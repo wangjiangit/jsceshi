@@ -3,10 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>vue</title>
-    <script type="application/javascript"  src="./vue.js"></script>
+    <style type="text/css">
+        .class1{
+            color:red;
+        }
+        .class2{
+            border:1px solid green;
+            width:150px;
+            height:150px;
+        }
+    </style>
+
 </head>
 <body>
-<div id="app"  style="width: 400px;height: 400px;background-color:lightgrey"  v-bind:title="message" v-on:click="dianjidiv" >
+<div id="app"  style="width: 400px;height: 800px;background-color:lightgrey"  v-bind:title="message|addboundary" v-on:click="dianjidiv('arg1')" >
     {{message}}
     <p v-if="seen">
         this is p
@@ -25,9 +35,31 @@
     <p >
         {{ num | plus(4) }}
     </p>
+    <p>
+        计算属性：{{calcPro1}}
+    </p>
+    <p v-bind:style="style1">
+        stylesheet
+    </p>
+    <p v-bind:class="[class1, class2] ">
+        中国
+    </p>
+
+    <h1 v-if="isTrue">H1</h1>
+    <h2 v-else>H2</h2>
+
+    <template v-if="isTrue">
+        <div style="border:1px solid red;width:400px;height:100px;background-color:#d1eefa">
+                <h1>你好，欢迎来到</h1>
+        </div>
+    </template>
     <input type="input" v-model="input_message" />
 </div>
-
+<div id="app2">
+    {{message}}
+</div>
+</body>
+<script type="application/javascript"  src="./vue.js"></script>
 <script>
     var vm=new Vue({
         el:'#app',
@@ -39,11 +71,19 @@
                 {"name":'lisi',"age":18}
             ],
             "input_message":'hell input',
-            "num":5
+            "num":5,
+            "firstname":"jian",
+            "lastname":"wang",
+            "style1":{"color":"red","border":"1px solid green"},
+            "class1":"class1",
+            "class2":"class2",
+            "isTrue":[]
         },
         "methods":{
-            "dianjidiv":function(){
-            //    alert('adsf');
+            "dianjidiv":function(event,arg1){
+                //    alert('adsf');
+                console.log(arg1);
+                console.log(event);
                 this.message='HH';
                 console.log(this.message);
             }
@@ -51,18 +91,46 @@
         "filters":{
             "plus":function(value,step){
                 return   (value + step);
+            },
+            "addboundary":function(value){
+                return "---"+value+'----';
+            }
+        },
+        "computed":{
+            "calcPro1":function(){
+                return  Date.now();
+            },
+            "fullName":{
+                "get":function(){
+                    return this.firstname+'---'+this.lastname;
+                },
+                "set":function(newval){
+                    console.log('计算属性:fullName改变了');
+                }
+            }
+        },
+        "watch":{
+            "message":function(newVal,oldVal){
+                console.log('该属性新值为：'+newVal);
             }
         }
     });
 
- //  console.log(vm.$el);
-  // console.log(vm.$data.message);
-  //  console.log(vm.$el===document.getElementById('app'));
-   // vm.message='HHHHH';
+    //  console.log(vm.$el);
+    // console.log(vm.$data.message);
+    //  console.log(vm.$el===document.getElementById('app'));
+    // vm.message='HHHHH';
+    // console.log(vm.calcPro1);
     vm.$watch('message',function(newVal,oldVal){
         console.log('修改了message变量');
     });
-</script>
 
-</body>
+
+    var vm2=new Vue({
+        "el":"#app2",
+        "data":{
+            "message":"hello kitty"
+        }
+    });
+</script>
 </html>
