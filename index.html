@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon" />
+    <meta http-equiv/>
+</head>
+<body>
+<select name="city">
+    <option value="a">a</option>
+    <option value="b">b</option>
+    <option value="c">c</option>
+</select>
+
+<input type="text" id="text1"/>
+<i id="id4">abcd</i>
+<b id="id3">abcd</b>
+<div id="div1" style="background-color:blue;width:100px;height: 100px;">
+    <div id="div2" style="background-color:red;width:50px;height: 50px;">
+        div2
+    </div>
+</div>
+<iframe id="iframe1" src="./iframe_html.html" width="100px" height="100px"></iframe>
+<button id="button1">按钮</button>
+<button class="newclass">新按钮</button>
+<input  type="file"  name="tupian" accept="image/*;capture=camera"/>
+</body>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="./jquery.custom.min.js"></script>
+<script src="common.js"></script>
+<script src="dashboard.js "></script>
+<script>
+
+    console.log(myApp.dashboard.showMessage());
+    if (typeof Function.prototype.method != 'function') {
+        Function.prototype.method = function (name, func) {
+            this.prototype[name] = func;
+            return this;
+        }
+    }
+    var arr1=[1,2,3,4];
+    $('body').bind('click',arr1,function(event){
+        alert(event.data);
+    });
+
+    //alert(document.getElementById('div2').offsetHeight);
+    var s=parseInt(4);
+
+    function a(){
+        var a= 3,b=4;
+        for(var i=0;i<5;i++){
+            a+=1;
+        }
+        console.log(a);
+    }
+    a();
+
+  //  $.post('http://www.baidu.com');
+
+    $('#button1').click(function(){
+        var script =document.createElement('script');
+        script.setAttribute('src','http://localhost/test.php?callback=triggerJsonp');
+        document.getElementsByTagName('head')[0].appendChild(script);
+
+        $('body').append('<button class="newclass">新按钮</button>');
+        $('body').css({"background-color":"grey"});
+
+    });
+
+    for(var i=0;i<document.getElementsByClassName('newclass').length;i++){
+        document.getElementsByClassName('newclass')[i].onclick=function(){
+            alert('asdf');
+        };
+    }
+
+
+    function  triggerJsonp(data){
+     //   alert(data);
+    }
+
+   //  alert(window.isNaN(s));
+  //  alert(document.getElementById('iframe1').contentWindow);
+    // alert(document.getElementById('iframe1').contentDocument);
+  //  alert(document.getElementById('iframe1').contentWindow==window.window);
+   // alert(document.documentElement);
+   // alert(document.getElementById('iframe1').contentWindow.document.getElementById('div1').textContent);
+    //alert(self.frames['iframe1'].contentWindow.document.getElementById('div1').textContent);
+
+   // alert(window.parent==window.window);
+    String.method('bool', function (str) {
+        return this == str;
+    }).method('ok',function(){
+        return this == 'ok';
+    });
+
+   // window.eval('alert("asdf")');
+
+    // alert('ab'.bool('ab'));
+    //alert('oks'.ok());
+    $(function () {
+        var obj= {'name':'wangjian','age':23};
+        var count=0;
+        for(var i in obj){
+            count++;
+        }
+
+      //  alert(count);
+
+        function getFunc1(value){
+            return function (value){
+                return value;
+            }
+        }
+
+        var gg=getFunc1(3);
+      //  alert(typeof Function);
+
+        var str1='A,B,C,D,E,F,G';
+
+
+        var witness_name='';
+      var  audit_staff_list='[{"iswess":1,"staff_name":"zhangsan"},{"iswess":1,"staff_name":"zhangsan"},{"iswess":1,"staff_name":"zhangsan"}]';
+        if(audit_staff_list){
+            audit_staff_list=JSON.parse(audit_staff_list);
+            for( var i=0;  i< audit_staff_list.length ;i++){
+                if(audit_staff_list[i].iswess){
+                    witness_name+=audit_staff_list[i].staff_name+'.';
+                }
+            }
+         //   alert(witness_name);
+        }
+/*
+        $('#div2').bind('tang.namespace1',function(){
+            alert('tang.namespace1');
+        });
+
+        $('#div2').trigger('tang.namespace1');*/
+        //$obj = $.extend({"name1": "value1", "age": 32}, {"name2": "value2", "age": 23});
+
+        //myApp.dashboard.init();
+        //myApp.common.init();
+
+        /*var url="1234213433.jpg";
+         urlArr=url.split('');
+         alert($.isArray(urlArr));
+         alert(urlArr[urlArr.length-1]);*/
+
+        /*function where()
+         {
+         var v1='sasfd';
+         v2='ddd';
+         }
+
+         console.log(v1);
+         console.log(v2);*/
+        //jQuery 的非侵扰式就是分离
+        $.extend({
+            'func1':function(){
+
+            },
+            'URL':'http://www.baidu.com'
+        });
+      //  $('#div2').new();
+      //  alert($.URL);
+        $('#id4').click(function () {
+         //   alert('id4');
+        });
+
+        $('#div1').click(function () {
+            getLocation();
+          //  alert('div1')
+        });
+        $('#div2').click(function (event) {
+            event.stopPropagation();
+
+         //   alert(event.currentTarget)
+
+        });
+        /*
+         $(document).contextmenu(function(){
+         return false;
+         });*/
+
+
+        /*function Class(){
+         this.name='class1';
+         this.color='red';
+         return window;
+         }
+
+         alert(new Class())*/
+
+        var str = '1990-10-05';
+        var strreplace = str.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1");
+
+
+    });
+
+
+</script>
+
+<script type="text/javascript">
+    var i=0;
+  /*  window.setTimeout(function(){
+        alert(i);
+    },0)*/
+    a();
+    i++;
+
+    function a(){
+      //  alert(i);
+    }
+</script>
+
+<script>
+
+   // alert(window.location.protocol);
+    function getLocation()
+    {
+        if (navigator.geolocation)
+        {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+        else{x.innerHTML="Geolocation is not supported by this browser.";}
+    }
+    function showPosition(position)
+    {
+       alert("Latitude: " + position.coords.latitude +
+                "<br />Longitude: " + position.coords.longitude);
+    }
+
+
+    if(typeof XMLHttpRequest == 'undefined'){
+        XMLHttpRequest=function  (){
+            try{
+                return  new ActiveXObject('Msxml2.XMLHttp.6.0');
+            }catch(e){};
+
+            try{
+                return  new ActiveXObject('Msxml2.XMLHttp.3.0');
+            }catch(e){};
+
+            try{
+                return  new ActiveXObject('Msxml2.XMLHttp');
+            }catch(e){};
+
+            throw new Error('No  XMLHttpRequest');
+        }
+    }
+
+    var xhr=new XMLHttpRequest();
+    xhr.open('POST','http://localhost',true);
+    xhr.onreadystatechange=function(){
+        if(this.readyState==4){
+            if(this.status==200 && this.status<300){
+               // 处理业务
+            }else{
+                //通讯存在问题
+            }
+        }
+    }
+    var data={"name":'wj'};
+    xhr.send(data);
+</script>
+</html>

@@ -1,0 +1,819 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>外勤申请</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />	 <!--以1:1 的比例进行页面设计-->
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="full-screen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes"> <!--设置Web应用是否以全屏模式运行	  -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"><!--状态栏会有一个黑色的背景-->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+
+    <!-- Zepto Include -->
+    <script type="text/javascript" src="//cdn.bootcss.com/FrozenUI/1.3.0/lib/zepto.min.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+    <!-- 引入css -->
+    <link rel="stylesheet" type="text/css" href="http://assets.xxkj.com/css/attn_wx/frozen.css" />
+    <link rel="stylesheet" type="text/css" href="http://assets.xxkj.com/css/attn_wx/style.css?type=3" />
+    <link rel="stylesheet" type="text/css" href="http://assets.xxkj.com/css/linearicons.css" />
+
+    <!-- Mobiscroll JS and CSS Includes -->
+    <script type="text/javascript" src="http://assets.xxkj.com/plugins/mobiscroll/mobiscroll.custom-2.16.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://assets.xxkj.com/plugins/mobiscroll/mobiscroll.custom-2.16.0.min.css" />
+
+    <script type="text/javascript" src="//cdn.bootcss.com/FrozenUI/1.3.0/js/frozen.js"></script>
+
+    <script type="text/javascript" src="http://assets.xxkj.com/plugins/mobiscroll/mobiscroll.datetime-2.16.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://assets.xxkj.com/plugins/mobiscroll/mobiscroll.datetime-2.16.0.min.css" />
+
+    <script type="text/javascript" src="//cdn.bootcss.com/iScroll/5.2.0/iscroll.min.js"></script>
+    <!-- <script type="text/javascript" src="http://assets.xxkj.com/js/jq.js"></script>
+  -->
+    <script type="text/javascript" src="http://assets.xxkj.com/js/weixin/jMob.js"></script>
+    <script type="text/javascript" src="http://assets.xxkj.com/js/weixin/jMF.js"></script>
+
+    <style type="text/css">
+        /*		body, html{width: 100%;height: 100%; margin:0;font-family:"微软雅黑";}*/
+        #l-map{height:300px;width:100%;}
+        #r-result{width:100%;}
+    </style>
+</head>
+<body>
+
+<div id="content">
+    <section class="ui-container mb-45">
+        <form action="http://mp.xxkj.com/at/fieldwork/apply" method="post" id="fieldwork">
+            <div class="ui-form ui-border-t">
+                <div class="ui-row-flex ui-whitespace ui-form-item ui-form-item-radio ui-border-b kind-col">
+                    <div class="ui-col ui-col text-center">
+                        <label class="ui-radio" for="radio1">
+                            <input type="radio" checked name="type" class="changetype" value="1" ><span>外访客户</span>
+                        </label>
+                    </div>
+                    <div class="ui-col ui-col  text-center">
+                        <label class="ui-radio" for="radio1">
+                            <input type="radio" name="type"  class="changetype" value="2" ><span>外出公干</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- 出发 -->
+            <div class="ui-form ui-border-t mt-10 ui-whitespace">
+                <div class="ui-out ui-border-b sec">
+                    <div class="ui-out-info">
+                        <div class="out-time">
+                            <span class="info-title v-ib">外勤日期</span>
+                            <span class="v-ib time ">2016-12-05</span>
+                        </div>
+                        <div class="out-time">
+                            <span class="info-title v-ib">出发时间</span>
+                            <span class="v-ib time time_udp"></span>
+                        </div>
+                        <div class="out-local">
+                            <div class="info-title">出发定位</div>
+                            <div class="out-addr">
+                                <div class="icn icn-refresh dis" onclick="getnowloc(this)"></div>
+                                <div class="out-addr-cnt location">
+                                    <p onclick="getnowloc(this)"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-out-btn">
+                        <a class="btn-orange" onclick="checkin(this,1)">出发</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 外勤1 -->
+            <div class="ui-form ui-border-t outting mt-10 sec">
+                <div class="ui-form-item ui-border-b changetishi">
+                    <label>
+                        客户名称
+                    </label>
+                    <input type="text" placeholder="请填写客户名称" value="">
+                </div>
+                <div class="ui-out ui-border-b">
+                    <div class="ui-out-info">
+                        <div class="out-time">
+                            <span class="info-title v-ib">签到时间</span>
+                            <span class="v-ib time"></span>
+                        </div>
+                        <div class="out-local">
+                            <div class="info-title">签到定位</div>
+                            <div class="out-addr">
+                                <div class="icn icn-unrefresh"></div>
+                                <div class="out-addr-cnt">
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-out-btn">
+                        <a class="btn-orange disabled">签到</a>
+                    </div>
+                </div>
+                <div class="ui-out ui-border-b">
+                    <div class="ui-out-info">
+                        <div class="out-time">
+                            <span class="info-title v-ib">签退时间</span>
+                            <span class="v-ib time"></span>
+                        </div>
+                        <div class="out-local">
+                            <div class="info-title">签退定位</div>
+                            <div class="out-addr">
+                                <div class="icn icn-unrefresh"></div>
+                                <div class="out-addr-cnt">
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-out-btn">
+                        <a class="btn-orange disabled">签退</a>
+                        <!-- <a>已签到</a> -->
+                    </div>
+                </div>
+                <div class="ui-form-item form-textarea">
+                    <textarea placeholder="请输入备注说明" name="remark[]" class="remark"></textarea>
+                </div>
+            </div>
+            <div id="fieldapply"></div>
+            <div class="text-center mv-20" id="addfieldworkbtn">
+                <a class="icn-add dis">新增外勤</a>
+            </div>
+
+            <!-- 签入 -->
+            <div class="ui-form ui-border-t mt-10 ui-whitespace sec">
+                <div class="ui-out ui-border-b">
+                    <div class="ui-out-info">
+                        <div class="out-time">
+                            <span class="info-title v-ib">签入时间</span>
+						<span class="v-ib time " style="color:#cdcdcd;">
+												</span>
+                        </div>
+                        <div class="out-local">
+                            <div class="info-title">签入定位</div>
+                            <div class="out-addr">
+                                <div class="icn icn-unrefresh dis"></div>
+                                <div class="out-addr-cnt location">
+                                    <p ></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-out-btn">
+                    </div>
+                </div>
+            </div>
+            <input hidden name='date' id="date" value='' />
+            <div class="ui-form-item ui-border-b" style="height:auto">
+                <input hidden name='auditlist' id="auditlist" value='[{"type":"parent","key":1,"staff_id":"1000","staff_name":"裘鑫科","staff_avatar":"http:\/\/q4.qlogo.cn\/g?b=qq&k=wpPaufFNRnnFW2tllnSM8g&s=40&t=1461717796"},{"type":"staff","key":1,"staff_name":"潘瑶","staff_id":"1308","staff_avatar":"http:\/\/img.xxkj.com\/\/uploads\/data\/face\/1308.jpg"}]' />
+                <label>
+                    审批人
+                </label>
+                <!-- <p style="padding-left:95px;line-height:28px;padding-top:8px;padding-bottom:8px;">
+                    肖珍<span class="lnr lnr-arrow-right mh-5"></span>刘光明<span class="lnr lnr-arrow-right mh-5"></span>鲍笑薇
+                </p> -->
+                <p class="node-tip">(点击头像删除)</p>
+                <!-- <span class="c-999">(点击头像删除)</span> -->
+                <div class="ui-checker auditlistdetail">
+
+                </div>
+            </div>
+
+            <div class="ui-btn-group bg-eee" style="padding-top:20px;">
+                <button class="ui-btn-lg ui-btn-primary" onclick="cancelapply(); return false;">取消申请</button>
+                <button class="ui-btn-lg ui-btn-primary" : disabled  >提交申请</button>
+            </div>
+            <input type="hidden" id="fieldwork_id" value="0">
+            <input type="hidden" id="fieldword_apply" value="0">
+            <input type="hidden" id="timestamp" value="1480903205">
+        </form>
+    </section>
+
+    <!--增加审批节点-->
+    <div id="addauditnode" class="ui-dialog">
+        <div class="ui-dialog-cnt">
+            <div class="ui-dialog-hd" style="height:44px;line-height:44px;">
+                <div class="ui-searchbar-wrap focus search">
+                    <div class="ui-searchbar ui-border-radius">
+                        <i class="ui-icon-search"></i>
+                        <div class="ui-searchbar-input">
+                            <input value="" hidden id="noditstepid" type="text" placeholder="当前步骤">
+                            <input value="" id="auditwitness" type="text" placeholder="请输入姓名"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-dialog-bd search-list" style="padding:0px;">
+                <div class="wrapper wrappernode" class="ui-form">
+                    <div class="scroller">
+                        <ul id="witness_content_node">
+
+                        </ul>
+                    </div>
+                </div>
+                <!-- </div> -->
+            </div>
+            <div class="ui-dialog-ft">
+                <button type="button" onclick="$('#addauditnode').dialog('hide');" data-role="button">取消</button>
+                <button type="button" id='selectnodestaff' data-role="button">确定</button>
+            </div>
+        </div>
+    </div>
+    <!--增加审批节点结束-->
+
+</div>
+<script type="text/javascript">
+
+    function get_now_time(){
+        var timestamp = parseInt($('#timestamp').val());
+        var d = new Date(timestamp * 1000);
+        var second = d.getSeconds();
+        var minute = d.getMinutes();
+        var hour = d.getHours()
+        if (parseInt(second) < 10) {
+            second = '0' + second;
+        };
+        if (parseInt(minute) < 10) {
+            minute = '0' + minute;
+        };
+        if (parseInt(hour) < 10) {
+            hour = '0' + hour;
+        };
+        var date = hour + ":" + minute + ":" + second;
+        return date;
+    }
+
+    function addfieldwork(){
+        var fieldobj = $("#fieldapply") ;
+        if ($('input[type="radio"]:checked').val() == 1) {
+            cust_name = '客户名称';
+        }else if($('input[type="radio"]:checked').val() == 2){
+            cust_name = '公干事由';
+        }
+        $("#fieldword_apply").val('1');
+        var date = get_now_time();
+        var fieldhtml = '<div class="ui-form ui-border-t outting mt-10 "><div class="close"><a class="icn-delete"></a></div><div class="ui-form-item ui-border-b"><label>'+cust_name+'</label><input type="text" placeholder="请填写'+cust_name+'"></div><div class="ui-out ui-border-b sec"><div class="ui-out-info"><div class="out-time"><span class="info-title v-ib">签到时间</span><span class="v-ib time time_udp">'+date+'</span></div><div class="out-local"><div class="info-title">签到定位</div><div class="out-addr"><div class="icn icn-refresh" onclick="getnowloc(this)"></div><div class="out-addr-cnt location"><p onclick="getnowloc(this)"></p></div></div></div></div><div class="ui-out-btn"><a class="btn-orange" onclick="checkin(this,2)">签到</a></div></div><div class="ui-out ui-border-b"><div class="ui-out-info"><div class="out-time"><span class="info-title v-ib">签退时间</span><span class="v-ib time"></span></div><div class="out-local"><div class="info-title">签退定位</div><div class="out-addr"><div class="icn icn-unrefresh"></div><div class="out-addr-cnt"><p></p></div></div></div></div><div class="ui-out-btn"><a class="btn-orange disabled">签退</a></div></div><div class="ui-form-item form-textarea"><textarea placeholder="请输入备注说明" name="remark[]" class="remark"></textarea></div></div>';
+
+        $(".time_udp").closest('div').find('.time').removeClass('time_udp');
+        fieldobj.after(fieldhtml);
+
+        $("#addfieldworkbtn").html('<a class="icn-add dis">新增外勤</a>');
+        $(".sec:last").find(".icn").removeClass("icn-refresh");
+        $(".sec:last").find(".icn").addClass("icn-unrefresh");
+        $(".sec:last").find(".ui-out-btn").html('<a class="btn-orange disabled">签入</a>');
+
+        $(".close a").click(function(){
+            $(this).parents('.ui-form').remove();
+            $(".sec:last").find(".icn").removeClass("icn-unrefresh");
+            $(".sec:last").find(".icn").addClass("icn-refresh");
+            $(".sec:last").find(".ui-out-btn").html('<a class="btn-orange" onclick="checkin(this,4)">签入</a>');
+            $("#addfieldworkbtn").html('<a class="icn-add" onclick="addfieldwork()">新增外勤</a>');
+            $(".sec:last").find(".time").addClass("time_udp");
+        });
+
+    }
+    function time_udp(){
+        var timestamp = parseInt($("#timestamp").val());
+        $("#timestamp").val(timestamp+1);
+        $('.time_udp').html(get_now_time());
+    }
+    $(function(){
+        $("#fieldwork").submit(function(){
+            var showel = '';
+            var id = $("#fieldwork_id").val();
+            var remark = $('textarea[name="remark"]').serialize();
+            var auditlist = $('#auditlist').val() ;
+            $.ajax({
+                url:this.action,
+                type:'POST',
+                data:{is_submit:1,id:id,remark:remark,auditlist:auditlist},
+                dataType:'json',
+                beforeSend:function(XMLHttpRequest){
+                    //加载中
+                    showel = $.loading({content:'提交中'});
+                },
+
+                success:function(data){
+                    showel.loading("hide");
+                    if (data.errcode == 1) {
+                        $.tips({
+                            content:data.errmsg,
+                            stayTime:1500,
+                            type:"warn"
+                        });
+                        return ;
+                    }else{
+                        var el=$.tips({
+                            content:'申请成功',
+                            stayTime:1500,
+                            type:"success"
+                        });
+                        el.on("tips:hide",function(){
+                            window.location.href="http://mp.xxkj.com/at/fieldwork/applylist";
+                        });
+                    }
+                    //data = data.data ;
+                },
+                error:function(data){
+                    showel.loading("hide");
+                    $.tips({
+                        content:"申请失败",
+                        stayTime:1500,
+                        type:"warn"
+                    });
+                }
+            });
+            return false ;
+        });
+        // $('.kind-col div').on('tap',function(){
+        //	 $(this).find("input[name='type']").prop("checked",true);
+        //	 $(this).siblings().find("input[name='type']").prop("checked",false);
+        //	 if ($("input[class='changetype']:checked").val() == 1) {
+        //		 $('.changetishi').find('label').html('客户名称');
+        //		 $('.changetishi').find('input').attr('placeholder','请输入客户名称');
+        //	 }else{
+        //		 $('.changetishi').find('label').html('公干事由');
+        //		 $('.changetishi').find('input').attr('placeholder','请输入公干事由');
+        //	 }
+        // });
+        $(".changetype").change(function() {
+            if ($("input[class='changetype']:checked").val() == 1) {
+                $('.changetishi').find('label').html('客户名称');
+                $('.changetishi').find('input').attr('placeholder','请输入客户名称');
+            }else{
+                $('.changetishi').find('label').html('公干事由');
+                $('.changetishi').find('input').attr('placeholder','请输入公干事由');
+            }
+        });
+        //实时更新时间
+        setInterval('time_udp()', 1000);
+    });
+</script>
+
+<script type="text/javascript">
+    wx.config({
+        debug: false,
+        appId: 'wx673a7c60103bf7bc',
+        timestamp: 1480903204,
+        nonceStr: 'e2RtvE8tuASQ02gr',
+        signature: '2f5282e6562e6546db0fad9b836e04220d212bd8',
+        jsApiList: [
+            'openLocation',
+            'getLocation'
+        ]
+    });
+    function getnowloc(obj){
+        $(obj).parents('.sec').find('.location p').html('正在获取位置..');
+        $(obj).parents('.sec').find(".icn-refresh").addClass("refreshing");
+        $(obj).parents('.sec').find('.location p').removeAttr('onclick');
+        // $(obj).parents('.sec').find('.location p').html('位置xxx');
+        // $(obj).parents('.sec').find(".icn-refresh").removeClass("refreshing");
+        wx.getLocation({
+            type:'wgs84',
+            success: function (res) {
+                var latitude  = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                var speed = res.speed; // 速度，以米/每秒计
+                var accuracy = res.accuracy; // 位置精度
+                // $("body").append(latitude+','+longitude);
+                //异步得到位置
+                $.ajax({
+                    url:"http://mp.xxkj.com/at/fieldwork/getlocale",
+                    type:'POST',
+                    data:{latitude:latitude,longitude:longitude},
+                    dataType:'json',
+                    success:function(data){
+                        if (data.errcode == 1) {
+                            $.tips({
+                                content:data.errmsg,
+                                stayTime:1500,
+                                type:"warn"
+                            });
+                            return ;
+                        }else{
+                            var p_obj = $(obj).parents('.sec').find('.location p');
+                            p_obj.html(data.data.recommend);
+                            p_obj.attr('loc',data.data.title);
+                            // alert(data.data.recommend + '|' + data.data.title);
+                            p_obj.attr('city',data.data.city);
+                            p_obj.attr('lat',latitude);
+                            p_obj.attr('lon',longitude);
+
+                            p_obj.attr('onclick','getnowloc(this)');
+
+                            $(obj).parents('.sec').find(".icn-refresh").removeClass("refreshing");
+                        }
+                    },
+                    error:function(data){
+                        $(obj).parents('.sec').find('.location p').html('未获取到位置');
+                        $(obj).parents('.sec').find(".icn-refresh").removeClass("refreshing");
+                        $.tips({
+                            content:'未获取到当前位置',
+                            stayTime:1500,
+                            type:"warn"
+                        });
+                    }
+                });
+            },
+            cancel: function (res) {
+                alert('用户拒绝授权获取地理位置');
+            }
+        });
+    }
+
+
+    var showel = '';
+    var tmp_obj;
+    function relocate(obj){
+
+        tmp_obj = obj;
+        // alert(city+'|'+location+'|'+lat+'|'+lon);
+        // $("body").hide();
+        $("#content").hide();
+        showel = $.loading();
+
+
+        //加载地图
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = "http://api.map.baidu.com/api?v=2.0&ak=5FdwAzRCVbG0aPQZfukzEDUT&callback=initMap";
+        document.body.appendChild(script);
+    }
+    //加载地图
+    // showel = $.loading();
+    // $("#content").hide();
+    // var script = document.createElement("script");
+    // script.type = "text/javascript";
+    // script.src = "http://api.map.baidu.com/api?v=2.0&ak=5FdwAzRCVbG0aPQZfukzEDUT&callback=initMap";
+    // document.body.appendChild(script);
+
+    function initMap(){
+        // var location = '数字娱乐产业园';
+        // var lat = '120.3';
+        // var lon = '30.3';
+
+        var city = $(tmp_obj).attr('city');
+        var location = $(tmp_obj).attr('loc');
+        var lat = $(tmp_obj).attr('lat');
+        var lon = $(tmp_obj).attr('lon');
+        // alert($(tmp_obj).html());
+        $("body").prepend('<div id="l-map"></div>');
+        $("#l-map").after('<div id="r-result"></div>');
+        var map = new BMap.Map("l-map");			// 创建Map实例
+        map.centerAndZoom(new BMap.Point(lat, lon), 11);
+        // map.addEventListener("tilesloaded",function(){alert($("#r-result").html());});
+        var local = new BMap.LocalSearch(map, {
+            renderOptions: {map: map, panel: "r-result"}
+        });
+
+        local.search(location);
+        // var i=0;
+        local.setResultsHtmlSetCallback(function(obj){
+            showel.loading("hide");
+            $(obj).find('li').click(function(){
+                var address = $(this).find("div:first").find("span:first").text();
+                $(tmp_obj).html(address);
+                $("#r-result").remove();
+                $("#l-map").remove();
+                $("#content").show();
+
+            });
+            // i++;
+            // showel.loading("hide");
+            // document.getElementById("r-result").addEventListener("click",alert(1));
+
+            // if (i>1) {
+            //	 // alert(poi.address);
+            //	 // $("#r-result").html('');
+            //	 // $("#l-map").html('');
+            //	 $(tmp_obj).html(poi.address);
+            //	 // $("#r-result").remove();
+            //	 // $("#l-map").remove();
+            //	 // $("#content").show();
+            // };
+
+            // return false;
+
+        });
+    }
+
+
+
+    wx.ready(function () {
+        var id = $("#fieldwork_id").val();
+        if (id == 0) {
+            $('.sec:first').find('.icn-refresh').click();
+        };
+    });
+    // var id = $("#fieldwork_id").val();
+    // if (id == 0) {
+    //	 $('.sec:first').find('.icn-refresh').click();
+    // };
+
+    //签到签退处理
+    function checkin(obj,step){
+        var id = $("#fieldwork_id").val();
+        var fieldword_apply = $("#fieldword_apply").val();
+        var now_loc = $.trim($(obj).parents('.sec').find('.location').find('p').html());
+        var type = $('input[type="radio"]:checked').val();
+        // alert(now_loc);return;
+        // var show_msg = (type==1)?'签到':'签退' ;
+        var show_msg = '';
+        var step_msg = '';
+        if (step == 1) {
+            show_msg = '出发';
+            step_msg = '打卡中';
+        }else if (step == 2) {
+            show_msg = '签到';
+            step_msg = '签到中';
+        }else if (step == 3) {
+            show_msg = '签退';
+            step_msg = '签退中';
+        }else if (step == 4) {
+            show_msg = '签入';
+            step_msg = '打卡中';
+        }
+
+        var date = $("#date").val();
+        // now_loc = '数字娱乐产业园';
+        var cust_name_obj = $(obj).parents('.sec').siblings('div').find('input:first');
+        var cust_name = $.trim(cust_name_obj.val());
+
+        var arr = [];
+        $('.remark').each(function(i){
+            arr[i] = $(this).val();
+        });
+// now_loc = '文一路';
+        var auditlist = $('#auditlist').val() ;
+        var postData = {now_loc:now_loc,cust_name:cust_name,step:step,id:id,fieldword_apply:fieldword_apply,type:type,auditlist:auditlist};
+        postData.remark = arr;
+
+        if (now_loc == '未获取到位置' || now_loc == '' || now_loc == '正在获取位置..' || now_loc == '未定位') {
+            $.tips({
+                content:'未获取到位置,请重新定位',
+                stayTime:1500,
+                type:"warn"
+            });
+        }else if(cust_name_obj.length && cust_name == ''){
+            $.tips({
+                content:$(obj).parents('.sec').siblings('div').find('input:first').attr('placeholder'),
+                stayTime:1500,
+                type:"warn"
+            });
+        }else{
+            $(".time_udp").closest('div').find('.time').removeClass('time_udp');
+            var showel = '';
+            $.ajax({
+                url:"http://mp.xxkj.com/at/fieldwork/checkin?date="+date,
+                type:'POST',
+                data:postData,
+                dataType:'json',
+                beforeSend:function(XMLHttpRequest){
+                    //加载中
+                    showel = $.loading({content:step_msg});
+                },
+                success:function(data){
+                    if (data.errcode==1) {
+                        showel.loading("hide");
+                        $.tips({content:data.errmsg,stayTime:1500,type:"warn"});
+                        return false;
+                    }else{
+                        $(obj).closest('div').html('<a>'+step_msg+'</a>');
+                        showel.loading("hide");
+                        var el=$.tips({
+                            content:show_msg+'成功',
+                            stayTime:1500,
+                            type:"success"
+                        });
+                        el.on("tips:hide",function(){
+                            // window.location.reload();
+                            window.location = 'http://mp.xxkj.com/at/fieldwork/apply?date='+date;
+                        });
+                    }
+
+                },
+                error:function(data){
+                    showel.loading("hide");
+                    $.tips({
+                        content:show_msg+'失败,请重试',
+                        stayTime:1500,
+                        type:"warn"
+                    });
+                }
+            });
+        }
+    }
+
+    $(function(){
+        function nodejscroll(){
+            myScroll = new IScroll('.wrappernode', {
+                scrollbars: true,
+                mouseWheel: true,
+                interactiveScrollbars: true,
+                shrinkScrollbars: 'scale',
+                fadeScrollbars: true,
+                useTransition: false,
+                // vScrollbar:false
+            });
+        }
+//加载审批节点
+        var approver = '[{"type":"parent","key":1,"staff_id":"1000","staff_name":"裘鑫科","staff_avatar":"http:\/\/q4.qlogo.cn\/g?b=qq&k=wpPaufFNRnnFW2tllnSM8g&s=40&t=1461717796"},{"type":"staff","key":1,"staff_name":"潘瑶","staff_id":"1308","staff_avatar":"http:\/\/img.xxkj.com\/\/uploads\/data\/face\/1308.jpg"}]' ;
+        approver = $.parseJSON(approver);
+        function loadauditlist(approver){
+            var tmp_html = '' ;
+            nodeLength = approver.length ;
+            if (approver) {
+                $.each(approver,function(k,v){
+                    // alert(k+'--'+v);
+                    if (!v.staff_avatar) {
+                        v.staff_avatar = 'https://res.mail.qq.com/bizmp/zh_CN/images/dev/icon_avatar_default.png' ;
+                    };
+                    var tmp_type = v.type.substr(0,6);
+                    if (v.type == 'staff' || tmp_type == 'parent') {
+                        tmp_html += '<div class="check-node auditnode">' ;
+                        tmp_html += '<div class="avatar"><img src="' + v.staff_avatar+'" ></div>' ;
+                        tmp_html +=	  '<div class="txt">' ;
+                        tmp_html +=	   '<p class="name">'+v.staff_name+'</p>' ;
+                        tmp_html +=	   '</div>' ;
+                        tmp_html +=  '</div>' ;
+                    }else if(v.type == 'role'){
+                        tmp_html += '<div class="check-node auditnode">' ;
+                        tmp_html += '<div class="avatar"><img src="' + v.staff_avatar+'" ></div>' ;
+                        tmp_html +=	  '<div class="txt">' ;
+                        tmp_html +=	   '<p class="name">'+v.role_name+'</p>' ;
+                        tmp_html +=	   '</div>' ;
+                        tmp_html +=  '</div>' ;
+                    }
+                    if (approver.length != (k+1)) {
+                        tmp_html +=  '<div class="connect addauditbutton">' ;
+                        tmp_html +=	  '<p><a><span class="icn-add-node"></span></a></p>' ;
+                        tmp_html +=	  '<p><span class="icn-arrow-right"></span></p>' ;
+                        tmp_html +=  '</div>' ;
+                    }
+                }) ;
+                tmp_html += '<div class="add-node addauditbutton">' ;
+                tmp_html +=	'<a><span class="icn-add-node-line"></span></a>' ;
+                tmp_html +=  '</div>' ;
+                $('.auditlistdetail').html(tmp_html) ;
+
+                $('.auditnode').click(function(){
+                    var audit_list = $('#auditlist').val() ;
+                    var audit_index = $(this).index() ;
+                    if (audit_index) {
+                        audit_index -= audit_index/2 ;
+                    }
+                    $.ajax({
+                        url:'http://mp.xxkj.com/at/wxabnormalapply/modifyauditlist',
+                        type:'POST',
+                        data:{'type':'delete','step':audit_index,'audit_list':audit_list},
+                        dataType:'json',
+                        success:function(data){
+                            if(data.errcode){
+                                $.tips({content:data.errmsg,stayTime:1500,type:"warn"});
+                                return false;
+                            }else{
+                                loadauditlist(data.data) ;
+                                $('#auditlist').val(JSON.stringify(data.data)) ;
+                                // alert($('#audit_step_'+step).html());
+                                $(this).remove();
+                            }
+                        },
+                        error:function(data,a,e){
+                            $.tips({content:'数据异常',stayTime:1500,type:"warn"});
+                        }
+                    });
+                });
+
+                //获取员工并保存到allstaff中
+                allstaff = [];
+                if(!allstaff||allstaff=='undefined'||allstaff==''){
+                    $.ajax({
+                        url  : "http://mp.xxkj.com/at/data/search",
+                        dataType: "json",
+                        type: 'get',
+                        success : function(data){
+                            if(data.errcode==1){
+                                alert(data.errmsg);
+                                allstaff = null;
+                            }else{
+                                allstaff = data.data;
+                            }
+                        }
+                    });
+                }
+                // document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+                $('.addauditbutton').click(function(){
+                    // alert($(this).index());
+                    var this_index = $(this).index() ;
+                    this_index -= (this_index - 1)/2 + 1;
+                    $('#noditstepid').val(this_index) ;
+                    // alert(this_index);return false;
+                    // nodeLength
+                    //初始化搜索表单
+                    var ahtml = [];
+                    $.each(allstaff, function(i, staff){
+                        ahtml[ahtml.length] = ['<li><div class="ui-form-item ui-form-item-radio ui-border-b"><p class="radio-item">'+staff["realname"]+'</p><label class="ui-radio" for="radio"><input type="radio" name="nodestaffname" value="'+staff["id"]+'"></label></div></li>'].join('');
+                    });
+                    $('#witness_content_node').html(ahtml.join(''));
+                    $("#addauditnode").dialog("show");
+                    nodejscroll();
+                });
+                // alert(tmp_html);
+            }else{
+                return false ;
+            }
+        }
+        loadauditlist(approver) ;
+        // alert(approver);
+        $("#selectnodestaff").on('tap',function(){
+            // alert('test');
+            $("input[name='nodestaffname']").each(function(){
+                if(this.checked){
+                    // $('input[name="noditstepstaffid"]').val(this.value);
+                    var audit_list = $('#auditlist').val() ;
+                    var audit_index = $('#noditstepid').val() ;
+                    var staff_id = this.value ;
+                    /*if (staff_id) {
+                     $.tips({content:'数据异常,请刷新重试!',stayTime:1500,type:"warn"});
+                     }*/
+                    $.ajax({
+                        url:'http://mp.xxkj.com/at/wxabnormalapply/modifyauditlist',
+                        type:'POST',
+                        data:{'type':'add','step':audit_index,'audit_list':audit_list,'staff_id':staff_id},
+                        dataType:'json',
+                        success:function(data){
+                            if(data.errcode){
+                                $.tips({content:data.errmsg,stayTime:1500,type:"warn"});
+                                return false;
+                            }else{
+                                $('#auditlist').val(JSON.stringify(data.data)) ;
+                                loadauditlist(data.data) ;
+                            }
+                        },
+                        error:function(data,a,e){
+                            $.tips({content:'数据异常',stayTime:1500,type:"warn"});
+                        }
+                    });
+                    // alert(this.value);
+                }
+            });
+            $('#addauditnode').dialog('hide');
+        });
+        $('.ui-searchbar').click(function(){
+            $('.ui-searchbar-input input').focus();
+        });
+        $('#auditwitness').keyup(function(){
+            var dom = this;
+            var s = $.trim(this.value);
+            if(s == ''){
+                //初始化搜索表单
+                var ahtml = [];
+                $.each(allstaff, function(i, staff){
+                    ahtml[ahtml.length] = ['<li><div class="ui-form-item ui-form-item-radio ui-border-b"><p class="radio-item">'+staff["realname"]+'</p><label class="ui-radio" for="radio"><input type="radio" name="nodestaffname" value="'+staff["id"]+'"></label></div></li>'].join('');
+                });
+                $('#witness_content_node').html(ahtml.join(''));
+
+                $("#addauditnode").dialog("show");
+                return false;
+            }
+            var ahtml = [];
+            $.each(allstaff, function(i, staff){
+                var name = staff['realname']+staff['e_name'];
+                var index = name.indexOf(s);
+                if(index>-1){
+                    ahtml[ahtml.length] = ['<li><div class="ui-form-item ui-form-item-radio ui-border-b"><p class="radio-item">'+staff["realname"]+'</p><label class="ui-radio" for="radio"><input type="radio" name="nodestaffname" value="'+staff["id"]+'"></label></div></li>'].join('');
+                }
+            });
+            $('#witness_content_node').html(ahtml.join(''));
+        });
+    });
+    function cancelapply(){
+        history.back(-1);
+        return false;
+    }
+
+    $(function(){
+        jMF.confirm({
+            title:'',
+            type: 'attention',
+            content:'您有一条申请未提交是否继续完成',
+            onSubmit:function(){//点击确认 跳转至提交页面
+                window.location = 'http://mp.xxkj.com/at/fieldwork/apply?date=2016-12-02';
+            },
+            onCancel:function(){//点击取消
+                $("#date").val('2016-12-05');
+            }
+        });
+    });
+</script>
+<script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src = "//hm.baidu.com/hm.js?d310f37d4bc94da52808a72047cad661";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
+</body>
+</html>
