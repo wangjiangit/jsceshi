@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<div id="app"  style="width: 400px;height: 800px;background-color:lightgrey"  v-bind:title="message|addboundary" v-on:click="dianjidiv('arg1')" >
+<div id="app"  style="width: 400px;height: 1500px;background-color:lightgrey"  v-bind:title="message|addboundary" v-on:click="dianjidiv('arg1')" >
     {{message}}
     <p v-if="seen">
         this is p
@@ -67,7 +67,58 @@
     </p>
 
     <input  type="text" v-on:keyup.stop.enter="enterKeyFunc" placeholder="测试按钮修饰符"/>
+    <input type="text" v-model="username" name="username" placeholder="请输入用户名">
+    <textarea v-model.trim="username"></textarea>
+    <span style="color:red">{{username}}</span>
 
+    <input type="checkbox" name="checkbox1" v-model="checkboxArr"  value="nan"/>
+    <label for="checkboxArr"> 男</label>
+    <input type="checkbox" name="checkbox1" v-model="checkboxArr"  value="nv"/>
+    <label for="checkboxArr"> 女</label>
+    <input type="checkbox"  name="checkbox1" v-model="checkboxArr"  value="zhong"/>
+    <label for="checkboxArr"> 保密</label>
+    <span> {{checkboxArr}}</span>
+
+    <br/>
+    <input type="radio" id="one" value="One" v-model="picked">
+    <label for="one">One</label>
+    <br>
+    <input type="radio" id="two" value="Two" v-model="picked">
+    <label for="two">Two</label>
+    <br>
+    <span>Picked: {{ picked }}</span>
+
+    <br/>
+    <select v-model="select1" >
+        <option value="a">A</option>
+        <option value="b">B</option>
+        <option value="c">C</option>
+    </select>
+    <span>Selected: {{ select1 }}</span>
+
+    <br/>
+    <select v-model="select2" multiple>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <br>
+    <span>Selected: {{ select2 }}</span>
+
+    <br/>
+
+    动态选项，用 v-for 渲染：
+    <select v-model="select3">
+        <option v-for="option in options" v-bind:value="option.value">
+            {{ option.text }}
+        </option>
+    </select>
+    <span>Selected: {{ select3 }}</span>
+
+    <br/>
+    //动态属性(把a属性的值绑定到pick1属性中)
+    <input type="radio" id="pick1" v-model="pick1" v-bind:value="a">
+    <label for="pick1">动态属性</label>
     <h1 v-if="isTrue">H1</h1>
     <h2 v-else>H2</h2>
 
@@ -94,6 +145,18 @@
                 {"name":'lisi',"age":18}
             ],
             "input_message":'hell input',
+            "username":null,
+            "checkboxArr":[],
+            "picked":'Two',
+            "pick1":true,
+            "a":'a_value',
+            "select1":'a',
+            "select2":[],
+            "select3":null,
+            "options":[
+                {"text":"安庆","value":"anqing"},
+                {"text":"杭州","value":"hangzhou"}
+            ],
             "num":5,
             "firstname":"jian",
             "lastname":"wang",
