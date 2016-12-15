@@ -22,10 +22,28 @@
         this is p
     </p>
     <ol id="ol1">
-        <li v-for="item in items">
-             姓名：{{ item.name}} 年龄：{{item.age}}
+        <li v-for="(item ,index) in items">
+           {{index}}  姓名：{{ item.name}} 年龄：{{item.age}}
         </li>
     </ol>
+    <ul>
+       <template v-for="item in items">
+           <span style="color:red">...</span>
+           <li>{{item.name}}</li>
+       </template>
+    </ul>
+
+    <ul>
+
+            <li v-for="(item,key,index) in object1">
+                {{index}}
+                {{key=='name'? '姓名:'+item:''}}
+                {{key=='age'? '年龄:'+item:''}}
+            </li>
+    </ul>
+    <p>
+        <span v-for="n in 20">{{ n }}</span>
+    </p>
     <p>
         {{input_message}}
     </p>
@@ -44,6 +62,11 @@
     <p v-bind:class="[class1, class2] ">
         中国
     </p>
+    <p v-on:click.stop="counterFunc('arg1',$event )">
+        你被点击了{{counter}}次数
+    </p>
+
+    <input  type="text" v-on:keyup.stop.enter="enterKeyFunc" placeholder="测试按钮修饰符"/>
 
     <h1 v-if="isTrue">H1</h1>
     <h2 v-else>H2</h2>
@@ -77,7 +100,9 @@
             "style1":{"color":"red","border":"1px solid green"},
             "class1":"class1",
             "class2":"class2",
-            "isTrue":[]
+            "isTrue":[],
+            "object1":{"name":"wangjian","age":20},
+            "counter":0
         },
         "methods":{
             "dianjidiv":function(event,arg1){
@@ -86,6 +111,17 @@
                 console.log(event);
                 this.message='HH';
                 console.log(this.message);
+               /* this.items = this.items.filter(function (item) {
+                    return item.name.match(/lisi/)
+                });*/
+            },
+            "counterFunc":function(arg1,event){
+                this.counter+=1;
+                console.log(arg1);
+              // event.stopPropagation();
+            },
+            "enterKeyFunc":function(){
+                console.log('enter key');
             }
         },
         "filters":{
@@ -124,7 +160,10 @@
     vm.$watch('message',function(newVal,oldVal){
         console.log('修改了message变量');
     });
+   // var a = Array.prototype.map.call([1,2,3], function(x) { return x+1 });
 
+// var a=   [1,2,3].map(function(x) { return x+1 });
+  //  console.log(a);
 
     var vm2=new Vue({
         "el":"#app2",
