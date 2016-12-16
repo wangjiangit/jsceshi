@@ -9,7 +9,7 @@
     <simple-counter> </simple-counter>
     <simple-counter> </simple-counter>
     <simple-counter> </simple-counter>
-    <child my-message="hello" v-bind:prop1="data1"></child>
+    <child my-message="hello" v-bind:prop1="data1"  v-on:trigger1="shijian2" v-on:dblclick.native="shijian3"></child>
 
     <component1 v-bind:prop-a="30" prop-c="CCC"></component1>
 </div>
@@ -17,6 +17,11 @@
 </body>
 <script type="text/javascript" src="./vue.js"></script>
 <script type="text/javascript">
+
+    var bus = new Vue();
+    bus.$on('is-selected',function(id){
+        console.log('hello');
+    });
 
     //组件simple-counter
     Vue.component('simple-counter',{
@@ -42,7 +47,9 @@
         },
         "methods":{
             "shijian1":function(){
-                alert('hello');
+                console.log('hello');
+                this.$emit('trigger1');//触发trigger1自定义事件事件
+                bus.$emit('is-selected');
             }
         },
         "template":"<span style='color:red' v-on:click='shijian1'>{{myMessage}} {{prop1}} == {{hebing}} 大写：{{prop1_computed}}</span>"
@@ -85,7 +92,15 @@
 var vm =new Vue({
     "el":'#div1',
     "data":{
-        "data1":"welcome to china"
+        "data1":"welcome to china",
+    },
+    "methods":{
+        "shijian2":function(){
+            console.log('hello world');
+        },
+        "shijian3":function(){
+            console.log('在组件的根元素上监听一个原生事件');
+        }
     }
 });
 
