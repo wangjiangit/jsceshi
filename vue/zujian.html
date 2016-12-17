@@ -7,11 +7,17 @@
 <body>
 <div id="div1">
     <simple-counter>{{message}} </simple-counter>
-    <simple-counter> </simple-counter>
-    <simple-counter> </simple-counter>
+    <simple-counter> <span style="color:red">red flag</span> </simple-counter>
+    <simple-counter> <H2 slot="name1">wj</H2> </simple-counter>
     <child my-message="hello" v-bind:prop1="data1"  v-on:trigger1="shijian2" v-on:dblclick.native="shijian3"></child>
 
     <component1 v-bind:prop-a="30" prop-c="CCC"></component1>
+
+    <!--动态组件切换，使用保留的component元素  如果把切换出去的组件保留在内存中，可以保留它的状态或避免重新渲染 ,可使用keep-alive-->
+    <keep-alive>
+        <component v-bind:is="currentView">
+        </component>
+    </keep-alive>
 </div>
 
 </body>
@@ -25,7 +31,7 @@
 
     //组件simple-counter
     Vue.component('simple-counter',{
-        "template":"<button v-on:click='counter+=1' v-show='true' >点击次数：{{counter}} <slot>备用插槽</slot></button>",
+        "template":"<button v-on:click='counter+=1' v-show='true' >点击次数：{{counter}} <slot name='name1'></slot> <slot>备用插槽</slot> </button>",
         "data":function(){
             var data={
                 "counter":0
@@ -93,7 +99,8 @@ var vm =new Vue({
     "el":'#div1',
     "data":{
         "data1":"welcome to china",
-        "message":"welcome to America"
+        "message":"welcome to America",
+        "currentView":"home"
     },
     "methods":{
         "shijian2":function(){
@@ -101,6 +108,14 @@ var vm =new Vue({
         },
         "shijian3":function(){
             console.log('在组件的根元素上监听一个原生事件');
+        }
+    },
+    "components":{   //局部组件注册
+        "home":{
+            "template":"<span style='color:blue'>Home组件</span>"
+        },
+        "about":{
+            "template":"<span style='color:blue'>About组件</span>"
         }
     }
 });
