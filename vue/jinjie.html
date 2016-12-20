@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue进阶</title>
+</head>
+<body>
+<div id="example">{{message}}</div>
+</body>
+<script type="text/javascript" src="./vue.js"></script>
+<script>
+    //Vue.nextTick  组件不会立即重新渲染,当刷新队列时，组件会在事件循环队列清空时的下一个“tick”更新。
+    //这样回调函数在 DOM 更新完成后就会调用。例如：
+    var vm = new Vue({
+        el: '#example',
+        data: {
+            message: '123'
+        }
+    })
+    vm.message = 'new message' // 更改数据
+    console.log(vm.$el.textContent === 'new message'); // false
+    Vue.nextTick(function () {
+       console.log( vm.$el.textContent === 'new message'); // true
+    });
+    
+</script>
+</html>
