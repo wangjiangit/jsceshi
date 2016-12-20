@@ -6,7 +6,7 @@
 </head>
 <body>
 <div id="div1">
-    <simple-counter>{{message}} </simple-counter>
+    <simple-counter  ref="zizujian1"  >{{message}} </simple-counter>
     <simple-counter> <span style="color:red">red flag</span> </simple-counter>
     <simple-counter> <H2 slot="name1">wj</H2> </simple-counter>
     <child my-message="hello" v-bind:prop1="data1"  v-on:trigger1="shijian2" v-on:dblclick.native="shijian3"></child>
@@ -112,7 +112,7 @@ var vm =new Vue({
     },
     "components":{   //局部组件注册
         "home":{
-            "template":"<span style='color:blue'>Home组件</span>"
+            "template":"<span style='color:blue'><span style='color:red'>...</span>Home组件</span>"
         },
         "about":{
             "template":"<span style='color:blue'>About组件</span>"
@@ -120,6 +120,57 @@ var vm =new Vue({
     }
 });
 
+
+
+    console.log(vm.$refs.zizujian1);
     console.log(vm.message);
+
+
+    /**组件命名规则**/
+
+    // 在组件定义中
+  //  components: {
+        // 使用 kebab-case 形式注册
+    //    'kebab-cased-component': { /* ... */ },
+        // register using camelCase
+      //  'camelCasedComponent': { /* ... */ },
+        // register using TitleCase
+       // 'TitleCasedComponent': { /* ... */ }
+  //  }
+
+    //在模板中使用如下：
+    <!-- 在HTML模版中始终使用 kebab-case -->
+   /* <kebab-cased-component></kebab-cased-component>
+    <camel-cased-component></camel-cased-component>
+    <title-cased-component></title-cased-component>*/
+
+    //递归组件---组件可以在它的模板中递归地调用自己
+    /*Vue.component('stack-overflow', {
+        name: 'stack-overflow',
+        template: '<div><stack-overflow></stack-overflow></div>'
+    });*/
+
+
+    //组件模板定义的几种方法
+    /*
+    最佳实践是使用 template 选项在组件内定义模板或者在 .vue 文件中使用 template 元素。
+    另一种定义模版的方式是在 JavaScript 标签里使用 text/x-template 类型，并且指定一个id。例如：
+    然后代码如下：
+    Vue.component('hello-world', {
+        template: '#hello-world-template'
+    })*/
+
+    //使用v-once的低级静态组件
+    //尽管在 Vue 中渲染 HTML 很快，不过当组件中包含大量静态内容时，可以考虑使用 v-once 将渲染结果缓存起来，就像这样：
+   /*
+    Vue.component('terms-of-service', {
+        template: '\
+    <div v-once>\
+      <h1>Terms of Service</h1>\
+      ... a lot of static content ...\
+    </div>\
+  '
+    })
+    */
 </script>
 </html>
