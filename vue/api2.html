@@ -100,7 +100,58 @@
         staticRenderFns: res.staticRenderFns
     })*/
 
-    
+    //选项/数据
+     //data  Vue 实例的数据对象。Vue 将会递归将 data 的属性转换为 getter/setter，从而让 data 的属性能够响应数据变化。对象必须是纯粹的对象(含有零个或多个的key/value对)：浏览器 API 创建的原生对象，原型上的属性会被忽略。大概来说，data 应该只能是数据 - 不推荐观察拥有状态行为的对象。
+     //实例创建之后，可以通过vm.$data访问原始数据对象，Vue实例也代理了data对象上的所有属性,因此等价
+    // vm.$data.a 等价于 vm.a
+    //以 _ 或 $ 开头的属性 不会 被 Vue 实例代理,你可以使用vm.$data._property 的方式访问这些属性。
+
+
+    //props
+    //props 可以是数组或对象，用于接收来自父组件的数据。props 可以是简单的数组，或者使用对象作为替代，对象允许配置高级选项，如类型检测、自定义校验和设置默认值。
+
+    //propsData
+    //创建实例时传递 props。主要作用是方便测试。
+
+
+    //computed
+    //计算属性将被混入到 Vue 实例中。所有 getter 和 setter 的 this 上下文自动地绑定为 Vue 实例。
+   /*
+    var vm = new Vue({
+        data: { a: 1 },
+        computed: {
+            // 仅读取，值只须为函数
+            aDouble: function () {
+                return this.a * 2
+            },
+            // 读取和设置
+            aPlus: {
+                get: function () {
+                    return this.a + 1
+                },
+                set: function (v) {
+                    this.a = v - 1
+                }
+            }
+        }
+    })
+    vm.aPlus   // -> 2
+    vm.aPlus = 3
+    vm.a       // -> 2
+    vm.aDouble // -> 4
+    */
+
+    //methods  methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些方法，或者在指令表达式中使用。方法中的 this 自动绑定为 Vue 实例。
+   /* var vm = new Vue({
+        data: { a: 1 },
+        methods: {
+            plus: function () {
+                this.a++
+            }
+        }
+    })
+    vm.plus()
+    vm.a // 2*/
 
 
 
