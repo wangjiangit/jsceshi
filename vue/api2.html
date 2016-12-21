@@ -63,6 +63,46 @@
     //删除对象的属性。如果对象是响应式的，确保删除能触发更新视图。这个方法主要用于避开 Vue 不能检测到属性被删除的限制，但是你应该很少会使用它。
     //Vue.delete(vm.data,'c');
 
+    //Vue.directive()  //注册或获取全局指令
+
+    //Vue.filter()  //注册或获取全局顾虑器
+
+    /*
+    // 注册
+    Vue.filter('my-filter', function (value) {
+        // 返回处理后的值
+    });
+    // getter，返回已注册的过滤器
+    var myFilter = Vue.filter('my-filter');*/
+
+
+    //Vue.component();      //注册或获取全局组件
+    /*
+    // 注册组件，传入一个扩展过的构造器
+    Vue.component('my-component', Vue.extend({ /!* ... *!/ }))
+    // 注册组件，传入一个选项对象（自动调用 Vue.extend）
+    Vue.component('my-component', { /!* ... *!/ })
+    // 获取注册的组件（始终返回构造器）
+    var MyComponent = Vue.component('my-component')*/
+
+    //Vue.use(plugin) // 插件相关
+
+    //Vue.mixin  //全局注册一个混合
+
+    //Vue.compile(template) //在render函数中编译模板字符串,只在独立构建时有效
+
+   /* var res = Vue.compile('<div><span>{{ msg }}</span></div>')
+    new Vue({
+        data: {
+            msg: 'hello'
+        },
+        render: res.render,
+        staticRenderFns: res.staticRenderFns
+    })*/
+
+    
+
+
 
     var vm =new Vue({
         "el":"#example"
