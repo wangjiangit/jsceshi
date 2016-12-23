@@ -77,7 +77,7 @@
     });
     // getter，返回已注册的过滤器
     var myFilter = Vue.filter('my-filter');*/
-
+    //可以这样用myFilter(value)
 
     //Vue.component();      //注册或获取全局组件
     /*
@@ -229,6 +229,77 @@
 
     //destroyed
     //Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
+
+    //选项/资源
+
+    //directives 包含Vue实例可用指令的哈希表
+    //filters   包含Vue实例可用过滤器的哈希表
+    //components 包含 Vue 实例可用组件的哈希表.
+
+    //选项/杂项
+    //parent
+    //指定已创建的实例之父实例，在两者之间建立父子关系。子实例可以用 this.$parent 访问父实例，子实例被推入父实例的 $children 数组中
+
+    //mixins
+    //mixins 选项接受一个混合对象的数组。这些混合实例对象可以像正常的实例对象一样包含选项,他们将在 Vue.extend() 里最终选择使用相同的选项合并逻辑合并。举例：如果你混合包含一个钩子而创建组件本身也有一个,两个函数将被调用。
+   // Mixin钩子按照传入顺序依次调用,并在调用组件自身的钩子之前被调用。
+
+    //name
+    //允许组件模板递归地调用自身。注意，组件在全局用 Vue.component() 注册时，全局 ID 自动作为组件的 name。
+    //指定 name 选项的另一个好处是便于调试。有名字的组件有更友好的警告信息。另外，当在有 vue-devtools, 未命名组件将显示成 <AnonymousComponent>, 这很没有语义。通过提供 name 选项，可以获得更有语义信息的组件树。
+
+
+    //extend
+    //允许声明扩展另一个组件(可以是一个简单的选项对象或构造函数),而无需使用 Vue.extend。这主要是为了便于扩展单文件组件。
+    /*
+    var CompA = { ... }
+    // 在没有调用 Vue.extend 时候继承 CompA
+    var CompB = {
+        extends: CompA,
+            ...
+    }*/
+
+    //delimiters
+    //改变纯文本插入分隔符。
+    /* new Vue({
+        delimiters: ["{{", "}}"]
+    });*/
+
+    //functional
+    //使组件无状态（没有 data ）和无实例（没有 this 上下文）。他们用一个简单的 render 函数返回虚拟节点使他们更容易渲染。
+
+
+    //实例属性
+    //Vue 实例观察的数据对象。Vue 实例代理了对其 data 对象属性的访问
+
+    //vm.$data
+    //Vue 实例观察的数据对象。Vue 实例代理了对其 data 对象属性的访问
+
+    //vm.$el(只读)
+    //Vue 实例使用的根 DOM 元素。
+
+    //vm.options
+    //用于当前 Vue 实例的初始化选项。需要在选项中包含自定义属性时会有用处：
+    // console.log(vm.$options.customOption1);
+
+    //vm.$parent
+    //父实例，如果当前实例有的话。
+
+    //vm.$root
+    //获取当前组件树的根 Vue 实例。如果当前实例没有父实例，此实例将会是其自已。
+
+    //vm.$children
+    //当前实例的直接子组件。需要注意 $children 并不保证顺序，也不是响应式的。如果你发现自己正在尝试使用 $children 来进行数据绑定，考虑使用一个数组配合 v-for 来生成子组件，并且使用 Array 作为真正的来源。
+
+    //vm.$slots
+    //用来访问被 slot 分发的内容。每个具名 slot 有其相应的属性（例如：slot="foo" 中的内容将会在 vm.$slots.foo 中被找到）。default 属性包括了所有没有被包含在具名 slot 中的节点。
+
+    //vm.$refs
+    //一个对象，其中包含了所有拥有 ref 注册的子组件。
+
+    //vm.$isServer
+    //当前 Vue 实例是否运行于服务器。
+    
     var vm =new Vue({
         "el":"#example",
         "data":{
@@ -242,6 +313,7 @@
         "methods":{
           "dianji":function(){
               this.message='hello world';
+              console.log('dianji');
           }
         },
         "beforeCreate":function(){
@@ -265,7 +337,8 @@
         },
         "destroyed":function(){
             console.log('destroyed');
-        }
+        },
+        "customOption1":'zidingyixuanxiang'
     });
 
 
@@ -277,6 +350,8 @@
     });
     vm1.$mount('#div1');*/
    // console.log(vm.$el);
+   // console.log(vm.$options.customOption1);
+   // console.log(vm.$root);
 
 </script>
 </html>
