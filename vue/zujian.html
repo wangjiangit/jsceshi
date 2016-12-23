@@ -25,8 +25,8 @@
 <script type="text/javascript">
 
     var bus = new Vue();
-    bus.$on('is-selected',function(id){
-        console.log('hello id:'+id);
+    bus.$on('is-selected',function(id,s){
+        console.log('hello id:'+id+'s:'+s);
     });
 
     //组件simple-counter
@@ -55,7 +55,7 @@
             "shijian1":function(){
                 console.log('hello');
                 this.$emit('trigger1');//触发trigger1自定义事件事件
-                bus.$emit('is-selected',1);
+                bus.$emit('is-selected',1,4);
             }
         },
         "template":"<span style='color:red' v-on:click='shijian1'>{{myMessage}} {{prop1}} == {{hebing}} 大写：{{prop1_computed}}</span>"
