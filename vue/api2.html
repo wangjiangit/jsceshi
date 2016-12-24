@@ -7,6 +7,9 @@
 <body>
 <div id="example" v-on:click="dianji">
     div{{message}}
+    <span style="color:red" v-show="true"  v-text="msg"></span>
+    <p v-html="p"></p>
+    <span v-pre>{{ this will not be compiled }}</span>
 </div>
 <div id="div1">
     这是DIV1
@@ -376,10 +379,145 @@
     //完全销毁一个实例。清理它与其它实例的连接，解绑它的全部指令及事件监听器。
     //调用vm.$destroy()，将触发 beforeDestroy和destroyed 钩子
 
+    //指令
+    // v-text
+    //更新元素的 textContent。如果要更新部分的 textContent ，需要使用 {{ Mustache }} 插值。
+
+    //v-html
+    //更新元素的 innerHTML 。注意：内容按普通 HTML 插入 - 不会作为 Vue 模板进行编译 。如果试图使用 v-html 组合模板,可以重新考虑通过是否通过使用组件来替代。
+
+    //v-show
+    //根据表达式之真假值，切换元素的 display CSS 属性。
+
+    //v-if
+    //根据表达式的值的真假条件渲染元素。在切换时元素及它的数据绑定 / 组件被销毁并重建。如果元素是 <template> ，将提出它的内容作为条件块。
+
+    //v-else
+    //前一兄弟元素必须有 v-if 或 v-else-if。
+
+    /*<div v-if="Math.random() > 0.5">
+            Now you see me
+    </div>
+    <div v-else>
+    Now you don't
+    </div>*/
+
+    //v-else-if
+/*
+    <div v-if="type === 'A'">
+    A
+    </div>
+    <div v-else-if="type === 'B'">
+    B
+    </div>
+    <div v-else-if="type === 'C'">
+    C
+    </div>
+    <div v-else>
+    Not A/B/C
+    </div>*/
+
+    //v-for
+    //基于源数据多次渲染元素或模板块。
+    //类型:Array | Object | number | string
+    /*
+    <div v-for="(item, index) in items"></div>
+    <div v-for="(val, key) in object"></div>
+    <div v-for="(val, key, index) in object"></div>
+    <div v-for="item in items" :key="item.id">
+            {{ item.text }}
+    </div>*/
+
+    //v-on
+    //绑定事件监听器。事件类型由参数指定。表达式可以是一个方法的名字或一个内联语句，如果没有修饰符也可以省略。
+
+    //v-bind
+    //动态地绑定一个或多个特性，或一个组件 prop 到表达式。
+    /*
+     修饰符：
+     .prop - 被用于绑定 DOM 属性。(what’s the difference?)
+     .camel - transform the kebab-case attribute name into camelCase. (supported since 2.1.0)
+
+    在绑定 class 或 style 特性时，支持其它类型的值，如数组或对象。可以通过下面的教程链接查看详情。
+
+    在绑定 prop 时，prop 必须在子组件中声明。可以用修饰符指定不同的绑定类型。
+
+    没有参数时，可以绑定到一个包含键值对的对象。注意此时 class 和 style 绑定不支持数组和对象。*/
+
+    <!-- 绑定一个属性 -->
+          /*  <img v-bind:src="imageSrc">
+                <!-- 缩写 -->
+            <img :src="imageSrc">
+                <!-- with inline string concatenation -->
+            <img :src="'/path/to/images/' + fileName">
+                <!-- class 绑定 -->
+            <div :class="{ red: isRed }"></div>
+            <div :class="[classA, classB]"></div>
+            <div :class="[classA, { classB: isB, classC: isC }]">
+                <!-- style 绑定 -->
+            <div :style="{ fontSize: size + 'px' }"></div>
+            <div :style="[styleObjectA, styleObjectB]"></div>
+                <!-- 绑定一个有属性的对象 -->
+            <div v-bind="{ id: someProp, 'other-attr': otherProp }"></div>
+                <!-- 通过 prop 修饰符绑定 DOM 属性 -->
+            <div v-bind:text-content.prop="text"></div>
+                <!-- prop 绑定. “prop” 必须在 my-component 中声明。 -->
+            <my-component :prop="someThing"></my-component>
+                <!-- XLink -->
+            <svg><a :xlink:special="foo"></a></svg>*/
+
+        //v-model
+        //在表单控件或者组件上创建双向绑定。
+        //随表单控件类型不同而不同。
+        /*修饰符：
+
+         .lazy - 取代 input 监听 change 事件
+        .number - 输入字符串转为数字
+        .trim - 输入首尾空格过滤*/
+
+    //v-pre
+    //跳过这个元素和它的子元素的编译过程。可以用来显示原始 Mustache 标签。跳过大量没有指令的节点会加快编译
+    //<span v-pre>{{ this will not be compiled }}</span>
+
+    //v-cloak
+    //这个指令保持在元素上直到关联实例结束编译。和 CSS 规则如 [v-cloak] { display: none } 一起用时，这个指令可以隐藏未编译的 Mustache 标签直到实例准备完毕。
+
+    //v-once
+    //只渲染元素和组件一次。随后的重新渲染,元素/组件及其所有的子节点将被视为静态内容并跳过。这可以用于优化更新性能。
+
+
+    //特殊元素
+    //key
+    //key 的特殊属性主要用在 Vue的虚拟DOM算法，在新旧nodes对比时辨识VNodes。如果不使用key，Vue会使用一种最大限度减少动态元素并且尽可能的尝试修复/再利用相同类型元素的算法。使用key，它会基于key的变化重新排列元素顺序，并且会移除key不存在的元素。
+
+    //ref
+    //ref 被用来给元素或子组件注册引用信息。引用信息会根据父组件的 $refs 对象进行注册。如果在普通的DOM元素上使用，引用信息就是元素; 如果用在子组件上，引用信息就是组件实例:
+
+    //slot
+    //用于标记往哪个slot中插入子组件内容。
+
+    //内置组件
+    //component
+    //渲染一个“元组件”为动态组件。依 is 的值，来决定哪个组件被渲染。
+
+    //transition
+    //<transition> 元素作为单个元素/组件的过渡效果。<transition> 不会渲染额外的 DOM 元素，也不会出现在检测过的组件层级中。它只是将内容包裹在其中，简单的运用过渡行为。
+
+    //transition-group
+    //<transition-group> 元素作为多个元素/组件的过渡效果。<transition-group> 渲染一个真实的 DOM 元素。默认渲染 <span>，可以通过 tag 属性配置哪个元素应该被渲染。
+
+    //keep-alive
+    //<keep-alive> 包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们。和 <transition> 相似，<keep-alive> 是一个抽象组件：它自身不会渲染一个 DOM 元素，也不会出现在父组件链中。
+
+    //slot
+    //<slot> 元素作为组件模板之中的内容分发插槽。 <slot> 元素自身将被替换。
+
     var vm =new Vue({
         "el":"#example",
         "data":{
-          "message":"message"
+          "message":"message",
+            "msg":"welcome to china",
+            "p":"<span color='blue'>this paragraph</span>"
         },
         "computed":{
           "message1":function(){
