@@ -9,7 +9,7 @@
     <simple-counter  ref="zizujian1"  >{{message}} </simple-counter>
     <simple-counter> <span style="color:red">red flag</span> </simple-counter>
     <simple-counter> <H2 slot="name1">wj</H2> </simple-counter>
-    <child my-message="hello" v-bind:prop1="data1"  v-on:trigger1="shijian2" v-on:dblclick.native="shijian3"></child>
+    <child my-message="hello" v-bind:prop1="data1"  prop2="ABCD" v-on:trigger1="shijian2" v-on:dblclick.native="shijian3"></child>
 
     <component1 v-bind:prop-a="30" prop-c="CCC"></component1>
 
@@ -42,7 +42,7 @@
 
     //组件child
     Vue.component('child',{
-        "props":['myMessage','prop1'],
+        "props":['myMessage','prop1','prop2'],
         "data":function(){
             return {"hebing":this.myMessage+ this.prop1}
         },
@@ -58,7 +58,7 @@
                 bus.$emit('is-selected',1,4);
             }
         },
-        "template":"<span style='color:red' v-on:click='shijian1'>{{myMessage}} {{prop1}} == {{hebing}} 大写：{{prop1_computed}}</span>"
+        "template":"<span style='color:red' v-on:click='shijian1'>{{myMessage}} {{prop1}} == {{hebing}} 大写：{{prop1_computed}}  {{prop2}}</span>"
     });
 
     //组件component1
