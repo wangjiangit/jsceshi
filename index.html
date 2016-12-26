@@ -25,6 +25,7 @@
 <button id="button1">按钮</button>
 <button class="newclass">新按钮</button>
 <input  type="file"  name="tupian" accept="image/*;capture=camera"/>
+<button id="button2">Button2</button>
 </body>
 <script type="text/javascript" src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="./jquery.custom.min.js"></script>
@@ -39,6 +40,12 @@
     });*/
 
   //  console.log(a.b);
+   $('#button2').click(function(){
+       $.ajax({
+           'url':'/js/index.php',
+           'data':{"name":"wangjian"}
+       });
+   });
     console.log(myApp.dashboard.showMessage());
     if (typeof Function.prototype.method != 'function') {
         Function.prototype.method = function (name, func) {
