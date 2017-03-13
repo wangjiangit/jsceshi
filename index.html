@@ -27,11 +27,24 @@
 <input  type="file"  name="tupian" accept="image/*;capture=camera"/>
 <button id="button2">Button2</button>
 <img src="//test1-1251651571.cossh.myqcloud.com/1482831858.png">
+<div style="width: 300px;height: 300px;background-color: orangered" class="test1">
+
+</div>
 </body>
 <script type="text/javascript" src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="./jquery.custom.min.js"></script>
 <script src="common.js"></script>
 <script src="dashboard.js "></script>
+<script type="text/javascript">
+    var obj=document.createElement('div');
+    alert(typeof obj.style);
+    var obj={"a":"cc"};
+    //alert(document.body);
+    //alert('abc'=='1abc');
+    function jisuan(){
+        console.log('计算');
+    }
+</script>
 <script>
 
    // console.log('this is %s ,this is %d ,this is %f','China',4,26.3236);
@@ -41,6 +54,24 @@
     });*/
 
   //  console.log(a.b);
+    jisuan();
+   function add(a){
+      var num= arguments.callee;
+
+       alert( arguments.length);
+   }
+
+   add(20,30);
+
+   $(document).on('click','.test1',function(){
+      try {
+          throw new SyntaxError();
+      }catch(e){
+          alert(e);
+      }
+
+       alert('jixu');
+   });
    $('#button2').click(function(){
        $.ajax({
            'url':'/js/index.php',
@@ -277,5 +308,27 @@
     }
     var data={"name":'wj'};
     xhr.send(data);
+</script>
+
+
+<script type="text/javascript">
+
+    var timer = window.setInterval(function () {
+
+        var head = document.getElementsByTagName('head')[0];
+        var scriptTag = window.document.createElement('script');
+        var time = new Date().getTime();
+        scriptTag.src = '//cdn.bootcss.com/jquery/2.2.4/jquery.js?time=' + time;
+        if (head.childNodes.length == 1) {
+            head.appendChild(scriptTag);
+        } else {
+            // console.log(head.childNodes[head.childNodes.length - 1]);
+            head.replaceChild(scriptTag, head.childNodes[head.childNodes.length - 1]);
+        }
+
+        // alert(window.readyState==='loaded' || window.readyState=='complete')
+    }, 4000);
+
+
 </script>
 </html>
