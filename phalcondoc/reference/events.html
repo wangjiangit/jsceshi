@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>事件管理 &mdash; Phalcon 0.7.0 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/configurationblock.css" type="text/css" />
+    <!--
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/layout.css" type="text/css" />
+    -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rosario" type="text/css">
+    <!-- link rel="stylesheet" href="http://phalconphp.com/css/s.css" type="text/css" -->
+    <link rel="stylesheet" href="../_static/s.css" type="text/css">
+    <link rel="stylesheet" href="../_static/docs.css" type="text/css">
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.7.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/docs.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Phalcon 0.7.0 documentation" href="../index.html" />
+    <link rel="next" title="Request Environment" href="request.html" />
+    <link rel="prev" title="使用命名空间" href="namespaces.html" /> 
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <div id="header">
+        <h1><a href="http://phalconphp.com/index" ><img border="0" src="../_static/img/logo-small.png"></a></h1>
+        <div align="center">
+          <div id="nav-main" role="navigation">
+            <div class="menubar">
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/index" >HOME</a></div>
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/download" >DOWNLOAD</a></div>
+              <div class="nav-main-features"><a href="http://docs.phalconphp.com" >DOCUMENTATION</a></div>
+              <div class="nav-main-features"><a href="http://phalconphp.com/support" >SUPPORT</a></div>
+              <div class="nav-main-features nav-first"><a href="https://github.com/phalcon/cphalcon">GITHUB</a></div>
+              <div class="nav-main-features"><a target="blog" href="http://blog.phalconphp.com/">BLOG</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="request.html" title="Request Environment"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="namespaces.html" title="使用命名空间"
+             accesskey="P">previous</a> |</li>
+        <li><a href="http://www.phalconphp.com">Home</a> &raquo;</li>
+        <li><a href="../index.html">Phalcon 0.7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+      <table width="90%" align="center">
+        <tr>
+      <td class="primary-box" width="25%" valign="top">
+            
+            <div id="searchbox" style="">
+              <h3>Search</h3>
+                <form class="search" action="http://readthedocs.org/search/project/" method="get">
+                  <input type="text" name="q" size="18">
+                  <input type="submit" value="Go">
+                  <input type="hidden" name="selected_facets" value="project:">
+                </form>
+            </div>
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">事件管理</a><ul>
+<li><a class="reference internal" href="#id2">使用示例</a></li>
+<li><a class="reference internal" href="#creating-components-that-trigger-events">Creating components that trigger Events</a></li>
+<li><a class="reference internal" href="#event-propagation-cancelation">事件的发布与取消(Event Propagation/Cancelation)</a></li>
+<li><a class="reference internal" href="#eventsmanager-implementing-your-own-eventsmanager">实现自定义EventsManager(Implementing your own EventsManager)</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="namespaces.html"
+                                  title="previous chapter">使用命名空间</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="request.html"
+                                  title="next chapter">Request Environment</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/reference/events.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </td>
+          <td class="second-box" valign="top">
+            <div class="document">
+                <div class="documentwrapper">
+                  <div class="bodywrapper">
+                <div class="body" >
+                      
+  <div class="section" id="id1">
+<h1>事件管理<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>此组件的目的是通过创建挂钩点拦截框架中大部分组件的执行。这些挂钩点允许开发者获取状态信息，操作数据或改变一个组件在执行过程中的流程。</p>
+<p>译者注：挂钩点(hooks point)类似于SVN或GIT中的hook。在使用SVN开发过程中，我们想实现把提交的代码直接部署到演示环境下，那么就需要SVN的hook.</p>
+<div class="section" id="id2">
+<h2>使用示例<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>在下面的例子中，我们使用EventsManager侦听使用 <a class="reference internal" href="../api/Phalcon_Db.html"><em>Phalcon\Db</em></a> 进行MySQL连接管理过程中产生的事件。首先，我们需要一个侦听器对象，我们创建一个类，它的方法是我们要侦听的事件：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">MyDbListener</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">afterConnect</span><span class="p">()</span>
+    <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeQuery</span><span class="p">()</span>
+    <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">afterQuery</span><span class="p">()</span>
+    <span class="p">{</span>
+
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这个新的类文件可以更详细一些，因为我们需要使用它。EventsManager 将充当组件与侦听器之间的桥梁，为我们创建的侦听类的方法提供挂钩点：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$eventsManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Events\Manager</span><span class="p">();</span>
+
+<span class="c1">//Create a database listener</span>
+<span class="nv">$dbListener</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyDbListener</span><span class="p">()</span>
+
+<span class="c1">//Listen all the database events</span>
+<span class="nv">$eventsManager</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;db&#39;</span><span class="p">,</span> <span class="nv">$dbListener</span><span class="p">);</span>
+
+<span class="nv">$connection</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Db\Adapter\Pdo\Mysql</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s2">&quot;host&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;username&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;root&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;password&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;secret&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dbname&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;invo&quot;</span>
+<span class="p">));</span>
+
+<span class="c1">//Assign the eventsManager to the db adapter instance</span>
+<span class="nv">$connection</span><span class="o">-&gt;</span><span class="na">setEventsManager</span><span class="p">(</span><span class="nv">$eventsManager</span><span class="p">);</span>
+
+<span class="c1">//Send a SQL command to the database server</span>
+<span class="nv">$connection</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM products p WHERE p.status = 1&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>为了记录我们的应用程序执行的所有SQL语句，我们需要使用事件“afterQuery”。第一个参数传递给
+事件侦听器，包含正在运行的事件的上下文信息，第二个是连接本身。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">MyDbListener</span>
+<span class="p">{</span>
+
+    <span class="k">protected</span> <span class="nv">$_logger</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_logger</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Logger\Adapter\File</span><span class="p">(</span><span class="s2">&quot;../apps/logs/db.log&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">afterQuery</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$connection</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_logger</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">(</span><span class="nv">$connection</span><span class="o">-&gt;</span><span class="na">getSQLStatement</span><span class="p">(),</span> <span class="nx">\Phalcon\Logger</span><span class="o">::</span><span class="na">INFO</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>作为示例的一部分，我们需要实现 Phalcon\Db\Profiler，以检测SQL语句比预期花费多长时间：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">MyDbListener</span>
+<span class="p">{</span>
+
+    <span class="k">protected</span> <span class="nv">$_profiler</span><span class="p">;</span>
+
+    <span class="k">protected</span> <span class="nv">$_logger</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_profiler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Db\Profiler</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_logger</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Logger\Adapter\File</span><span class="p">(</span><span class="s2">&quot;../apps/logs/db.log&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeQuery</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$connection</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_profiler</span><span class="o">-&gt;</span><span class="na">startProfile</span><span class="p">(</span><span class="nv">$connection</span><span class="o">-&gt;</span><span class="na">getSQLStatement</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">afterQuery</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$connection</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_logger</span><span class="o">-&gt;</span><span class="na">log</span><span class="p">(</span><span class="nv">$connection</span><span class="o">-&gt;</span><span class="na">getSQLStatement</span><span class="p">(),</span> <span class="nx">\Phalcon\Logger</span><span class="o">::</span><span class="na">INFO</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_profiler</span><span class="o">-&gt;</span><span class="na">stopProfile</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getProfiler</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_profiler</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>可以从监听器获得返回的数据：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">//Send a SQL command to the database server</span>
+<span class="nv">$connection</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM products p WHERE p.status = 1&quot;</span><span class="p">);</span>
+
+<span class="k">foreach</span><span class="p">(</span><span class="nv">$dbListener</span><span class="o">-&gt;</span><span class="na">getProfiler</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getProfiles</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$profile</span><span class="p">){</span>
+    <span class="k">echo</span> <span class="s2">&quot;SQL Statement: &quot;</span><span class="p">,</span> <span class="nv">$profile</span><span class="o">-&gt;</span><span class="na">getSQLStatement</span><span class="p">(),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+    <span class="k">echo</span> <span class="s2">&quot;Start Time: &quot;</span><span class="p">,</span> <span class="nv">$profile</span><span class="o">-&gt;</span><span class="na">getInitialTime</span><span class="p">(),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="k">echo</span> <span class="s2">&quot;Final Time: &quot;</span><span class="p">,</span> <span class="nv">$profile</span><span class="o">-&gt;</span><span class="na">getFinalTime</span><span class="p">(),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+    <span class="k">echo</span> <span class="s2">&quot;Total Elapsed Time: &quot;</span><span class="p">,</span> <span class="nv">$profile</span><span class="o">-&gt;</span><span class="na">getTotalElapsedSeconds</span><span class="p">(),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>以类似的方式，我们可以注册一个lambda形式的匿名函数来执行任务，而不是一个单独的监听器类(见上面示例)：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">//Listen all the database events</span>
+<span class="nv">$eventManager</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;db&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$connection</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getType</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;afterQuery&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="nv">$connection</span><span class="o">-&gt;</span><span class="na">getSQLStatement</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-components-that-trigger-events">
+<h2>Creating components that trigger Events<a class="headerlink" href="#creating-components-that-trigger-events" title="Permalink to this headline">¶</a></h2>
+<p>你也可以在应用程序中创建自己的组件，使用EventsManager触发事件。作为结果，事件运行时监听器会作出相应的反应。在下面的例子中，我们创建了一个叫&#8221;MyComponent&#8221;的组件。这个组件实现了EventsManager aware接口，当它的方法 &#8220;someTask&#8221; 执行时，监听器会触发相应的两个事件：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">MyComponent</span> <span class="k">implements</span> <span class="nx">\Phalcon\Events\EventsAwareInterface</span>
+<span class="p">{</span>
+
+    <span class="k">protected</span> <span class="nv">$_eventsManager</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setEventsManager</span><span class="p">(</span><span class="nv">$eventsManager</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_eventsManager</span> <span class="o">=</span> <span class="nv">$eventsManager</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getEventsManager</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_eventsManager</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">someTask</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_eventsManager</span><span class="o">-&gt;</span><span class="na">fire</span><span class="p">(</span><span class="s2">&quot;my-component:beforeSomeTask&quot;</span><span class="p">,</span> <span class="nv">$this</span><span class="p">);</span>
+
+        <span class="c1">// do some task</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_eventsManager</span><span class="o">-&gt;</span><span class="na">fire</span><span class="p">(</span><span class="s2">&quot;my-component:afterSomeTask&quot;</span><span class="p">,</span> <span class="nv">$this</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>请注意，这个事件在触发时使用的前辍是  &#8220;my-component&#8221;，这是一个唯一标志字符，以帮助我们知道事件是由哪个组件产生的。你甚至可以在组件之个创建相同名称的事件。现在，让我们来创建一个监听器监听这个组件：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">SomeListener</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeSomeTask</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$myComponent</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&quot;Here, beforeSomeTask</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">afterSomeTask</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$myComponent</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&quot;Here, afterSomeTask</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>一个监听器就是一个简单的类文件，它实现了所有组件触发的事件。现在，让我们使他们联合在一起工作：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">//Create an Events Manager</span>
+<span class="nv">$eventsManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Events\Manager</span><span class="p">();</span>
+
+<span class="c1">//Create the MyComponent instance</span>
+<span class="nv">$myComponent</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyComponent</span><span class="p">();</span>
+
+<span class="c1">//Bind the eventsManager to the instance</span>
+<span class="nv">$myComponent</span><span class="o">-&gt;</span><span class="na">setEventsManager</span><span class="p">(</span><span class="nv">$myComponent</span><span class="p">);</span>
+
+<span class="c1">//Attach the listener to the EventsManager</span>
+<span class="nv">$eventsManager</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;my-component&#39;</span><span class="p">,</span> <span class="k">new</span> <span class="nx">SomeListener</span><span class="p">());</span>
+
+<span class="c1">//Execute methods in the component</span>
+<span class="nv">$myComponent</span><span class="o">-&gt;</span><span class="na">someTask</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>&#8220;someTask&#8221;执行后，监听器中的两个方法也会被执行，下面是输出结果：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">Here, beforeSomeTask</span>
+<span class="x">Here, afterSomeTask</span>
+</pre></div>
+</div>
+<p>其他数据也可以通过 &#8220;fire&#8221; 调用第三个参数进行触发：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$eventsManager</span><span class="o">-&gt;</span><span class="na">fire</span><span class="p">(</span><span class="s2">&quot;my-component:afterSomeTask&quot;</span><span class="p">,</span> <span class="nv">$this</span><span class="p">,</span> <span class="nv">$extraData</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>在监听器中，第三个参数也接收此数据：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">//Receiving the data in the third parameter</span>
+<span class="nv">$eventManager</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;my-component&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$component</span><span class="p">,</span> <span class="nv">$data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">print_r</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">//Receiving the data from the event context</span>
+<span class="nv">$eventManager</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;my-component&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$component</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">print_r</span><span class="p">(</span><span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">());</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>如果监听器只对一个特定类型的事件感兴趣，你可以直接绑定：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">//The handler will only be executed if the event triggered is &quot;beforeSomeTask&quot;</span>
+<span class="nv">$eventManager</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;my-component:beforeSomeTask&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$component</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="event-propagation-cancelation">
+<h2>事件的发布与取消(Event Propagation/Cancelation)<a class="headerlink" href="#event-propagation-cancelation" title="Permalink to this headline">¶</a></h2>
+<p>许多监听器可能会添加相同的事件，这意味着，对于同类类型的事件，许多监听器都会被触发(即会有非常多同类型的消息输出)。根据注册到 EventsManager 的顺序，监听器被一一触发。一些事件可以被撤消，表明可以停止一些其他的监听器事件被触发：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$eventsManager</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;db&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$connection</span><span class="p">){</span>
+
+    <span class="c1">//We stop the event if it is cancelable</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$event</span><span class="o">-&gt;</span><span class="na">isCancelable</span><span class="p">())</span> <span class="p">{</span>
+        <span class="c1">//Stop the event, so other listeners will not be notified about this</span>
+        <span class="nv">$event</span><span class="o">-&gt;</span><span class="na">stop</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">//...</span>
+
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>在默认情况下，事件是可以被取消的，甚至在框架中的大部分事件都是可以被取消的。你可以使用fire方法传递第四个参数，值为&#8221;false&#8221;，以达到不可取消的目的：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$eventsManager</span><span class="o">-&gt;</span><span class="na">fire</span><span class="p">(</span><span class="s2">&quot;my-component:afterSomeTask&quot;</span><span class="p">,</span> <span class="nv">$this</span><span class="p">,</span> <span class="nv">$extraData</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="eventsmanager-implementing-your-own-eventsmanager">
+<h2>实现自定义EventsManager(Implementing your own EventsManager)<a class="headerlink" href="#eventsmanager-implementing-your-own-eventsmanager" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../api/Phalcon_Events_ManagerInterface.html"><em>Phalcon\Events\ManagerInterface</em></a> interface must be implemented to create your own
+EventsManager replacing the one provided by Phalcon.</p>
+</div>
+</div>
+
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="request.html" title="Request Environment"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="namespaces.html" title="使用命名空间"
+             >previous</a> |</li> 
+      </ul>
+    </div>
+        <div id="footer">
+             &copy; Copyright 2012, Phalcon Team.
+             Last updated on Sep 15, 2014.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+        </div>
+
+    </div>
+
+  </body>
+</html>

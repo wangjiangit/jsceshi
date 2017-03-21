@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Phalcon Query Language (PHQL) &mdash; Phalcon 0.7.0 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/configurationblock.css" type="text/css" />
+    <!--
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/layout.css" type="text/css" />
+    -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rosario" type="text/css">
+    <!-- link rel="stylesheet" href="http://phalconphp.com/css/s.css" type="text/css" -->
+    <link rel="stylesheet" href="../_static/s.css" type="text/css">
+    <link rel="stylesheet" href="../_static/docs.css" type="text/css">
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.7.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/docs.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Phalcon 0.7.0 documentation" href="../index.html" />
+    <link rel="next" title="ODM (Object-Document Mapper)" href="odm.html" />
+    <link rel="prev" title="使用模型(Working with Models)" href="models.html" /> 
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <div id="header">
+        <h1><a href="http://phalconphp.com/index" ><img border="0" src="../_static/img/logo-small.png"></a></h1>
+        <div align="center">
+          <div id="nav-main" role="navigation">
+            <div class="menubar">
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/index" >HOME</a></div>
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/download" >DOWNLOAD</a></div>
+              <div class="nav-main-features"><a href="http://docs.phalconphp.com" >DOCUMENTATION</a></div>
+              <div class="nav-main-features"><a href="http://phalconphp.com/support" >SUPPORT</a></div>
+              <div class="nav-main-features nav-first"><a href="https://github.com/phalcon/cphalcon">GITHUB</a></div>
+              <div class="nav-main-features"><a target="blog" href="http://blog.phalconphp.com/">BLOG</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="odm.html" title="ODM (Object-Document Mapper)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="models.html" title="使用模型(Working with Models)"
+             accesskey="P">previous</a> |</li>
+        <li><a href="http://www.phalconphp.com">Home</a> &raquo;</li>
+        <li><a href="../index.html">Phalcon 0.7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+      <table width="90%" align="center">
+        <tr>
+      <td class="primary-box" width="25%" valign="top">
+            
+            <div id="searchbox" style="">
+              <h3>Search</h3>
+                <form class="search" action="http://readthedocs.org/search/project/" method="get">
+                  <input type="text" name="q" size="18">
+                  <input type="submit" value="Go">
+                  <input type="hidden" name="selected_facets" value="project:">
+                </form>
+            </div>
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Phalcon Query Language (PHQL)</a><ul>
+<li><a class="reference internal" href="#id1">使用示例</a></li>
+<li><a class="reference internal" href="#creating-phql-queries">Creating PHQL Queries</a></li>
+<li><a class="reference internal" href="#selecting-records">Selecting Records</a><ul>
+<li><a class="reference internal" href="#results-types">Results Types</a></li>
+<li><a class="reference internal" href="#joins">Joins</a></li>
+<li><a class="reference internal" href="#aggregations">Aggregations</a></li>
+<li><a class="reference internal" href="#conditions">条件(Conditions)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inserting-data">Inserting Data</a></li>
+<li><a class="reference internal" href="#updating-data">更新数据(Updating Data)</a></li>
+<li><a class="reference internal" href="#deleting-data">删除数据(Deleting Data)</a></li>
+<li><a class="reference internal" href="#query-builderqueries-creating-queries-using-the-query-builder">使用Query Builder创建queries(Creating queries using the Query Builder)</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="models.html"
+                                  title="previous chapter">使用模型(Working with Models)</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="odm.html"
+                                  title="next chapter">ODM (Object-Document Mapper)</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/reference/phql.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </td>
+          <td class="second-box" valign="top">
+            <div class="document">
+                <div class="documentwrapper">
+                  <div class="bodywrapper">
+                <div class="body" >
+                      
+  <div class="section" id="phalcon-query-language-phql">
+<h1>Phalcon Query Language (PHQL)<a class="headerlink" href="#phalcon-query-language-phql" title="Permalink to this headline">¶</a></h1>
+<p>译者注：学过JAVA，略懂Hibernate的人应该会知道，hibernate是javaee中一个非常流程的ORM软件，它其中生成的中间语句就叫做HQL。</p>
+<p>Phalcon查询语言，也可以叫PhalconQL或PHQL，是一个高层次的，允许你使用一种类SQL语言的方式的一种SQL方言。PHQL是一个用C语言编写的SQL语法分析器。</p>
+<p>为了达到尽可能高的性能，Phalcon提供了一个分析器，使用了和 <a class="reference external" href="http://en.wikipedia.org/wiki/Lemon_Parser_Generator">SQLite</a> 相同的技术。该技术提供了一个小型的内存分析器，具有非常低的内存占用，同时也是线程安全的。</p>
+<p>解析器首先检查传递过来的PHQL语句，然后把它们转化成一种中间性的语句，最后再将其转换为相应的RDBMS所需要的SQL方言。</p>
+<p>在PHQL中，我们已经实现了一系列的功能，以保证你在访问数据库时是安全的：</p>
+<ul class="simple">
+<li>Bound parameters are part of the PHQL language helping you to secure your code</li>
+<li>PHQL only allows one SQL statement to be executed per call preventing injections</li>
+<li>PHQL ignores all SQL comments which are often used in SQL injections</li>
+<li>PHQL only allows data manipulation statements, avoiding altering or dropping tables/databases by mistake or externally without authorization</li>
+<li>PHQL implements a high level abstraction allowing you handling models as tables and class attributes as fields</li>
+</ul>
+<div class="section" id="id1">
+<h2>使用示例<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>为了更好的展示PHQL是如何工作的，我们将使用模型  “Cars” 和 “Brands”：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">Cars</span> <span class="k">extends</span> <span class="nx">Phalcon\Mvc\Model</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$id</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nv">$name</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nv">$brand_id</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nv">$price</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nv">$year</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nv">$style</span><span class="p">;</span>
+
+   <span class="sd">/**</span>
+<span class="sd">    * This model is mapped to the table sample_cars</span>
+<span class="sd">    */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getSource</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;sample_cars&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * A car only has a Brand, but a Brand have many Cars</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">initialize</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">belongsTo</span><span class="p">(</span><span class="s1">&#39;brand_id&#39;</span><span class="p">,</span> <span class="s1">&#39;Brands&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>每个Car只有一个Brand,一个Brand有多个Cars:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">Brands</span> <span class="k">extends</span> <span class="nx">Phalcon\Mvc\Model</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="nv">$id</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nv">$name</span><span class="p">;</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * The model Brands is mapped to the &quot;sample_brands&quot; table</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getSource</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;sample_brands&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * A Brand can have many Cars</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">initialize</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hasMany</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;Cars&#39;</span><span class="p">,</span> <span class="s1">&#39;brand_id&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-phql-queries">
+<h2>Creating PHQL Queries<a class="headerlink" href="#creating-phql-queries" title="Permalink to this headline">¶</a></h2>
+<p>PHQL查询可以通过实例化 <a class="reference internal" href="../api/Phalcon_Mvc_Model_Query.html"><em>Phalcon\Mvc\Model\Query</em></a> 来创建：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// Instantiate the Query</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Mvc\Model\Query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM Cars&quot;</span><span class="p">);</span>
+
+<span class="c1">// Pass the DI container</span>
+<span class="nv">$query</span><span class="o">-&gt;</span><span class="na">setDI</span><span class="p">(</span><span class="nv">$di</span><span class="p">);</span>
+
+<span class="c1">// Execute the query returning a result if any</span>
+<span class="nv">$robots</span> <span class="o">=</span> <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>在控制器或视图文件中，它可以使用服务容器中的一个注入服务 <a class="reference internal" href="../api/Phalcon_Mvc_Model_Manager.html"><em>models manager</em></a> 来轻松的实现create/execute</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">modelsManager</span><span class="o">-&gt;</span><span class="na">createQuery</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM Cars&quot;</span><span class="p">);</span>
+
+<span class="nv">$robots</span> <span class="o">=</span> <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>或者像下面这样：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$robots</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">modelsManager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM Cars&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="selecting-records">
+<h2>Selecting Records<a class="headerlink" href="#selecting-records" title="Permalink to this headline">¶</a></h2>
+<p>作为大家所熟悉的SQL，PHQL允许你在查询中使用SELECT语句，只是需要使用模型类的名称来替代数据表名：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">createQuery</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM Cars ORDER BY Cars.name&quot;</span><span class="p">);</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">createQuery</span><span class="p">(</span><span class="s2">&quot;SELECT Cars.name FROM Cars ORDER BY Cars.name&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>带有命名空间的模型类同样可以：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM Formula\Cars ORDER BY Formula\Cars.name&quot;</span><span class="p">;</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">createQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT Formula\Cars.name FROM Formula\Cars ORDER BY Formula\Cars.name&quot;</span><span class="p">;</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">createQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT c.name FROM Formula\Cars c ORDER BY c.name&quot;</span><span class="p">;</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">createQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Phalcon支持大部分的SQL标准，甚至是非标准指令，如，LIMIT:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$phql</span>   <span class="o">=</span> <span class="s2">&quot;SELECT c.name FROM Cars AS c &quot;</span>
+   <span class="o">.</span> <span class="s2">&quot;WHERE c.brand_id = 21 ORDER BY c.name LIMIT 100&quot;</span><span class="p">;</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">createQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="section" id="results-types">
+<h3>Results Types<a class="headerlink" href="#results-types" title="Permalink to this headline">¶</a></h3>
+<p>根据我们查询列的类型，返回的结果类型会稍有不同。如果你检索一个整体对象，它将返回 <a class="reference internal" href="../api/Phalcon_Mvc_Model_Resultset_Simple.html"><em>Phalcon\Mvc\Model\Resultset\Simple</em></a> 的对象实例。这种结果集是一组完整的模型对象：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT c.* FROM Cars AS c ORDER BY c.name&quot;</span><span class="p">;</span>
+<span class="nv">$cars</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$cars</span> <span class="k">as</span> <span class="nv">$car</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;Name: &quot;</span><span class="p">,</span> <span class="nv">$car</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这是完全一样的：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$cars</span> <span class="o">=</span> <span class="nx">Cars</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s2">&quot;order&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;name&quot;</span><span class="p">));</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$cars</span> <span class="k">as</span> <span class="nv">$car</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;Name: &quot;</span><span class="p">,</span> <span class="nv">$car</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>完整的对象可以被修改和重新保存到数据库，因为他们代表着关联数据表的一个完整记录。有一些其他类型的查询不返回完整的对象，例如：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT c.id, c.name FROM Cars AS c ORDER BY c.name&quot;</span><span class="p">;</span>
+<span class="nv">$cars</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$cars</span> <span class="k">as</span> <span class="nv">$car</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;Name: &quot;</span><span class="p">,</span> <span class="nv">$car</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>我们只查询了数据表中的某些字段，因此，这不能算是一个完整的对象。在这种情况下，也返回 <a class="reference internal" href="../api/Phalcon_Mvc_Model_Resultset_Simple.html"><em>Phalcon\Mvc\Model\Resultset\Simple</em></a> 的实例对象。然而，这个对象只包含两列属性值。</p>
+<p>这些值不代表完整的对象，我们称他们为标量。PHQL允许你查询各种类型的标量，如fields,functions,literals, expressions等</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT CONCAT(c.id, &#39; &#39;, c.name) AS id_name FROM Cars AS c ORDER BY c.name&quot;</span><span class="p">;</span>
+<span class="nv">$cars</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$cars</span> <span class="k">as</span> <span class="nv">$car</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$car</span><span class="o">-&gt;</span><span class="na">id_name</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>我们既可以只查询完整的对象或标量，也可以同时查询他们：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$phql</span>   <span class="o">=</span> <span class="s2">&quot;SELECT c.price*0.16 AS taxes, c.* FROM Cars AS c ORDER BY c.name&quot;</span><span class="p">;</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>在这种情况下，返回的是  <a class="reference internal" href="../api/Phalcon_Mvc_Model_Resultset_Complex.html"><em>Phalcon\Mvc\Model\Resultset\Complex</em></a> 的实例对象，这允许同时访问完整对象和标量：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$result</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;Name: &quot;</span><span class="p">,</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="na">cars</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+    <span class="k">echo</span> <span class="s2">&quot;Price: &quot;</span><span class="p">,</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="na">cars</span><span class="o">-&gt;</span><span class="na">price</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+    <span class="k">echo</span> <span class="s2">&quot;Taxes: &quot;</span><span class="p">,</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="na">taxes</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>标量的属性值映射到&#8221;row&#8221;上，而完整的对象则是被映射到与它相关的模型对象上。</p>
+</div>
+<div class="section" id="joins">
+<h3>Joins<a class="headerlink" href="#joins" title="Permalink to this headline">¶</a></h3>
+<p>使用PHQL可以很方便的通过多个模型来获取数据，Phalcon支持大多数类型的Joins。我们在模型中定义的关系，在使用PHQL时会自动的添加到条件上：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$phql</span>  <span class="o">=</span> <span class="s2">&quot;SELECT Cars.name AS car_name, Brands.name AS brand_name FROM Cars JOIN Brands&quot;</span><span class="p">;</span>
+<span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$rows</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="na">car_name</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+    <span class="k">echo</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="na">brand_name</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>默认情况下，将使用INNER JOIN的方式，你也可以在查询中使用其他类型的JOIN：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT Cars.*, Brands.* FROM Cars INNER JOIN Brands&quot;</span><span class="p">;</span>
+<span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT CCars.*, Brands.* FROM Cars LEFT JOIN Brands&quot;</span><span class="p">;</span>
+<span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT Cars.*, Brands.* FROM Cars LEFT OUTER JOIN Brands&quot;</span><span class="p">;</span>
+<span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT Cars.*, Brands.* FROM Cars CROSS JOIN Brands&quot;</span><span class="p">;</span>
+<span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>有可能的话，在JOIN中手工设置SQL条件：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT Cars.*, Brands.* FROM Cars INNER JOIN Brands ON Brands.id = Cars.brands_id&quot;</span><span class="p">;</span>
+<span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>同时，Joins还可以在使用以下方式：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT Cars.*, Brands.* FROM Cars, Brands WHERE Brands.id = Cars.brands_id&quot;</span><span class="p">;</span>
+<span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$rows</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;Car: &quot;</span><span class="p">,</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="na">cars</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+    <span class="k">echo</span> <span class="s2">&quot;Brand: &quot;</span><span class="p">,</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="na">brands</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>如果在查询时使用了别名，获取属性值将使用别名的名称做为row的名称：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT c.*, b.* FROM Cars c, Brands b WHERE b.id = c.brands_id&quot;</span><span class="p">;</span>
+<span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$rows</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;Car: &quot;</span><span class="p">,</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="na">c</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+    <span class="k">echo</span> <span class="s2">&quot;Brand: &quot;</span><span class="p">,</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="na">b</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="aggregations">
+<h3>Aggregations<a class="headerlink" href="#aggregations" title="Permalink to this headline">¶</a></h3>
+<p>下面的示例将展示如何在PHQL中使用聚合：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// How much are the prices of all the cars?</span>
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT SUM(price) AS summatory FROM Cars&quot;</span><span class="p">;</span>
+<span class="nv">$row</span>  <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getFirst</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;summatory&#39;</span><span class="p">];</span>
+
+<span class="c1">// How many cars are by each brand?</span>
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT Cars.brand_id, COUNT(*) FROM Cars GROUP BY Cars.brand_id&quot;</span><span class="p">;</span>
+<span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$rows</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="na">brand_id</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="nv">$row</span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// How many cars are by each brand?</span>
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT Brands.name, COUNT(*) FROM Cars JOIN Brands GROUP BY 1&quot;</span><span class="p">;</span>
+<span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$rows</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="nv">$row</span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT MAX(price) AS maximum, MIN(price) AS minimum FROM Cars&quot;</span><span class="p">;</span>
+<span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$rows</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$row</span><span class="p">[</span><span class="s2">&quot;maximum&quot;</span><span class="p">],</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="nv">$row</span><span class="p">[</span><span class="s2">&quot;minimum&quot;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Count distinct used brands</span>
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT COUNT(DISTINCT brand_id) AS brandId FROM Cars&quot;</span><span class="p">;</span>
+<span class="nv">$rows</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$rows</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="na">brandId</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="conditions">
+<h3>条件(Conditions)<a class="headerlink" href="#conditions" title="Permalink to this headline">¶</a></h3>
+<p>条件的作用是允许你过滤查询内容，WHERE条件可以这样使用：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// Simple conditions</span>
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM Cars WHERE Cars.name = &#39;Lamborghini Espada&#39;&quot;</span><span class="p">;</span>
+<span class="nv">$cars</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM Cars WHERE Cars.price &gt; 10000&quot;</span><span class="p">;</span>
+<span class="nv">$cars</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM Cars WHERE TRIM(Cars.name) = &#39;Audi R8&#39;&quot;</span><span class="p">;</span>
+<span class="nv">$cars</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM Cars WHERE Cars.name LIKE &#39;Ferrari%&#39;&quot;</span><span class="p">;</span>
+<span class="nv">$cars</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM Cars WHERE Cars.name NOT LIKE &#39;Ferrari%&#39;&quot;</span><span class="p">;</span>
+<span class="nv">$cars</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM Cars WHERE Cars.price IS NULL&quot;</span><span class="p">;</span>
+<span class="nv">$cars</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM Cars WHERE Cars.id IN (120, 121, 122)&quot;</span><span class="p">;</span>
+<span class="nv">$cars</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM Cars WHERE Cars.id NOT IN (430, 431)&quot;</span><span class="p">;</span>
+<span class="nv">$cars</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM Cars WHERE Cars.id BETWEEN 1 AND 100&quot;</span><span class="p">;</span>
+<span class="nv">$cars</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>此外，PHQL的另一特点，prepared参数自动转义用户输入数据，下面将介绍的是与安全相关：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM Cars WHERE Cars.name = :name:&quot;</span><span class="p">;</span>
+<span class="nv">$cars</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;name&quot;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Lamborghini Espada&#39;</span><span class="p">));</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM Cars WHERE Cars.name = ?0&quot;</span><span class="p">;</span>
+<span class="nv">$cars</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="mi">0</span> <span class="o">=&gt;</span> <span class="s1">&#39;Lamborghini Espada&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="inserting-data">
+<h2>Inserting Data<a class="headerlink" href="#inserting-data" title="Permalink to this headline">¶</a></h2>
+<p>PHQL是使用熟悉的INSERT语句插入数据：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// Inserting without columns</span>
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO Cars VALUES (NULL, &#39;Lamborghini Espada&#39;, &quot;</span>
+      <span class="o">.</span> <span class="s2">&quot;7, 10000.00, 1969, &#39;Grand Tourer&#39;)&quot;</span><span class="p">;</span>
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+
+<span class="c1">// Specifyng columns to insert</span>
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO Cars (name, brand_id, year, style) &quot;</span>
+      <span class="o">.</span> <span class="s2">&quot;VALUES (&#39;Lamborghini Espada&#39;, 7, 1969, &#39;Grand Tourer&#39;)&quot;</span><span class="p">;</span>
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+
+<span class="c1">// Inserting using placeholders</span>
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO Cars (name, brand_id, year, style) &quot;</span>
+      <span class="o">.</span> <span class="s2">&quot;VALUES (:name:, :brand_id:, :year:, :style)&quot;</span><span class="p">;</span>
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$sql</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;name&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;Lamborghini Espada&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;brand_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">7</span><span class="p">,</span>
+        <span class="s1">&#39;year&#39;</span>     <span class="o">=&gt;</span> <span class="mi">1969</span><span class="p">,</span>
+        <span class="s1">&#39;style&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;Grand Tourer&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Phalcon中不只是用PHQL语句转换为SQL语句的。如果我们是手工创建模型对象，里面的所有事件及定义的业务规则都会被执行。现在，我们添加一个模型Cars的业务规则，让car的价格不低于$ 10,000:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">Phalcon\Mvc\Model\Message</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Cars</span> <span class="k">extends</span> <span class="nx">Phalcon\Mvc\Model</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeCreate</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">price</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">appendMessage</span><span class="p">(</span><span class="k">new</span> <span class="nx">Message</span><span class="p">(</span><span class="s2">&quot;A car cannot cost less than $ 10,000&quot;</span><span class="p">));</span>
+            <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>如果我们在模型中使用以下的INSERT语句，INSERT操作将不成功，因为价格不符合定义的规则：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$phql</span>   <span class="o">=</span> <span class="s2">&quot;INSERT INTO Cars VALUES (NULL, &#39;Nissan Versa&#39;, 7, 9999.00, 2012, &#39;Sedan&#39;)&quot;</span><span class="p">;</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$result</span><span class="o">-&gt;</span><span class="na">success</span><span class="p">()</span> <span class="o">==</span> <span class="k">false</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$result</span><span class="o">-&gt;</span><span class="na">getMessages</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$message</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">echo</span> <span class="nv">$message</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="updating-data">
+<h2>更新数据(Updating Data)<a class="headerlink" href="#updating-data" title="Permalink to this headline">¶</a></h2>
+<p>更新一行记录和插入一行记录非常相似。正如你所知道的，更新数据记录的指令是UPDATE。当更新一行记录时，对应的模型事件将被执行。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// Updating a single column</span>
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;UPDATE Cars SET price = 15000.00 WHERE id = 101&quot;</span><span class="p">;</span>
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+
+<span class="c1">// Updating multiples columns</span>
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;UPDATE Cars SET price = 15000.00, type = &#39;Sedan&#39; WHERE id = 101&quot;</span><span class="p">;</span>
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+
+<span class="c1">// Updating multiples rows</span>
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;UPDATE Cars SET price = 7000.00, type = &#39;Sedan&#39; WHERE brands_id &gt; 5&quot;</span><span class="p">;</span>
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+
+<span class="c1">// Using placeholders</span>
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;UPDATE Cars SET price = ?0, type = ?1 WHERE brands_id &gt; ?2&quot;</span><span class="p">;</span>
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span>
+    <span class="nv">$phql</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="mi">0</span> <span class="o">=&gt;</span> <span class="mf">7000.00</span><span class="p">,</span>
+        <span class="mi">1</span> <span class="o">=&gt;</span> <span class="s1">&#39;Sedan&#39;</span><span class="p">,</span>
+        <span class="mi">2</span> <span class="o">=&gt;</span> <span class="mi">5</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="deleting-data">
+<h2>删除数据(Deleting Data)<a class="headerlink" href="#deleting-data" title="Permalink to this headline">¶</a></h2>
+<p>当删除数据时，对应的模型事件将被执行：</p>
+<div class="highlight-php"><div class="highlight"><pre>&lt;?php
+
+// Deleting a single row
+$phql = &quot;DELETE FROM Cars WHERE id = 101&quot;;
+$manager-&gt;executeQuery($phql);
+
+// Deleting multiple rows
+$phql = &quot;DELETE FROM Cars WHERE id &gt; 100&quot;;
+$manager-&gt;executeQuery($phql);
+
+// Using placeholders
+$phql = &quot;DELETE FROM Cars WHERE id BETWEEN :initial: AND :final:&quot;;
+$manager-&gt;executeQuery(
+    $phql,
+    array(
+        &#39;initial&#39; =&gt; 1,
+        &#39;final&#39; =&gt; &#39;100
+    )
+);
+</pre></div>
+</div>
+</div>
+<div class="section" id="query-builderqueries-creating-queries-using-the-query-builder">
+<h2>使用Query Builder创建queries(Creating queries using the Query Builder)<a class="headerlink" href="#query-builderqueries-creating-queries-using-the-query-builder" title="Permalink to this headline">¶</a></h2>
+<p>Query Builder可以创建一个PHQL query，而不需要编写PHQL语句了，同时Query Builder对IDE工具是友好的（可以自动提示）：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">createBuilder</span><span class="p">()</span>
+    <span class="o">&gt;</span><span class="nb">join</span><span class="p">(</span><span class="s1">&#39;RobotsParts&#39;</span><span class="p">);</span>
+    <span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+    <span class="o">-&gt;</span><span class="na">order</span><span class="p">(</span><span class="s1">&#39;Robots.name&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">getQuery</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>与下面是相同的：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$phql</span> <span class="o">=</span> <span class="s2">&quot;SELECT Robots.*</span>
+<span class="s2">    FROM Robots JOIN RobotsParts p</span>
+<span class="s2">    ORDER BY Robots.name LIMIT 20&quot;</span><span class="p">;</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nv">$manager</span><span class="o">-&gt;</span><span class="na">executeQuery</span><span class="p">(</span><span class="nv">$phql</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>更多关于query builder的示例：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+<span class="c1">// &#39;SELECT Robots.* FROM Robots&#39;</span>
+
+<span class="c1">// &#39;SELECT Robots.*, RobotsParts.* FROM Robots, RobotsParts&#39;</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">,</span> <span class="s1">&#39;RobotsParts&#39;</span><span class="p">))</span>
+
+<span class="c1">// &#39;SELECT * FROM Robots&#39;</span>
+<span class="nv">$phql</span> <span class="o">=</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">columns</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">)</span>
+                <span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+
+<span class="c1">// &#39;SELECT id, name FROM Robots&#39;</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">columns</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">))</span>
+        <span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+
+<span class="c1">// &#39;SELECT id, name FROM Robots&#39;</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">columns</span><span class="p">(</span><span class="s1">&#39;id, name&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+
+<span class="c1">// &#39;SELECT Robots.* FROM Robots WHERE Robots.name = &quot;Voltron&quot;&#39;</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;Robots.name = &quot;Voltron&quot;&#39;</span><span class="p">)</span>
+
+<span class="c1">// &#39;SELECT Robots.* FROM Robots WHERE Robots.id = 100&#39;</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1">// &#39;SELECT Robots.* FROM Robots GROUP BY Robots.name&#39;</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">groupBy</span><span class="p">(</span><span class="s1">&#39;Robots.name&#39;</span><span class="p">)</span>
+
+<span class="c1">// &#39;SELECT Robots.* FROM Robots GROUP BY Robots.name, Robots.id&#39;</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">groupBy</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;Robots.name&#39;</span><span class="p">,</span> <span class="s1">&#39;Robots.id&#39;</span><span class="p">))</span>
+
+<span class="c1">// &#39;SELECT Robots.name, SUM(Robots.price) FROM Robots GROUP BY Robots.name&#39;</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">columns</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;Robots.name&#39;</span><span class="p">,</span> <span class="s1">&#39;SUM(Robots.price)&#39;</span><span class="p">))</span>
+    <span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">groupBy</span><span class="p">(</span><span class="s1">&#39;Robots.name&#39;</span><span class="p">)</span>
+
+<span class="c1">// &#39;SELECT Robots.name, SUM(Robots.price) FROM Robots</span>
+<span class="c1">// GROUP BY Robots.name HAVING SUM(Robots.price) &gt; 1000&#39;</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">columns</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;Robots.name&#39;</span><span class="p">,</span> <span class="s1">&#39;SUM(Robots.price)&#39;</span><span class="p">))</span>
+    <span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">groupBy</span><span class="p">(</span><span class="s1">&#39;Robots.name&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">having</span><span class="p">(</span><span class="s1">&#39;SUM(Robots.price) &gt; 1000&#39;</span><span class="p">)</span>
+
+<span class="c1">// &#39;SELECT Robots.* FROM Robots JOIN RobotsParts&#39;);</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">join</span><span class="p">(</span><span class="s1">&#39;RobotsParts&#39;</span><span class="p">)</span>
+
+<span class="c1">// &#39;SELECT Robots.* FROM Robots JOIN RobotsParts AS p&#39;);</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">join</span><span class="p">(</span><span class="s1">&#39;RobotsParts&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="c1">// &#39;SELECT Robots.* FROM Robots JOIN RobotsParts ON Robots.id = RobotsParts.robots_id AS p&#39;);</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">join</span><span class="p">(</span><span class="s1">&#39;RobotsParts&#39;</span><span class="p">,</span> <span class="s1">&#39;Robots.id = RobotsParts.robots_id&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="c1">// &#39;SELECT Robots.* FROM Robots</span>
+<span class="c1">// JOIN RobotsParts ON Robots.id = RobotsParts.robots_id AS p</span>
+<span class="c1">// JOIN Parts ON Parts.id = RobotsParts.parts_id AS t&#39;</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">join</span><span class="p">(</span><span class="s1">&#39;RobotsParts&#39;</span><span class="p">,</span> <span class="s1">&#39;Robots.id = RobotsParts.robots_id&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">join</span><span class="p">(</span><span class="s1">&#39;Parts&#39;</span><span class="p">,</span> <span class="s1">&#39;Parts.id = RobotsParts.parts_id&#39;</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">)</span>
+
+<span class="c1">// &#39;SELECT r.* FROM Robots AS r&#39;</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">addFrom</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+
+<span class="c1">// &#39;SELECT Robots.*, p.* FROM Robots, Parts AS p&#39;</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">addFrom</span><span class="p">(</span><span class="s1">&#39;Parts&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="c1">// &#39;SELECT r.*, p.* FROM Robots AS r, Parts AS p&#39;</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;r&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Robots&#39;</span><span class="p">))</span>
+        <span class="o">-&gt;</span><span class="na">addFrom</span><span class="p">(</span><span class="s1">&#39;Parts&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">)</span>
+
+<span class="c1">// &#39;SELECT r.*, p.* FROM Robots AS r, Parts AS p&#39;);</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;r&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Robots&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Parts&#39;</span><span class="p">))</span>
+
+<span class="c1">// &#39;SELECT Robots.* FROM Robots LIMIT 10&#39;</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1">// &#39;SELECT Robots.* FROM Robots LIMIT 10 OFFSET 5&#39;</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;Robots&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="odm.html" title="ODM (Object-Document Mapper)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="models.html" title="使用模型(Working with Models)"
+             >previous</a> |</li> 
+      </ul>
+    </div>
+        <div id="footer">
+             &copy; Copyright 2012, Phalcon Team.
+             Last updated on Sep 15, 2014.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+        </div>
+
+    </div>
+
+  </body>
+</html>

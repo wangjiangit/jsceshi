@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Request Environment &mdash; Phalcon 0.7.0 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/configurationblock.css" type="text/css" />
+    <!--
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/layout.css" type="text/css" />
+    -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rosario" type="text/css">
+    <!-- link rel="stylesheet" href="http://phalconphp.com/css/s.css" type="text/css" -->
+    <link rel="stylesheet" href="../_static/s.css" type="text/css">
+    <link rel="stylesheet" href="../_static/docs.css" type="text/css">
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.7.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/docs.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Phalcon 0.7.0 documentation" href="../index.html" />
+    <link rel="next" title="Returning Responses" href="response.html" />
+    <link rel="prev" title="事件管理" href="events.html" /> 
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <div id="header">
+        <h1><a href="http://phalconphp.com/index" ><img border="0" src="../_static/img/logo-small.png"></a></h1>
+        <div align="center">
+          <div id="nav-main" role="navigation">
+            <div class="menubar">
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/index" >HOME</a></div>
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/download" >DOWNLOAD</a></div>
+              <div class="nav-main-features"><a href="http://docs.phalconphp.com" >DOCUMENTATION</a></div>
+              <div class="nav-main-features"><a href="http://phalconphp.com/support" >SUPPORT</a></div>
+              <div class="nav-main-features nav-first"><a href="https://github.com/phalcon/cphalcon">GITHUB</a></div>
+              <div class="nav-main-features"><a target="blog" href="http://blog.phalconphp.com/">BLOG</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="response.html" title="Returning Responses"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="events.html" title="事件管理"
+             accesskey="P">previous</a> |</li>
+        <li><a href="http://www.phalconphp.com">Home</a> &raquo;</li>
+        <li><a href="../index.html">Phalcon 0.7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+      <table width="90%" align="center">
+        <tr>
+      <td class="primary-box" width="25%" valign="top">
+            
+            <div id="searchbox" style="">
+              <h3>Search</h3>
+                <form class="search" action="http://readthedocs.org/search/project/" method="get">
+                  <input type="text" name="q" size="18">
+                  <input type="submit" value="Go">
+                  <input type="hidden" name="selected_facets" value="project:">
+                </form>
+            </div>
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Request Environment</a><ul>
+<li><a class="reference internal" href="#id1">获取数据</a></li>
+<li><a class="reference internal" href="#request">在控制器中使用Request</a></li>
+<li><a class="reference internal" href="#id2">文件上传</a></li>
+<li><a class="reference internal" href="#working-with-headers">Working with Headers</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="events.html"
+                                  title="previous chapter">事件管理</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="response.html"
+                                  title="next chapter">Returning Responses</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/reference/request.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </td>
+          <td class="second-box" valign="top">
+            <div class="document">
+                <div class="documentwrapper">
+                  <div class="bodywrapper">
+                <div class="body" >
+                      
+  <div class="section" id="request-environment">
+<h1>Request Environment<a class="headerlink" href="#request-environment" title="Permalink to this headline">¶</a></h1>
+<p>每一个HTTP请求（通常是由浏览器发起的）包含额外的信息，如头数据的请求，文件，变量等。
+基于Web的应用程序的文件需要分析这些信息，以提供正确的
+响应返回给请求者。 <a class="reference internal" href="../api/Phalcon_Http_Request.html"><em>Phalcon\HTTP\Request</em></a> 封装
+信息的请求，允许你在一个面向对象的方法来访问它。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// Getting a request instance</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Http\Request</span><span class="p">();</span>
+
+<span class="c1">// Check whether the request was made with method POST</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">isPost</span><span class="p">()</span> <span class="o">==</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Check whether the request was made with Ajax</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">isAjax</span><span class="p">()</span> <span class="o">==</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="s2">&quot;Request was made using POST and AJAX&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="id1">
+<h2>获取数据<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>PHP根据请求的类型自动填充超全局变量$_GET 和 $_POST。这些数组包含表单提交或通过URL请求的参数。这些数组中的变量值是未加过滤的，可能包含非法字符，甚至是恶意代码，这可能会导致 <a class="reference external" href="http://en.wikipedia.org/wiki/SQL_injection">SQL injection</a> or <a class="reference external" href="http://en.wikipedia.org/wiki/Cross-site_scripting">Cross Site Scripting (XSS)</a> 攻击。</p>
+<p><a class="reference internal" href="../api/Phalcon_Http_Request.html"><em>Phalcon\HTTP\Request</em></a> 允许你访问$_REQUEST,
+$_GET 和 $_POST 这些数组中的值，并且可以通过&#8221;filter&#8221; (by default
+<a class="reference internal" href="filter.html"><em>Phalcon\Filter</em></a>) 服务对他们进行过滤或消毒。下面的例子提供与原始PHP获取数据相同的行为：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// Manually applying the filter</span>
+<span class="nv">$filter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Filter</span><span class="p">();</span>
+
+<span class="nv">$email</span>  <span class="o">=</span> <span class="nv">$filter</span><span class="o">-&gt;</span><span class="na">sanitize</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s2">&quot;user_email&quot;</span><span class="p">],</span> <span class="s2">&quot;email&quot;</span><span class="p">);</span>
+
+<span class="c1">// Manually applying the filter to the value</span>
+<span class="nv">$filter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Filter</span><span class="p">();</span>
+<span class="nv">$email</span>  <span class="o">=</span> <span class="nv">$filter</span><span class="o">-&gt;</span><span class="na">sanitize</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPost</span><span class="p">(</span><span class="s2">&quot;user_email&quot;</span><span class="p">),</span> <span class="s2">&quot;email&quot;</span><span class="p">);</span>
+
+<span class="c1">// Automatically applying the filter</span>
+<span class="nv">$email</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPost</span><span class="p">(</span><span class="s2">&quot;user_email&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">);</span>
+
+<span class="c1">// Setting a default value if the param is null</span>
+<span class="nv">$email</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPost</span><span class="p">(</span><span class="s2">&quot;user_email&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">,</span> <span class="s2">&quot;some@example.com&quot;</span><span class="p">);</span>
+
+<span class="c1">// Setting a default value if the param is null without filtering</span>
+<span class="nv">$email</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getPost</span><span class="p">(</span><span class="s2">&quot;user_email&quot;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="s2">&quot;some@example.com&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="request">
+<h2>在控制器中使用Request<a class="headerlink" href="#request" title="Permalink to this headline">¶</a></h2>
+<p>访问请求最常见的地方发生在controller/action中。要想在控制器中访问 <a class="reference internal" href="../api/Phalcon_Http_Request.html"><em>Phalcon\HTTP\Request</em></a> 对象，你可以使用 $this-&gt;request 这个公共属性：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">\Phalcon\Mvc\Controller</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
+    <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">saveAction</span><span class="p">()</span>
+    <span class="p">{</span>
+
+        <span class="c1">// Check if request has made with POST</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">isPost</span><span class="p">()</span> <span class="o">==</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="c1">// Access POST data</span>
+            <span class="nv">$customerName</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">getPost</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">);</span>
+            <span class="nv">$customerBorn</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">getPost</span><span class="p">(</span><span class="s2">&quot;born&quot;</span><span class="p">);</span>
+
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>文件上传<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>另一种常见的任务是文件上传。<a class="reference internal" href="../api/Phalcon_Http_Request.html"><em>Phalcon\HTTP\Request</em></a> 提供了一个面向对象的方式来实现这个任务：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">\Phalcon\Mvc\Controller</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">uploadAction</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Check if the user has uploaded files</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">hasFiles</span><span class="p">()</span> <span class="o">==</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Print the real file names and sizes</span>
+            <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">getUploadedFiles</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$file</span><span class="p">)</span> <span class="p">{</span>
+
+                <span class="c1">//Print file details</span>
+                <span class="k">echo</span> <span class="nv">$file</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">(),</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="nv">$file</span><span class="o">-&gt;</span><span class="na">getSize</span><span class="p">(),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+
+
+                <span class="c1">//Move the file into the application</span>
+                <span class="nv">$file</span><span class="o">-&gt;</span><span class="na">moveTo</span><span class="p">(</span><span class="s1">&#39;files/&#39;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Phalcon\Http\Request::getUploadedFiles() 返回的每个对象是类文件 <a class="reference internal" href="../api/Phalcon_Http_Request_File.html"><em>Phalcon\Http\Request\File</em></a> 的实际对象。使用 $_FILES 超全局变量提供了相同的行为。<a class="reference internal" href="../api/Phalcon_Http_Request_File.html"><em>Phalcon\Http\Request\File</em></a> 封装了上传请求中的单个文件信息。</p>
+</div>
+<div class="section" id="working-with-headers">
+<h2>Working with Headers<a class="headerlink" href="#working-with-headers" title="Permalink to this headline">¶</a></h2>
+<p>正如上面提到的，请求头非常有用，它使我们能够发送适当的响应返回给用户。下面的例子将向你展示使用的方法：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// get the Http-X-Requested-With header</span>
+<span class="nv">$requestedWith</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getHeader</span><span class="p">(</span><span class="s2">&quot;X_REQUESTED_WITH&quot;</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$requestedWith</span> <span class="o">==</span> <span class="s2">&quot;XMLHttpRequest&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;The request was made with Ajax&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Same as above</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">isAjax</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;The request was made with Ajax&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Check the request layer</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">isSecureRequest</span><span class="p">()</span> <span class="o">==</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;The request was made using a secure layer&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Get the servers&#39;s ip address. ie. 192.168.0.100</span>
+<span class="nv">$ipAddress</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getServerAddress</span><span class="p">();</span>
+
+<span class="c1">// Get the client&#39;s ip address ie. 201.245.53.51</span>
+<span class="nv">$ipAddress</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getClientAddress</span><span class="p">();</span>
+
+<span class="c1">// Get the User Agent (HTTP_USER_AGENT)</span>
+<span class="nv">$userAgent</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getUserAgent</span><span class="p">();</span>
+
+<span class="c1">// Get the best acceptable content by the browser. ie text/xml</span>
+<span class="nv">$contentType</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getAcceptableContent</span><span class="p">();</span>
+
+<span class="c1">// Get the best charset accepted by the browser. ie. utf-8</span>
+<span class="nv">$charset</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getBestCharset</span><span class="p">();</span>
+
+<span class="c1">// Get the best language accepted configured in the browser. ie. en-us</span>
+<span class="nv">$language</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getBestLanguage</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="response.html" title="Returning Responses"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="events.html" title="事件管理"
+             >previous</a> |</li> 
+      </ul>
+    </div>
+        <div id="footer">
+             &copy; Copyright 2012, Phalcon Team.
+             Last updated on Sep 15, 2014.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+        </div>
+
+    </div>
+
+  </body>
+</html>

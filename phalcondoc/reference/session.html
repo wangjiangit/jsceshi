@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>把数据存储到Session(Storing data in Session) &mdash; Phalcon 0.7.0 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/configurationblock.css" type="text/css" />
+    <!--
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/layout.css" type="text/css" />
+    -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rosario" type="text/css">
+    <!-- link rel="stylesheet" href="http://phalconphp.com/css/s.css" type="text/css" -->
+    <link rel="stylesheet" href="../_static/s.css" type="text/css">
+    <link rel="stylesheet" href="../_static/docs.css" type="text/css">
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.7.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/docs.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Phalcon 0.7.0 documentation" href="../index.html" />
+    <link rel="next" title="Filtering and Sanitizing" href="filter.html" />
+    <link rel="prev" title="发送消息(Flashing Messages)" href="flash.html" /> 
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <div id="header">
+        <h1><a href="http://phalconphp.com/index" ><img border="0" src="../_static/img/logo-small.png"></a></h1>
+        <div align="center">
+          <div id="nav-main" role="navigation">
+            <div class="menubar">
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/index" >HOME</a></div>
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/download" >DOWNLOAD</a></div>
+              <div class="nav-main-features"><a href="http://docs.phalconphp.com" >DOCUMENTATION</a></div>
+              <div class="nav-main-features"><a href="http://phalconphp.com/support" >SUPPORT</a></div>
+              <div class="nav-main-features nav-first"><a href="https://github.com/phalcon/cphalcon">GITHUB</a></div>
+              <div class="nav-main-features"><a target="blog" href="http://blog.phalconphp.com/">BLOG</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="filter.html" title="Filtering and Sanitizing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="flash.html" title="发送消息(Flashing Messages)"
+             accesskey="P">previous</a> |</li>
+        <li><a href="http://www.phalconphp.com">Home</a> &raquo;</li>
+        <li><a href="../index.html">Phalcon 0.7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+      <table width="90%" align="center">
+        <tr>
+      <td class="primary-box" width="25%" valign="top">
+            
+            <div id="searchbox" style="">
+              <h3>Search</h3>
+                <form class="search" action="http://readthedocs.org/search/project/" method="get">
+                  <input type="text" name="q" size="18">
+                  <input type="submit" value="Go">
+                  <input type="hidden" name="selected_facets" value="project:">
+                </form>
+            </div>
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">把数据存储到Session(Storing data in Session)</a><ul>
+<li><a class="reference internal" href="#session">初始化Session</a></li>
+<li><a class="reference internal" href="#id1">存储/获取 Session数据</a></li>
+<li><a class="reference internal" href="#id2">移除/销毁 Session数据</a></li>
+<li><a class="reference internal" href="#isolating-session-data-between-applications">Isolating Session Data between Applications</a></li>
+<li><a class="reference internal" href="#session-bags">Session Bags</a></li>
+<li><a class="reference internal" href="#persistent-data-in-components">Persistent Data in Components</a></li>
+<li><a class="reference internal" href="#id3">实现自定义适配器</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="flash.html"
+                                  title="previous chapter">发送消息(Flashing Messages)</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="filter.html"
+                                  title="next chapter">Filtering and Sanitizing</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/reference/session.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </td>
+          <td class="second-box" valign="top">
+            <div class="document">
+                <div class="documentwrapper">
+                  <div class="bodywrapper">
+                <div class="body" >
+                      
+  <div class="section" id="session-storing-data-in-session">
+<h1>把数据存储到Session(Storing data in Session)<a class="headerlink" href="#session-storing-data-in-session" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="../api/Phalcon_Session.html"><em>Phalcon\Session</em></a> 组件提供了一种面象对象的方式访问session数据。</p>
+<div class="section" id="session">
+<h2>初始化Session<a class="headerlink" href="#session" title="Permalink to this headline">¶</a></h2>
+<p>有一些应用程序是会话密集型的，几乎所有的操作都需要访问Session数据。还有一些则不太需要用户会话。有了服务容器，我们可以确保只有在需要它的时候，就可以访问它：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">//Start the session the first time when some component request the session service</span>
+<span class="nv">$di</span><span class="o">-&gt;</span><span class="na">setShared</span><span class="p">(</span><span class="s1">&#39;session&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(){</span>
+    <span class="nv">$session</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Session\Adapter\Files</span><span class="p">();</span>
+    <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">();</span>
+    <span class="k">return</span> <span class="nv">$session</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>存储/获取 Session数据<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>你可以在控制器，视图文件，以及只要继承自 <a class="reference internal" href="../api/Phalcon_DI_Injectable.html"><em>Phalcon\DI\Injectable</em></a> 的组件中方便的访问session服务，并且可方便的存储或获取它们的值。请看示例：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">UserController</span> <span class="k">extends</span> <span class="nx">Phalcon\Mvc\Controller</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">//Set a session variable</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s2">&quot;user-name&quot;</span><span class="p">,</span> <span class="s2">&quot;Michael&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">welcomeAction</span><span class="p">()</span>
+    <span class="p">{</span>
+
+        <span class="c1">//Check if the variable is defined</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">has</span><span class="p">(</span><span class="s2">&quot;user-name&quot;</span><span class="p">))</span>
+        <span class="p">{</span>
+
+            <span class="c1">//Retrieve its value</span>
+            <span class="nv">$name</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s2">&quot;user-name&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>移除/销毁 Session数据<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>你可以移除指定的session数据，也可销毁整个session:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">UserController</span> <span class="k">extends</span> <span class="nx">Phalcon\Mvc\Controller</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">removeAction</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">//Remove a session variable</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">remove</span><span class="p">(</span><span class="s2">&quot;user-name&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">logoutAction</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">//Destroy the whole session</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">destroy</span><span class="p">();</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="isolating-session-data-between-applications">
+<h2>Isolating Session Data between Applications<a class="headerlink" href="#isolating-session-data-between-applications" title="Permalink to this headline">¶</a></h2>
+<p>有时，我们可能部署相同的应用程序在同一台服务器上两次，而使用相同的会话。当然，如果我们在会话中使用变量，我们希望每个应用程序都有其单独的会话数据(即使相同代码和相同的变量名称)。为了解决这个问题，你可以在某个应用程序中为每个会话创建的变量添加一个前辍：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">//Isolating the session data</span>
+<span class="nv">$di</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;session&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(){</span>
+
+    <span class="c1">//All variables created will prefixed with &quot;my-app-1&quot;</span>
+    <span class="nv">$session</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Session\Adapter\Files</span><span class="p">(</span>
+        <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;uniqueId&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;my-app-1&#39;</span>
+        <span class="p">)</span>
+    <span class="p">);</span>
+
+    <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">start</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="nv">$session</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="session-bags">
+<h2>Session Bags<a class="headerlink" href="#session-bags" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../api/Phalcon_Session_Bag.html"><em>Phalcon\Session\Bag</em></a> 组件帮助把session数据导入到 &#8220;namespaces&#8221;。通过这种方式，你可以轻松的创建一组会话变量到应用程序中，只需设置变量为 &#8220;bag&#8221;,它会自动存储为session数据：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$user</span>       <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Session\Bag</span><span class="p">();</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="s2">&quot;Kimbra Johnson&quot;</span><span class="p">;</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="na">age</span>  <span class="o">=</span> <span class="mi">22</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="persistent-data-in-components">
+<h2>Persistent Data in Components<a class="headerlink" href="#persistent-data-in-components" title="Permalink to this headline">¶</a></h2>
+<p>控制器，组件，或者其他继承自  <a class="reference internal" href="../api/Phalcon_DI_Injectable.html"><em>Phalcon\DI\Injectable</em></a> 的类都可以注入到  <a class="reference internal" href="../api/Phalcon_Session_Bag.html"><em>Phalcon\Session\Bag</em></a>.使用这个类的会话数据在每个类中的变量是隔离开的，基于此，你可以隔离每个请求持久化数据。</p>
+<p>译者注： 我曾在翻译tutorial invo章节时测试过此属性，并添加了注释。可以查阅 <a class="reference internal" href="tutorial-invo.html"><em>tutorial-invo</em></a>，搜索 &#8216;译者注&#8217;查看</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">UserController</span> <span class="k">extends</span> <span class="nx">Phalcon\Mvc\Controller</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Create a persistent variable &quot;name&quot;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">persistent</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="s2">&quot;Laura&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">welcomeAction</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">persistent</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="k">echo</span> <span class="s2">&quot;Welcome, &quot;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">persistent</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In a component:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">Security</span> <span class="k">extends</span> <span class="nx">Phalcon\Mvc\User\Component</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">auth</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// Create a persistent variable &quot;name&quot;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">persistent</span><span class="o">-&gt;</span><span class="na">name</span> <span class="o">=</span> <span class="s2">&quot;Laura&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getAuthName</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">persistent</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>通过 ($this-&gt;session) 添加的变量，可在整个应用程序进行访问。而通过 ($this-&gt;persistent) 添加的变量，只能在当前类访问。</p>
+</div>
+<div class="section" id="id3">
+<h2>实现自定义适配器<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../api/Phalcon_Session_AdapterInterface.html"><em>Phalcon\Session\AdapterInterface</em></a> interface must be implemented in order to create your own translate adapters or extend the existing ones:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">MySessionHandler</span> <span class="k">implements</span> <span class="nx">Phalcon\Session\AdapterInterface</span>
+<span class="p">{</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * MySessionHandler construtor</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param array $options</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$options</span><span class="o">=</span><span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Starts session, optionally using an adapter</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param array $options</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">start</span><span class="p">()</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Sets session options</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param array $options</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setOptions</span><span class="p">(</span><span class="nv">$options</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Get internal options</span>
+<span class="sd">     *</span>
+<span class="sd">     * @return array</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getOptions</span><span class="p">()</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Gets a session variable from an application context</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $index</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">get</span><span class="p">(</span><span class="nv">$index</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Sets a session variable in an application context</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $index</span>
+<span class="sd">     * @param string $value</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">set</span><span class="p">(</span><span class="nv">$index</span><span class="p">,</span> <span class="nv">$value</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Check whether a session variable is set in an application context</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $index</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">has</span><span class="p">(</span><span class="nv">$index</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Removes a session variable from an application context</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $index</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">remove</span><span class="p">(</span><span class="nv">$index</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Returns active session id</span>
+<span class="sd">     *</span>
+<span class="sd">     * @return string</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getId</span><span class="p">()</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Check whether the session has been started</span>
+<span class="sd">     *</span>
+<span class="sd">     * @return boolean</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">isStarted</span><span class="p">()</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Destroys the active session</span>
+<span class="sd">     *</span>
+<span class="sd">     * @return boolean</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">destroy</span><span class="p">()</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="filter.html" title="Filtering and Sanitizing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="flash.html" title="发送消息(Flashing Messages)"
+             >previous</a> |</li> 
+      </ul>
+    </div>
+        <div id="footer">
+             &copy; Copyright 2012, Phalcon Team.
+             Last updated on Sep 15, 2014.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+        </div>
+
+    </div>
+
+  </body>
+</html>

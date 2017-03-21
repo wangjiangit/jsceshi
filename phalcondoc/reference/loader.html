@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>万能的类文件加载器 &mdash; Phalcon 0.7.0 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/configurationblock.css" type="text/css" />
+    <!--
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/layout.css" type="text/css" />
+    -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rosario" type="text/css">
+    <!-- link rel="stylesheet" href="http://phalconphp.com/css/s.css" type="text/css" -->
+    <link rel="stylesheet" href="../_static/s.css" type="text/css">
+    <link rel="stylesheet" href="../_static/docs.css" type="text/css">
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.7.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/docs.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Phalcon 0.7.0 documentation" href="../index.html" />
+    <link rel="next" title="Logging" href="logging.html" />
+    <link rel="prev" title="多语言支持" href="translate.html" /> 
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <div id="header">
+        <h1><a href="http://phalconphp.com/index" ><img border="0" src="../_static/img/logo-small.png"></a></h1>
+        <div align="center">
+          <div id="nav-main" role="navigation">
+            <div class="menubar">
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/index" >HOME</a></div>
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/download" >DOWNLOAD</a></div>
+              <div class="nav-main-features"><a href="http://docs.phalconphp.com" >DOCUMENTATION</a></div>
+              <div class="nav-main-features"><a href="http://phalconphp.com/support" >SUPPORT</a></div>
+              <div class="nav-main-features nav-first"><a href="https://github.com/phalcon/cphalcon">GITHUB</a></div>
+              <div class="nav-main-features"><a target="blog" href="http://blog.phalconphp.com/">BLOG</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="logging.html" title="Logging"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="translate.html" title="多语言支持"
+             accesskey="P">previous</a> |</li>
+        <li><a href="http://www.phalconphp.com">Home</a> &raquo;</li>
+        <li><a href="../index.html">Phalcon 0.7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+      <table width="90%" align="center">
+        <tr>
+      <td class="primary-box" width="25%" valign="top">
+            
+            <div id="searchbox" style="">
+              <h3>Search</h3>
+                <form class="search" action="http://readthedocs.org/search/project/" method="get">
+                  <input type="text" name="q" size="18">
+                  <input type="submit" value="Go">
+                  <input type="hidden" name="selected_facets" value="project:">
+                </form>
+            </div>
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">万能的类文件加载器</a><ul>
+<li><a class="reference internal" href="#registering-namespaces">Registering Namespaces</a></li>
+<li><a class="reference internal" href="#registering-prefixes">Registering Prefixes</a></li>
+<li><a class="reference internal" href="#registering-directories">Registering Directories</a></li>
+<li><a class="reference internal" href="#registering-classes">Registering Classes</a></li>
+<li><a class="reference internal" href="#id2">其他扩展名文件的加载</a></li>
+<li><a class="reference internal" href="#modifying-current-strategies">Modifying current strategies</a></li>
+<li><a class="reference internal" href="#autoloading-events">Autoloading Events</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="translate.html"
+                                  title="previous chapter">多语言支持</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="logging.html"
+                                  title="next chapter">Logging</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/reference/loader.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </td>
+          <td class="second-box" valign="top">
+            <div class="document">
+                <div class="documentwrapper">
+                  <div class="bodywrapper">
+                <div class="body" >
+                      
+  <div class="section" id="id1">
+<h1>万能的类文件加载器<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="../api/Phalcon_Loader.html"><em>Phalcon\Loader</em></a> 这个组件允许你根据预定义规则自动加载项目中的类文件。
+此组件采用C语言编写，在读取和解析PHP文件方面，使用了最低的性能开销。</p>
+<p>此组件功能是基于PHP自身的 <a class="reference external" href="http://www.php.net/manual/en/language.oop5.autoload.php">autoloading classes</a> 实现的。如果在任何代码部分未找到类，那么它将尝试使用特殊的处理加载它,:doc:<cite>Phalcon\Loader &lt;../api/Phalcon_Loader&gt;</cite> 就是用于处理这种任务的。加载类文件采用按需加载的方式，只有需要某个类文件时，才会进行加载及文件读取。这种技术被称为延时初始化( <a class="reference external" href="http://en.wikipedia.org/wiki/Lazy_initialization">lazy initialization</a> )。</p>
+<p>使用此组件，你可以从其他项目或vendors(不知道是什么，应该指的是其他服务器)加载文件，autoloader 采用 <a class="reference external" href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md">PSR-0</a> 标准。</p>
+<p><a class="reference internal" href="../api/Phalcon_Loader.html"><em>Phalcon\Loader</em></a> 提供四种方式自动加载类文件，你可以一次只使用其中一个，或者混合使用。</p>
+<div class="section" id="registering-namespaces">
+<h2>Registering Namespaces<a class="headerlink" href="#registering-namespaces" title="Permalink to this headline">¶</a></h2>
+<p>如果你的代码使用了命名空间或外部库文件，可以使用registerNamespaces()，它提供了一种自动加载机制，可以通过传递一个关联数组，key是命名空间前辍，value是类文件存放的目录。当加载并试图查找类文件时，分隔符被替换成目录分隔符，以便正确加载类文件。还有一点请注意，value末尾一定要以&#8221;/&#8221;结尾。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// Creates the autoloader</span>
+<span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Loader</span><span class="p">();</span>
+
+<span class="c1">//Register some namespaces</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">registerNamespaces</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+       <span class="s2">&quot;Example\Base&quot;</span>    <span class="o">=&gt;</span> <span class="s2">&quot;vendor/example/base/&quot;</span><span class="p">,</span>
+       <span class="s2">&quot;Example\Adapter&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;vendor/example/adapter/&quot;</span><span class="p">,</span>
+       <span class="s2">&quot;Example&quot;</span>         <span class="o">=&gt;</span> <span class="s2">&quot;vendor/example/&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// register autoloader</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">();</span>
+
+<span class="c1">// The required class will automatically include the</span>
+<span class="c1">// file vendor/example/adapter/Some.php</span>
+<span class="nv">$some</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Example\Adapter\Some</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="registering-prefixes">
+<h2>Registering Prefixes<a class="headerlink" href="#registering-prefixes" title="Permalink to this headline">¶</a></h2>
+<p>这种策略非常类似上面讲到的命名空间的加载机制。它也需要一个关联数组，key是前辍，value是类所在的目录。加载的时候，命名空间分隔符和下划线&#8221;_&#8221;将要被替换为目录分隔符。还是请注意，value的结尾一定要以&#8221;/&#8221;作为结束符。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// Creates the autoloader</span>
+<span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Loader</span><span class="p">();</span>
+
+<span class="c1">//Register some prefixes</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">registerPrefixes</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+       <span class="s2">&quot;Example_Base&quot;</span>    <span class="o">=&gt;</span> <span class="s2">&quot;vendor/example/base/&quot;</span><span class="p">,</span>
+       <span class="s2">&quot;Example_Adapter&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;vendor/example/adapter/&quot;</span><span class="p">,</span>
+       <span class="s2">&quot;Example_&quot;</span>         <span class="o">=&gt;</span> <span class="s2">&quot;vendor/example/&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// register autoloader</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">();</span>
+
+<span class="c1">// The required class will automatically include the</span>
+<span class="c1">// file vendor/example/adapter/Some.php</span>
+<span class="nv">$some</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Example_Adapter_Some</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="registering-directories">
+<h2>Registering Directories<a class="headerlink" href="#registering-directories" title="Permalink to this headline">¶</a></h2>
+<p>第三种方式是注册目录，在注册的目录中找到类文件。在性能方面，不建议使用此种方式，因为Phalcon将对注册的所有目录及文件进行查找，直接查找具有相同名称的类文件。注册目录时的顺序是非常重要的。请注意，结尾以&#8221;/&#8221;结束。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// Creates the autoloader</span>
+<span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Loader</span><span class="p">();</span>
+
+<span class="c1">// Register some directories</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">registerDirs</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;library/MyComponent/&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;library/OtherComponent/Other/&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vendor/example/adapters/&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vendor/example/&quot;</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// register autoloader</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">();</span>
+
+<span class="c1">// The required class will automatically include the file from</span>
+<span class="c1">// the first directory where it has been located</span>
+<span class="c1">// i.e. library/OtherComponent/Other/Some.php</span>
+<span class="nv">$some</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Some</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="registering-classes">
+<h2>Registering Classes<a class="headerlink" href="#registering-classes" title="Permalink to this headline">¶</a></h2>
+<p>最后一种方式是注册类的名称和路径。这种加载方面是最快的一种加载方式。然而，随着应用程序的增长，更多的类及文件需要加载，这将使维护工作变得非常麻烦，因为不太建议使用。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// Creates the autoloader</span>
+<span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Loader</span><span class="p">();</span>
+
+<span class="c1">// Register some classes</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">registerClasses</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;Some&quot;</span>         <span class="o">=&gt;</span> <span class="s2">&quot;library/OtherComponent/Other/Some.php&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Example\Base&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;vendor/example/adapters/Example/BaseClass.php&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">// register autoloader</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">();</span>
+
+<span class="c1">// Requiring a class will automatically include the file it references</span>
+<span class="c1">// in the associative array</span>
+<span class="c1">// i.e. library/OtherComponent/Other/Some.php</span>
+<span class="nv">$some</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Some</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>其他扩展名文件的加载<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>一些自动加载策略，如&#8221;prefixes&#8221;,&#8221;namespaces&#8221;,或&#8221;directories&#8221;都会自动加载扩展名为&#8221;.php&#8221;的文件。如果你想自动加载其他扩展类型的文件时，你可以使用&#8221;setExtensions&#8221;方法。示例如下：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+ <span class="c1">// Creates the autoloader</span>
+<span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Loader</span><span class="p">();</span>
+
+<span class="c1">//Set file extensions to check</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">setExtensions</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s2">&quot;php&quot;</span><span class="p">,</span> <span class="s2">&quot;inc&quot;</span><span class="p">,</span> <span class="s2">&quot;phb&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="modifying-current-strategies">
+<h2>Modifying current strategies<a class="headerlink" href="#modifying-current-strategies" title="Permalink to this headline">¶</a></h2>
+<p>通过下面的方式可以把需要后来加载的其他文件合并到上述加载策略中：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// Adding more directories</span>
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">registerDirs</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;../app/library/&quot;</span>
+        <span class="s2">&quot;../app/plugins/&quot;</span>
+    <span class="p">),</span>
+    <span class="k">true</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>通过传递第二个参数&#8221;true&#8221;，可以让新的目录或类文件合并到上述四种加载策略中。</p>
+</div>
+<div class="section" id="autoloading-events">
+<h2>Autoloading Events<a class="headerlink" href="#autoloading-events" title="Permalink to this headline">¶</a></h2>
+<p>在下面的例子中，EventsManager与类加载器协同工作，使我们能够获得操作流程的调试信息：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$eventsManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Events\Manager</span><span class="p">();</span>
+
+<span class="nv">$loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Loader</span><span class="p">();</span>
+
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">registerNamespaces</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+   <span class="s1">&#39;Example\\Base&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;vendor/example/base/&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;Example\\Adapter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;vendor/example/adapter/&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;Example&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;vendor/example/&#39;</span>
+<span class="p">));</span>
+
+<span class="c1">//Listen all the loader events</span>
+<span class="nv">$eventsManager</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s1">&#39;loader&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$loader</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getType</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;beforeCheckPath&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">getCheckedPath</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">setEventsManager</span><span class="p">(</span><span class="nv">$eventsManager</span><span class="p">);</span>
+
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>当事件返回布尔值false时，可以停止激活的操作。支持以下一些事件：</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="38%" />
+<col width="37%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Event Name</th>
+<th class="head" colspan="2">Triggered</th>
+<th class="head">Can stop operation?</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>beforeCheckClass</td>
+<td colspan="2">Triggered before start the autoloading process</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>pathFound</td>
+<td colspan="2">Triggered when the loader locate a class</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>afterCheckClass</td>
+<td colspan="2">Triggered after finish the autoloading process. If this event is launched the autoloader didn&#8217;t find the class file</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="logging.html" title="Logging"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="translate.html" title="多语言支持"
+             >previous</a> |</li> 
+      </ul>
+    </div>
+        <div id="footer">
+             &copy; Copyright 2012, Phalcon Team.
+             Last updated on Sep 15, 2014.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+        </div>
+
+    </div>
+
+  </body>
+</html>

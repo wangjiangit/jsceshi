@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Filtering and Sanitizing &mdash; Phalcon 0.7.0 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/configurationblock.css" type="text/css" />
+    <!--
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/layout.css" type="text/css" />
+    -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rosario" type="text/css">
+    <!-- link rel="stylesheet" href="http://phalconphp.com/css/s.css" type="text/css" -->
+    <link rel="stylesheet" href="../_static/s.css" type="text/css">
+    <link rel="stylesheet" href="../_static/docs.css" type="text/css">
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.7.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/docs.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Phalcon 0.7.0 documentation" href="../index.html" />
+    <link rel="next" title="Reading Configuration" href="config.html" />
+    <link rel="prev" title="把数据存储到Session(Storing data in Session)" href="session.html" /> 
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <div id="header">
+        <h1><a href="http://phalconphp.com/index" ><img border="0" src="../_static/img/logo-small.png"></a></h1>
+        <div align="center">
+          <div id="nav-main" role="navigation">
+            <div class="menubar">
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/index" >HOME</a></div>
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/download" >DOWNLOAD</a></div>
+              <div class="nav-main-features"><a href="http://docs.phalconphp.com" >DOCUMENTATION</a></div>
+              <div class="nav-main-features"><a href="http://phalconphp.com/support" >SUPPORT</a></div>
+              <div class="nav-main-features nav-first"><a href="https://github.com/phalcon/cphalcon">GITHUB</a></div>
+              <div class="nav-main-features"><a target="blog" href="http://blog.phalconphp.com/">BLOG</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="config.html" title="Reading Configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="session.html" title="把数据存储到Session(Storing data in Session)"
+             accesskey="P">previous</a> |</li>
+        <li><a href="http://www.phalconphp.com">Home</a> &raquo;</li>
+        <li><a href="../index.html">Phalcon 0.7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+      <table width="90%" align="center">
+        <tr>
+      <td class="primary-box" width="25%" valign="top">
+            
+            <div id="searchbox" style="">
+              <h3>Search</h3>
+                <form class="search" action="http://readthedocs.org/search/project/" method="get">
+                  <input type="text" name="q" size="18">
+                  <input type="submit" value="Go">
+                  <input type="hidden" name="selected_facets" value="project:">
+                </form>
+            </div>
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Filtering and Sanitizing</a><ul>
+<li><a class="reference internal" href="#sanitizing-data">Sanitizing data</a></li>
+<li><a class="reference internal" href="#sanitizing-from-controllers">Sanitizing from Controllers</a></li>
+<li><a class="reference internal" href="#filtering-action-parameters">Filtering Action Parameters</a></li>
+<li><a class="reference internal" href="#filtering-data">Filtering data</a></li>
+<li><a class="reference internal" href="#filters">Filters内置类型</a></li>
+<li><a class="reference internal" href="#id1">自定义Filters</a></li>
+<li><a class="reference internal" href="#complex-sanitizing-and-filtering">Complex Sanitizing and Filtering</a></li>
+<li><a class="reference internal" href="#implementing-your-own-filter">Implementing your own Filter</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="session.html"
+                                  title="previous chapter">把数据存储到Session(Storing data in Session)</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="config.html"
+                                  title="next chapter">Reading Configuration</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/reference/filter.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </td>
+          <td class="second-box" valign="top">
+            <div class="document">
+                <div class="documentwrapper">
+                  <div class="bodywrapper">
+                <div class="body" >
+                      
+  <div class="section" id="filtering-and-sanitizing">
+<h1>Filtering and Sanitizing<a class="headerlink" href="#filtering-and-sanitizing" title="Permalink to this headline">¶</a></h1>
+<p>对用户输入的数据进行过滤/消毒是软件开发的重要组成部分。过分信任或忽略过滤用户输入，可能导致用户访问到未经授权的页面，主要是用户数据，甚至是你应用程序的服务器托管的所有内容。</p>
+<div class="figure align-center">
+<img alt="../_images/sql.png" src="../_images/sql.png" />
+</div>
+<p>Full image (from xkcd)</p>
+<p><a class="reference internal" href="../api/Phalcon_Filter.html"><em>Phalcon\Filter</em></a> 组件提供了一组常用的用于过滤以及处理用户输入数据的助手工具。它提供了一种面像对象的方式来包装PHP filter扩展。</p>
+<div class="section" id="sanitizing-data">
+<h2>Sanitizing data<a class="headerlink" href="#sanitizing-data" title="Permalink to this headline">¶</a></h2>
+<p>Sanitizing 处理从字符串中移除指定字符，这并不是必须的，需要开发者明确指定。sanitizing后的用户输入数据，能确保应用程序的完整和安全。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$filter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Filter</span><span class="p">();</span>
+
+<span class="c1">// returns &quot;someone@example.com&quot;</span>
+<span class="nv">$filter</span><span class="o">-&gt;</span><span class="na">sanitize</span><span class="p">(</span><span class="s2">&quot;some(one)@exa\mple.com&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">);</span>
+
+<span class="c1">// returns &quot;hello&quot;</span>
+<span class="nv">$filter</span><span class="o">-&gt;</span><span class="na">sanitize</span><span class="p">(</span><span class="s2">&quot;hello&lt;&lt;&quot;</span><span class="p">,</span> <span class="s2">&quot;string&quot;</span><span class="p">);</span>
+
+<span class="c1">// returns &quot;100019&quot;</span>
+<span class="nv">$filter</span><span class="o">-&gt;</span><span class="na">sanitize</span><span class="p">(</span><span class="s2">&quot;!100a019&quot;</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">);</span>
+
+<span class="c1">// returns &quot;100019.01&quot;</span>
+<span class="nv">$filter</span><span class="o">-&gt;</span><span class="na">sanitize</span><span class="p">(</span><span class="s2">&quot;!100a019.01a&quot;</span><span class="p">,</span> <span class="s2">&quot;float&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sanitizing-from-controllers">
+<h2>Sanitizing from Controllers<a class="headerlink" href="#sanitizing-from-controllers" title="Permalink to this headline">¶</a></h2>
+<p>你可以在控制器中访问  <a class="reference internal" href="../api/Phalcon_Filter.html"><em>Phalcon\Filter</em></a> 对象，当需要访问GET或POST输入数据时(通过request对象)。第一个参数是变量的名称，第二个参数是filter类型。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">ProductsController</span> <span class="k">extends</span> <span class="nx">\Phalcon\Mvc\Controller</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
+    <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">saveAction</span><span class="p">()</span>
+    <span class="p">{</span>
+
+        <span class="c1">// Sanitizing price from input</span>
+        <span class="nv">$price</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">getPost</span><span class="p">(</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="s2">&quot;double&quot;</span><span class="p">);</span>
+
+        <span class="c1">// Sanitizing email from input</span>
+        <span class="nv">$email</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">getPost</span><span class="p">(</span><span class="s2">&quot;customerEmail&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="filtering-action-parameters">
+<h2>Filtering Action Parameters<a class="headerlink" href="#filtering-action-parameters" title="Permalink to this headline">¶</a></h2>
+<p>下面的示例将向你展示如何在controller/action中 sanitize Action的参数：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">ProductsController</span> <span class="k">extends</span> <span class="nx">\Phalcon\Mvc\Controller</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
+    <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">showAction</span><span class="p">(</span><span class="nv">$productId</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$productId</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">filter</span><span class="o">-&gt;</span><span class="na">sanitize</span><span class="p">(</span><span class="nv">$productId</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="filtering-data">
+<h2>Filtering data<a class="headerlink" href="#filtering-data" title="Permalink to this headline">¶</a></h2>
+<p>除了sanitizing功能，<a class="reference internal" href="../api/Phalcon_Filter.html"><em>Phalcon\Filter</em></a> 还提供了删除或修改输入数据的过滤功能，以生成我们想要的数据。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$filter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Filter</span><span class="p">();</span>
+
+<span class="c1">// returns &quot;Hello&quot;</span>
+<span class="nv">$filter</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s2">&quot;&lt;h1&gt;Hello&lt;/h1&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;striptags&quot;</span><span class="p">);</span>
+
+<span class="c1">// returns &quot;Hello&quot;</span>
+<span class="nv">$filter</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">(</span><span class="s2">&quot;  Hello   &quot;</span><span class="p">,</span> <span class="s2">&quot;trim&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="filters">
+<h2>Filters内置类型<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
+<p>The following are the built-in filters provided by this component:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>string</td>
+<td>Strip tags</td>
+</tr>
+<tr class="row-odd"><td>email</td>
+<td>Remove all characters except letters, digits and !#$%&amp;*+-/=?^_`{|}~&#64;.[].</td>
+</tr>
+<tr class="row-even"><td>int</td>
+<td>Remove all characters except digits, plus and minus sign.</td>
+</tr>
+<tr class="row-odd"><td>float</td>
+<td>Remove all characters except digits, dot, plus and minus sign.</td>
+</tr>
+<tr class="row-even"><td>alphanum</td>
+<td>Remove all characters except [a-zA-Z0-9]</td>
+</tr>
+<tr class="row-odd"><td>striptags</td>
+<td>Applies the <a class="reference external" href="http://www.php.net/manual/en/function.strip-tags.php">strip_tags</a> function</td>
+</tr>
+<tr class="row-even"><td>trim</td>
+<td>Applies the <a class="reference external" href="http://www.php.net/manual/en/function.trim.php">trim</a> function</td>
+</tr>
+<tr class="row-odd"><td>lower</td>
+<td>Applies the <a class="reference external" href="http://www.php.net/manual/en/function.strtolower.php">strtolower</a> function</td>
+</tr>
+<tr class="row-even"><td>upper</td>
+<td>Applies the <a class="reference external" href="http://www.php.net/manual/en/function.strtoupper.php">strtoupper</a> function</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id1">
+<h2>自定义Filters<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>你可以创建自定义过滤器添加到 <a class="reference internal" href="../api/Phalcon_Filter.html"><em>Phalcon\Filter</em></a>。过滤函数可以使用匿名函数的形式：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$filter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Filter</span><span class="p">();</span>
+
+<span class="c1">//Using an anonymous function</span>
+<span class="nv">$filter</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;md5&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">preg_replace</span><span class="p">(</span><span class="s1">&#39;/[^0-9a-f]/&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nv">$value</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">//Sanitize with the &quot;md5&quot; filter</span>
+<span class="nv">$filtered</span> <span class="o">=</span> <span class="nv">$filter</span><span class="o">-&gt;</span><span class="na">sanitize</span><span class="p">(</span><span class="nv">$possibleMd5</span><span class="p">,</span> <span class="s2">&quot;md5&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>或者，如果你愿意，你也可以实现一个过滤器类：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">IPv4Filter</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">filter</span><span class="p">(</span><span class="nv">$value</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">filter_var</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span> <span class="nx">FILTER_VALIDATE_IP</span><span class="p">,</span> <span class="nx">FILTER_FLAG_IPV4</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="nv">$filter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Filter</span><span class="p">();</span>
+
+<span class="c1">//Using an object</span>
+<span class="nv">$filter</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;ipv4&#39;</span><span class="p">,</span> <span class="k">new</span> <span class="nx">IPv4Filter</span><span class="p">());</span>
+
+<span class="c1">//Sanitize with the &quot;ipv4&quot; filter</span>
+<span class="nv">$filteredIp</span> <span class="o">=</span> <span class="nv">$filter</span><span class="o">-&gt;</span><span class="na">sanitize</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="s2">&quot;ipv4&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="complex-sanitizing-and-filtering">
+<h2>Complex Sanitizing and Filtering<a class="headerlink" href="#complex-sanitizing-and-filtering" title="Permalink to this headline">¶</a></h2>
+<p>PHP本身也提供了一个极好的filter扩展，查阅文档：<a class="reference external" href="http://www.php.net/manual/en/book.filter.php">Data Filtering at PHP Documentation</a></p>
+</div>
+<div class="section" id="implementing-your-own-filter">
+<h2>Implementing your own Filter<a class="headerlink" href="#implementing-your-own-filter" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../api/Phalcon_FilterInterface.html"><em>Phalcon\FilterInterface</em></a> interface must be implemented to create your own filtering service replacing the one providing by Phalcon.</p>
+</div>
+</div>
+
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="config.html" title="Reading Configuration"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="session.html" title="把数据存储到Session(Storing data in Session)"
+             >previous</a> |</li> 
+      </ul>
+    </div>
+        <div id="footer">
+             &copy; Copyright 2012, Phalcon Team.
+             Last updated on Sep 15, 2014.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+        </div>
+
+    </div>
+
+  </body>
+</html>

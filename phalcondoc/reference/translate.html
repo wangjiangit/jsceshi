@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>多语言支持 &mdash; Phalcon 0.7.0 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/configurationblock.css" type="text/css" />
+    <!--
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/layout.css" type="text/css" />
+    -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rosario" type="text/css">
+    <!-- link rel="stylesheet" href="http://phalconphp.com/css/s.css" type="text/css" -->
+    <link rel="stylesheet" href="../_static/s.css" type="text/css">
+    <link rel="stylesheet" href="../_static/docs.css" type="text/css">
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.7.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/docs.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Phalcon 0.7.0 documentation" href="../index.html" />
+    <link rel="next" title="万能的类文件加载器" href="loader.html" />
+    <link rel="prev" title="Access Control Lists ACL" href="acl.html" /> 
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <div id="header">
+        <h1><a href="http://phalconphp.com/index" ><img border="0" src="../_static/img/logo-small.png"></a></h1>
+        <div align="center">
+          <div id="nav-main" role="navigation">
+            <div class="menubar">
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/index" >HOME</a></div>
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/download" >DOWNLOAD</a></div>
+              <div class="nav-main-features"><a href="http://docs.phalconphp.com" >DOCUMENTATION</a></div>
+              <div class="nav-main-features"><a href="http://phalconphp.com/support" >SUPPORT</a></div>
+              <div class="nav-main-features nav-first"><a href="https://github.com/phalcon/cphalcon">GITHUB</a></div>
+              <div class="nav-main-features"><a target="blog" href="http://blog.phalconphp.com/">BLOG</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="loader.html" title="万能的类文件加载器"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="acl.html" title="Access Control Lists ACL"
+             accesskey="P">previous</a> |</li>
+        <li><a href="http://www.phalconphp.com">Home</a> &raquo;</li>
+        <li><a href="../index.html">Phalcon 0.7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+      <table width="90%" align="center">
+        <tr>
+      <td class="primary-box" width="25%" valign="top">
+            
+            <div id="searchbox" style="">
+              <h3>Search</h3>
+                <form class="search" action="http://readthedocs.org/search/project/" method="get">
+                  <input type="text" name="q" size="18">
+                  <input type="submit" value="Go">
+                  <input type="hidden" name="selected_facets" value="project:">
+                </form>
+            </div>
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">多语言支持</a><ul>
+<li><a class="reference internal" href="#id2">适配器</a></li>
+<li><a class="reference internal" href="#component-usage">Component Usage</a></li>
+<li><a class="reference internal" href="#implementing-your-own-adapters">Implementing your own adapters</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="acl.html"
+                                  title="previous chapter">Access Control Lists ACL</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="loader.html"
+                                  title="next chapter">万能的类文件加载器</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/reference/translate.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </td>
+          <td class="second-box" valign="top">
+            <div class="document">
+                <div class="documentwrapper">
+                  <div class="bodywrapper">
+                <div class="body" >
+                      
+  <div class="section" id="id1">
+<h1>多语言支持<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>在应用程序开发中，可使用:doc:<cite>Phalcon\Translate &lt;../api/Phalcon_Translate&gt;</cite> 组件帮助实现多语言。使用此组件，可根据用户选择的语言提供相应的语言支持。</p>
+<div class="section" id="id2">
+<h2>适配器<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>该组件使用适配器，以统一的方式读取相应的语言文件。</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Adapter</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>NativeArray</td>
+<td>Uses PHP arrays to store the messages. This is the best option in terms of performance.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="component-usage">
+<h2>Component Usage<a class="headerlink" href="#component-usage" title="Permalink to this headline">¶</a></h2>
+<p>翻译的字符串存储在文件中，这些文件的结构可能会有所不同，具体取决于你所使用的适配器。Phalcon允许你自由的组织翻译，简单的结构可能是这样：</p>
+<div class="highlight-bash"><div class="highlight"><pre>app/messages/en.php
+app/messages/es.php
+app/messages/fr.php
+app/messages/zh.php
+</pre></div>
+</div>
+<p>每个翻译文件都包含一个由key/value组成的数组。对于每一个翻译文件，key都是唯一的，相同的数组需要使用不同的文件，保持key不变，value值根据每种语言进行翻译即可。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">//app/messages/es.php</span>
+<span class="nv">$messages</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">&quot;hi&quot;</span>      <span class="o">=&gt;</span> <span class="s2">&quot;Hello&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;bye&quot;</span>     <span class="o">=&gt;</span> <span class="s2">&quot;Good Bye&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hi-name&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Hello %name%&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;song&quot;</span>    <span class="o">=&gt;</span> <span class="s2">&quot;This song is %song%&quot;</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">//app/messages/fr.php</span>
+<span class="nv">$messages</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">&quot;hi&quot;</span>      <span class="o">=&gt;</span> <span class="s2">&quot;Bonjour&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;bye&quot;</span>     <span class="o">=&gt;</span> <span class="s2">&quot;Au revoir&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hi-name&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Bonjour %name%&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;song&quot;</span>    <span class="o">=&gt;</span> <span class="s2">&quot;La chanson est %song%&quot;</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>在应用程序中实现语言转化机制并不难，关键取决于你想如何实现它。你可以根据检测用户的浏览器语言为用户提供相应的语言支持或者提供一个设置页面供用户自己选择他们想要的语言。</p>
+<p>一个简单的用于检测客户端用户语言的方式是通过 $_SERVER[&#8216;HTTP_ACCEPT_LANGUAGE&#8217;]，或者也可以在controller/action中直接调用 $this-&gt;request-&gt;getBestLanguage() 也可。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">UserController</span> <span class="k">extends</span> <span class="nx">\Phalcon\Mvc\Controller</span>
+<span class="p">{</span>
+
+  <span class="k">protected</span> <span class="k">function</span> <span class="nf">_getTranslation</span><span class="p">()</span>
+  <span class="p">{</span>
+
+    <span class="c1">//Ask browser what is the best language</span>
+    <span class="nv">$language</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">getBestLanguage</span><span class="p">();</span>
+
+    <span class="c1">//Check if we have a translation file for that lang</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="s2">&quot;app/messages/&quot;</span><span class="o">.</span><span class="nv">$language</span><span class="o">.</span><span class="s2">&quot;.php&quot;</span><span class="p">))</span> <span class="p">{</span>
+       <span class="k">require</span> <span class="s2">&quot;app/messages/&quot;</span><span class="o">.</span><span class="nv">$language</span><span class="o">.</span><span class="s2">&quot;.php&quot;</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+       <span class="c1">// fallback to some default</span>
+       <span class="k">require</span> <span class="s2">&quot;app/messages/en.php&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">//Return a translation object</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">\Phalcon\Translate\Adapter\NativeArray</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+       <span class="s2">&quot;content&quot;</span> <span class="o">=&gt;</span> <span class="nv">$messages</span>
+    <span class="p">));</span>
+
+  <span class="p">}</span>
+
+  <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
+  <span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">setVar</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;Mike&quot;</span><span class="p">);</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">setVar</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_getTranslation</span><span class="p">());</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>本例中的 _getTranslation 适用于整个控制器，通过变量 $t 传递翻译字符到视图，并且使用它。我们可以在视图层这样使用翻译字符串：</p>
+<div class="highlight-html+php"><div class="highlight"><pre><span class="c">&lt;!-- welcome --&gt;</span>
+<span class="c">&lt;!-- String: hi =&gt; &#39;Hello&#39; --&gt;</span>
+<span class="nt">&lt;p&gt;</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$t</span><span class="o">-&gt;</span><span class="na">_</span><span class="p">(</span><span class="s2">&quot;hi&quot;</span><span class="p">),</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="nv">$name</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="nt">&lt;/p&gt;</span>
+</pre></div>
+</div>
+<p>函数&#8221;_&#8221;通过传递的key返回翻译后的字符串。一些字符串中可能包含有占位符，如 Hello %name%。这些点位符可以通过函数&#8221;_&#8221;来传递参数进行替换，传递的参数是一个key/value的数组，其中的key是占位符名称，值是被替换的数据：</p>
+<div class="highlight-html+php"><div class="highlight"><pre><span class="c">&lt;!-- welcome --&gt;</span>
+<span class="c">&lt;!-- String: hi-user =&gt; &#39;Hello %name%&#39; --&gt;</span>
+<span class="nt">&lt;p&gt;</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$t</span><span class="o">-&gt;</span><span class="na">_</span><span class="p">(</span><span class="s2">&quot;hi-user&quot;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s2">&quot;name&quot;</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">));</span> <span class="cp">?&gt;</span><span class="nt">&lt;/p&gt;</span>
+</pre></div>
+</div>
+<p>一些应用程序实现了基于URL的多语言，如 <a class="reference external" href="http://www.mozilla.org/">http://www.mozilla.org/</a><strong>es-ES</strong>/firefox/. Phalcon 通过使用 <a class="reference internal" href="routing.html"><em>Router</em></a> 也可以实现一样的效果。</p>
+</div>
+<div class="section" id="implementing-your-own-adapters">
+<h2>Implementing your own adapters<a class="headerlink" href="#implementing-your-own-adapters" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../api/Phalcon_Translate_AdapterInterface.html"><em>Phalcon\Translate\AdapterInterface</em></a> interface must be implemented in order to create your own translate adapters or extend the existing ones:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">MyTranslateAdapter</span> <span class="k">implements</span> <span class="nx">Phalcon\Translate\AdapterInterface</span>
+<span class="p">{</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Adapter constructor</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param array $data</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$options</span><span class="p">);</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Returns the translation string of the given key</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param   string $translateKey</span>
+<span class="sd">     * @param   array $placeholders</span>
+<span class="sd">     * @return  string</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">_</span><span class="p">(</span><span class="nv">$translateKey</span><span class="p">,</span> <span class="nv">$placeholders</span><span class="o">=</span><span class="k">null</span><span class="p">);</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Returns the translation related to the given key</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param   string $index</span>
+<span class="sd">     * @param   array $placeholders</span>
+<span class="sd">     * @return  string</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">query</span><span class="p">(</span><span class="nv">$index</span><span class="p">,</span> <span class="nv">$placeholders</span><span class="o">=</span><span class="k">null</span><span class="p">);</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Check whether is defined a translation key in the internal array</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param   string $index</span>
+<span class="sd">     * @return  bool</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">exists</span><span class="p">(</span><span class="nv">$index</span><span class="p">);</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="loader.html" title="万能的类文件加载器"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="acl.html" title="Access Control Lists ACL"
+             >previous</a> |</li> 
+      </ul>
+    </div>
+        <div id="footer">
+             &copy; Copyright 2012, Phalcon Team.
+             Last updated on Sep 15, 2014.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+        </div>
+
+    </div>
+
+  </body>
+</html>

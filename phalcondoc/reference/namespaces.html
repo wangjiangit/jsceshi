@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>使用命名空间 &mdash; Phalcon 0.7.0 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/configurationblock.css" type="text/css" />
+    <!--
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/layout.css" type="text/css" />
+    -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rosario" type="text/css">
+    <!-- link rel="stylesheet" href="http://phalconphp.com/css/s.css" type="text/css" -->
+    <link rel="stylesheet" href="../_static/s.css" type="text/css">
+    <link rel="stylesheet" href="../_static/docs.css" type="text/css">
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.7.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/docs.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Phalcon 0.7.0 documentation" href="../index.html" />
+    <link rel="next" title="事件管理" href="events.html" />
+    <link rel="prev" title="微应用" href="micro.html" /> 
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <div id="header">
+        <h1><a href="http://phalconphp.com/index" ><img border="0" src="../_static/img/logo-small.png"></a></h1>
+        <div align="center">
+          <div id="nav-main" role="navigation">
+            <div class="menubar">
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/index" >HOME</a></div>
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/download" >DOWNLOAD</a></div>
+              <div class="nav-main-features"><a href="http://docs.phalconphp.com" >DOCUMENTATION</a></div>
+              <div class="nav-main-features"><a href="http://phalconphp.com/support" >SUPPORT</a></div>
+              <div class="nav-main-features nav-first"><a href="https://github.com/phalcon/cphalcon">GITHUB</a></div>
+              <div class="nav-main-features"><a target="blog" href="http://blog.phalconphp.com/">BLOG</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="events.html" title="事件管理"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="micro.html" title="微应用"
+             accesskey="P">previous</a> |</li>
+        <li><a href="http://www.phalconphp.com">Home</a> &raquo;</li>
+        <li><a href="../index.html">Phalcon 0.7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+      <table width="90%" align="center">
+        <tr>
+      <td class="primary-box" width="25%" valign="top">
+            
+            <div id="searchbox" style="">
+              <h3>Search</h3>
+                <form class="search" action="http://readthedocs.org/search/project/" method="get">
+                  <input type="text" name="q" size="18">
+                  <input type="submit" value="Go">
+                  <input type="hidden" name="selected_facets" value="project:">
+                </form>
+            </div>
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">使用命名空间</a><ul>
+<li><a class="reference internal" href="#setting-up-the-framework">Setting up the framework</a></li>
+<li><a class="reference internal" href="#controllers-with-namespaces">Controllers with Namespaces</a></li>
+<li><a class="reference internal" href="#models-in-namespaces">Models in Namespaces</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="micro.html"
+                                  title="previous chapter">微应用</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="events.html"
+                                  title="next chapter">事件管理</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/reference/namespaces.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </td>
+          <td class="second-box" valign="top">
+            <div class="document">
+                <div class="documentwrapper">
+                  <div class="bodywrapper">
+                <div class="body" >
+                      
+  <div class="section" id="id1">
+<h1>使用命名空间<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://php.net/manual/en/language.namespaces.php">Namespaces</a> 可以用来避免类名冲突，这意味着，如果你有两个控制器，在应用程序中使用相同的名称，
+可以使用命名空间来区分他们。命名空间是也可用于创建module。</p>
+<div class="section" id="setting-up-the-framework">
+<h2>Setting up the framework<a class="headerlink" href="#setting-up-the-framework" title="Permalink to this headline">¶</a></h2>
+<p>使用命名空间时对加载相应控制器会有一定的影响。需要调整框架命名空间的行为，可以实现加载一个或全部：</p>
+<p>使用自动加载的方式需要考虑命名空间的影响，以下是使用 Phalcon\Loader 的示例：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$loader</span><span class="o">-&gt;</span><span class="na">registerNamespaces</span><span class="p">(</span>
+    <span class="k">array</span><span class="p">(</span>
+       <span class="s1">&#39;Store\Admin\Controllers&#39;</span>    <span class="o">=&gt;</span> <span class="s2">&quot;../bundles/admin/controllers/&quot;</span><span class="p">,</span>
+       <span class="s1">&#39;Store\Admin\Models&#39;</span>    <span class="o">=&gt;</span> <span class="s2">&quot;../bundles/admin/models/&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>在定义路由时，控制器的路径可以指定控制器的全名称：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$router</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span>
+    <span class="s2">&quot;/admin/users/my-profile&quot;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;controller&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Store\Admin\Users&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;action&quot;</span>     <span class="o">=&gt;</span> <span class="s2">&quot;profile&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>把命名空间当作路由定义的参数(详见路由器章节)：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$router</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span>
+    <span class="s2">&quot;/:namespace/admin/users/my-profile&quot;</span><span class="p">,</span>
+    <span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;namespace&quot;</span>  <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;controller&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Users&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;action&quot;</span>     <span class="o">=&gt;</span> <span class="s2">&quot;profile&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>如果你只在你的应用程序中对每个控制器使用相同的命名空间，那么你可以在注册分发器时定义一个默认的命名空间，这样做的话，你就不再需要在定义路由的时候指定完整的类名称了：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">//Registering a dispatcher</span>
+<span class="nv">$di</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;dispatcher&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nv">$dispatcher</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Mvc\Dispatcher</span><span class="p">();</span>
+    <span class="nv">$dispatcher</span><span class="o">-&gt;</span><span class="na">setDefaultNamespace</span><span class="p">(</span><span class="s1">&#39;Store\Admin\Controllers\\&#39;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$dispatcher</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="controllers-with-namespaces">
+<h2>Controllers with Namespaces<a class="headerlink" href="#controllers-with-namespaces" title="Permalink to this headline">¶</a></h2>
+<p>下面的示例演示如何实现使用命名空间来编写一个控制器：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">Store\Admin\Controllers</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">UsersController</span> <span class="k">extends</span> <span class="nx">\Phalcon\Mvc\Controller</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
+    <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">profileAction</span><span class="p">()</span>
+    <span class="p">{</span>
+
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="models-in-namespaces">
+<h2>Models in Namespaces<a class="headerlink" href="#models-in-namespaces" title="Permalink to this headline">¶</a></h2>
+<p>对于模型，使用getSource来指定关联的数据表是非常必要的：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">Store\Toys</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Robots</span> <span class="k">extends</span> <span class="nx">\Phalcon\Mvc\Model</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getSource</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s2">&quot;robots&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>另外，因为命名空间的原因，一些魔术方法不能如预期般运行，你可以按如下方式手工定义正确的行为：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">Store\Toys</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Robots</span> <span class="k">extends</span> <span class="nx">\Phalcon\Mvc\Model</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getSource</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s2">&quot;robots&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">initialize</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hasMany</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s1">&#39;Store\Toys\RobotsParts&#39;</span><span class="p">,</span> <span class="s1">&#39;robots_id&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getRobotsParts</span><span class="p">(</span><span class="nv">$arguments</span><span class="o">=</span><span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getRelated</span><span class="p">(</span><span class="s1">&#39;Store\Toys\RobotsParts&#39;</span><span class="p">,</span> <span class="nv">$arguments</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="events.html" title="事件管理"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="micro.html" title="微应用"
+             >previous</a> |</li> 
+      </ul>
+    </div>
+        <div id="footer">
+             &copy; Copyright 2012, Phalcon Team.
+             Last updated on Sep 15, 2014.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+        </div>
+
+    </div>
+
+  </body>
+</html>

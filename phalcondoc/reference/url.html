@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Generating URLs and Paths &mdash; Phalcon 0.7.0 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/configurationblock.css" type="text/css" />
+    <!--
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/layout.css" type="text/css" />
+    -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rosario" type="text/css">
+    <!-- link rel="stylesheet" href="http://phalconphp.com/css/s.css" type="text/css" -->
+    <link rel="stylesheet" href="../_static/s.css" type="text/css">
+    <link rel="stylesheet" href="../_static/docs.css" type="text/css">
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.7.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/docs.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Phalcon 0.7.0 documentation" href="../index.html" />
+    <link rel="next" title="发送消息(Flashing Messages)" href="flash.html" />
+    <link rel="prev" title="Returning Responses" href="response.html" /> 
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <div id="header">
+        <h1><a href="http://phalconphp.com/index" ><img border="0" src="../_static/img/logo-small.png"></a></h1>
+        <div align="center">
+          <div id="nav-main" role="navigation">
+            <div class="menubar">
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/index" >HOME</a></div>
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/download" >DOWNLOAD</a></div>
+              <div class="nav-main-features"><a href="http://docs.phalconphp.com" >DOCUMENTATION</a></div>
+              <div class="nav-main-features"><a href="http://phalconphp.com/support" >SUPPORT</a></div>
+              <div class="nav-main-features nav-first"><a href="https://github.com/phalcon/cphalcon">GITHUB</a></div>
+              <div class="nav-main-features"><a target="blog" href="http://blog.phalconphp.com/">BLOG</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="flash.html" title="发送消息(Flashing Messages)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="response.html" title="Returning Responses"
+             accesskey="P">previous</a> |</li>
+        <li><a href="http://www.phalconphp.com">Home</a> &raquo;</li>
+        <li><a href="../index.html">Phalcon 0.7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+      <table width="90%" align="center">
+        <tr>
+      <td class="primary-box" width="25%" valign="top">
+            
+            <div id="searchbox" style="">
+              <h3>Search</h3>
+                <form class="search" action="http://readthedocs.org/search/project/" method="get">
+                  <input type="text" name="q" size="18">
+                  <input type="submit" value="Go">
+                  <input type="hidden" name="selected_facets" value="project:">
+                </form>
+            </div>
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Generating URLs and Paths</a><ul>
+<li><a class="reference internal" href="#setting-a-base-uri">Setting a base URI</a></li>
+<li><a class="reference internal" href="#generating-uris">Generating URIs</a></li>
+<li><a class="reference internal" href="#producing-urls-without-mod-rewrite">Producing URLs without Mod-Rewrite</a></li>
+<li><a class="reference internal" href="#implementing-your-own-url-generator">Implementing your own Url Generator</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="response.html"
+                                  title="previous chapter">Returning Responses</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="flash.html"
+                                  title="next chapter">发送消息(Flashing Messages)</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/reference/url.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </td>
+          <td class="second-box" valign="top">
+            <div class="document">
+                <div class="documentwrapper">
+                  <div class="bodywrapper">
+                <div class="body" >
+                      
+  <div class="section" id="generating-urls-and-paths">
+<h1>Generating URLs and Paths<a class="headerlink" href="#generating-urls-and-paths" title="Permalink to this headline">¶</a></h1>
+<p>在Phalcon应用程序中，使用 <a class="reference internal" href="../api/Phalcon_Mvc_Url.html"><em>Phalcon\Mvc\Url</em></a> 组件生成URL。它能够生成基于路由的独立的URL。</p>
+<div class="section" id="setting-a-base-uri">
+<h2>Setting a base URI<a class="headerlink" href="#setting-a-base-uri" title="Permalink to this headline">¶</a></h2>
+<p>根据你的应用程序安装到主机文档目录的位置，你的应用程序URI可能会出现一个基础的URI。</p>
+<p>例如，如果你的主机文档目录是 /var/www/htdocs，而你的应用程序安装到 /var/www/htdocs/invo，那么基础URI即为 /invo/.如果你使用虚拟主机的形式安装此应用，那么baseUri即为 /. 执行以下代码，你可以检测你的应用程序的baseUri.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Mvc\Url</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nv">$url</span><span class="o">-&gt;</span><span class="na">getBaseUri</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>默认情况下，Phalcon 会自动检测应用程序的baseUri.但如果你想提高应用程序性能的话，最好还是手工设置：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Mvc\Url</span><span class="p">();</span>
+
+<span class="nv">$url</span><span class="o">-&gt;</span><span class="na">setBaseUri</span><span class="p">(</span><span class="s1">&#39;/invo/&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>通常情况下，此组件必须被注册到服务容器中，因此你可以直接这样设置它：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$di</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(){</span>
+    <span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Mvc\Url</span><span class="p">();</span>
+    <span class="nv">$url</span><span class="o">-&gt;</span><span class="na">setBaseUri</span><span class="p">(</span><span class="s1">&#39;/invo/&#39;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$url</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="generating-uris">
+<h2>Generating URIs<a class="headerlink" href="#generating-uris" title="Permalink to this headline">¶</a></h2>
+<p>如果你使用的是 <a class="reference internal" href="routing.html"><em>Router</em></a> 的默认行为。你的应用程序会匹配路由模式 : /:controller/:action/:params. 因此，很容易通过&#8221;get&#8221;方法得到：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$url</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s2">&quot;products/save&quot;</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x"></span>
+</pre></div>
+</div>
+<p>请注意，预先设置baseUri并不是必须的。如果你已经通过设置路由命名，你可以很容易改变它。例如，你有以下途径：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$route</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">&#39;/blog/{$year}/{month}/{title}&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;show&#39;</span>
+<span class="p">))</span><span class="o">-&gt;</span><span class="na">setName</span><span class="p">(</span><span class="s1">&#39;show-post&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>生成URL还可以通过以下方式：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">//This produces: /blog/2012/01/some-blog-post</span>
+<span class="nv">$url</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;for&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;show-post&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;year&#39;</span> <span class="o">=&gt;</span> <span class="mi">2012</span><span class="p">,</span>
+    <span class="s1">&#39;month&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;01&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;some-blog-post&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="producing-urls-without-mod-rewrite">
+<h2>Producing URLs without Mod-Rewrite<a class="headerlink" href="#producing-urls-without-mod-rewrite" title="Permalink to this headline">¶</a></h2>
+<p>你还可以使用此组件在不使用重写规则的情况下创建URL：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Mvc\Url</span><span class="p">();</span>
+
+<span class="c1">//Pass the URI in $_GET[&quot;_url&quot;]</span>
+<span class="nv">$url</span><span class="o">-&gt;</span><span class="na">setBaseUri</span><span class="p">(</span><span class="s1">&#39;/invo/index.php?_url=/&#39;</span><span class="p">);</span>
+
+<span class="c1">//This produce: /invo/index.php?_url=/products/save</span>
+<span class="k">echo</span> <span class="nv">$url</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s2">&quot;products/save&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>你也可以使用 $_SERVER[&#8220;REQUEST_URI&#8221;]:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$url</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Mvc\Url</span><span class="p">();</span>
+
+<span class="c1">//Pass the URI using $_SERVER[&quot;REQUEST_URI&quot;]</span>
+<span class="nv">$url</span><span class="o">-&gt;</span><span class="na">setBaseUri</span><span class="p">(</span><span class="s1">&#39;/invo/index.php?_url=/&#39;</span><span class="p">);</span>
+
+<span class="c1">//Pass the URI in $_GET[&quot;_url&quot;]</span>
+<span class="nv">$url</span><span class="o">-&gt;</span><span class="na">setBaseUri</span><span class="p">(</span><span class="s1">&#39;/invo/index.php/&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>在这种情况下，你必须手工处理路由中的URI：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$router</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Mvc\Router</span><span class="p">();</span>
+
+<span class="c1">// ... define routes</span>
+
+<span class="nv">$uri</span> <span class="o">=</span> <span class="nb">str_replace</span><span class="p">(</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s2">&quot;SCRIPT_NAME&quot;</span><span class="p">],</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s2">&quot;REQUEST_URI&quot;</span><span class="p">]);</span>
+<span class="nv">$router</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$uri</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>产生的路由看起来像这样：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">//This produce: /invo/index.php/products/save</span>
+<span class="k">echo</span> <span class="nv">$url</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s2">&quot;products/save&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="implementing-your-own-url-generator">
+<h2>Implementing your own Url Generator<a class="headerlink" href="#implementing-your-own-url-generator" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../api/Phalcon_Mvc_UrlInterface.html"><em>Phalcon\Mvc\UrlInterface</em></a> interface must be implemented to create your own URL generator replacing the one providing by Phalcon.</p>
+</div>
+</div>
+
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="flash.html" title="发送消息(Flashing Messages)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="response.html" title="Returning Responses"
+             >previous</a> |</li> 
+      </ul>
+    </div>
+        <div id="footer">
+             &copy; Copyright 2012, Phalcon Team.
+             Last updated on Sep 15, 2014.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+        </div>
+
+    </div>
+
+  </body>
+</html>

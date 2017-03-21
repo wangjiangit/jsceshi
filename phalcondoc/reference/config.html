@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Reading Configuration &mdash; Phalcon 0.7.0 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/configurationblock.css" type="text/css" />
+    <!--
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/layout.css" type="text/css" />
+    -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rosario" type="text/css">
+    <!-- link rel="stylesheet" href="http://phalconphp.com/css/s.css" type="text/css" -->
+    <link rel="stylesheet" href="../_static/s.css" type="text/css">
+    <link rel="stylesheet" href="../_static/docs.css" type="text/css">
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.7.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/docs.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Phalcon 0.7.0 documentation" href="../index.html" />
+    <link rel="next" title="数据分页" href="pagination.html" />
+    <link rel="prev" title="Filtering and Sanitizing" href="filter.html" /> 
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <div id="header">
+        <h1><a href="http://phalconphp.com/index" ><img border="0" src="../_static/img/logo-small.png"></a></h1>
+        <div align="center">
+          <div id="nav-main" role="navigation">
+            <div class="menubar">
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/index" >HOME</a></div>
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/download" >DOWNLOAD</a></div>
+              <div class="nav-main-features"><a href="http://docs.phalconphp.com" >DOCUMENTATION</a></div>
+              <div class="nav-main-features"><a href="http://phalconphp.com/support" >SUPPORT</a></div>
+              <div class="nav-main-features nav-first"><a href="https://github.com/phalcon/cphalcon">GITHUB</a></div>
+              <div class="nav-main-features"><a target="blog" href="http://blog.phalconphp.com/">BLOG</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="pagination.html" title="数据分页"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="filter.html" title="Filtering and Sanitizing"
+             accesskey="P">previous</a> |</li>
+        <li><a href="http://www.phalconphp.com">Home</a> &raquo;</li>
+        <li><a href="../index.html">Phalcon 0.7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+      <table width="90%" align="center">
+        <tr>
+      <td class="primary-box" width="25%" valign="top">
+            
+            <div id="searchbox" style="">
+              <h3>Search</h3>
+                <form class="search" action="http://readthedocs.org/search/project/" method="get">
+                  <input type="text" name="q" size="18">
+                  <input type="submit" value="Go">
+                  <input type="hidden" name="selected_facets" value="project:">
+                </form>
+            </div>
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Reading Configuration</a><ul>
+<li><a class="reference internal" href="#file-adapters">File Adapters</a></li>
+<li><a class="reference internal" href="#id1">原生数组</a></li>
+<li><a class="reference internal" href="#ini">读取INI文件</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="filter.html"
+                                  title="previous chapter">Filtering and Sanitizing</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="pagination.html"
+                                  title="next chapter">数据分页</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/reference/config.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </td>
+          <td class="second-box" valign="top">
+            <div class="document">
+                <div class="documentwrapper">
+                  <div class="bodywrapper">
+                <div class="body" >
+                      
+  <div class="section" id="reading-configuration">
+<h1>Reading Configuration<a class="headerlink" href="#reading-configuration" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="../api/Phalcon_Config.html"><em>Phalcon\Config</em></a> 使用相应的适配器读取配置文件，转换为面像对象的方式进行操作配置文件。</p>
+<div class="section" id="file-adapters">
+<h2>File Adapters<a class="headerlink" href="#file-adapters" title="Permalink to this headline">¶</a></h2>
+<p>可用的适配器：</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">File Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Ini</td>
+<td>Uses INI files to store settings. Internally the adapter uses the PHP function parse_ini_file.</td>
+</tr>
+<tr class="row-odd"><td>Array</td>
+<td>Uses PHP multidimensional arrays to store settings. This adapter offers the best performance.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id1">
+<h2>原生数组<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>下面的示例演示了如何把原生PHP数组转化为 Phalcon\Config 对象。下面的示例提供了最佳性能，因为在此请求期间，未发生文件读取。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$settings</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">&quot;database&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;adapter&quot;</span>  <span class="o">=&gt;</span> <span class="s2">&quot;Mysql&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;host&quot;</span>     <span class="o">=&gt;</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;username&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;scott&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;password&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;cheetah&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span>     <span class="o">=&gt;</span> <span class="s2">&quot;test_db&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+     <span class="s2">&quot;app&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;controllersDir&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;../app/controllers/&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;modelsDir&quot;</span>      <span class="o">=&gt;</span> <span class="s2">&quot;../app/models/&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;viewsDir&quot;</span>       <span class="o">=&gt;</span> <span class="s2">&quot;../app/views/&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s2">&quot;mysetting&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;the-value&quot;</span>
+<span class="p">);</span>
+
+<span class="nv">$config</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Config</span><span class="p">(</span><span class="nv">$settings</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">controllersDir</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">database</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">mysetting</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>如果你想更好的组织你的项目结构，你可以把数组保存到一个单独的文件中，然后读取它。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">require</span> <span class="s2">&quot;config/config.php&quot;</span><span class="p">;</span>
+<span class="nv">$config</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Config</span><span class="p">(</span><span class="nv">$settings</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ini">
+<h2>读取INI文件<a class="headerlink" href="#ini" title="Permalink to this headline">¶</a></h2>
+<p>INI文件是一种常见的方式来存储设置。Phalcon\Config 使用优化的PHP函数parse_ini_file读取这些文件。INI文件中的sections部分被解析成子设定，以方便使用。</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="k">[database]</span>
+<span class="na">adapter</span>  <span class="o">=</span> <span class="s">Mysql</span>
+<span class="na">host</span>     <span class="o">=</span> <span class="s">localhost</span>
+<span class="na">username</span> <span class="o">=</span> <span class="s">scott</span>
+<span class="na">password</span> <span class="o">=</span> <span class="s">cheetah</span>
+<span class="na">name</span>     <span class="o">=</span> <span class="s">test_db</span>
+
+<span class="k">[phalcon]</span>
+<span class="na">controllersDir</span> <span class="o">=</span> <span class="s">&quot;../app/controllers/&quot;</span>
+<span class="na">modelsDir</span>      <span class="o">=</span> <span class="s">&quot;../app/models/&quot;</span>
+<span class="na">viewsDir</span>       <span class="o">=</span> <span class="s">&quot;../app/views/&quot;</span>
+
+<span class="k">[models]</span>
+<span class="na">metadata.adapter</span>  <span class="o">=</span> <span class="s">&quot;Memory&quot;</span>
+</pre></div>
+</div>
+<p>你可以按以下方式读取配件文件：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$config</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Config\Adapter\Ini</span><span class="p">(</span><span class="s2">&quot;path/config.ini&quot;</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">phalcon</span><span class="o">-&gt;</span><span class="na">controllersDir</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">database</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">models</span><span class="o">-&gt;</span><span class="na">metadata</span><span class="o">-&gt;</span><span class="na">adapter</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="pagination.html" title="数据分页"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="filter.html" title="Filtering and Sanitizing"
+             >previous</a> |</li> 
+      </ul>
+    </div>
+        <div id="footer">
+             &copy; Copyright 2012, Phalcon Team.
+             Last updated on Sep 15, 2014.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+        </div>
+
+    </div>
+
+  </body>
+</html>

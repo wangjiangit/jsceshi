@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Dispatching Controllers &mdash; Phalcon 0.7.0 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/configurationblock.css" type="text/css" />
+    <!--
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/layout.css" type="text/css" />
+    -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rosario" type="text/css">
+    <!-- link rel="stylesheet" href="http://phalconphp.com/css/s.css" type="text/css" -->
+    <link rel="stylesheet" href="../_static/s.css" type="text/css">
+    <link rel="stylesheet" href="../_static/docs.css" type="text/css">
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.7.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/docs.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Phalcon 0.7.0 documentation" href="../index.html" />
+    <link rel="next" title="微应用" href="micro.html" />
+    <link rel="prev" title="路由器(Routing)" href="routing.html" /> 
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <div id="header">
+        <h1><a href="http://phalconphp.com/index" ><img border="0" src="../_static/img/logo-small.png"></a></h1>
+        <div align="center">
+          <div id="nav-main" role="navigation">
+            <div class="menubar">
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/index" >HOME</a></div>
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/download" >DOWNLOAD</a></div>
+              <div class="nav-main-features"><a href="http://docs.phalconphp.com" >DOCUMENTATION</a></div>
+              <div class="nav-main-features"><a href="http://phalconphp.com/support" >SUPPORT</a></div>
+              <div class="nav-main-features nav-first"><a href="https://github.com/phalcon/cphalcon">GITHUB</a></div>
+              <div class="nav-main-features"><a target="blog" href="http://blog.phalconphp.com/">BLOG</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="micro.html" title="微应用"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="routing.html" title="路由器(Routing)"
+             accesskey="P">previous</a> |</li>
+        <li><a href="http://www.phalconphp.com">Home</a> &raquo;</li>
+        <li><a href="../index.html">Phalcon 0.7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+      <table width="90%" align="center">
+        <tr>
+      <td class="primary-box" width="25%" valign="top">
+            
+            <div id="searchbox" style="">
+              <h3>Search</h3>
+                <form class="search" action="http://readthedocs.org/search/project/" method="get">
+                  <input type="text" name="q" size="18">
+                  <input type="submit" value="Go">
+                  <input type="hidden" name="selected_facets" value="project:">
+                </form>
+            </div>
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Dispatching Controllers</a><ul>
+<li><a class="reference internal" href="#the-dispatch-loop">The Dispatch Loop</a><ul>
+<li><a class="reference internal" href="#dispatch-loop-events">分发器事件(Dispatch Loop Events)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#forwarding-to-other-actions">Forwarding to other actions</a></li>
+<li><a class="reference internal" href="#getting-parameters">获取参数(Getting Parameters)</a></li>
+<li><a class="reference internal" href="#handling-not-found-exceptions">Handling Not-Found Exceptions</a></li>
+<li><a class="reference internal" href="#implementing-your-own-dispatcher">实现自定义分发器(Implementing your own Dispatcher)</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="routing.html"
+                                  title="previous chapter">路由器(Routing)</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="micro.html"
+                                  title="next chapter">微应用</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/reference/dispatching.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </td>
+          <td class="second-box" valign="top">
+            <div class="document">
+                <div class="documentwrapper">
+                  <div class="bodywrapper">
+                <div class="body" >
+                      
+  <div class="section" id="dispatching-controllers">
+<h1>Dispatching Controllers<a class="headerlink" href="#dispatching-controllers" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="../api/Phalcon_Mvc_Dispatcher.html"><em>Phalcon\Mvc\Dispatcher</em></a> 组件负责在MVC应用程序中负责实例化控制器以及执行所需操作的。了解它的具体运作方法能很好的帮助我们了解整个框架提供的服务。</p>
+<div class="section" id="the-dispatch-loop">
+<h2>The Dispatch Loop<a class="headerlink" href="#the-dispatch-loop" title="Permalink to this headline">¶</a></h2>
+<p>很多重要的过程发生在MVC工作流本身，尤其是在控制器部分。这些工作发生在控制调度度期间，控制器文件的读取，加载，初始化，以及操作的执行。如果一个action中的流程跳转到另一个控制器的controller/action上，控制调度器再次启动，为了更好的说明这一点，下面的例子将展示  <a class="reference internal" href="../api/Phalcon_Mvc_Dispatcher.html"><em>Phalcon\Mvc\Dispatcher</em></a> 内部执行的过程：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">//Dispatch loop</span>
+<span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="nv">$finished</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="nv">$finished</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+
+    <span class="nv">$controllerClass</span> <span class="o">=</span> <span class="nv">$controllerName</span><span class="o">.</span><span class="s2">&quot;Controller&quot;</span><span class="p">;</span>
+
+    <span class="c1">//Instantiating the controller class via autoloaders</span>
+    <span class="nv">$controller</span> <span class="o">=</span> <span class="k">new</span> <span class="nv">$controllerClass</span><span class="p">();</span>
+
+    <span class="c1">// Execute the action</span>
+    <span class="nb">call_user_func_array</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="nv">$controller</span><span class="p">,</span> <span class="nv">$actionName</span> <span class="o">.</span> <span class="s2">&quot;Action&quot;</span><span class="p">),</span> <span class="nv">$params</span><span class="p">);</span>
+
+    <span class="c1">// Finished should be reloaded to check if the flow was forwarded to another controller</span>
+    <span class="c1">// $finished = false;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>上面的代码没有添加验证器，过滤器以及额外的检查，但它很好的展示了分发器在正常的调度程序中的操作流程。</p>
+<div class="section" id="dispatch-loop-events">
+<h3>分发器事件(Dispatch Loop Events)<a class="headerlink" href="#dispatch-loop-events" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../api/Phalcon_Mvc_Dispatcher.html"><em>Phalcon\Mvc\Dispatcher</em></a> 也能够发送事件到  <a class="reference internal" href="events.html"><em>EventsManager</em></a> 。事件被触发的类型名称为 &#8220;dispatch&#8221;。其中的一些事件，返回布尔值false时，可以停止事件的运作。主要支持以下事件：</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="83%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Event Name</th>
+<th class="head">Triggered</th>
+<th class="head">Can stop operation?</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>beforeDispatchLoop</td>
+<td>Triggered before enter in the dispatch loop. At this point the dispatcher don&#8217;t know if the controller or the actions to be executed exist. The Dispatcher only knows the information passed by the Router.</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>beforeDispatch</td>
+<td>Triggered after enter in the dispatch loop. At this point the dispatcher don&#8217;t know if the controller or the actions to be executed exist. The Dispatcher only knows the information passed by the Router.</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>beforeExecuteRoute</td>
+<td>Triggered before execute the controller/action method. At this point the dispatcher has been initialized the controller and know if the action exist.</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>afterExecuteRoute</td>
+<td>Triggered after execute the controller/action method. As operation cannot be stopped, only use this event to make clean up after execute the action</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>beforeNotFoundAction</td>
+<td>Triggered when the action was not found in the controller</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>beforeException</td>
+<td>Triggered before the dispatcher throws any exception</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>afterDispatch</td>
+<td>Triggered after execute the controller/action method. As operation cannot be stopped, only use this event to make clean up after execute the action</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>afterDispatchLoop</td>
+<td>Triggered after exit the dispatch loop</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="tutorial-invo.html"><em>INVO</em></a> 教程中演示了如何使用分发器配合 <a class="reference internal" href="acl.html"><em>Acl</em></a> 实现安全认证。</p>
+<p>下面的示例将演示如何在分发器上注册监听器事件：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$di</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;dispatcher&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(){</span>
+
+    <span class="c1">//Create an event manager</span>
+    <span class="nv">$eventsManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Events\Manager</span><span class="p">();</span>
+
+    <span class="c1">//Attach a listener for type &quot;dispatch&quot;</span>
+    <span class="nv">$eventsManager</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s2">&quot;dispatch&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$dispatcher</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//...</span>
+    <span class="p">});</span>
+
+    <span class="nv">$dispatcher</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Mvc\Dispatcher</span><span class="p">();</span>
+
+    <span class="c1">//Bind the eventsManager to the view component</span>
+    <span class="nv">$dispatcher</span><span class="o">-&gt;</span><span class="na">setEventsManager</span><span class="p">(</span><span class="nv">$eventsManager</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="nv">$dispatcher</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Instantiated controllers act automatically as listeners for dispatch events, so you can implement methods as callbacks:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">\Phalcon\Mvc\Controller</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeExecuteRoute</span><span class="p">(</span><span class="nv">$dispatcher</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Executed before every found action</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">afterExecuteRoute</span><span class="p">(</span><span class="nv">$dispatcher</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Executed after every found action</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="forwarding-to-other-actions">
+<h2>Forwarding to other actions<a class="headerlink" href="#forwarding-to-other-actions" title="Permalink to this headline">¶</a></h2>
+<p>分发器允许我们从一个controller/action跳转到另一个controller/action。这是非常有用的，如果我们需要在代码中进行用户检查等事项，可以将用户重定向到其他页面。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">\Phalcon\Mvc\Controller</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
+    <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">saveAction</span><span class="p">(</span><span class="nv">$year</span><span class="p">,</span> <span class="nv">$postTitle</span><span class="p">)</span>
+    <span class="p">{</span>
+
+        <span class="c1">// .. store some product and forward the user</span>
+
+        <span class="c1">// Forward flow to the index action</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dispatcher</span><span class="o">-&gt;</span><span class="na">forward</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+            <span class="s2">&quot;controller&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;action&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;index&quot;</span>
+        <span class="p">));</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>请记住，&#8221;forward&#8221;和HTTP重定向不一样，虽然他们显示了相同的结果。&#8221;forward&#8221;不刷新当前页面，所有的重定向都发生在一个单一的请求中，而HTTP重定向则需要完成两个请求。</p>
+<p>更多关于forward的例子：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">// Forward flow to another action in the current controller</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dispatcher</span><span class="o">-&gt;</span><span class="na">forward</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s2">&quot;action&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;search&quot;</span>
+<span class="p">));</span>
+
+<span class="c1">// Forward flow to another action in the current controller</span>
+<span class="c1">// passing parameters</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dispatcher</span><span class="o">-&gt;</span><span class="na">forward</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s2">&quot;action&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;search&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;params&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="p">));</span>
+
+<span class="c1">// Forward flow to another action in the current controller</span>
+<span class="c1">// passing parameters</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dispatcher</span><span class="o">-&gt;</span><span class="na">forward</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s2">&quot;action&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;search&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;params&quot;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>跳转动作按受以下一些参数：</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Triggered</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>controller</td>
+<td>A valid controller name to forward to.</td>
+</tr>
+<tr class="row-odd"><td>action</td>
+<td>A valid action name to forward to.</td>
+</tr>
+<tr class="row-even"><td>params</td>
+<td>An array of parameters for the action</td>
+</tr>
+<tr class="row-odd"><td>namespace</td>
+<td>A valid namespace name where the controller is part of</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="getting-parameters">
+<h2>获取参数(Getting Parameters)<a class="headerlink" href="#getting-parameters" title="Permalink to this headline">¶</a></h2>
+<p>当一条路由提供了命名参数，你可以在控制器，视图文件或者其他任何继承了 <a class="reference internal" href="../api/Phalcon_DI_Injectable.html"><em>Phalcon\DI\Injectable</em></a> 的组件中获取值。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">\Phalcon\Mvc\Controller</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span>
+    <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">saveAction</span><span class="p">()</span>
+    <span class="p">{</span>
+
+        <span class="c1">// Get the post&#39;s title passed in the URL as parameter</span>
+        <span class="nv">$title</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dispatcher</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">);</span>
+
+        <span class="c1">// Get the post&#39;s year passed in the URL as parameter</span>
+        <span class="c1">// also filtering it</span>
+        <span class="nv">$year</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">dispatcher</span><span class="o">-&gt;</span><span class="na">getParam</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;int&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="handling-not-found-exceptions">
+<h2>Handling Not-Found Exceptions<a class="headerlink" href="#handling-not-found-exceptions" title="Permalink to this headline">¶</a></h2>
+<p>使用  <a class="reference internal" href="events.html"><em>EventsManager</em></a> ，插入一个挂钩点，以使在controller/action不存在的时候，抛出一个异常信息。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$di</span><span class="o">-&gt;</span><span class="na">setShared</span><span class="p">(</span><span class="s1">&#39;dispatcher&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="c1">//Create/Get an EventManager</span>
+    <span class="nv">$eventsManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Events\Manager</span><span class="p">();</span>
+
+    <span class="c1">//Attach a listener</span>
+    <span class="nv">$eventsManager</span><span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="s2">&quot;dispatch&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$event</span><span class="p">,</span> <span class="nv">$dispatcher</span><span class="p">,</span> <span class="nv">$exception</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="c1">//The controller exists but the action not</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getType</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;beforeNotFoundAction&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$dispatcher</span><span class="o">-&gt;</span><span class="na">forward</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;show404&#39;</span>
+            <span class="p">));</span>
+            <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">//Alternative way, controller or action doesn&#39;t exist</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$event</span><span class="o">-&gt;</span><span class="na">getType</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;beforeException&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">switch</span> <span class="p">(</span><span class="nv">$exception</span><span class="o">-&gt;</span><span class="na">getCode</span><span class="p">())</span> <span class="p">{</span>
+                <span class="k">case</span> <span class="nx">Phalcon\Dispatcher</span><span class="o">::</span><span class="na">EXCEPTION_HANDLER_NOT_FOUND</span><span class="o">:</span>
+                <span class="k">case</span> <span class="nx">Phalcon\Dispatcher</span><span class="o">::</span><span class="na">EXCEPTION_ACTION_NOT_FOUND</span><span class="o">:</span>
+                    <span class="nv">$dispatcher</span><span class="o">-&gt;</span><span class="na">forward</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+                        <span class="s1">&#39;controller&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;action&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;show404&#39;</span>
+                    <span class="p">));</span>
+                    <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="nv">$dispatcher</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phalcon\Mvc\Dispatcher</span><span class="p">();</span>
+
+    <span class="c1">//Bind the EventsManager to the dispatcher</span>
+    <span class="nv">$dispatcher</span><span class="o">-&gt;</span><span class="na">setEventsManager</span><span class="p">(</span><span class="nv">$eventsManager</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="nv">$dispatcher</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="implementing-your-own-dispatcher">
+<h2>实现自定义分发器(Implementing your own Dispatcher)<a class="headerlink" href="#implementing-your-own-dispatcher" title="Permalink to this headline">¶</a></h2>
+<p>通过实现 <a class="reference internal" href="../api/Phalcon_Mvc_DispatcherInterface.html"><em>Phalcon\Mvc\DispatcherInterface</em></a> 接口文件可以在Phalcon中创建一个自定义的分发器。</p>
+</div>
+</div>
+
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="micro.html" title="微应用"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="routing.html" title="路由器(Routing)"
+             >previous</a> |</li> 
+      </ul>
+    </div>
+        <div id="footer">
+             &copy; Copyright 2012, Phalcon Team.
+             Last updated on Sep 15, 2014.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+        </div>
+
+    </div>
+
+  </body>
+</html>

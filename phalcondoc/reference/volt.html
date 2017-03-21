@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Volt模板引擎 &mdash; Phalcon 0.7.0 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/configurationblock.css" type="text/css" />
+    <!--
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/layout.css" type="text/css" />
+    -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rosario" type="text/css">
+    <!-- link rel="stylesheet" href="http://phalconphp.com/css/s.css" type="text/css" -->
+    <link rel="stylesheet" href="../_static/s.css" type="text/css">
+    <link rel="stylesheet" href="../_static/docs.css" type="text/css">
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.7.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/docs.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Phalcon 0.7.0 documentation" href="../index.html" />
+    <link rel="next" title="MVC Applications" href="applications.html" />
+    <link rel="prev" title="视图助手(View Helpers)" href="tags.html" /> 
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <div id="header">
+        <h1><a href="http://phalconphp.com/index" ><img border="0" src="../_static/img/logo-small.png"></a></h1>
+        <div align="center">
+          <div id="nav-main" role="navigation">
+            <div class="menubar">
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/index" >HOME</a></div>
+              <div class="nav-main-features nav-first"><a href="http://phalconphp.com/download" >DOWNLOAD</a></div>
+              <div class="nav-main-features"><a href="http://docs.phalconphp.com" >DOCUMENTATION</a></div>
+              <div class="nav-main-features"><a href="http://phalconphp.com/support" >SUPPORT</a></div>
+              <div class="nav-main-features nav-first"><a href="https://github.com/phalcon/cphalcon">GITHUB</a></div>
+              <div class="nav-main-features"><a target="blog" href="http://blog.phalconphp.com/">BLOG</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="applications.html" title="MVC Applications"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tags.html" title="视图助手(View Helpers)"
+             accesskey="P">previous</a> |</li>
+        <li><a href="http://www.phalconphp.com">Home</a> &raquo;</li>
+        <li><a href="../index.html">Phalcon 0.7.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+      <table width="90%" align="center">
+        <tr>
+      <td class="primary-box" width="25%" valign="top">
+            
+            <div id="searchbox" style="">
+              <h3>Search</h3>
+                <form class="search" action="http://readthedocs.org/search/project/" method="get">
+                  <input type="text" name="q" size="18">
+                  <input type="submit" value="Go">
+                  <input type="hidden" name="selected_facets" value="project:">
+                </form>
+            </div>
+            <h3><a href="../index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference internal" href="#">Volt模板引擎</a><ul>
+<li><a class="reference internal" href="#id1">激活 Volt</a></li>
+<li><a class="reference internal" href="#id2">基本使用方法</a></li>
+<li><a class="reference internal" href="#id3">变量</a></li>
+<li><a class="reference internal" href="#id4">过滤器</a></li>
+<li><a class="reference internal" href="#id5">注释</a></li>
+<li><a class="reference internal" href="#list-of-control-structures">List of Control Structures</a><ul>
+<li><a class="reference internal" href="#for">For</a></li>
+<li><a class="reference internal" href="#if">If</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">变量赋值</a></li>
+<li><a class="reference internal" href="#expressions">Expressions</a><ul>
+<li><a class="reference internal" href="#arrays">Arrays</a></li>
+<li><a class="reference internal" href="#math">数学计算(Math)</a></li>
+<li><a class="reference internal" href="#comparisions">比较运算符(Comparisions)</a></li>
+<li><a class="reference internal" href="#logic">逻辑运算符(Logic)</a></li>
+<li><a class="reference internal" href="#other-operators">其他操作符(Other Operators)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#using-tag-helpers">Using Tag Helpers</a></li>
+<li><a class="reference internal" href="#view-integration">视图集成(View Integration)</a></li>
+<li><a class="reference internal" href="#template-inheritance">模板继承(Template Inheritance)</a></li>
+<li><a class="reference internal" href="#setting-up-the-volt-engine">Setting up the Volt Engine</a></li>
+<li><a class="reference internal" href="#id7">相关资源</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="tags.html"
+                                  title="previous chapter">视图助手(View Helpers)</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="applications.html"
+                                  title="next chapter">MVC Applications</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/reference/volt.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </td>
+          <td class="second-box" valign="top">
+            <div class="document">
+                <div class="documentwrapper">
+                  <div class="bodywrapper">
+                <div class="body" >
+                      
+  <div class="section" id="volt">
+<h1>Volt模板引擎<a class="headerlink" href="#volt" title="Permalink to this headline">¶</a></h1>
+<p>Volt是一个超快速和设计者友好的模板语言，C语言编写的PHP。它为您提供了一套
+助理写一个简单的方法的意见。伏法尔康与其他组件的高度集成，
+就像你可以使用它作为一个独立的组件在你的应用程序中。</p>
+<p>Volt是一种用C语言编写的超快速并且设计友好的PHP模板引擎，它为你提供了一套很方便的视图助手。Volt与其他的组件高度集成，就像你可以在应用程序中单独使用它一样。</p>
+<div class="figure align-center">
+<img alt="../_images/volt.jpg" src="../_images/volt.jpg" />
+</div>
+<p>Volt的灵感来源于 <a class="reference external" href="https://github.com/vito/chyrp/wiki/Twig-Reference">Twig</a> 。最初由Armin Ronacher创建，而它则是受 <a class="reference external" href="http://jinja.pocoo.org/">Jinja</a> 的启发。
+因此，许多已经在使用Twig的开发人员将熟练的使用相同的语法。Volt的语法和功能更为强大，更多的元素以及更强的性能。</p>
+<p>Volt被编译成PHP代码，因此基本上省却了手动编写PHP代码，实现了业务逻辑与视图分离：</p>
+<div class="highlight-html+jinja"><div class="highlight"><pre><span class="c">{# app/views/products/show.volt #}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">last_products</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">product</span> <span class="k">in</span> <span class="nv">products</span> <span class="cp">%}</span>
+    * Name: <span class="cp">{{</span> <span class="nv">product.name</span><span class="o">|</span><span class="nf">e</span> <span class="cp">}}</span>
+    <span class="cp">{%</span> <span class="k">if</span> <span class="nv">product.status</span> <span class="o">==</span> <span class="s2">&quot;Active&quot;</span> <span class="cp">%}</span>
+       Price: <span class="cp">{{</span> <span class="nv">product.price</span> <span class="o">+</span> <span class="nv">product.taxes</span><span class="o">/</span><span class="m">100</span> <span class="cp">}}</span>
+    <span class="cp">{%</span> <span class="k">endif</span>  <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endfor</span>  <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<div class="section" id="id1">
+<h2>激活 Volt<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>作为一种模板引擎，你需要把Volt注册到视图组件，并设置一个扩展名称或者使用默认的扩展名 .phtml ：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">//Registering Volt as template engine</span>
+<span class="nv">$di</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="nv">$view</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Mvc\View</span><span class="p">();</span>
+
+    <span class="nv">$view</span><span class="o">-&gt;</span><span class="na">setViewsDir</span><span class="p">(</span><span class="s1">&#39;../app/views/&#39;</span><span class="p">);</span>
+
+    <span class="nv">$view</span><span class="o">-&gt;</span><span class="na">registerEngines</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;.volt&quot;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Phalcon\Mvc\View\Engine\Volt&#39;</span>
+    <span class="p">));</span>
+
+    <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>使用默认的 &#8221;.phtml&#8221; 作为扩展名称：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="nv">$view</span><span class="o">-&gt;</span><span class="na">registerEngines</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s2">&quot;.phtml&quot;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Phalcon\Mvc\View\Engine\Volt&#39;</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>基本使用方法<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Volt的代码是由PHP和HTML构成。Volt中有一组特殊的分隔符，{% ... %} 用来执行循环语句或条件判断等，赋值语句使用 {{ ... }}。</p>
+<p>下面是一个小示例，用于说明一些基本的功能：</p>
+<div class="highlight-html+jinja"><div class="highlight"><pre><span class="c">{# app/views/posts/show.phtml #}</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span><span class="cp">{{</span> <span class="nv">title</span> <span class="cp">}}</span> - A example blog<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+
+        <span class="cp">{%</span> <span class="k">if</span> <span class="nv">show_navigation</span> <span class="cp">%}</span>
+            <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;navigation&quot;</span><span class="nt">&gt;</span>
+            <span class="cp">{%</span> <span class="k">for</span> <span class="nv">item</span> <span class="k">in</span> <span class="nv">menu</span> <span class="cp">%}</span>
+                <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">item.href</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">item.caption</span> <span class="cp">}}</span><span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+            <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+            <span class="nt">&lt;/ul&gt;</span>
+        <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+
+        <span class="nt">&lt;h1&gt;</span><span class="cp">{{</span> <span class="nv">post.title</span> <span class="cp">}}</span><span class="nt">&lt;/h1&gt;</span>
+
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;</span>
+            <span class="cp">{{</span> <span class="nv">post.content</span> <span class="cp">}}</span>
+        <span class="nt">&lt;/div&gt;</span>
+
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<p>你可以使用 Phalcon\Mvc\View::setVar 把控制器中的变量传递到视图中。在前面的例子中，有三个变量传递到视图中：title, menu 和 post ：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">PostsController</span> <span class="k">extends</span> <span class="nx">\Phalcon\Mvc\Controller</span>
+<span class="p">{</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">showAction</span><span class="p">()</span>
+    <span class="p">{</span>
+
+        <span class="nv">$post</span> <span class="o">=</span> <span class="nx">Post</span><span class="o">::</span><span class="na">findFirst</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">setVar</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="nv">$post</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">setVar</span><span class="p">(</span><span class="s2">&quot;post&quot;</span><span class="p">,</span> <span class="nv">$post</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">setVar</span><span class="p">(</span><span class="s2">&quot;menu&quot;</span><span class="p">,</span> <span class="nx">Menu</span><span class="o">::</span><span class="na">find</span><span class="p">());</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">view</span><span class="o">-&gt;</span><span class="na">setVar</span><span class="p">(</span><span class="s2">&quot;show_navigation&quot;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>变量<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>变量可以有属性，可以通过使用语法访问他们，如：foo.bar。如果它们是数组，你可以使用 foo[&#8216;bar&#8217;] 的方式访问：</p>
+<div class="highlight-jinja"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">post.title</span> <span class="cp">}}</span><span class="x"></span>
+<span class="cp">{{</span> <span class="nv">post</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span> <span class="cp">}}</span><span class="x"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>过滤器<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>变量可以使用过滤器格式化或修改，管道操作符 &#8220;|&#8221; 用于接收过滤器过滤变量：</p>
+<div class="highlight-jinja"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">post.title</span><span class="o">|</span><span class="nf">e</span> <span class="cp">}}</span><span class="x"></span>
+<span class="cp">{{</span> <span class="nv">post.content</span><span class="o">|</span><span class="nf">striptags</span> <span class="cp">}}</span><span class="x"></span>
+<span class="cp">{{</span> <span class="nv">name</span><span class="o">|</span><span class="nf">capitalize</span><span class="o">|</span><span class="nf">trim</span> <span class="cp">}}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>以下列表是Volt内置的过滤器：</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Filter</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>e</td>
+<td>Applies Phalcon\Escaper-&gt;escapeHtml to the value</td>
+</tr>
+<tr class="row-odd"><td>escape</td>
+<td>Applies Phalcon\Escaper-&gt;escapeHtml to the value</td>
+</tr>
+<tr class="row-even"><td>trim</td>
+<td>Applies the <a class="reference external" href="http://php.net/manual/en/function.trim.php">trim</a> PHP function to the value. Removing extra spaces</td>
+</tr>
+<tr class="row-odd"><td>striptags</td>
+<td>Applies the <a class="reference external" href="http://php.net/manual/en/function.striptags.php">striptags</a> PHP function to the value. Removing HTML tags</td>
+</tr>
+<tr class="row-even"><td>slashes</td>
+<td>Applies the <a class="reference external" href="http://php.net/manual/en/function.slashes.php">slashes</a> PHP function to the value. Escaping values</td>
+</tr>
+<tr class="row-odd"><td>stripslashes</td>
+<td>Applies the <a class="reference external" href="http://php.net/manual/en/function.stripslashes.php">stripslashes</a> PHP function to the value. Removing escaped quotes</td>
+</tr>
+<tr class="row-even"><td>capitalize</td>
+<td>Capitalizes a string by applying the <a class="reference external" href="http://php.net/manual/en/function.ucwords.php">ucwords</a> PHP function to the value</td>
+</tr>
+<tr class="row-odd"><td>lowercase</td>
+<td>Change the case of a string to lowercase</td>
+</tr>
+<tr class="row-even"><td>uppercase</td>
+<td>Change the case of a string to uppercase</td>
+</tr>
+<tr class="row-odd"><td>length</td>
+<td>Counts the string length or how many items are in an array or object</td>
+</tr>
+<tr class="row-even"><td>nl2br</td>
+<td>Changes newlines \n by line breaks (&lt;br /&gt;). Uses the PHP function <a class="reference external" href="http://php.net/manual/en/function.nl2br.php">nl2br</a></td>
+</tr>
+<tr class="row-odd"><td>sort</td>
+<td>Sorts an array using the PHP function <a class="reference external" href="http://php.net/manual/en/function.asort.php">asort</a></td>
+</tr>
+<tr class="row-even"><td>json_encode</td>
+<td>Converts a value into its <a class="reference external" href="http://php.net/manual/en/function.json-encode.php">JSON</a> representation</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id5">
+<h2>注释<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>在Volt模板中可以使用 {# ... #} 分隔符添加注释，他们内部的所有文字将被忽略：</p>
+<div class="highlight-jinja"><div class="highlight"><pre><span class="c">{# note: this is a comment</span>
+<span class="c">    {% set price = 100; %}</span>
+<span class="c">#}</span><span class="x"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="list-of-control-structures">
+<h2>List of Control Structures<a class="headerlink" href="#list-of-control-structures" title="Permalink to this headline">¶</a></h2>
+<p>Volt提供了一组基本的但功能强大的控制结构：</p>
+<div class="section" id="for">
+<h3>For<a class="headerlink" href="#for" title="Permalink to this headline">¶</a></h3>
+<p>Loop over each item in a sequence. The following example shows how to traverse a set of &#8220;robots&#8221; and print his/her name:</p>
+<div class="highlight-html+jinja"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Robots<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;ul&gt;</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">robot</span> <span class="k">in</span> <span class="nv">robots</span> <span class="cp">%}</span>
+  <span class="nt">&lt;li&gt;</span><span class="cp">{{</span> <span class="nv">robot.name</span><span class="o">|</span><span class="nf">e</span> <span class="cp">}}</span><span class="nt">&lt;/li&gt;</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+</div>
+<p>for循环嵌套:</p>
+<div class="highlight-html+jinja"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Robots<span class="nt">&lt;/h1&gt;</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">robot</span> <span class="k">in</span> <span class="nv">robots</span> <span class="cp">%}</span>
+  <span class="cp">{%</span> <span class="k">for</span> <span class="nv">part</span> <span class="k">in</span> <span class="nv">robot.parts</span> <span class="cp">%}</span>
+  Robot: <span class="cp">{{</span> <span class="nv">robot.name</span><span class="o">|</span><span class="nf">e</span> <span class="cp">}}</span> Part: <span class="cp">{{</span> <span class="nv">part.name</span><span class="o">|</span><span class="nf">e</span> <span class="cp">}}</span> <span class="nt">&lt;br/&gt;</span>
+  <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="if">
+<h3>If<a class="headerlink" href="#if" title="Permalink to this headline">¶</a></h3>
+<p>As PHP, a if statement checks if an expression is evaluated as true or false:</p>
+<div class="highlight-html+jinja"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Cyborg Robots<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;ul&gt;</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">robot</span> <span class="k">in</span> <span class="nv">robots</span> <span class="cp">%}</span>
+  <span class="cp">{%</span> <span class="k">if</span> <span class="nv">robot.type</span> <span class="o">=</span> <span class="s2">&quot;cyborg&quot;</span> <span class="cp">%}</span>
+  <span class="nt">&lt;li&gt;</span><span class="cp">{{</span> <span class="nv">robot.name</span><span class="o">|</span><span class="nf">e</span> <span class="cp">}}</span><span class="nt">&lt;/li&gt;</span>
+  <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+</div>
+<p>The else clause is also supported:</p>
+<div class="highlight-html+jinja"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Robots<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;ul&gt;</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">robot</span> <span class="k">in</span> <span class="nv">robots</span> <span class="cp">%}</span>
+  <span class="cp">{%</span> <span class="k">if</span> <span class="nv">robot.type</span> <span class="o">=</span> <span class="s2">&quot;cyborg&quot;</span> <span class="cp">%}</span>
+  <span class="nt">&lt;li&gt;</span><span class="cp">{{</span> <span class="nv">robot.name</span><span class="o">|</span><span class="nf">e</span> <span class="cp">}}</span><span class="nt">&lt;/li&gt;</span>
+  <span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+  <span class="nt">&lt;li&gt;</span><span class="cp">{{</span> <span class="nv">robot.name</span><span class="o">|</span><span class="nf">e</span> <span class="cp">}}</span> (not a cyborg)<span class="nt">&lt;/li&gt;</span>
+  <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>变量赋值<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>在模板文件中，可以使用 &#8220;set&#8221; 设置或改变变量的值：</p>
+<div class="highlight-html+jinja"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">set</span> <span class="nv">fruits</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;Apple&#39;</span><span class="o">,</span> <span class="s1">&#39;Banana&#39;</span><span class="o">,</span> <span class="s1">&#39;Orange&#39;</span><span class="o">]</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">set</span> <span class="nv">name</span> <span class="o">=</span> <span class="nv">robot.name</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="expressions">
+<h2>Expressions<a class="headerlink" href="#expressions" title="Permalink to this headline">¶</a></h2>
+<p>Volt对表达式提供了一组基本的支持，包括字符串以及常用的操作：</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Filter</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>“this is a string”</td>
+<td>Text between double quotes or single quotes are handled as strings</td>
+</tr>
+<tr class="row-odd"><td>100.25</td>
+<td>Numbers with a decimal part are handled as doubles/floats</td>
+</tr>
+<tr class="row-even"><td>100</td>
+<td>Numbers without a decimal part are handled as integers</td>
+</tr>
+<tr class="row-odd"><td>false</td>
+<td>Constant &#8220;false&#8221; is the boolean false value</td>
+</tr>
+<tr class="row-even"><td>true</td>
+<td>Constant &#8220;true&#8221; is the boolean true value</td>
+</tr>
+<tr class="row-odd"><td>null</td>
+<td>Constant &#8220;null&#8221; is the Null value</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="arrays">
+<h3>Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline">¶</a></h3>
+<p>无论你使用PHP 5.3 或 5.4，你都可以用 &#8220;[ ]&#8221; 括起来的形式来创建数组：</p>
+<p>译者注：如果在PHP文件中想用这种方式创建数组，PHP最低版本应该为PHP 5.4</p>
+<div class="highlight-html+jinja"><div class="highlight"><pre><span class="c">{# Simple array #}</span>
+<span class="cp">{{</span> <span class="o">[</span><span class="s1">&#39;Apple&#39;</span><span class="o">,</span> <span class="s1">&#39;Banana&#39;</span><span class="o">,</span> <span class="s1">&#39;Orange&#39;</span><span class="o">]</span> <span class="cp">}}</span>
+
+<span class="c">{# Other simple array #}</span>
+<span class="cp">{{</span> <span class="o">[</span><span class="s1">&#39;Apple&#39;</span><span class="o">,</span> <span class="m">1</span><span class="o">,</span> <span class="m">2.5</span><span class="o">,</span> <span class="kp">false</span><span class="o">,</span> <span class="nv">null</span><span class="o">]</span> <span class="cp">}}</span>
+
+<span class="c">{# Multi-Dimensional array #}</span>
+<span class="cp">{{</span> <span class="o">[[</span><span class="m">1</span><span class="o">,</span> <span class="m">2</span><span class="o">],</span> <span class="o">[</span><span class="m">3</span><span class="o">,</span> <span class="m">4</span><span class="o">],</span> <span class="o">[</span><span class="m">5</span><span class="o">,</span> <span class="m">6</span><span class="o">]]</span> <span class="cp">}}</span>
+
+<span class="c">{# Hash-style array #}</span>
+<span class="cp">{{</span> <span class="o">[</span><span class="s1">&#39;first&#39;</span><span class="o">:</span> <span class="m">1</span><span class="o">,</span> <span class="s1">&#39;second&#39;</span><span class="o">:</span> <span class="m">4</span><span class="o">/</span><span class="m">2</span><span class="o">,</span> <span class="s1">&#39;third&#39;</span><span class="o">:</span> <span class="s1">&#39;3&#39;</span><span class="o">]</span> <span class="cp">}}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="math">
+<h3>数学计算(Math)<a class="headerlink" href="#math" title="Permalink to this headline">¶</a></h3>
+<p>你可以在模板文件中直接使用以下操作符进行计算：</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Operator</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>+</td>
+<td>Perform an adding operation. {{ 2+3 }} returns 5</td>
+</tr>
+<tr class="row-odd"><td>-</td>
+<td>Perform a substraction operation {{ 2-3 }} returns -1</td>
+</tr>
+<tr class="row-even"><td>*</td>
+<td>Perform a multiplication operation {{ 2*3 }} returns 6</td>
+</tr>
+<tr class="row-odd"><td>/</td>
+<td>Perform a division operation {{ 10/2 }} returns 5</td>
+</tr>
+<tr class="row-even"><td>%</td>
+<td>Calculate the remainder of an integer division {{ 10%3 }} returns 1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="comparisions">
+<h3>比较运算符(Comparisions)<a class="headerlink" href="#comparisions" title="Permalink to this headline">¶</a></h3>
+<p>下面是在模板中可用的比较运算符：</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Operator</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>==</td>
+<td>Check whether both operands are equal</td>
+</tr>
+<tr class="row-odd"><td>!=</td>
+<td>Check whether both operands aren&#8217;t equal</td>
+</tr>
+<tr class="row-even"><td>&lt;&gt;</td>
+<td>Check whether both operands aren&#8217;t equal</td>
+</tr>
+<tr class="row-odd"><td>&gt;</td>
+<td>Check whether left operand is greater than right operand</td>
+</tr>
+<tr class="row-even"><td>&lt;</td>
+<td>Check whether left operand is less than right operand</td>
+</tr>
+<tr class="row-odd"><td>&lt;=</td>
+<td>Check whether left operand is less or equal than right operand</td>
+</tr>
+<tr class="row-even"><td>&gt;=</td>
+<td>Check whether left operand is greater or equal than right operand</td>
+</tr>
+<tr class="row-odd"><td>===</td>
+<td>Check whether both operands are identical</td>
+</tr>
+<tr class="row-even"><td>!==</td>
+<td>Check whether both operands aren&#8217;t identical</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="logic">
+<h3>逻辑运算符(Logic)<a class="headerlink" href="#logic" title="Permalink to this headline">¶</a></h3>
+<p>Logic operators are useful in the &#8220;if&#8221; expression evaluation to combine multiple tests:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Operator</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>or</td>
+<td>Return true if the left or right operand is evaluated as true</td>
+</tr>
+<tr class="row-odd"><td>and</td>
+<td>Return true if both left and right operands are evaluated as true</td>
+</tr>
+<tr class="row-even"><td>not</td>
+<td>Negates an expression</td>
+</tr>
+<tr class="row-odd"><td>( expr )</td>
+<td>Parenthesis groups expressions</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="other-operators">
+<h3>其他操作符(Other Operators)<a class="headerlink" href="#other-operators" title="Permalink to this headline">¶</a></h3>
+<p>Additional operators seen the following operators are available:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Operator</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>~</td>
+<td>Concatenates both operands {{ &#8220;hello &#8221; ~ &#8220;world&#8221; }}</td>
+</tr>
+<tr class="row-odd"><td>|</td>
+<td>Applies a filter in the right operand to the left {{ &#8220;hello&#8221;|uppercase }}</td>
+</tr>
+<tr class="row-even"><td>..</td>
+<td>Creates a range {{ &#8216;a&#8217;..&#8217;z&#8217; }} {{ 1..10 }}</td>
+</tr>
+<tr class="row-odd"><td>is</td>
+<td>Same as == (equals)</td>
+</tr>
+<tr class="row-even"><td>is not</td>
+<td>Same as != (not equals)</td>
+</tr>
+</tbody>
+</table>
+<p>The following example shows how to use operators:</p>
+<div class="highlight-html+jinja"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">set</span> <span class="nv">robots</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;Voltron&#39;</span><span class="o">,</span> <span class="s1">&#39;Astro Boy&#39;</span><span class="o">,</span> <span class="s1">&#39;Terminator&#39;</span><span class="o">,</span> <span class="s1">&#39;C3PO&#39;</span><span class="o">]</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">index</span> <span class="k">in</span> <span class="m">0.</span><span class="nv">.robots</span><span class="o">|</span><span class="nf">length</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">if</span> <span class="nv">isset</span> <span class="nv">robots</span><span class="o">[</span><span class="nv">index</span><span class="o">]</span> <span class="cp">%}</span>
+        <span class="cp">{{</span> <span class="s2">&quot;Name: &quot;</span> <span class="o">~</span> <span class="nv">robots</span><span class="o">[</span><span class="nv">index</span><span class="o">]</span> <span class="cp">}}</span>
+    <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="using-tag-helpers">
+<h2>Using Tag Helpers<a class="headerlink" href="#using-tag-helpers" title="Permalink to this headline">¶</a></h2>
+<p>Volt 高度集成  <a class="reference internal" href="tags.html"><em>Phalcon\Tag</em></a>,因此你可以在Volt模板中方便的使用它们：</p>
+<div class="highlight-html+jinja"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">javascript_include</span><span class="o">(</span><span class="s2">&quot;js/jquery.js&quot;</span><span class="o">)</span> <span class="cp">}}</span>
+
+<span class="cp">{{</span> <span class="nv">form</span><span class="o">(</span><span class="s1">&#39;products/save&#39;</span><span class="o">,</span> <span class="s1">&#39;method&#39;</span><span class="o">:</span> <span class="s1">&#39;post&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+
+    <span class="nt">&lt;label&gt;</span>Name<span class="nt">&lt;/label&gt;</span>
+    <span class="cp">{{</span> <span class="nv">text_field</span><span class="o">(</span><span class="s2">&quot;name&quot;</span><span class="o">,</span> <span class="s2">&quot;size&quot;</span><span class="o">:</span> <span class="m">32</span><span class="o">)</span> <span class="cp">}}</span>
+
+    <span class="nt">&lt;label&gt;</span>Type<span class="nt">&lt;/label&gt;</span>
+    <span class="cp">{{</span> <span class="nv">select</span><span class="o">(</span><span class="s2">&quot;type&quot;</span><span class="o">,</span> <span class="nv">productTypes</span><span class="o">,</span> <span class="s1">&#39;using&#39;</span><span class="o">:</span> <span class="o">[</span><span class="s1">&#39;id&#39;</span><span class="o">,</span> <span class="s1">&#39;name&#39;</span><span class="o">])</span> <span class="cp">}}</span>
+
+    <span class="cp">{{</span> <span class="nv">submit_button</span><span class="o">(</span><span class="s1">&#39;Send&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+</div>
+<p>下面是生成的PHP代码：</p>
+<div class="highlight-html+php"><div class="highlight"><pre><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nx">Phalcon\Tag</span><span class="o">::</span><span class="na">javascriptInclude</span><span class="p">(</span><span class="s2">&quot;js/jquery.js&quot;</span><span class="p">)</span> <span class="cp">?&gt;</span>
+
+<span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nx">Phalcon\Tag</span><span class="o">::</span><span class="na">form</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;products/save&#39;</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;post&#39;</span><span class="p">));</span> <span class="cp">?&gt;</span>
+
+    <span class="nt">&lt;label&gt;</span>Name<span class="nt">&lt;/label&gt;</span>
+    <span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nx">Phalcon\Tag</span><span class="o">::</span><span class="na">textField</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;size&#39;</span> <span class="o">=&gt;</span> <span class="mi">32</span><span class="p">));</span> <span class="cp">?&gt;</span>
+
+    <span class="nt">&lt;label&gt;</span>Type<span class="nt">&lt;/label&gt;</span>
+    <span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nx">Phalcon\Tag</span><span class="o">::</span><span class="na">select</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="nv">$productTypes</span><span class="p">,</span> <span class="s1">&#39;using&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">)));</span> <span class="cp">?&gt;</span>
+
+    <span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nx">Phalcon\Tag</span><span class="o">::</span><span class="na">submitButton</span><span class="p">(</span><span class="s1">&#39;Send&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span>
+
+<span class="nt">&lt;/form&gt;</span>
+</pre></div>
+</div>
+<p>要想在Volt模板中调用  PhalconTag 助手，你只需要使用它们在Volt中对应的缩写版本即可：</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="61%" />
+<col width="39%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method</th>
+<th class="head">Volt function</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Phalcon\Tag::linkTo</td>
+<td>link_to</td>
+</tr>
+<tr class="row-odd"><td>Phalcon\Tag::textField</td>
+<td>text_field</td>
+</tr>
+<tr class="row-even"><td>Phalcon\Tag::passwordField</td>
+<td>password_field</td>
+</tr>
+<tr class="row-odd"><td>Phalcon\Tag::hiddenField</td>
+<td>hidden_field</td>
+</tr>
+<tr class="row-even"><td>Phalcon\Tag::fileField</td>
+<td>file_field</td>
+</tr>
+<tr class="row-odd"><td>Phalcon\Tag::checkField</td>
+<td>check_field</td>
+</tr>
+<tr class="row-even"><td>Phalcon\Tag::radioField</td>
+<td>radio_field</td>
+</tr>
+<tr class="row-odd"><td>Phalcon\Tag::submitButton</td>
+<td>submit_button</td>
+</tr>
+<tr class="row-even"><td>Phalcon\Tag::selectStatic</td>
+<td>select_static</td>
+</tr>
+<tr class="row-odd"><td>Phalcon\Tag::select</td>
+<td>select</td>
+</tr>
+<tr class="row-even"><td>Phalcon\Tag::textArea</td>
+<td>text_area</td>
+</tr>
+<tr class="row-odd"><td>Phalcon\Tag::form</td>
+<td>form</td>
+</tr>
+<tr class="row-even"><td>Phalcon\Tag::endForm</td>
+<td>end_form</td>
+</tr>
+<tr class="row-odd"><td>Phalcon\Tag::getTitle</td>
+<td>get_title</td>
+</tr>
+<tr class="row-even"><td>Phalcon\Tag::stylesheetLink</td>
+<td>stylesheet_link</td>
+</tr>
+<tr class="row-odd"><td>Phalcon\Tag::javascriptInclude</td>
+<td>javascript_include</td>
+</tr>
+<tr class="row-even"><td>Phalcon\Tag::image</td>
+<td>image</td>
+</tr>
+<tr class="row-odd"><td>Phalcon\Tag::friendlyTitle</td>
+<td>friendly_title</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="view-integration">
+<h2>视图集成(View Integration)<a class="headerlink" href="#view-integration" title="Permalink to this headline">¶</a></h2>
+<p>Volt 模板集成了 <a class="reference internal" href="views.html"><em>Phalcon\Mvc\View</em></a>, 你的模板层次结构和默认的层次结构一样，你可以这样使用 partials ：</p>
+<div class="highlight-html+jinja"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">content</span><span class="o">()</span> <span class="cp">}}</span>
+
+<span class="cp">{{</span> <span class="nv">partial</span><span class="o">(</span><span class="s2">&quot;partials/footer.volt&quot;</span><span class="o">)</span> <span class="cp">}}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="template-inheritance">
+<h2>模板继承(Template Inheritance)<a class="headerlink" href="#template-inheritance" title="Permalink to this headline">¶</a></h2>
+<p>模板继承：你可以创建一个基础模板，其他模板继承自这个基础模板，可提高模板文件的复用性。基础模板使用 <em>blocks</em> 定义一个块，这个块可以是可以被子模板覆盖的。现在让我们假设，我们有以下的基础模板：</p>
+<div class="highlight-html+jinja"><div class="highlight"><pre><span class="c">{# templates/base.volt #}</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="cp">{%</span> <span class="k">block</span> <span class="nv">head</span> <span class="cp">%}</span>
+            <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;style.css&quot;</span> <span class="nt">/&gt;</span>
+        <span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+        <span class="nt">&lt;title&gt;</span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span> - My Webpage<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;</span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;footer&quot;</span><span class="nt">&gt;</span>
+            <span class="cp">{%</span> <span class="k">block</span> <span class="nv">footer</span> <span class="cp">%}</span><span class="ni">&amp;copy;</span> Copyright 2012, All rights reserved.<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<p>其他的模板可以继承自这个基础模板，同时替换掉基础模板中的 block:</p>
+<div class="highlight-jinja"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;templates/base.volt&quot;</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span><span class="x">Index</span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">head</span> <span class="cp">%}</span><span class="x">&lt;style type=&quot;text/css&quot;&gt;.important { color: #336699; }&lt;/style&gt;</span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    &lt;h1&gt;Index&lt;/h1&gt;</span>
+<span class="x">    &lt;p class=&quot;important&quot;&gt;Welcome on my awesome homepage.&lt;/p&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>并非所有的 block 都需要在子模板中进行替换(意思是，你可以替换需要的那一部分)。上面的示例最终输出结果如下：</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;style </span><span class="na">type=</span><span class="s">&quot;text/css&quot;</span><span class="nt">&gt;</span><span class="nc">.important</span> <span class="p">{</span> <span class="k">color</span><span class="o">:</span> <span class="m">#336699</span><span class="p">;</span> <span class="p">}</span><span class="nt">&lt;/style&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Index - My Webpage<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;h1&gt;</span>Index<span class="nt">&lt;/h1&gt;</span>
+            <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;important&quot;</span><span class="nt">&gt;</span>Welcome on my awesome homepage.<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;footer&quot;</span><span class="nt">&gt;</span>
+            <span class="ni">&amp;copy;</span> Copyright 2012, All rights reserved.
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<p>作为一个片断，&#8221;extends&#8221; 后跟的路径是一个相对于视图存放目录的相对路径(即 app/views).</p>
+<blockquote class="highlights">
+<div>默认情况下，出于对性能的考虑，Volt只检查子模板是否有修改。因为建议在开发阶段初始时使用 &#8216;compileAlways&#8217; =&gt; true。这样的话，模板始终检查父模板是否有修改。</div></blockquote>
+</div>
+<div class="section" id="setting-up-the-volt-engine">
+<h2>Setting up the Volt Engine<a class="headerlink" href="#setting-up-the-volt-engine" title="Permalink to this headline">¶</a></h2>
+<p>Volt是可以通过配置改变默认的行为的，下面的例子说明如何做到这一点：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">//Register Volt as a service</span>
+<span class="nv">$di</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;voltService&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$view</span><span class="p">,</span> <span class="nv">$di</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="nv">$volt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Mvc\View\Engine\Volt</span><span class="p">(</span><span class="nv">$view</span><span class="p">,</span> <span class="nv">$di</span><span class="p">);</span>
+
+    <span class="nv">$volt</span><span class="o">-&gt;</span><span class="na">setOptions</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;compiledPath&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;../app/compiled-templates/&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;compiledExtension&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;.compiled&quot;</span>
+    <span class="p">));</span>
+
+    <span class="k">return</span> <span class="nv">$volt</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="c1">//Register Volt as template engine</span>
+<span class="nv">$di</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="nv">$view</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Mvc\View</span><span class="p">();</span>
+
+    <span class="nv">$view</span><span class="o">-&gt;</span><span class="na">setViewsDir</span><span class="p">(</span><span class="s1">&#39;../app/views/&#39;</span><span class="p">);</span>
+
+    <span class="nv">$view</span><span class="o">-&gt;</span><span class="na">registerEngines</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;.volt&quot;</span> <span class="o">=&gt;</span> <span class="s1">&#39;voltService&#39;</span>
+    <span class="p">));</span>
+
+    <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>如果你不重用 Volt，你可以不把它作为一个服务，而是在注册 view 服务的时候，用匿名函数的方式注册Volt模板引擎：</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+
+<span class="c1">//Register Volt as template engine with an anonymous function</span>
+<span class="nv">$di</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="nv">$view</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Mvc\View</span><span class="p">();</span>
+
+    <span class="nv">$view</span><span class="o">-&gt;</span><span class="na">setViewsDir</span><span class="p">(</span><span class="s1">&#39;../app/views/&#39;</span><span class="p">);</span>
+
+    <span class="nv">$view</span><span class="o">-&gt;</span><span class="na">registerEngines</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+        <span class="s2">&quot;.volt&quot;</span> <span class="o">=&gt;</span> <span class="k">function</span><span class="p">(</span><span class="nv">$view</span><span class="p">,</span> <span class="nv">$di</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$volt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Phalcon\Mvc\View\Engine\Volt</span><span class="p">(</span><span class="nv">$view</span><span class="p">,</span> <span class="nv">$di</span><span class="p">);</span>
+
+            <span class="c1">//set some options here</span>
+
+            <span class="k">return</span> <span class="nv">$volt</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">));</span>
+
+    <span class="k">return</span> <span class="nv">$view</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Volt 配置选项：</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="82%" />
+<col width="6%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Description</th>
+<th class="head">Default</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>compiledPath</td>
+<td>A writable path where the compiled PHP templates will be placed</td>
+<td>./</td>
+</tr>
+<tr class="row-odd"><td>compiledExtension</td>
+<td>An additional extension appended to the compiled PHP file</td>
+<td>.php</td>
+</tr>
+<tr class="row-even"><td>compiledSeparator</td>
+<td>Volt replaces the directory separators / and \ by this separator in order to create a single file in the compiled directory</td>
+<td>%%</td>
+</tr>
+<tr class="row-odd"><td>stat</td>
+<td>Whether Phalcon must check if exists differences between the template file and its compiled path</td>
+<td>true</td>
+</tr>
+<tr class="row-even"><td>compileAlways</td>
+<td>Tell Volt if the templates must be compiled in each request or only when they change</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id7">
+<h2>相关资源<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>A bundle for Sublime/Textmate is available <a class="reference external" href="https://github.com/phalcon/volt-sublime-textmate">here</a></li>
+<li>Our website is running using Volt as template engine, check out its code on <a class="reference external" href="https://github.com/phalcon/website">github</a></li>
+</ul>
+</div>
+</div>
+
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    <div class="related">
+      <ul>
+        <li class="right" >
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="applications.html" title="MVC Applications"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tags.html" title="视图助手(View Helpers)"
+             >previous</a> |</li> 
+      </ul>
+    </div>
+        <div id="footer">
+             &copy; Copyright 2012, Phalcon Team.
+             Last updated on Sep 15, 2014.
+            Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.
+        </div>
+
+    </div>
+
+  </body>
+</html>
