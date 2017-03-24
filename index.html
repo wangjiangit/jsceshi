@@ -5,8 +5,18 @@
     <title>Title</title>
     <link href="favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon" />
     <meta http-equiv/>
+    <style type="text/css">
+        #dddd_div+p{
+            color:red;
+        }
+    </style>
 </head>
 <body>
+<div id="dddd_div"></div>
+<p>afd</p>
+<p>afd</p>
+<p>afd</p>
+<input type="text" maxlength="3" name="feedback"  id="feedback"/>
 <select name="city">
     <option value="a">a</option>
     <option value="b">b</option>
@@ -30,14 +40,25 @@
 <div style="width: 300px;height: 300px;background-color: orangered" class="test1">
 
 </div>
+<a data-staff_id="1223" data-date="2017-12-01"></a>
+<a data-staff_id="1223" data-date="2017-12-02"></a>
+<div>
+    <p>
+        <span class="class1"></span>
+        <span class="class1"></span>
+        <span class="class1"></span>
+    </p>
+</div>
 </body>
 <script type="text/javascript" src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="./jquery.custom.min.js"></script>
 <script src="common.js"></script>
 <script src="dashboard.js "></script>
 <script type="text/javascript">
+    //alert($('span.class1').parents('div').get(0));
+    //alert($('a[data-staff_id="1223"][data-date="2017-12-01"]').length);
     var obj=document.createElement('div');
-    alert(typeof obj.style);
+    //alert(typeof obj.style);
     var obj={"a":"cc"};
     //alert(document.body);
     //alert('abc'=='1abc');
@@ -47,6 +68,11 @@
 </script>
 <script>
 
+    var arr1=[ { "trail_id": "504", "staff_id": "1353", "co_id": "1", "dept_id": "559", "staff_name": "汪见", "type": "2", "date": "2017-03-21", "time": "09:36:35", "address": "西湖区益乐路杭州数字娱乐产业园3号楼", "title": "事由1", "content": "备注11", "images": "" }, { "trail_id": "513", "staff_id": "1353", "co_id": "1", "dept_id": "559", "staff_name": "汪见", "type": "1", "date": "2017-03-21", "time": "16:38:46", "address": "西湖区益乐路杭州数字娱乐产业园西门", "title": "cc'd has 叫你宝贝", "content": "被主角的名字叫", "images": "" }, { "trail_id": "514", "staff_id": "1353", "co_id": "1", "dept_id": "559", "staff_name": "汪见", "type": "1", "date": "2017-03-21", "time": "16:39:59", "address": "西湖区益乐路杭州数字娱乐产业园西门", "title": "快看看", "content": "快看看\n\n京津冀", "images": "10015520.cos.myqcloud.com/1490073594000.jpg" } ];
+
+    for(var i=0 ;i<arr1.length;i++){
+        console.log(arr1[i].trail_id);
+    }
    // console.log('this is %s ,this is %d ,this is %f','China',4,26.3236);
    /* var a={};
     Object.defineProperty(a,'b',{
@@ -58,7 +84,7 @@
    function add(a){
       var num= arguments.callee;
 
-       alert( arguments.length);
+      // alert( arguments.length);
    }
 
    add(20,30);
@@ -67,10 +93,10 @@
       try {
           throw new SyntaxError();
       }catch(e){
-          alert(e);
+         // alert(e);
       }
 
-       alert('jixu');
+      // alert('jixu');
    });
    $('#button2').click(function(){
        $.ajax({
@@ -87,7 +113,7 @@
     }
     var arr1=[1,2,3,4];
     $('body').bind('click',arr1,function(event){
-        alert(event.data);
+       // alert(event.data);
     });
 
     //alert(document.getElementById('div2').offsetHeight);
@@ -116,7 +142,7 @@
 
     for(var i=0;i<document.getElementsByClassName('newclass').length;i++){
         document.getElementsByClassName('newclass')[i].onclick=function(){
-            alert('asdf');
+           // alert('asdf');
         };
     }
 
@@ -239,7 +265,7 @@
 
         var str = '1990-10-05';
         var strreplace = str.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1");
-        alert(strreplace);
+       // alert(strreplace);
 
     });
 
@@ -257,6 +283,15 @@
     function a(){
       //  alert(i);
     }
+
+    $(function(){
+        $('#feedback').bind('input propertychange change',function(){
+
+            if($(this).val().length == 3){
+                alert('asdf');
+            }
+        });
+    });
 </script>
 
 <script>
