@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Workers</title>
+</head>
+<body>
+<h1>Web Workers</h1>
+
+<div id="test" style="width:500px;"></div>
+<script type="text/javascript">
+    var worker=new Worker('./work1.js');
+    worker.postMessage(69);
+
+    worker.onmessage=function(e){
+        console.log(e);
+        var test=document.getElementById('test').innerHTML=e.data;
+    };
+</script>
+</body>
+</html>
