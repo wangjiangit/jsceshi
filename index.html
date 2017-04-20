@@ -381,7 +381,7 @@
     $(function(){
         var flag=0;
         $('#button_1').click(function(){
-
+            $(this).
             $.ajax({
                 url: '/line.php',
                 async:false,
@@ -408,9 +408,20 @@
     });
 
   $('#button_2').click(function(){
+      $(this).attr("disabled", true); //当设置元素为disabled 时，对它所有的js都不起作用
 
-      console.log(flag);
+      func1();
+
+
   });
+
+  function  func1(){
+     window.setInterval(function(){
+         $('#button_2').attr("disabled", false);
+     },2500);
+  }
+
+
 
 
 </script>
