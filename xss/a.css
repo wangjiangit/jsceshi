@@ -1,0 +1,4 @@
+body{
+    background-image:expression(alert('hello'));
+    background-color: red;
+}
