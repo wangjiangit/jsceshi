@@ -1,0 +1,5824 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>ECSHOP 数据库结构说明 (适用版本v2.7.3)</title>
+<meta name="Keywords" content="ecshop在线手册,提供ecshop 2.7.3最新版程序说明,数据库说明,模板结构说明,常见问题,该手册由ecshop模板堂重制" />
+<meta name="Description" content="ecshop在线手册,提供ecshop 2.7.3最新版程序说明,数据库说明,模板结构说明,常见问题,该手册由ecshop模板堂重制" />
+<style>
+body {
+
+    color:#4f6b72;
+    padding:0;
+    margin:0;
+	background:#fff; font-size:14px; font-family:12px/1.5 tahoma,arial,'Hiragino Sans GB',\5b8b\4f53,sans-serif; line-height:150%; margin:5px 0 0 0; padding-bottom:20px;color:#404040; line-height:30px;
+}
+
+a,a:visited {
+    text-decoration:none;
+    color:#4f6b72;
+    border-bottom:1px dotted #CCC;
+}
+
+a:hover {
+    text-decoration:underline;
+}
+
+table {
+    border:1px solid #C1DAD7;
+    border-collapse:collapse;
+}
+
+th {
+    background:#d6eef0;
+    padding:5px;
+}
+
+td {
+    padding:3px 5px 3px 10px;
+    vertical-align:top;
+}
+
+dl#template_maps dt {
+    font-size:16px;
+    padding:0;
+    padding-top:55px;
+    margin:10px 0 10px 0;
+}
+
+dl#template_maps dd {
+    padding:0;
+    padding-bottom:20px;
+    margin:0;
+    margin-bottom:30px;
+    border-bottom:1px dashed #CCC;
+}
+
+#nav {
+    padding:10px;
+}
+
+#nav ul {
+    padding:0;
+    margin:0;
+    margin-bottom:15px;
+    list-style:none; border:none;     color:#4f6b72; font-size:12px;
+}
+
+#nav ul li {
+    padding-left:28px;
+    margin-bottom:3px;
+    background:url("http://www.ecshop.com/template_tutorial/images/parent.gif") no-repeat 17px center;
+}
+
+#nav ul li.parent {
+    font-weight:bold;
+    padding-left:10px;
+    background:none;
+    margin-bottom:3px;
+}
+
+#nav ul li.child {
+    padding-left:38px;
+    background:url("http://www.ecshop.com/template_tutorial/images/child.gif") no-repeat 27px center;
+}
+
+#nav ul li.child a {
+    color:#888;
+}
+
+.menu {
+    
+    background:#eee;
+    height:38px; line-height:38px;
+    text-align:right;
+ 
+ padding:0 10px;
+}
+
+.menu h3 {
+    float:left;
+    font-size:16px;
+    margin:0;
+    padding:0;
+}
+
+.menu a,
+.menu a:visited {
+    font-size:12px;
+    text-decoration:none;
+    color:#666;
+    padding:5px 10px;
+    height:20px;
+    background:#FFF;
+    border:1px solid #FFF;
+}
+
+.menu a:hover {
+    background:transparent;
+}
+
+.content {
+    padding:10px 30px;
+}
+
+.content ol li {
+    margin-bottom:8px;
+    line-height:1.5em;
+}
+
+
+
+ 
+  /*模块容器*/
+  .block{
+  width:960px; height:auto;
+}
+  .box{background:#f1f1f1; padding-bottom:2px; overflow:hidden;}
+  .box_1{border:1px solid #c5e4ff; background-color:#fff;}
+  .box_2{border:1px solid #c5e4ff; background:url(images/box_2Bg.gif) repeat-x top left;
+  background-color:#edf8fe;  overflow:hidden;
+  }
+  .boxCenterList{padding:8px;}
+  /*模块标题*/
+  h3{height:33px; line-height:33px; font-size:12px; background:url(images/h3title.gif) repeat-x left top; text-align:right;
+  padding:0 12px; font-weight:100;
+  }
+ textarea{border:1px solid #ccc; width:938px; padding:10px; height:100px;}
+ 
+ 
+ 
+ h1{ height:40px; line-height:40px; background:#4f81bd; color:#FFF; padding-left:20px; font-size:16px; margin-top:60px; }
+ ul{ border:1px solid #FFCC00; padding:5px 10px;}
+  ul strong{ color:#FF0000}
+  #tbox{width:58px; float:right; position:fixed; right:50px; bottom:15px;
+_position:absolute;
+_bottom:auto;
+_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));
+_margin-bottom:15px;
+}/*解决IE6下不兼容 position:fixed 的问题*/
+#gotop{ width:58px; height:56px; background:url(../images/icon.png) no-repeat; display:block;}
+#gotop{ background-position:0 -118px;} 
+#gotop:hover{ background-position:0 -59px;}
+.a{ display:block; height:30px; line-height:30px; background:#2d96e9; text-decoration: none; text-align: center; color:#FFFFFF; border-bottom:2px solid #fff}
+.a:hover{ background:#4f81bd}
+.b{ background:#4f81bd  }
+  .blank{height:10px; line-height:10px; clear:both; visibility:hidden;}
+.share { float:left}
+.share a{ text-decoration:none; border:none}
+.share  dl{ float:left; line-height:22px; padding-right:10px;}
+.share div{ float:left; padding-top:11px;}
+
+</style>
+</head>
+<body>
+<div class="menu">
+<h3>ECSHOP 数据库结构说明 (适用版本v2.7.3)</h3>
+</div>
+<div class="content">
+<h4>1.account_log 用户账目日志表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td>log_id</td>
+<td>mediumint(8)</td>
+<td>否 /</td>
+<td>自增 ID 号</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>mediumint(8)</td>
+<td>否 /</td>
+<td>用户登录后保存在session中的id号,跟users表中user_id对应</td>
+</tr>
+<tr>
+<td>user_money</td>
+<td>decimal(10,2) </td>
+<td>否 /</td>
+<td>用户该笔记录的余额</td>
+</tr>
+<tr>
+<td>frozen_money </td>
+<td>decimal(10,2) </td>
+<td>否 /</td>
+<td>被冻结的资金</td>
+</tr>
+<tr>
+<td>rank_points </td>
+<td>mediumint(9) </td>
+<td>否 /</td>
+<td>等级积分,跟消费积分是分开的</td>
+</tr>
+<tr>
+<td>pay_points </td>
+<td>mediumint(9) </td>
+<td>否 /</td>
+<td>消费积分,跟等级积分是分开的</td>
+</tr>
+<tr>
+<td>change_time </td>
+<td>int(10) </td>
+<td>否 /</td>
+<td>该笔操作发生的时间</td>
+</tr>
+<tr>
+<td>change_desc </td>
+<td>varchar(255)</td>
+<td>否 /</td>
+<td>该笔操作的备注</td>
+</tr>
+<tr>
+<td>change_type </td>
+<td>tinyint(3)</td>
+<td>否 /</td>
+<td>操作类型,0为充值,1,为提现,2为管理员调节,99为其它类型</td>
+</tr>
+</table>
+<h4>2.ad&nbsp;广告表 </h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91">ad_id </td>
+<td width="80">smallint(5)&nbsp; </td>
+<td width="71">否&nbsp;/ </td>
+<td width="364">自增ID号 </td>
+</tr>
+<tr>
+<td width="91">position_id </td>
+<td width="80">smallint(5)&nbsp; </td>
+<td width="71">否&nbsp;/&nbsp;0 </td>
+<td width="364">0,站外广告;从1开始代表的是该广告所处的广告位,同表ad_postition中的字段position_id的值 </td>
+</tr>
+<tr>
+<td width="91">media_type </td>
+<td width="80">tinyint(3)&nbsp; </td>
+<td width="71">否&nbsp;/&nbsp;0 </td>
+<td width="364">广告类型,0图片;1flash;2代码3文字 </td>
+</tr>
+<tr>
+<td width="91">ad_name </td>
+<td width="80">varchar(60) </td>
+<td width="71">否&nbsp;/ </td>
+<td width="364">该条广告记录的广告名称 </td>
+</tr>
+<tr>
+<td width="91">ad_link </td>
+<td width="80">varchar(255) </td>
+<td width="71">否&nbsp;/ </td>
+<td width="364">广告链接地址 </td>
+</tr>
+<tr>
+<td width="91">ad_code </td>
+<td width="80">text </td>
+<td width="71">否&nbsp;/ </td>
+<td width="364">广告链接的表现,文字广告就是文字或图片和flash就是它们的地址 </td>
+</tr>
+<tr>
+<td width="91">start_time </td>
+<td width="80">int(11) </td>
+<td width="71">否&nbsp;/&nbsp;0 </td>
+<td width="364">广告开始时间 </td>
+</tr>
+<tr>
+<td width="91">end_time </td>
+<td width="80">int(11) </td>
+<td width="71">否&nbsp;/&nbsp;0 </td>
+<td width="364">广告结速时间 </td>
+</tr>
+<tr>
+<td width="91">link_man </td>
+<td width="80">varchar(60) </td>
+<td width="71">否&nbsp;/ </td>
+<td width="364">广告联系人 </td>
+</tr>
+<tr>
+<td width="91">link_email </td>
+<td width="80">varchar(60) </td>
+<td width="71">否&nbsp;/ </td>
+<td width="364">广告联系人的邮箱 </td>
+</tr>
+<tr>
+<td width="91">link_phone </td>
+<td width="80">varchar(60) </td>
+<td width="71">否&nbsp;/ </td>
+<td width="364">广告联系人的电话 </td>
+</tr>
+<tr>
+<td width="91">click_count </td>
+<td width="80">mediumint(8)&nbsp; </td>
+<td width="71">否&nbsp;/&nbsp;0 </td>
+<td width="364">该广告点击数 </td>
+</tr>
+<tr>
+<td width="91">enabled </td>
+<td width="80">tinyint(3) </td>
+<td width="71">否&nbsp;/&nbsp;1 </td>
+<td width="364">该广告是否关闭;1开启;&nbsp;0关闭;&nbsp;关闭后广告将不再有效 </td>
+</tr>
+</table>
+<h4>3.admin_action&nbsp;管理权限分配</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">action_id</td>
+<td width="84" valign="top">tinyint(3)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="364" valign="top">自增ID号</td>
+</tr>
+<tr>
+<td width="91" valign="top">parent_id</td>
+<td width="84" valign="top">tinyint(3)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="364" valign="top">该id&nbsp;项的父id,对应本表的action_id字段</td>
+</tr>
+<tr>
+<td width="91" valign="top">action_code</td>
+<td width="84" valign="top">varchar(20)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="364" valign="top">代表权限的英文字符串,对应汉文在语言文件中,如果该字段有某个字符串,就表示有该权限</td>
+</tr>
+<tr>
+<td width="91" valign="top">relevance</td>
+<td width="84" valign="top">varchar(20)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>4.admin_log&nbsp;&nbsp;管理日志</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">log_id</td>
+<td width="86" valign="top">int(10)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="362" valign="top">自增ID号</td>
+</tr>
+<tr>
+<td width="91" valign="top">log_time</td>
+<td width="86" valign="top">int(10)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="362" valign="top">写日志时间</td>
+</tr>
+<tr>
+<td width="91" valign="top">user_id</td>
+<td width="86" valign="top">tinyint(3)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="362" valign="top">该日志所记录的操作者id,同admin_user的user_id</td>
+</tr>
+<tr>
+<td width="91" valign="top">log_info</td>
+<td width="86" valign="top">varchar(255)</td>
+<td width="67" valign="top">否&nbsp;/</td>
+<td width="362" valign="top">管理操作内容</td>
+</tr>
+<tr>
+<td width="91" valign="top">ip_address</td>
+<td width="86" valign="top">varchar(15)</td>
+<td width="67" valign="top">否&nbsp;/</td>
+<td width="362" valign="top">登录者登录IP</td>
+</tr>
+</table>
+<h4>5.admin_message&nbsp;&nbsp;管理留言&nbsp;</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">message_id</td>
+<td width="86" valign="top">smallint(5)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="362" valign="top">自增id号</td>
+</tr>
+<tr>
+<td width="91" valign="top">sender_id</td>
+<td width="86" valign="top">tinyint(3)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="362" valign="top">发送该留言的管理员id,同admin_user的user_id</td>
+</tr>
+<tr>
+<td width="91" valign="top">receiver_id</td>
+<td width="86" valign="top">tinyint(3)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="362" valign="top">接收消息管理员id,同admin_user的user_id,如果是给多个管理员发送,则同一个消息给每个管理员id发送一条</td>
+</tr>
+<tr>
+<td width="91" valign="top">sent_time</td>
+<td width="86" valign="top">int(11)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="362" valign="top">留言发送时间</td>
+</tr>
+<tr>
+<td width="91" valign="top">read_time</td>
+<td width="86" valign="top">int(11)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="362" valign="top">留言阅读时间</td>
+</tr>
+<tr>
+<td width="91" valign="top">readed</td>
+<td width="86" valign="top">tinyint(1)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="362" valign="top">留言是否阅读1已阅读;0未阅读</td>
+</tr>
+<tr>
+<td width="91" valign="top">deleted</td>
+<td width="86" valign="top">tinyint(1)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="362" valign="top">留言是否已经被删除&nbsp;1已删除;0未删除</td>
+</tr>
+<tr>
+<td width="91" valign="top">title</td>
+<td width="86" valign="top">varchar(150)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="362" valign="top">留言的主题</td>
+</tr>
+<tr>
+<td width="91" valign="top">message</td>
+<td width="86" valign="top">text</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="362" valign="top">留言的内容</td>
+</tr>
+</table>
+<h4>6.admin_user&nbsp;&nbsp;管理员管理</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">user_id</td>
+<td width="84" valign="top">smallint(5)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="364" valign="top">自增id号,管理员代码</td>
+</tr>
+<tr>
+<td width="91" valign="top">user_name</td>
+<td width="84" valign="top">varchar(60)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="364" valign="top">管理员登录名</td>
+</tr>
+<tr>
+<td width="91" valign="top">email</td>
+<td width="84" valign="top">varchar(60)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="364" valign="top">管理员邮箱</td>
+</tr>
+<tr>
+<td width="91" valign="top">password</td>
+<td width="84" valign="top">varchar(32)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="364" valign="top">管理员登录密码</td>
+</tr>
+<tr>
+<td width="91" valign="top">add_time</td>
+<td width="84" valign="top">int(11)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="364" valign="top">管理员添加时间</td>
+</tr>
+<tr>
+<td width="91" valign="top">last_login</td>
+<td width="84" valign="top">int(11)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="364" valign="top">管理员最后一次登录时间</td>
+</tr>
+<tr>
+<td width="91" valign="top">last_ip</td>
+<td width="84" valign="top">varchar(15)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="364" valign="top">管理员最后一次登录IP</td>
+</tr>
+<tr>
+<td width="91" valign="top">action_list</td>
+<td width="84" valign="top">text</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="364" valign="top">管理员管理权限列表</td>
+</tr>
+<tr>
+<td width="91" valign="top">nav_list</td>
+<td width="84" valign="top">text</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="364" valign="top">管理员导航栏配置项</td>
+</tr>
+<tr>
+<td width="91" valign="top">lang_type</td>
+<td width="84" valign="top">varchar(50)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">agency_id</td>
+<td width="84" valign="top">smallint(5)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="364" valign="top">该管理员负责的办事处理的id,同agency的agency_id字段.如果管理员没有负责办事处,则此处为0</td>
+</tr>
+<tr>
+<td width="91" valign="top">suppliers_id</td>
+<td width="84" valign="top">smallint(5)</td>
+<td width="67" valign="top">是&nbsp;/&nbsp;0</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">todolist</td>
+<td width="84" valign="top">longtext</td>
+<td width="67" valign="top">是&nbsp;/&nbsp;</td>
+<td width="364" valign="top">记事本记录的数据</td>
+</tr>
+<tr>
+<td width="91" valign="top">role_id</td>
+<td width="84" valign="top">smallint(5)</td>
+<td width="67" valign="top">是&nbsp;/&nbsp;</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>7.adsense&nbsp;&nbsp;广告相关统计</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">from_ad</td>
+<td width="86" valign="top">smallint(5)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="362" valign="top">广告代号,-1是部外广告,如果是站内广告则为ad的ad_id</td>
+</tr>
+<tr>
+<td width="91" valign="top">referer</td>
+<td width="86" valign="top">varchar(255)</td>
+<td width="67" valign="top">否&nbsp;/</td>
+<td width="362" valign="top">页面来源</td>
+</tr>
+<tr>
+<td width="91" valign="top">clicks</td>
+<td width="86" valign="top">int(10)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="362" valign="top">点击率</td>
+</tr>
+</table>
+<h4>8.ad_custom&nbsp;&nbsp;</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">Ad_id</td>
+<td width="84" valign="top">Mediumint(8)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Ad_type</td>
+<td width="84" valign="top">Tinyint(1)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;1</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Ad_name</td>
+<td width="84" valign="top">Varchar(60)</td>
+<td width="67" valign="top">是&nbsp;/&nbsp;</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Add_time</td>
+<td width="84" valign="top">Int(10)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Content</td>
+<td width="84" valign="top">Mediumtext</td>
+<td width="67" valign="top">是&nbsp;/&nbsp;</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">url</td>
+<td width="84" valign="top">Varchar(255)</td>
+<td width="67" valign="top">是&nbsp;/&nbsp;</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Ad_status</td>
+<td width="84" valign="top">Tinyint(3)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>9.ad_position&nbsp;&nbsp;广告位</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="96" valign="top">position_id</td>
+<td width="86" valign="top">tinyint(3)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;</td>
+<td width="357" valign="top">广告位自增id</td>
+</tr>
+<tr>
+<td width="96" valign="top">position_name</td>
+<td width="86" valign="top">varchar(60)</td>
+<td width="66" valign="top">否&nbsp;/</td>
+<td width="357" valign="top">广告位名称</td>
+</tr>
+<tr>
+<td width="96" valign="top">ad_width</td>
+<td width="86" valign="top">smallint(5)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="357" valign="top">广告位宽度</td>
+</tr>
+<tr>
+<td width="96" valign="top">ad_height</td>
+<td width="86" valign="top">smallint(5)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="357" valign="top">广告高度</td>
+</tr>
+<tr>
+<td width="96" valign="top">position_desc</td>
+<td width="86" valign="top">varchar(255)</td>
+<td width="66" valign="top">否&nbsp;/</td>
+<td width="357" valign="top">广告位描述</td>
+</tr>
+<tr>
+<td width="96" valign="top">position_style</td>
+<td width="86" valign="top">text</td>
+<td width="66" valign="top">否&nbsp;/</td>
+<td width="357" valign="top">广告位模板代码</td>
+</tr>
+</table>
+<h4>10.affiliate_log&nbsp;&nbsp;管理日志</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">log_id</td>
+<td width="92" valign="top">mediumint(8)</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;</td>
+<td width="357" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">order_id</td>
+<td width="92" valign="top">mediumint(8)</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;&nbsp;</td>
+<td width="357" valign="top">顺序ID</td>
+</tr>
+<tr>
+<td width="91" valign="top">time</td>
+<td width="92" valign="top">int(10)</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;</td>
+<td width="357" valign="top">时间</td>
+</tr>
+<tr>
+<td width="91" valign="top">user_id</td>
+<td width="92" valign="top">mediumint(8)</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;</td>
+<td width="357" valign="top">用户ID</td>
+</tr>
+<tr>
+<td width="91" valign="top">user_name</td>
+<td width="92" valign="top">varchar(60)</td>
+<td width="66" valign="top">是&nbsp;/&nbsp;</td>
+<td width="357" valign="top">用户名</td>
+</tr>
+<tr>
+<td width="91" valign="top">money</td>
+<td width="92" valign="top">decimal(10,2)</td>
+<td width="66" valign="top">否/0.00</td>
+<td width="357" valign="top">钱</td>
+</tr>
+<tr>
+<td width="91" valign="top">point</td>
+<td width="92" valign="top">int(10)</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="357" valign="top">积分</td>
+</tr>
+<tr>
+<td width="91" valign="top">separate_type</td>
+<td width="92" valign="top">tinyint(1)</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="357" valign="top">特殊说明</td>
+</tr>
+</table>
+<h4>11.agency&nbsp;&nbsp;办事处信息</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">agency_id</td>
+<td width="86" valign="top">smallint(5)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="362" valign="top">办事处ID</td>
+</tr>
+<tr>
+<td width="91" valign="top">agency_name</td>
+<td width="86" valign="top">varchar(255)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="362" valign="top">办事处名字</td>
+</tr>
+<tr>
+<td width="91" valign="top">agency_desc</td>
+<td width="86" valign="top">text</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="362" valign="top">办事处描述</td>
+</tr>
+</table>
+<h4>12.area_region&nbsp;&nbsp;记录配送区域关联id</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="110" valign="top">shipping_area_id</td>
+<td width="81" valign="top">smallint(5)</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="349" valign="top">配送区域的id&nbsp;号,等同shipping_area的shipping_area_id的值</td>
+</tr>
+<tr>
+<td width="110" valign="top">region_id</td>
+<td width="81" valign="top">smallint(5)</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="349" valign="top">地区列表,等同于ecs_region的region_id</td>
+</tr>
+</table>
+<h4>13.article&nbsp;&nbsp;文章内容</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">article_id</td>
+<td width="91" valign="top">mediumint(8)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/</td>
+<td width="358" valign="top">自增ID号</td>
+</tr>
+<tr>
+<td width="91" valign="top">cat_id</td>
+<td width="91" valign="top">smallint(5)</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="358" valign="top">该文章的分类,同article_cat的cat_id,如果不在,将自动成为保留类型而不能删除</td>
+</tr>
+<tr>
+<td width="91" valign="top">title</td>
+<td width="91" valign="top">varchar(150)</td>
+<td width="66" valign="top">否&nbsp;/</td>
+<td width="358" valign="top">文章题目</td>
+</tr>
+<tr>
+<td width="91" valign="top">content</td>
+<td width="91" valign="top">longtext</td>
+<td width="66" valign="top">否&nbsp;/</td>
+<td width="358" valign="top">文章内容</td>
+</tr>
+<tr>
+<td width="91" valign="top">author</td>
+<td width="91" valign="top">varchar(30)</td>
+<td width="66" valign="top">否&nbsp;/</td>
+<td width="358" valign="top">文章作者</td>
+</tr>
+<tr>
+<td width="91" valign="top">author_email</td>
+<td width="91" valign="top">varchar(60)</td>
+<td width="66" valign="top">否&nbsp;/</td>
+<td width="358" valign="top">文件作者的email</td>
+</tr>
+<tr>
+<td width="91" valign="top">keywords</td>
+<td width="91" valign="top">varchar(255)</td>
+<td width="66" valign="top">否&nbsp;/</td>
+<td width="358" valign="top">文章的关键字</td>
+</tr>
+<tr>
+<td width="91" valign="top">article_type</td>
+<td width="91" valign="top">tinyint(1)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;2</td>
+<td width="358" valign="top">文章类型</td>
+</tr>
+<tr>
+<td width="91" valign="top">is_open</td>
+<td width="91" valign="top">tinyint(1)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;1</td>
+<td width="358" valign="top">是否显示;1显示;0不显示&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">add_time</td>
+<td width="91" valign="top">int(10)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="358" valign="top">文章添加时间</td>
+</tr>
+<tr>
+<td width="91" valign="top">file_url</td>
+<td width="91" valign="top">varchar(255)</td>
+<td width="66" valign="top">否&nbsp;/</td>
+<td width="358" valign="top">上传文件或者外部文件的url</td>
+</tr>
+<tr>
+<td width="91" valign="top">open_type</td>
+<td width="91" valign="top">tinyint(1)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="358" valign="top">0,正常;&nbsp;当该字段为1或2时,会在文章最后添加一个链接&#8217;相关下载&#8217;,连接地址等于file_url的值;但程序在此处有Bug</td>
+</tr>
+<tr>
+<td width="91" valign="top">link</td>
+<td width="91" valign="top">varchar(255)</td>
+<td width="66" valign="top">否&nbsp;/</td>
+<td width="358" valign="top">该文章标题所引用的连接,如果该项有值将不能显示文章内容,即该表中content的值</td>
+</tr>
+<tr>
+<td width="91" valign="top">description</td>
+<td width="91" valign="top">varchar(255)</td>
+<td width="66" valign="top">是&nbsp;/&nbsp;</td>
+<td width="358" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>14.article_cat&nbsp;&nbsp;文章分类信息</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">cat_id&nbsp;</td>
+<td width="86" valign="top">smallint(5)</td>
+<td width="67" valign="top">否</td>
+<td width="362" valign="top">自增ID</td>
+</tr>
+<tr>
+<td width="91" valign="top">cat_name&nbsp;</td>
+<td width="86" valign="top">varchar(255)</td>
+<td width="67" valign="top">否</td>
+<td width="362" valign="top">分类名称</td>
+</tr>
+<tr>
+<td width="91" valign="top">cat_type&nbsp;</td>
+<td width="86" valign="top">tinyint(1)&nbsp;</td>
+<td width="67" valign="top">否</td>
+<td width="362" valign="top">分类类型&nbsp;1,普通分类2,系统分类&nbsp;3,网店信息&nbsp;4,&nbsp;帮助分类&nbsp;5,网店帮助</td>
+</tr>
+<tr>
+<td width="91" valign="top">keywords&nbsp;</td>
+<td width="86" valign="top">varchar(255)</td>
+<td width="67" valign="top">否</td>
+<td width="362" valign="top">分类关键字</td>
+</tr>
+<tr>
+<td width="91" valign="top">cat_desc&nbsp;</td>
+<td width="86" valign="top">varchar(255)</td>
+<td width="67" valign="top">否</td>
+<td width="362" valign="top">分类说明文字</td>
+</tr>
+<tr>
+<td width="91" valign="top">sort_order&nbsp;</td>
+<td width="86" valign="top">tinyint(3)&nbsp;</td>
+<td width="67" valign="top">否</td>
+<td width="362" valign="top">分类显示顺序</td>
+</tr>
+<tr>
+<td width="91" valign="top">show_in_nav&nbsp;</td>
+<td width="86" valign="top">tinyint(1)&nbsp;</td>
+<td width="67" valign="top">否</td>
+<td width="362" valign="top">是否在导航栏显示&nbsp;0&nbsp;否&nbsp;;&nbsp;&nbsp;1&nbsp;是</td>
+</tr>
+<tr>
+<td width="91" valign="top">parent_id</td>
+<td width="86" valign="top">smallint(5)&nbsp;</td>
+<td width="67" valign="top">否</td>
+<td width="362" valign="top">父节点id，取值于该表cat_id字段</td>
+</tr>
+</table>
+<h4>15.attribute&nbsp;&nbsp;商品类型属性</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="100" valign="top">attr_id</td>
+<td width="83" valign="top">smallint(5)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;</td>
+<td width="357" valign="top">自增&nbsp;ID</td>
+</tr>
+<tr>
+<td width="100" valign="top">cat_id</td>
+<td width="83" valign="top">smallint(5)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="357" valign="top">商品类型&nbsp;,&nbsp;同goods_type的&nbsp;cat_id</td>
+</tr>
+<tr>
+<td width="100" valign="top">attr_name</td>
+<td width="83" valign="top">varchar(60)</td>
+<td width="66" valign="top">否&nbsp;/</td>
+<td width="357" valign="top">属性名称</td>
+</tr>
+<tr>
+<td width="100" valign="top">attr_input_type</td>
+<td width="83" valign="top">tinyint(1)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;1</td>
+<td width="357" valign="top">当添加商品时,该属性的添加类别;&nbsp;0为手功输入;1为选择输入;2为多行文本输入</td>
+</tr>
+<tr>
+<td width="100" valign="top">attr_type</td>
+<td width="83" valign="top">tinyint(1)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;1</td>
+<td width="357" valign="top">属性是否多选;&nbsp;0否;&nbsp;1是&nbsp;如果可以多选,则可以自定义属性,并且可以根据值的不同定不同的价</td>
+</tr>
+<tr>
+<td width="100" valign="top">attr_values</td>
+<td width="83" valign="top">text</td>
+<td width="66" valign="top">否&nbsp;/</td>
+<td width="357" valign="top">即选择输入,则attr_name对应的值的取值就是该这字段值&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">attr_index</td>
+<td width="83" valign="top">tinyint(1)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="357" valign="top">属性是否可以检索;0不需要检索;&nbsp;1关键字检索2范围检索,该属性应该是如果检索的话,可以通过该属性找到有该属性的商品</td>
+</tr>
+<tr>
+<td width="100" valign="top">sort_order</td>
+<td width="83" valign="top">tinyint(3)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="357" valign="top">属性显示的顺序,数字越大越靠前,如果数字一样则按id顺序</td>
+</tr>
+<tr>
+<td width="100" valign="top">is_linked</td>
+<td width="83" valign="top">tinyint(1)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="357" valign="top">是否关联,0&nbsp;不关联&nbsp;1关联;&nbsp;如果关联,&nbsp;那么用户在购买该商品时,具有有该属性相同的商品将被推荐给用户</td>
+</tr>
+<tr>
+<td width="100" valign="top">attr_group</td>
+<td width="83" valign="top">tinyint(1)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="357" valign="top">属性分组,相同的为一个属性组应该取自goods_type的attr_group的值的顺序.</td>
+</tr>
+</table>
+<h4>16.auction_log&nbsp;&nbsp;拍卖出价记录表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="90" valign="top">log_id</td>
+<td width="92" valign="top">mediumint(8)</td>
+<td width="66" valign="top">否</td>
+<td width="357" valign="top">自增ID号</td>
+</tr>
+<tr>
+<td width="90" valign="top">act_id</td>
+<td width="92" valign="top">mediumint(8)</td>
+<td width="66" valign="top">否</td>
+<td width="357" valign="top">拍卖活动的id,取值于goods_activity的act_id字段</td>
+</tr>
+<tr>
+<td width="90" valign="top">bid_user</td>
+<td width="92" valign="top">mediumint(8)</td>
+<td width="66" valign="top">否</td>
+<td width="357" valign="top">出价的用户id,取值于users的user_id</td>
+</tr>
+<tr>
+<td width="90" valign="top">bid_price</td>
+<td width="92" valign="top">decimal(10,2)</td>
+<td width="66" valign="top">否</td>
+<td width="357" valign="top">出价价格</td>
+</tr>
+<tr>
+<td width="90" valign="top">bid_time</td>
+<td width="92" valign="top">int(10)</td>
+<td width="66" valign="top">否</td>
+<td width="357" valign="top">出价时间</td>
+</tr>
+</table>
+<h4>17.auto_manage&nbsp;处理文章，商品自动上下线的计划任务列表（需要安装计划任务插件）</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="90" valign="top">item_id</td>
+<td width="91" valign="top">mediumint(8)</td>
+<td width="66" valign="top">否</td>
+<td width="358" valign="top">如果是商品就是goods的goods_id,如果是文章就是article的article_id</td>
+</tr>
+<tr>
+<td width="90" valign="top">type</td>
+<td width="91" valign="top">varchar(10)</td>
+<td width="66" valign="top">否</td>
+<td width="358" valign="top">Goods是商品,article是文章</td>
+</tr>
+<tr>
+<td width="90" valign="top">starttime</td>
+<td width="91" valign="top">int(10)</td>
+<td width="66" valign="top">否</td>
+<td width="358" valign="top">上线时间</td>
+</tr>
+<tr>
+<td width="90" valign="top">endtime</td>
+<td width="91" valign="top">int(10)</td>
+<td width="66" valign="top">否</td>
+<td width="358" valign="top">下线时间&nbsp;</td>
+</tr>
+</table>
+<h4>18.back_goods&nbsp;&nbsp;</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">Rec_id</td>
+<td width="84" valign="top">mediumint(8)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Back_id</td>
+<td width="84" valign="top">mediumint(8)</td>
+<td width="67" valign="top">是&nbsp;/&nbsp;0</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Goods_id</td>
+<td width="84" valign="top">mediumint(8)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Product_id</td>
+<td width="84" valign="top">mediumint(8)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Product_sn</td>
+<td width="84" valign="top">Vatchar(60)</td>
+<td width="67" valign="top">是&nbsp;/</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Goods_name</td>
+<td width="84" valign="top">Vatchar(120)</td>
+<td width="67" valign="top">是&nbsp;/</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Brand_name</td>
+<td width="84" valign="top">Vatchar(60)</td>
+<td width="67" valign="top">是&nbsp;/</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Goods_sn</td>
+<td width="84" valign="top">Vatchar(60)</td>
+<td width="67" valign="top">是&nbsp;/</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Is_real</td>
+<td width="84" valign="top">Tinyint(1)</td>
+<td width="67" valign="top">是&nbsp;/&nbsp;0</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Send_number</td>
+<td width="84" valign="top">Smallint(5)</td>
+<td width="67" valign="top">是&nbsp;/&nbsp;0</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Goods_attr</td>
+<td width="84" valign="top">Test</td>
+<td width="67" valign="top">是&nbsp;/&nbsp;</td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>19.back_order&nbsp;&nbsp;</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="100" valign="top">back_id</td>
+<td width="96" valign="top">mediumint(8)</td>
+<td width="90" valign="top">否</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">delivery_sn</td>
+<td width="96" valign="top">varchar(20)</td>
+<td width="90" valign="top">否</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">order_sn</td>
+<td width="96" valign="top">varchar(20)</td>
+<td width="90" valign="top">否</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">order_id</td>
+<td width="96" valign="top">mediumint(8)</td>
+<td width="90" valign="top">否</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">invoice_no</td>
+<td width="96" valign="top">varchar(50)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">add_time</td>
+<td width="96" valign="top">int(10)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">shipping_id</td>
+<td width="96" valign="top">tinyint(3)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">shipping_name</td>
+<td width="96" valign="top">varchar(120)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">user_id</td>
+<td width="96" valign="top">mediumint(8)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">action_user</td>
+<td width="96" valign="top">varchar(30)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">consignee</td>
+<td width="96" valign="top">varchar(60)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">address</td>
+<td width="96" valign="top">varchar(250)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">country</td>
+<td width="96" valign="top">smallint(5)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">province</td>
+<td width="96" valign="top">smallint(5)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">city</td>
+<td width="96" valign="top">smallint(5)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">district</td>
+<td width="96" valign="top">smallint(5)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">sign_building</td>
+<td width="96" valign="top">varchar(120)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">email</td>
+<td width="96" valign="top">varchar(60)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">zipcode</td>
+<td width="96" valign="top">varchar(60)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">tel</td>
+<td width="96" valign="top">varchar(60)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">mobile</td>
+<td width="96" valign="top">varchar(60)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">best_time</td>
+<td width="96" valign="top">varchar(120)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">postscript</td>
+<td width="96" valign="top">varchar(255)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">how_oos</td>
+<td width="96" valign="top">varchar(120)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">insure_fee</td>
+<td width="96" valign="top">decimal(10,2)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">shipping_fee</td>
+<td width="96" valign="top">decimal(10,2)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">update_time</td>
+<td width="96" valign="top">int(10)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">suppliers_id</td>
+<td width="96" valign="top">smallint(5)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">status</td>
+<td width="96" valign="top">tinyint(1)</td>
+<td width="90" valign="top">否</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">return_time</td>
+<td width="96" valign="top">int(10)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">agency_id</td>
+<td width="96" valign="top">smallint(5)</td>
+<td width="90" valign="top">是</td>
+<td width="321" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>20.bonus_type&nbsp;&nbsp;红包类型表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="125" valign="top">type_id</td>
+<td width="92" valign="top">smallint(5)&nbsp;</td>
+<td width="64" valign="top">否&nbsp;/</td>
+<td width="325" valign="top">红包类型流水号</td>
+</tr>
+<tr>
+<td width="125" valign="top">type_name</td>
+<td width="92" valign="top">varchar(60)</td>
+<td width="64" valign="top">否&nbsp;/</td>
+<td width="325" valign="top">红包名称</td>
+</tr>
+<tr>
+<td width="125" valign="top">type_money</td>
+<td width="92" valign="top">decimal(10,2)</td>
+<td width="64" valign="top">否/0.00</td>
+<td width="325" valign="top">红包所值的金额</td>
+</tr>
+<tr>
+<td width="125" valign="top">send_type</td>
+<td width="92" valign="top">tinyint(3)&nbsp;</td>
+<td width="64" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="325" valign="top">红包发送类型0按用户如会员等级,会员名称发放;1按商品类别发送;2按订单金额所达到的额度发送;3线下发送</td>
+</tr>
+<tr>
+<td width="125" valign="top">min_amount</td>
+<td width="92" valign="top">decimal(10,2)&nbsp;</td>
+<td width="64" valign="top">否/0.00</td>
+<td width="325" valign="top">如果按金额发送红包,该项是最小金额,即只要购买超过该金额的商品都可以领到红包&nbsp;</td>
+</tr>
+<tr>
+<td width="125" valign="top">max_amount</td>
+<td width="92" valign="top">decimal(10,2)&nbsp;</td>
+<td width="64" valign="top">否/0.00</td>
+<td width="325" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="125" valign="top">send_start_date</td>
+<td width="92" valign="top">int(11)</td>
+<td width="64" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="325" valign="top">红包发送的开始时间</td>
+</tr>
+<tr>
+<td width="125" valign="top">send_end_date</td>
+<td width="92" valign="top">int(11)</td>
+<td width="64" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="325" valign="top">红包发送的结束时间</td>
+</tr>
+<tr>
+<td width="125" valign="top">use_start_date</td>
+<td width="92" valign="top">int(11)</td>
+<td width="64" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="325" valign="top">红包可以使用的开始时间</td>
+</tr>
+<tr>
+<td width="125" valign="top">use_end_date</td>
+<td width="92" valign="top">int(11)</td>
+<td width="64" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="325" valign="top">红包可以使用的结束时间</td>
+</tr>
+<tr>
+<td width="125" valign="top">min_goods_amount</td>
+<td width="92" valign="top">decimal(10,2)&nbsp;</td>
+<td width="64" valign="top">否0.00</td>
+<td width="325" valign="top">可以使用该红包的商品的最低价格,即只要达到该价格商品才可以使用红包</td>
+</tr>
+</table>
+<h4>21.booking_goods&nbsp;&nbsp;缺货登记的订购和处理记录表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="97" valign="top">rec_id</td>
+<td width="91" valign="top">mediumint(8)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;</td>
+<td width="352" valign="top">自增ID号</td>
+</tr>
+<tr>
+<td width="97" valign="top">user_id</td>
+<td width="91" valign="top">mediumint(8)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="352" valign="top">登记该缺货记录的用户的id,取值user的user_id</td>
+</tr>
+<tr>
+<td width="97" valign="top">email</td>
+<td width="91" valign="top">varchar(60)</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;</td>
+<td width="352" valign="top">页面填的用户的email,默认取值于user的email</td>
+</tr>
+<tr>
+<td width="97" valign="top">link_man</td>
+<td width="91" valign="top">varchar(60)</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;</td>
+<td width="352" valign="top">页面填的用户的电话,默认取值于users的consignee</td>
+</tr>
+<tr>
+<td width="97" valign="top">tel</td>
+<td width="91" valign="top">varchar(60)</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;</td>
+<td width="352" valign="top">页面填的用户电话,默认取值于user的tel</td>
+</tr>
+<tr>
+<td width="97" valign="top">goods_id</td>
+<td width="91" valign="top">mediumint(8)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="352" valign="top">缺货登记商品id,取值于goods的goods_id</td>
+</tr>
+<tr>
+<td width="97" valign="top">goods_desc</td>
+<td width="91" valign="top">varchar(255)</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;</td>
+<td width="352" valign="top">缺货登记时留的订购描述</td>
+</tr>
+<tr>
+<td width="97" valign="top">goods_number</td>
+<td width="91" valign="top">smallint(5)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="352" valign="top">订购数量</td>
+</tr>
+<tr>
+<td width="97" valign="top">booking_time</td>
+<td width="91" valign="top">int(10)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="352" valign="top">缺货登记的时间</td>
+</tr>
+<tr>
+<td width="97" valign="top">is_dispose</td>
+<td width="91" valign="top">tinyint(1)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="352" valign="top">是否已经被处理</td>
+</tr>
+<tr>
+<td width="97" valign="top">dispose_user</td>
+<td width="91" valign="top">varchar(30)</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;</td>
+<td width="352" valign="top">处理该缺货登记的管理员用户名,取值于session,该session取值于admin_user的user_name</td>
+</tr>
+<tr>
+<td width="97" valign="top">dispose_time</td>
+<td width="91" valign="top">int(10)&nbsp;</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="352" valign="top">处理的时间</td>
+</tr>
+<tr>
+<td width="97" valign="top">dispose_note</td>
+<td width="91" valign="top">varchar(255)</td>
+<td width="66" valign="top">否&nbsp;/&nbsp;</td>
+<td width="352" valign="top">处理时间管理员留的备注</td>
+</tr>
+</table>
+<h4>22.brand&nbsp;&nbsp;商品品牌表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">brand_id</td>
+<td width="86" valign="top">smallint(5)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="362" valign="top">自增id号</td>
+</tr>
+<tr>
+<td width="91" valign="top">brand_name</td>
+<td width="86" valign="top">varchar(60)</td>
+<td width="67" valign="top">否&nbsp;/</td>
+<td width="362" valign="top">品牌名称</td>
+</tr>
+<tr>
+<td width="91" valign="top">brand_logo</td>
+<td width="86" valign="top">varchar(80)</td>
+<td width="67" valign="top">否&nbsp;/</td>
+<td width="362" valign="top">上传的该公司Logo图片</td>
+</tr>
+<tr>
+<td width="91" valign="top">brand_desc</td>
+<td width="86" valign="top">text</td>
+<td width="67" valign="top">否&nbsp;/</td>
+<td width="362" valign="top">品牌描述</td>
+</tr>
+<tr>
+<td width="91" valign="top">site_url</td>
+<td width="86" valign="top">varchar(255)</td>
+<td width="67" valign="top">否&nbsp;/</td>
+<td width="362" valign="top">品牌的网址</td>
+</tr>
+<tr>
+<td width="91" valign="top">sort_order</td>
+<td width="86" valign="top">tinyint(3)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="362" valign="top">品牌在前台页面的显示顺序,数字越大越靠后</td>
+</tr>
+<tr>
+<td width="91" valign="top">is_show</td>
+<td width="86" valign="top">tinyint(1)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;1</td>
+<td width="362" valign="top">该品牌是否显示;0否1显示</td>
+</tr>
+</table>
+<h4>23.card&nbsp;&nbsp;&nbsp;贺卡的配置的信息</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">card_id</td>
+<td width="86" valign="top">tinyint(3)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="362" valign="top">自增id号</td>
+</tr>
+<tr>
+<td width="91" valign="top">card_name</td>
+<td width="86" valign="top">varchar(120)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="362" valign="top">贺卡名称</td>
+</tr>
+<tr>
+<td width="91" valign="top">card_img</td>
+<td width="86" valign="top">varchar(255)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="362" valign="top">贺卡图纸的名称</td>
+</tr>
+<tr>
+<td width="91" valign="top">card_fee</td>
+<td width="86" valign="top">decimal(6,2)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;</td>
+<td width="362" valign="top">贺卡所需费用</td>
+</tr>
+<tr>
+<td width="91" valign="top">free_money</td>
+<td width="86" valign="top">decimal(6,2)&nbsp;</td>
+<td width="67" valign="top">否/0.00</td>
+<td width="362" valign="top">订单达到该字段的值后使用此贺卡免费</td>
+</tr>
+<tr>
+<td width="91" valign="top">card_desc</td>
+<td width="86" valign="top">varchar(255)</td>
+<td width="67" valign="top">否/0.00</td>
+<td width="362" valign="top">贺卡描述</td>
+</tr>
+</table>
+<h4>24.cart&nbsp;&nbsp;购物车购物信息记录表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="101" valign="top">rec_id</td>
+<td width="92" valign="top">mediumint(8)&nbsp;</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">自增id号</td>
+</tr>
+<tr>
+<td width="101" valign="top">user_id</td>
+<td width="92" valign="top">mediumint(8)&nbsp;</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">用户登录ID;取自session</td>
+</tr>
+<tr>
+<td width="101" valign="top">session_id</td>
+<td width="92" valign="top">char(32)</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">如果该用户退出,该Session_id对应的购物车中所有记录都将被删除</td>
+</tr>
+<tr>
+<td width="101" valign="top">goods_id</td>
+<td width="92" valign="top">mediumint(8)&nbsp;</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">商品的ID,取自表goods的goods_id</td>
+</tr>
+<tr>
+<td width="101" valign="top">goods_sn</td>
+<td width="92" valign="top">varchar(60)</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">商品的货号,取自表goods的goods_sn</td>
+</tr>
+<tr>
+<td width="101" valign="top">product_id</td>
+<td width="92" valign="top">mediumint(8)</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="101" valign="top">goods_name</td>
+<td width="92" valign="top">varchar(120)</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">商品名称,取自表goods的goods_name</td>
+</tr>
+<tr>
+<td width="101" valign="top">market_price</td>
+<td width="92" valign="top">decimal(10,2)&nbsp;</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">商品的本店价,取自表市场价</td>
+</tr>
+<tr>
+<td width="101" valign="top">goods_price</td>
+<td width="92" valign="top">decimal(10,2)</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">商品的本店价,取自表goods的shop_price</td>
+</tr>
+<tr>
+<td width="101" valign="top">goods_number</td>
+<td width="92" valign="top">smallint(5)&nbsp;</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">商品的购买数量,在购物车时,实际库存不减少</td>
+</tr>
+<tr>
+<td width="101" valign="top">goods_attr</td>
+<td width="92" valign="top">text</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">商品的扩展属性,&nbsp;取自goods的extension_code</td>
+</tr>
+<tr>
+<td width="101" valign="top">is_real</td>
+<td width="92" valign="top">tinyint(1)&nbsp;</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">取自ecs_goods的is_real</td>
+</tr>
+<tr>
+<td width="101" valign="top">extension_code</td>
+<td width="92" valign="top">varchar(30)</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">商品的扩展属性,取自goods的extension_code</td>
+</tr>
+<tr>
+<td width="101" valign="top">parent_id</td>
+<td width="92" valign="top">mediumint(8)&nbsp;</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">该商品的父商品ID,没有该值为0,有的话那该商品就是该id的配件</td>
+</tr>
+<tr>
+<td width="101" valign="top">rec_type</td>
+<td width="92" valign="top">tinyint(1)&nbsp;</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">购物车商品类型;0普通;1团够;2拍卖;3夺宝奇兵</td>
+</tr>
+<tr>
+<td width="101" valign="top">is_gift</td>
+<td width="92" valign="top">smallint(5)&nbsp;</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">是否赠品,0否;其他,&nbsp;是参加优惠活动的id,取值于favourable_activity的act_id</td>
+</tr>
+<tr>
+<td width="101" valign="top">is_shipping</td>
+<td width="92" valign="top">tinyint(1)</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="101" valign="top">can_handsel</td>
+<td width="92" valign="top">tinyint(3)&nbsp;</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">能否处理</td>
+</tr>
+<tr>
+<td width="101" valign="top">goods_attr_id</td>
+<td width="92" valign="top">mediumint(8)</td>
+<td width="65" valign="top">否</td>
+<td width="347" valign="top">该商品的属性的id,取自goods_attr的goods_attr_id,如果有多个,只记录了最后一个,可能是bug</td>
+</tr>
+</table>
+<h4>25.category&nbsp;&nbsp;商品分类表，记录商品分类信息</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">cat_id</td>
+<td width="86" valign="top">smallint(5)&nbsp;</td>
+<td width="67" valign="top">否</td>
+<td width="362" valign="top">自增id号</td>
+</tr>
+<tr>
+<td width="91" valign="top">cat_name</td>
+<td width="86" valign="top">varchar(90)</td>
+<td width="67" valign="top">否</td>
+<td width="362" valign="top">分类名称</td>
+</tr>
+<tr>
+<td width="91" valign="top">keywords</td>
+<td width="86" valign="top">varchar(255)</td>
+<td width="67" valign="top">否</td>
+<td width="362" valign="top">分类的关键字,可能是为了搜索</td>
+</tr>
+<tr>
+<td width="91" valign="top">cat_desc</td>
+<td width="86" valign="top">varchar(255)</td>
+<td width="67" valign="top">否</td>
+<td width="362" valign="top">分类描述</td>
+</tr>
+<tr>
+<td width="91" valign="top">parent_id</td>
+<td width="86" valign="top">smallint(5)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="362" valign="top">该分类的父类ID,取值于该表的cat_id字段</td>
+</tr>
+<tr>
+<td width="91" valign="top">sort_order</td>
+<td width="86" valign="top">tinyint(1)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="362" valign="top">该分类在页面显示的顺序,数字越大顺序越靠后,同数字,id在前的先显示</td>
+</tr>
+<tr>
+<td width="91" valign="top">template_file</td>
+<td width="86" valign="top">varchar(50)</td>
+<td width="67" valign="top">否</td>
+<td width="362" valign="top">不确定字段,按名和表设计猜,应该是该分类的单独模板文件的名字</td>
+</tr>
+<tr>
+<td width="91" valign="top">measure_unit</td>
+<td width="86" valign="top">varchar(15)</td>
+<td width="67" valign="top">否</td>
+<td width="362" valign="top">该分类的计量单位</td>
+</tr>
+<tr>
+<td width="91" valign="top">show_in_nav</td>
+<td width="86" valign="top">tinyint(1)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="362" valign="top">是否显示在导航栏,0不;1显示</td>
+</tr>
+<tr>
+<td width="91" valign="top">style</td>
+<td width="86" valign="top">varchar(150)</td>
+<td width="67" valign="top">否</td>
+<td width="362" valign="top">该分类的单独的样式表的包括文件部分的文件路径</td>
+</tr>
+<tr>
+<td width="91" valign="top">is_show</td>
+<td width="86" valign="top">tinyint(1)&nbsp;</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;1</td>
+<td width="362" valign="top">是否在前台页面显示&nbsp;1显示;&nbsp;0不显示</td>
+</tr>
+<tr>
+<td width="91" valign="top">grade</td>
+<td width="86" valign="top">tinyint(4)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="362" valign="top">该分类的最高和最低价之间的价格分级,当大于1时,会根据最大最小价格区间分成区间,会在页面显示价格范围,如0-300,300-600,600-900这种;&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">filter_attr</td>
+<td width="86" valign="top">smallint(6)</td>
+<td width="67" valign="top">否&nbsp;/&nbsp;0</td>
+<td width="362" valign="top">如果该字段有值,则该分类将还会按照该值对应在表goods_attr的goods_attr_id所对应的属性筛选，如，封面颜色下有红，黑分类筛选</td>
+</tr>
+</table>
+<h4>26.cat_recommend&nbsp;&nbsp;</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="101" valign="top">Cat_id </td>
+<td width="83" valign="top">Smallint(5) </td>
+<td width="66" valign="top">否&nbsp;/&nbsp; </td>
+<td width="356" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="101" valign="top">Recommend_type </td>
+<td width="83" valign="top">Tinyint(1) </td>
+<td width="66" valign="top">否&nbsp;&nbsp;/&nbsp; </td>
+<td width="356" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>27.collect_goods&nbsp;&nbsp;会员收藏商品的记录列表，一条记录一个收藏商品</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">rec_id </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">收藏记录的自增id </td>
+</tr>
+<tr>
+<td width="91" valign="top">user_id </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">该条收藏记录的会员id，取值于users的user_id </td>
+</tr>
+<tr>
+<td width="91" valign="top">goods_id </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">收藏的商品id，取值于goods的goods_id </td>
+</tr>
+<tr>
+<td width="91" valign="top">add_time </td>
+<td width="91" valign="top">int(11)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">收藏时间 </td>
+</tr>
+<tr>
+<td width="91" valign="top">is_attention </td>
+<td width="91" valign="top">tinyint(1) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">是否关注该收藏商品;1是;0否 </td>
+</tr>
+</table>
+<h4>28.comment&nbsp;&nbsp;用户对文章和产品的评论列表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="98" valign="top">comment_id </td>
+<td width="91" valign="top">int(10)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="351" valign="top">用户评论的自增id </td>
+</tr>
+<tr>
+<td width="98" valign="top">comment_type </td>
+<td width="91" valign="top">tinyint(3)&nbsp; </td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0 </td>
+<td width="351" valign="top">用户评论的类型;0评论的是商品,1评论的是文章 </td>
+</tr>
+<tr>
+<td width="98" valign="top">id_value </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0 </td>
+<td width="351" valign="top">文章或者商品的id,文章对应的是article的article_id;商品对应的是goods的goods_id </td>
+</tr>
+<tr>
+<td width="98" valign="top">email </td>
+<td width="91" valign="top">varchar(60) </td>
+<td width="66" valign="top">否 </td>
+<td width="351" valign="top">评论是提交的Email地址,默认取的user的email </td>
+</tr>
+<tr>
+<td width="98" valign="top">user_name </td>
+<td width="91" valign="top">varchar(60) </td>
+<td width="66" valign="top">否 </td>
+<td width="351" valign="top">评论该文章或商品的人的名称,取值users的user_name </td>
+</tr>
+<tr>
+<td width="98" valign="top">content </td>
+<td width="91" valign="top">text </td>
+<td width="66" valign="top">否 </td>
+<td width="351" valign="top">评论的内容 </td>
+</tr>
+<tr>
+<td width="98" valign="top">comment_rank </td>
+<td width="91" valign="top">tinyint(1)&nbsp; </td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0 </td>
+<td width="351" valign="top">该文章或者商品的重星级;只有1到5星;由数字代替;其中5代表5星 </td>
+</tr>
+<tr>
+<td width="98" valign="top">add_time </td>
+<td width="91" valign="top">int(10)&nbsp; </td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0 </td>
+<td width="351" valign="top">评论的时间 </td>
+</tr>
+<tr>
+<td width="98" valign="top">ip_address </td>
+<td width="91" valign="top">varchar(15) </td>
+<td width="66" valign="top">否&nbsp;/&nbsp; </td>
+<td width="351" valign="top">评论时的用户IP </td>
+</tr>
+<tr>
+<td width="98" valign="top">status </td>
+<td width="91" valign="top">tinyint(3)&nbsp; </td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0 </td>
+<td width="351" valign="top">是否被管理员批准显示;1是;0未批准显示 </td>
+</tr>
+<tr>
+<td width="98" valign="top">parent_id </td>
+<td width="91" valign="top">int(10)&nbsp; </td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0 </td>
+<td width="351" valign="top">评论的父节点,取值该表的comment_id字段,如果该字段为0,则是一个普通评论,否则该条评论就是该字段的值所对应的评论的回复 </td>
+</tr>
+<tr>
+<td width="98" valign="top">user_id </td>
+<td width="91" valign="top">int(10) </td>
+<td width="66" valign="top">否&nbsp;/0 </td>
+<td width="351" valign="top">发表该评论的用户的用户id,取值user的user_id </td>
+</tr>
+</table>
+<h4>29.crons&nbsp;&nbsp;计划任务插件安装配置信息</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">cron_id </td>
+<td width="86" valign="top">tinyint(3)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">自增ID号 </td>
+</tr>
+<tr>
+<td width="91" valign="top">cron_code </td>
+<td width="86" valign="top">varchar(20) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">该插件文件在相应路径下的不包括''.php''部分的文件名，运行该插件将通过该字段的值寻找将运行的文件 </td>
+</tr>
+<tr>
+<td width="91" valign="top">cron_name </td>
+<td width="86" valign="top">varchar(120) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">计划任务的名称 </td>
+</tr>
+<tr>
+<td width="91" valign="top">cron_desc </td>
+<td width="86" valign="top">text </td>
+<td width="67" valign="top">是 </td>
+<td width="362" valign="top">计划人物的描述 </td>
+</tr>
+<tr>
+<td width="91" valign="top">cron_order </td>
+<td width="86" valign="top">tinyint(3)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">应该是用了设置计划任务执行的顺序的，即当同时触发2个任务时先执行哪一个，如果一样应该是id在前的先执行暂不确定 </td>
+</tr>
+<tr>
+<td width="91" valign="top">cron_config </td>
+<td width="86" valign="top">text </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">对每次处理的数据的数量的值，类型，名称序列化；比如删几天的日志，每次执行几个商品或文章的处理 </td>
+</tr>
+<tr>
+<td width="91" valign="top">thistime </td>
+<td width="86" valign="top">int(10) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">该计划任务上次被执行的时间 </td>
+</tr>
+<tr>
+<td width="91" valign="top">nextime </td>
+<td width="86" valign="top">int(10) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">该计划任务下次被执行的时间 </td>
+</tr>
+<tr>
+<td width="91" valign="top">day </td>
+<td width="86" valign="top">tinyint(2) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">如果该字段有值，则计划任务将在每月的这一天执行该计划人物 </td>
+</tr>
+<tr>
+<td width="91" valign="top">week </td>
+<td width="86" valign="top">varchar(1) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">如果该字段有值，则计划任务将在每周的这一天执行该计划人物 </td>
+</tr>
+<tr>
+<td width="91" valign="top">hour </td>
+<td width="86" valign="top">varchar(2) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">如果该字段有值，则该计划任务将在每天的这个小时段执行该计划任务 </td>
+</tr>
+<tr>
+<td width="91" valign="top">minute </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">如果该字段有值，则该计划任务将在每小时的这个分钟段执行该计划任务，该字段的值可以多个，用空格间隔 </td>
+</tr>
+<tr>
+<td width="91" valign="top">enable </td>
+<td width="86" valign="top">tinyint(1) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">该计划任务是否开启；0，关闭；1，开启 </td>
+</tr>
+<tr>
+<td width="91" valign="top">run_once </td>
+<td width="86" valign="top">tinyint(1) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">执行后是否关闭，这个关闭的意思还得再研究下 </td>
+</tr>
+<tr>
+<td width="91" valign="top">allow_ip </td>
+<td width="86" valign="top">varchar(100) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">允许运行该计划人物的服务器ip </td>
+</tr>
+<tr>
+<td width="91" valign="top">alow_files </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">运行触发该计划人物的文件列表可多个值，为空代表所有许可的 </td>
+</tr>
+</table>
+<h4>30.delivery_goods&nbsp;&nbsp;</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="99" valign="top">Rec_id </td>
+<td width="84" valign="top">mediumint(8) </td>
+<td width="66" valign="top">否 </td>
+<td width="356" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="99" valign="top">Delivery_id </td>
+<td width="84" valign="top">mediumint(8) </td>
+<td width="66" valign="top">否 </td>
+<td width="356" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="99" valign="top">Goods_id </td>
+<td width="84" valign="top">mediumint(8) </td>
+<td width="66" valign="top">否 </td>
+<td width="356" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="99" valign="top">Product_id </td>
+<td width="84" valign="top">mediumint(8) </td>
+<td width="66" valign="top">是 </td>
+<td width="356" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="99" valign="top">Product_sn </td>
+<td width="84" valign="top">Varchar(60) </td>
+<td width="66" valign="top">是 </td>
+<td width="356" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="99" valign="top">Goods_name </td>
+<td width="84" valign="top">Varchar(120) </td>
+<td width="66" valign="top">是 </td>
+<td width="356" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="99" valign="top">Brand_name </td>
+<td width="84" valign="top">Varchar(60) </td>
+<td width="66" valign="top">是 </td>
+<td width="356" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="99" valign="top">Goods_sn </td>
+<td width="84" valign="top">Varchar(60) </td>
+<td width="66" valign="top">是 </td>
+<td width="356" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="99" valign="top">Is_real </td>
+<td width="84" valign="top">Tinyint(1) </td>
+<td width="66" valign="top">是 </td>
+<td width="356" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="99" valign="top">Extension_code </td>
+<td width="84" valign="top">Varchar(30) </td>
+<td width="66" valign="top">是 </td>
+<td width="356" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="99" valign="top">Parent_id </td>
+<td width="84" valign="top">mediumint(8) </td>
+<td width="66" valign="top">是 </td>
+<td width="356" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="99" valign="top">Send_number </td>
+<td width="84" valign="top">Smallint(5) </td>
+<td width="66" valign="top">是 </td>
+<td width="356" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="99" valign="top">Goods_attr </td>
+<td width="84" valign="top">text </td>
+<td width="66" valign="top">是 </td>
+<td width="356" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>31.delivery_order</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="100" valign="top">delivery_id </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">delivery_sn </td>
+<td width="92" valign="top">varchar(20) </td>
+<td width="66" valign="top">否 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">order_sn </td>
+<td width="92" valign="top">varchar(20) </td>
+<td width="66" valign="top">否 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">order_id </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">invoice_no </td>
+<td width="92" valign="top">varchar(50) </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">add_time </td>
+<td width="92" valign="top">int(10)&nbsp; </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">shipping_id </td>
+<td width="92" valign="top">tinyint(3) </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">shipping_name </td>
+<td width="92" valign="top">varchar(120) </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">user_id </td>
+<td width="92" valign="top">mediumint(8) </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">action_user </td>
+<td width="92" valign="top">varchar(30) </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">consignee </td>
+<td width="92" valign="top">varchar(60) </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">address </td>
+<td width="92" valign="top">varchar(250) </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">country </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">province </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">city </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">district </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">sign_building </td>
+<td width="92" valign="top">varchar(120) </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">email </td>
+<td width="92" valign="top">varchar(60) </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">zipcode </td>
+<td width="92" valign="top">varchar(60) </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">tel </td>
+<td width="92" valign="top">varchar(60) </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">mobile </td>
+<td width="92" valign="top">varchar(60) </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">best_time </td>
+<td width="92" valign="top">varchar(120) </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">postscript </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">how_oos </td>
+<td width="92" valign="top">varchar(120) </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">insure_fee </td>
+<td width="92" valign="top">decimal(10,2)&nbsp; </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">shipping_fee </td>
+<td width="92" valign="top">decimal(10,2)&nbsp; </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">update_time </td>
+<td width="92" valign="top">int(10)&nbsp; </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">suppliers_id </td>
+<td width="92" valign="top">smallint(5) </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">status </td>
+<td width="92" valign="top">tinyint(1)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">agency_id </td>
+<td width="92" valign="top">smallint(5) </td>
+<td width="66" valign="top">是 </td>
+<td width="349" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>32.email_list&nbsp;&nbsp;增加电子杂志订阅表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="90" valign="top">id&nbsp; </td>
+<td width="91" valign="top">mediumint(8) </td>
+<td width="66" valign="top">否 </td>
+<td width="359" valign="top">邮件订阅的自增id </td>
+</tr>
+<tr>
+<td width="90" valign="top">email&nbsp; </td>
+<td width="91" valign="top">varchar(60) </td>
+<td width="66" valign="top">否 </td>
+<td width="359" valign="top">邮件订阅所填的邮箱地址 </td>
+</tr>
+<tr>
+<td width="90" valign="top">stat&nbsp; </td>
+<td width="91" valign="top">tinyint(1) </td>
+<td width="66" valign="top">否 </td>
+<td width="359" valign="top">是否确认，可以用户确认也可以管理员确认；0，未确认；1，已确认 </td>
+</tr>
+<tr>
+<td width="90" valign="top">hash </td>
+<td width="91" valign="top">varchar(10) </td>
+<td width="66" valign="top">否 </td>
+<td width="359" valign="top">邮箱确认的验证码，系统生成后发送到用户邮箱，用户验证激活时通过该值判断是否合法；主要用来防止非法验证邮箱 </td>
+</tr>
+</table>
+<h4>33.email_sendlist&nbsp;&nbsp;增加发送队列表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="93" valign="top">id&nbsp; </td>
+<td width="91" valign="top">mediumint(8) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">id </td>
+</tr>
+<tr>
+<td width="93" valign="top">email&nbsp; </td>
+<td width="91" valign="top">varchar(100) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">Email </td>
+</tr>
+<tr>
+<td width="93" valign="top">template_id&nbsp; </td>
+<td width="91" valign="top">mediumint(8) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">模板ID </td>
+</tr>
+<tr>
+<td width="93" valign="top">email_content&nbsp; </td>
+<td width="91" valign="top">text </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">邮件内容 </td>
+</tr>
+<tr>
+<td width="93" valign="top">error&nbsp; </td>
+<td width="91" valign="top">tinyint(1) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">错误消息 </td>
+</tr>
+<tr>
+<td width="93" valign="top">pri&nbsp; </td>
+<td width="91" valign="top">tinyint(10) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">优先级 </td>
+</tr>
+<tr>
+<td width="93" valign="top">last_send </td>
+<td width="91" valign="top">int(10) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">最后发送时间 </td>
+</tr>
+</table>
+<h4>34.error_log&nbsp;&nbsp;该表用来记录页面触发计划任务时失败所产生的错误</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="90" valign="top">id </td>
+<td width="86" valign="top">int(10) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">计划任务错误自增id </td>
+</tr>
+<tr>
+<td width="90" valign="top">info </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">错误详细信息 </td>
+</tr>
+<tr>
+<td width="90" valign="top">file </td>
+<td width="86" valign="top">varchar(100) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">产生错误的执行文件的绝对路径 </td>
+</tr>
+<tr>
+<td width="90" valign="top">time </td>
+<td width="86" valign="top">int(10) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">错误发生的时间 </td>
+</tr>
+</table>
+<h4>35.exchange_goods&nbsp;&nbsp;</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="104" valign="top">Goods_id </td>
+<td width="82" valign="top">Mediumint(8) </td>
+<td width="66" valign="top">否 </td>
+<td width="354" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="104" valign="top">Exchange_integral </td>
+<td width="82" valign="top">Int(10) </td>
+<td width="66" valign="top">否 </td>
+<td width="354" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="104" valign="top">Is_exchange </td>
+<td width="82" valign="top">Tinyint(1) </td>
+<td width="66" valign="top">否 </td>
+<td width="354" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="104" valign="top">Is_hot </td>
+<td width="82" valign="top">Tinyint(1) </td>
+<td width="66" valign="top">否 </td>
+<td width="354" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>36.favoutable_activity&nbsp;&nbsp;优惠活动的配置信息（送礼、减免、打折）</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="93" valign="top">act_id </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">优惠活动的自增id </td>
+</tr>
+<tr>
+<td width="93" valign="top">act_name </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">优惠活动的活动名称 </td>
+</tr>
+<tr>
+<td width="93" valign="top">start_time </td>
+<td width="92" valign="top">int(10)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">活动的开始时间 </td>
+</tr>
+<tr>
+<td width="93" valign="top">end_time </td>
+<td width="92" valign="top">int(10)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">活动的结束时间 </td>
+</tr>
+<tr>
+<td width="93" valign="top">user_rank </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">可以参加活动的用户信息，取值于user_rank的rank_id；其中0是非会员，其他是相应的会员等级；多个值用逗号分隔',&nbsp; </td>
+</tr>
+<tr>
+<td width="93" valign="top">act_range </td>
+<td width="92" valign="top">tinyint(3)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">`act_range`&nbsp;tinyint(3)&nbsp;unsigned&nbsp;NOT&nbsp;NULL&nbsp;COMMENT&nbsp;'优惠范围；0，全部商品；1，按分类；2，按品牌；3，按商品 </td>
+</tr>
+<tr>
+<td width="93" valign="top">act_range_ext </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">优惠范围；0，全部商品；1，按分类；2，按品牌；3，按商品 </td>
+</tr>
+<tr>
+<td width="93" valign="top">min_amount </td>
+<td width="92" valign="top">decimal(10,2)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">根据优惠活动范围的不同，该处意义不同；但是都是优惠范围的约束；如，如果是商品，该处是商品的id，如果是品牌，该处是品牌的id </td>
+</tr>
+<tr>
+<td width="93" valign="top">max_amount </td>
+<td width="92" valign="top">decimal(10,2)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">订单达到金额下限，才参加活动 </td>
+</tr>
+<tr>
+<td width="93" valign="top">act_type </td>
+<td width="92" valign="top">tinyint(3)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">参加活动的订单金额下限，0，表示没有上限 </td>
+</tr>
+<tr>
+<td width="93" valign="top">act_type_ext </td>
+<td width="92" valign="top">decimal(10,2)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">参加活动的优惠方式；0，送赠品或优惠购买；1，现金减免；价格打折优惠 </td>
+</tr>
+<tr>
+<td width="93" valign="top">gift </td>
+<td width="92" valign="top">text </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">如果是送赠品，该处是允许的最大数量，0，无数量限制；现今减免，则是减免金额，单位元；打折，是折扣值，100算，8折就是80 </td>
+</tr>
+<tr>
+<td width="93" valign="top">sort_order </td>
+<td width="92" valign="top">tinyint(3)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">如果有特惠商品，这里是序列化后的特惠商品的id,name,price信息;取值于goods的goods_id，goods_name，价格是添加活动时填写的 </td>
+</tr>
+</table>
+<h4>37.feedback&nbsp;&nbsp;用户反馈信息表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">msg_id </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">反馈信息自增id </td>
+</tr>
+<tr>
+<td width="91" valign="top">parent_id </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">父节点，取自该表msg_id；反馈该值为0；回复反馈为节点id </td>
+</tr>
+<tr>
+<td width="91" valign="top">user_id </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">用户ID </td>
+</tr>
+<tr>
+<td width="91" valign="top">user_name </td>
+<td width="91" valign="top">varchar(60) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">用户名 </td>
+</tr>
+<tr>
+<td width="91" valign="top">user_email </td>
+<td width="91" valign="top">varchar(60) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">Email </td>
+</tr>
+<tr>
+<td width="91" valign="top">msg_title </td>
+<td width="91" valign="top">varchar(200) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">标题 </td>
+</tr>
+<tr>
+<td width="91" valign="top">msg_type </td>
+<td width="91" valign="top">tinyint(1)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">类型 </td>
+</tr>
+<tr>
+<td width="91" valign="top">Msg_status </td>
+<td width="91" valign="top">tinyint(1) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">msg_content </td>
+<td width="91" valign="top">text </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">内容 </td>
+</tr>
+<tr>
+<td width="91" valign="top">msg_time </td>
+<td width="91" valign="top">int(10)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">时间 </td>
+</tr>
+<tr>
+<td width="91" valign="top">message_img </td>
+<td width="91" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">图片 </td>
+</tr>
+<tr>
+<td width="91" valign="top">order_id </td>
+<td width="91" valign="top">int(11) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">是否回复 </td>
+</tr>
+<tr>
+<td width="91" valign="top">Msg_area </td>
+<td width="91" valign="top">tinyint(1) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top"> </td>
+</tr>
+</table>
+<h4>38.friend_link&nbsp;&nbsp;友情链接配置信息表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">link_id </td>
+<td width="86" valign="top">smallint(5)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">友情链接自增id </td>
+</tr>
+<tr>
+<td width="91" valign="top">link_name </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">友情链接的名称，img的alt的内容 </td>
+</tr>
+<tr>
+<td width="91" valign="top">link_url </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">友情链接网站的链接地址 </td>
+</tr>
+<tr>
+<td width="91" valign="top">link_logo </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">友情链接的logo </td>
+</tr>
+<tr>
+<td width="91" valign="top">show_order </td>
+<td width="86" valign="top">tinyint(3)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">在页面的显示顺序 </td>
+</tr>
+</table>
+<h4>39.goods&nbsp;&nbsp;商品表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="122" valign="top">goods_id&nbsp; </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品id </td>
+</tr>
+<tr>
+<td width="122" valign="top">cat_id&nbsp; </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品所属商品分类id，取值category的cat_id </td>
+</tr>
+<tr>
+<td width="122" valign="top">goods_sn&nbsp; </td>
+<td width="92" valign="top">varchar(60) </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品的唯一货号 </td>
+</tr>
+<tr>
+<td width="122" valign="top">goods_name&nbsp; </td>
+<td width="92" valign="top">varchar(120) </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品的名称 </td>
+</tr>
+<tr>
+<td width="122" valign="top">goods_name_style&nbsp; </td>
+<td width="92" valign="top">varchar(60) </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品名称显示的样式；包括颜色和字体样式；格式如#ff00ff+strong </td>
+</tr>
+<tr>
+<td width="122" valign="top">click_count&nbsp; </td>
+<td width="92" valign="top">int(10)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品点击数 </td>
+</tr>
+<tr>
+<td width="122" valign="top">brand_id&nbsp; </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">品牌id，取值于brand&nbsp;的brand_id </td>
+</tr>
+<tr>
+<td width="122" valign="top">provider_name&nbsp; </td>
+<td width="92" valign="top">varchar(100) </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">供货人的名称，程序还没实现该功能 </td>
+</tr>
+<tr>
+<td width="122" valign="top">goods_number&nbsp; </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品库存数量 </td>
+</tr>
+<tr>
+<td width="122" valign="top">goods_weight&nbsp; </td>
+<td width="92" valign="top">decimal(10,3)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品的重量，以千克为单位 </td>
+</tr>
+<tr>
+<td width="122" valign="top">market_price&nbsp; </td>
+<td width="92" valign="top">decimal(10,2)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">市场售价 </td>
+</tr>
+<tr>
+<td width="122" valign="top">shop_price&nbsp; </td>
+<td width="92" valign="top">decimal(10,2)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">本店售价 </td>
+</tr>
+<tr>
+<td width="122" valign="top">promote_price&nbsp; </td>
+<td width="92" valign="top">decimal(10,2)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">促销价格 </td>
+</tr>
+<tr>
+<td width="122" valign="top">promote_start_date&nbsp; </td>
+<td width="92" valign="top">int(11)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">促销价格开始日期 </td>
+</tr>
+<tr>
+<td width="122" valign="top">promote_end_date&nbsp; </td>
+<td width="92" valign="top">int(11)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">促销价格结束日期 </td>
+</tr>
+<tr>
+<td width="122" valign="top">warn_number&nbsp; </td>
+<td width="92" valign="top">tinyint(3)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品报警数量 </td>
+</tr>
+<tr>
+<td width="122" valign="top">keywords&nbsp; </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品关键字，放在商品页的关键字中，为搜索引擎收录用 </td>
+</tr>
+<tr>
+<td width="122" valign="top">goods_brief&nbsp; </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品的简短描述 </td>
+</tr>
+<tr>
+<td width="122" valign="top">goods_desc&nbsp; </td>
+<td width="92" valign="top">text </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品的详细描述 </td>
+</tr>
+<tr>
+<td width="122" valign="top">goods_thumb&nbsp; </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品在前台显示的微缩图片，如在分类筛选时显示的小图片 </td>
+</tr>
+<tr>
+<td width="122" valign="top">goods_img&nbsp; </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品的实际大小图片，如进入该商品页时介绍商品属性所显示的大图片 </td>
+</tr>
+<tr>
+<td width="122" valign="top">original_img&nbsp; </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">应该是上传的商品的原始图片 </td>
+</tr>
+<tr>
+<td width="122" valign="top">is_real&nbsp; </td>
+<td width="92" valign="top">tinyint(3)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">是否是实物，1，是；0，否；比如虚拟卡就为0，不是实物 </td>
+</tr>
+<tr>
+<td width="122" valign="top">extension_code&nbsp; </td>
+<td width="92" valign="top">varchar(30) </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品的扩展属性，比如像虚拟卡 </td>
+</tr>
+<tr>
+<td width="122" valign="top">is_on_sale&nbsp; </td>
+<td width="92" valign="top">tinyint(1)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">该商品是否开放销售，1，是；0，否 </td>
+</tr>
+<tr>
+<td width="122" valign="top">is_alone_sale&nbsp; </td>
+<td width="92" valign="top">tinyint(1)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">是否能单独销售，1，是；0，否；如果不能单独销售，则只能作为某商品的配件或者赠品销售 </td>
+</tr>
+<tr>
+<td width="122" valign="top">Is_shipping </td>
+<td width="92" valign="top">tinyint(1) </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="122" valign="top">integral&nbsp; </td>
+<td width="92" valign="top">int(10)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">购买该商品可以使用的积分数量，估计应该是用积分代替金额消费；但程序好像还没有实现该功能 </td>
+</tr>
+<tr>
+<td width="122" valign="top">add_time&nbsp; </td>
+<td width="92" valign="top">int(10)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品的添加时间 </td>
+</tr>
+<tr>
+<td width="122" valign="top">sort_order&nbsp; </td>
+<td width="92" valign="top">smallint(4)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">应该是商品的显示顺序，不过该版程序中没实现该功能 </td>
+</tr>
+<tr>
+<td width="122" valign="top">is_delete&nbsp; </td>
+<td width="92" valign="top">tinyint(1)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品是否已经删除，0，否；1，已删除 </td>
+</tr>
+<tr>
+<td width="122" valign="top">is_best&nbsp; </td>
+<td width="92" valign="top">tinyint(1)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">是否是精品；0，否；1，是 </td>
+</tr>
+<tr>
+<td width="122" valign="top">is_new&nbsp; </td>
+<td width="92" valign="top">tinyint(1)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">是否是新品 </td>
+</tr>
+<tr>
+<td width="122" valign="top">is_hot&nbsp; </td>
+<td width="92" valign="top">tinyint(1)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">是否热销，0，否；1，是 </td>
+</tr>
+<tr>
+<td width="122" valign="top">is_promote&nbsp; </td>
+<td width="92" valign="top">tinyint(1)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">是否特价促销；0，否；1，是 </td>
+</tr>
+<tr>
+<td width="122" valign="top">bonus_type_id&nbsp; </td>
+<td width="92" valign="top">tinyint(3)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">购买该商品所能领到的红包类型 </td>
+</tr>
+<tr>
+<td width="122" valign="top">last_update&nbsp; </td>
+<td width="92" valign="top">int(10)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">最近一次更新商品配置的时间 </td>
+</tr>
+<tr>
+<td width="122" valign="top">goods_type&nbsp; </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品所属类型id，取值表goods_type的cat_id </td>
+</tr>
+<tr>
+<td width="122" valign="top">seller_note&nbsp; </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">商品的商家备注，仅商家可见 </td>
+</tr>
+<tr>
+<td width="122" valign="top">give_integral </td>
+<td width="92" valign="top">int(11) </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">购买该商品时每笔成功交易赠送的积分数量 </td>
+</tr>
+<tr>
+<td width="122" valign="top">rank_integral </td>
+<td width="92" valign="top">int(11) </td>
+<td width="64" valign="top">否 </td>
+<td width="328" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="122" valign="top">suppliers_id </td>
+<td width="92" valign="top">smallint(5) </td>
+<td width="64" valign="top">是 </td>
+<td width="328" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="122" valign="top">is_check </td>
+<td width="92" valign="top">tinyint(1)&nbsp; </td>
+<td width="64" valign="top">是 </td>
+<td width="328" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>40.goods_activity&nbsp;&nbsp;拍卖活动和夺宝奇兵活动配置信息</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">act_id </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">处境id号 </td>
+</tr>
+<tr>
+<td width="91" valign="top">act_name </td>
+<td width="91" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">促销活动的名称 </td>
+</tr>
+<tr>
+<td width="91" valign="top">act_desc </td>
+<td width="91" valign="top">text </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">促销活动的描述' </td>
+</tr>
+<tr>
+<td width="91" valign="top">act_type </td>
+<td width="91" valign="top">tinyint(3)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">goods_id </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">参加活动的id，取值于goods的goods_id </td>
+</tr>
+<tr>
+<td width="91" valign="top">product_id </td>
+<td width="91" valign="top">mediumint(8) </td>
+<td width="66" valign="top">&nbsp;</td>
+<td width="358" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">goods_name </td>
+<td width="91" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">商品的名称，取值于goods的goods_id </td>
+</tr>
+<tr>
+<td width="91" valign="top">start_time </td>
+<td width="91" valign="top">int(10)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">活动开始时间 </td>
+</tr>
+<tr>
+<td width="91" valign="top">end_time </td>
+<td width="91" valign="top">int(10)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">活动开始结束时间 </td>
+</tr>
+<tr>
+<td width="91" valign="top">is_finished </td>
+<td width="91" valign="top">tinyint(3)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">活动是否结束，0，结束；1，未结束 </td>
+</tr>
+</table>
+<h4>41.goods_article&nbsp;&nbsp;文章关联产品表 </h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="90" valign="top">goods_id </td>
+<td width="91" valign="top">mediumint(8) </td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0 </td>
+<td width="358" valign="top">商品id，取自goods的goods_id </td>
+</tr>
+<tr>
+<td width="90" valign="top">article_id </td>
+<td width="91" valign="top">mediumint(8) </td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0 </td>
+<td width="358" valign="top">文章id，取自&nbsp;article&nbsp;的article_id </td>
+</tr>
+<tr>
+<td width="90" valign="top">admin_id </td>
+<td width="91" valign="top">tinyint(3) </td>
+<td width="66" valign="top">否&nbsp;/&nbsp;0 </td>
+<td width="358" valign="top">猜想是管理员的id，但是程序中似乎没有提及到 </td>
+</tr>
+</table>
+<h4>42.good_attr&nbsp;&nbsp;具体商品属性表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">goods_attr_id&nbsp; </td>
+<td width="91" valign="top">int(10)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">自增ID号 </td>
+</tr>
+<tr>
+<td width="91" valign="top">goods_id&nbsp; </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">该具体属性属于的商品，取值于goods的goods_id </td>
+</tr>
+<tr>
+<td width="91" valign="top">attr_id&nbsp; </td>
+<td width="91" valign="top">smallint(5)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">该具体属性属于的属性类型的id，取自attribute&nbsp;的attr_id </td>
+</tr>
+<tr>
+<td width="91" valign="top">attr_value&nbsp; </td>
+<td width="91" valign="top">text </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">该具体属性的值 </td>
+</tr>
+<tr>
+<td width="91" valign="top">attr_pric </td>
+<td width="91" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">该属性对应在商品原价格上要加的价格 </td>
+</tr>
+</table>
+<h4>43.goods_cat&nbsp;&nbsp;商品的拓展分类</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="90" valign="top">goods_id </td>
+<td width="91" valign="top">mediumint(8) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">商品id </td>
+</tr>
+<tr>
+<td width="90" valign="top">cat_id </td>
+<td width="91" valign="top">smallint(5) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">商品分类id </td>
+</tr>
+</table>
+<h4>44.goods_gallery&nbsp;&nbsp;商品相册表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">img_id </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">商品相册ID </td>
+</tr>
+<tr>
+<td width="91" valign="top">goods_id </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">图片属性商品的id </td>
+</tr>
+<tr>
+<td width="91" valign="top">img_url </td>
+<td width="91" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">实际图片url </td>
+</tr>
+<tr>
+<td width="91" valign="top">img_desc </td>
+<td width="91" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">图片说明信息 </td>
+</tr>
+<tr>
+<td width="91" valign="top">thumb_url </td>
+<td width="91" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">微缩图片url </td>
+</tr>
+<tr>
+<td width="91" valign="top">img_original </td>
+<td width="91" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">根据名字猜，应该是上传的图片文件的最原始的文件的url </td>
+</tr>
+</table>
+<h4>45.goods_type&nbsp;&nbsp;商品类型</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">cat_id&nbsp; </td>
+<td width="86" valign="top">smallint(5)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">自增id </td>
+</tr>
+<tr>
+<td width="91" valign="top">cat_name&nbsp; </td>
+<td width="86" valign="top">varchar(60) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">商品类型名 </td>
+</tr>
+<tr>
+<td width="91" valign="top">enabled&nbsp; </td>
+<td width="86" valign="top">tinyint(1)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">类型状态1，为可用；0为不可用；不可用的类型，在添加商品的时候选择商品属性将不可选 </td>
+</tr>
+<tr>
+<td width="91" valign="top">attr_group </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">商品属性分组，将一个商品类型的属性分成组，在显示的时候也是按组显示。该字段的值显示在属性的前一行，像标题的作用 </td>
+</tr>
+</table>
+<h4>46.group_goods&nbsp;&nbsp;商品配件配置表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">parent_id </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">父商品id </td>
+</tr>
+<tr>
+<td width="91" valign="top">goods_id </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">配件商品id </td>
+</tr>
+<tr>
+<td width="91" valign="top">goods_price </td>
+<td width="92" valign="top">decimal(10,2)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">配件商品的价格 </td>
+</tr>
+<tr>
+<td width="91" valign="top">admin_id </td>
+<td width="92" valign="top">tinyint(3) </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">添加该配件的管理员id </td>
+</tr>
+</table>
+<h4>47.keywords&nbsp;&nbsp;页面搜索关键字搜索记录</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">date </td>
+<td width="91" valign="top">date </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">搜索日期 </td>
+</tr>
+<tr>
+<td width="91" valign="top">searchengine </td>
+<td width="91" valign="top">varchar(20) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">搜索引擎，默认是ecshop </td>
+</tr>
+<tr>
+<td width="91" valign="top">keyword </td>
+<td width="91" valign="top">varchar(90) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">搜索关键字，即用户填写的搜索内容 </td>
+</tr>
+<tr>
+<td width="91" valign="top">count </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">搜索次数，按天累加 </td>
+</tr>
+</table>
+<h4>48.link_goods&nbsp;&nbsp;关联商品信息表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="94" valign="top">goods_id </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">商品id </td>
+</tr>
+<tr>
+<td width="94" valign="top">link_goods_id </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">被关联的商品的id </td>
+</tr>
+<tr>
+<td width="94" valign="top">is_double </td>
+<td width="91" valign="top">tinyint(1)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">是否是双向关联;&nbsp;0否;&nbsp;1是 </td>
+</tr>
+<tr>
+<td width="94" valign="top">admin_id </td>
+<td width="91" valign="top">tinyint(3) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">添加此关联商品信息的管理员id </td>
+</tr>
+</table>
+<h4>49.mail_templates&nbsp;&nbsp;各种邮件的模板配置模板</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="110" valign="top">template_id&nbsp; </td>
+<td width="86" valign="top">tinyint(1)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="344" valign="top">邮件模板自增id </td>
+</tr>
+<tr>
+<td width="110" valign="top">template_code&nbsp; </td>
+<td width="86" valign="top">varchar(30) </td>
+<td width="65" valign="top">否 </td>
+<td width="344" valign="top">模板字符串名称，主要用于插件言语包时匹配语言包文件等用途 </td>
+</tr>
+<tr>
+<td width="110" valign="top">is_html&nbsp; </td>
+<td width="86" valign="top">tinyint(1)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="344" valign="top">邮件是否是html格式；0，否；1，是 </td>
+</tr>
+<tr>
+<td width="110" valign="top">template_subject&nbsp; </td>
+<td width="86" valign="top">varchar(200) </td>
+<td width="65" valign="top">否 </td>
+<td width="344" valign="top">该邮件模板的邮件主题 </td>
+</tr>
+<tr>
+<td width="110" valign="top">template_content&nbsp; </td>
+<td width="86" valign="top">text </td>
+<td width="65" valign="top">否 </td>
+<td width="344" valign="top">邮件模板的内容 </td>
+</tr>
+<tr>
+<td width="110" valign="top">last_modify&nbsp; </td>
+<td width="86" valign="top">int(10)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="344" valign="top">最后一次修改模板的时间 </td>
+</tr>
+<tr>
+<td width="110" valign="top">last_send&nbsp; </td>
+<td width="86" valign="top">int(10)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="344" valign="top">最近一次发送的时间，好像仅在杂志才记录 </td>
+</tr>
+<tr>
+<td width="110" valign="top">type </td>
+<td width="86" valign="top">varchar(10) </td>
+<td width="65" valign="top">否 </td>
+<td width="344" valign="top">该邮件模板的邮件类型；共2个类型；magazine，杂志订阅；template，关注订阅 </td>
+</tr>
+</table>
+<h4>50.member_price&nbsp;</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="90" valign="top">price_id&nbsp; </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">折扣价自增id </td>
+</tr>
+<tr>
+<td width="90" valign="top">goods_id&nbsp; </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">商品的id </td>
+</tr>
+<tr>
+<td width="90" valign="top">user_rank&nbsp; </td>
+<td width="92" valign="top">tinyint(3) </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">会员登记id </td>
+</tr>
+<tr>
+<td width="90" valign="top">user_price </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">指定商品对指定会员等级的固定定价价格，单位元 </td>
+</tr>
+</table>
+<h4>51.nav&nbsp;&nbsp;上中下3个导航栏的显示配置</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="90" valign="top">id </td>
+<td width="91" valign="top">mediumint(8) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">导航配置自增id </td>
+</tr>
+<tr>
+<td width="90" valign="top">ctype </td>
+<td width="91" valign="top">varchar(10) </td>
+<td width="66" valign="top">是 </td>
+<td width="358" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="90" valign="top">cid </td>
+<td width="91" valign="top">smallint(5)&nbsp; </td>
+<td width="66" valign="top">是 </td>
+<td width="358" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="90" valign="top">name </td>
+<td width="91" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">导航显示标题 </td>
+</tr>
+<tr>
+<td width="90" valign="top">ifshow </td>
+<td width="91" valign="top">tinyint(1) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">是否显示 </td>
+</tr>
+<tr>
+<td width="90" valign="top">vieworder </td>
+<td width="91" valign="top">tinyint(1) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">页面显示顺序，数字越大越靠后 </td>
+</tr>
+<tr>
+<td width="90" valign="top">opennew </td>
+<td width="91" valign="top">tinyint(1) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">导航链接页面是否在新窗口打开，1，是；其他，否 </td>
+</tr>
+<tr>
+<td width="90" valign="top">url </td>
+<td width="91" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">链接的页面地址 </td>
+</tr>
+<tr>
+<td width="90" valign="top">type </td>
+<td width="91" valign="top">varchar(10) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">处于导航栏的位置，top为顶部；middle为中间；bottom,为底部 </td>
+</tr>
+</table>
+<h4>52.order_action&nbsp;&nbsp;对订单操作日志表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="101" valign="top">action_id </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="348" valign="top">流水号 </td>
+</tr>
+<tr>
+<td width="101" valign="top">order_id </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="348" valign="top">被操作的交易号 </td>
+</tr>
+<tr>
+<td width="101" valign="top">action_user </td>
+<td width="91" valign="top">varchar(30) </td>
+<td width="66" valign="top">否 </td>
+<td width="348" valign="top">操作该次的人员 </td>
+</tr>
+<tr>
+<td width="101" valign="top">order_status </td>
+<td width="91" valign="top">tinyint(1)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="348" valign="top">作何操作0,未确认,&nbsp;1已确认;&nbsp;2已取消;&nbsp;3无效;&nbsp;4退货 </td>
+</tr>
+<tr>
+<td width="101" valign="top">shipping_status </td>
+<td width="91" valign="top">tinyint(1)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="348" valign="top">发货状态;&nbsp;0未发货;&nbsp;1已发货&nbsp;&nbsp;2已取消&nbsp;&nbsp;3备货中 </td>
+</tr>
+<tr>
+<td width="101" valign="top">pay_status </td>
+<td width="91" valign="top">tinyint(1)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="348" valign="top">支付状态&nbsp;0未付款;&nbsp;&nbsp;1已付款中;&nbsp;&nbsp;2已付款 </td>
+</tr>
+<tr>
+<td width="101" valign="top">action_note </td>
+<td width="91" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="348" valign="top">操作血注 </td>
+</tr>
+<tr>
+<td width="101" valign="top">log_time </td>
+<td width="91" valign="top">int(11) </td>
+<td width="66" valign="top">否 </td>
+<td width="348" valign="top">操作时间 </td>
+</tr>
+</table>
+<h4>53.order_goods&nbsp;&nbsp;订单的商品信息</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="101" valign="top">rec_id&nbsp; </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">订单商品信息自增id </td>
+</tr>
+<tr>
+<td width="101" valign="top">order_id&nbsp; </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">订单商品信息对应的详细信息id，取值order_info的order_id </td>
+</tr>
+<tr>
+<td width="101" valign="top">goods_id&nbsp; </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">商品的的id，取值表goods&nbsp;的goods_id </td>
+</tr>
+<tr>
+<td width="101" valign="top">goods_name&nbsp; </td>
+<td width="92" valign="top">varchar(120) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">商品的名称，取值表goods </td>
+</tr>
+<tr>
+<td width="101" valign="top">goods_sn&nbsp; </td>
+<td width="92" valign="top">varchar(60) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">商品的唯一货号，取值goods </td>
+</tr>
+<tr>
+<td width="101" valign="top">product_id </td>
+<td width="92" valign="top">mediumint(8) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="101" valign="top">goods_number&nbsp; </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">商品的购买数量 </td>
+</tr>
+<tr>
+<td width="101" valign="top">market_price&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">商品的市场售价，取值goods </td>
+</tr>
+<tr>
+<td width="101" valign="top">goods_price&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">商品的本店售价，取值goods </td>
+</tr>
+<tr>
+<td width="101" valign="top">goods_attr&nbsp; </td>
+<td width="92" valign="top">text </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">购买该商品时所选择的属性 </td>
+</tr>
+<tr>
+<td width="101" valign="top">send_number&nbsp; </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">当不是实物时，是否已发货，0，否；1，是 </td>
+</tr>
+<tr>
+<td width="101" valign="top">is_real&nbsp; </td>
+<td width="92" valign="top">tinyint(1)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">是否是实物，0，否；1，是；取值goods </td>
+</tr>
+<tr>
+<td width="101" valign="top">extension_code&nbsp; </td>
+<td width="92" valign="top">varchar(30) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">商品的扩展属性，比如像虚拟卡。取值goods </td>
+</tr>
+<tr>
+<td width="101" valign="top">parent_id&nbsp; </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">父商品id，取值于cart的parent_id；如果有该值则是值多代表的物品的配件 </td>
+</tr>
+<tr>
+<td width="101" valign="top">is_gift&nbsp; </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">是否参加优惠活动，0，否；其他，取值于cart&nbsp;的is_gift，跟其一样，是参加的优惠活动的id </td>
+</tr>
+<tr>
+<td width="101" valign="top">goods_attr_id </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top"> </td>
+</tr>
+</table>
+<h4>54.order_info&nbsp;&nbsp;订单的配送</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="102" valign="top">order_id&nbsp; </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">自增ID </td>
+</tr>
+<tr>
+<td width="102" valign="top">order_sn&nbsp; </td>
+<td width="92" valign="top">varchar(20) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">&nbsp;订单号,唯一 </td>
+</tr>
+<tr>
+<td width="102" valign="top">user_id&nbsp; </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">用户id,同users的user_id </td>
+</tr>
+<tr>
+<td width="102" valign="top">order_status&nbsp; </td>
+<td width="92" valign="top">tinyint(1)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">订单的状态;0未确认,1确认,2已取消,3无效,4退货 </td>
+</tr>
+<tr>
+<td width="102" valign="top">shipping_status&nbsp; </td>
+<td width="92" valign="top">tinyint(1)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">商品配送情况;0未发货,1已发货,2已收货,4退货 </td>
+</tr>
+<tr>
+<td width="102" valign="top">pay_status&nbsp; </td>
+<td width="92" valign="top">tinyint(1)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">支付状态;0未付款;1付款中;2已付款 </td>
+</tr>
+<tr>
+<td width="102" valign="top">consignee&nbsp; </td>
+<td width="92" valign="top">varchar(60) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">收货人的姓名,用户页面填写,默认取值表user_address </td>
+</tr>
+<tr>
+<td width="102" valign="top">country&nbsp; </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">收货人的国家,用户页面填写,默认取值于表user_address,其id对应的值在region </td>
+</tr>
+<tr>
+<td width="102" valign="top">province&nbsp; </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">收货人的省份,用户页面填写,默认取值于表user_address,&nbsp;其id对应的值在region </td>
+</tr>
+<tr>
+<td width="102" valign="top">city&nbsp; </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">收货人的城市,用户页面填写,默认取值于表user_address,其id对应的值在region </td>
+</tr>
+<tr>
+<td width="102" valign="top">district&nbsp; </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">收货人的地区,用户页面填写,默认取值于表user_address,其id对应的值在region </td>
+</tr>
+<tr>
+<td width="102" valign="top">address&nbsp; </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">收货人的详细地址,用户页面填写,默认取值于表user_address </td>
+</tr>
+<tr>
+<td width="102" valign="top">zipcode&nbsp; </td>
+<td width="92" valign="top">varchar(60) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">收货人的邮编,用户页面填写,默认取值于表user_address </td>
+</tr>
+<tr>
+<td width="102" valign="top">tel&nbsp; </td>
+<td width="92" valign="top">varchar(60) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">收货人的电话,用户页面填写,默认取值于表user_address </td>
+</tr>
+<tr>
+<td width="102" valign="top">mobile&nbsp; </td>
+<td width="92" valign="top">varchar(60) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">收货人的手机,用户页面填写,默认取值于表user_address </td>
+</tr>
+<tr>
+<td width="102" valign="top">email&nbsp; </td>
+<td width="92" valign="top">varchar(60) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">收货人的Email,&nbsp;用户页面填写,默认取值于表user_address </td>
+</tr>
+<tr>
+<td width="102" valign="top">best_time&nbsp; </td>
+<td width="92" valign="top">varchar(120) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">收货人的最佳送货时间,用户页面填写,默认取值于表user_addr&nbsp; </td>
+</tr>
+<tr>
+<td width="102" valign="top">sign_building&nbsp; </td>
+<td width="92" valign="top">varchar(120) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">送货人的地址的标志性建筑,用户页面填写,默认取值于表user_address </td>
+</tr>
+<tr>
+<td width="102" valign="top">postscript&nbsp; </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">订单附言,由用户提交订单前填写 </td>
+</tr>
+<tr>
+<td width="102" valign="top">shipping_id&nbsp; </td>
+<td width="92" valign="top">tinyint(3) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">用户选择的配送方式id,取值表shipping </td>
+</tr>
+<tr>
+<td width="102" valign="top">shipping_name&nbsp; </td>
+<td width="92" valign="top">varchar(120) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">用户选择的配送方式的名称,取值表shipping </td>
+</tr>
+<tr>
+<td width="102" valign="top">pay_id&nbsp; </td>
+<td width="92" valign="top">tinyint(3) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">用户选择的支付方式的id,取值表payment </td>
+</tr>
+<tr>
+<td width="102" valign="top">pay_name&nbsp; </td>
+<td width="92" valign="top">varchar(120) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">用户选择的支付方式名称,取值表payment </td>
+</tr>
+<tr>
+<td width="102" valign="top">how_oos&nbsp; </td>
+<td width="92" valign="top">varchar(120) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">缺货处理方式,等待所有商品备齐后再发,取消订单;与店主协商 </td>
+</tr>
+<tr>
+<td width="102" valign="top">how_surplus&nbsp; </td>
+<td width="92" valign="top">varchar(120) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">根据字段猜测应该是余额处理方式,程序未作这部分实现 </td>
+</tr>
+<tr>
+<td width="102" valign="top">pack_name&nbsp; </td>
+<td width="92" valign="top">varchar(120) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">包装名称,取值表pack </td>
+</tr>
+<tr>
+<td width="102" valign="top">card_name&nbsp; </td>
+<td width="92" valign="top">varchar(120) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">贺卡的名称,取值card </td>
+</tr>
+<tr>
+<td width="102" valign="top">card_message&nbsp; </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">贺卡内容,由用户提交 </td>
+</tr>
+<tr>
+<td width="102" valign="top">inv_payee&nbsp; </td>
+<td width="92" valign="top">varchar(120) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">发票抬头,用户页面填写 </td>
+</tr>
+<tr>
+<td width="102" valign="top">inv_content&nbsp; </td>
+<td width="92" valign="top">varchar(120) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">发票内容,用户页面选择,取值shop_config的code字段的值&nbsp;为invoice_content的value </td>
+</tr>
+<tr>
+<td width="102" valign="top">goods_amount&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">商品的总金额 </td>
+</tr>
+<tr>
+<td width="102" valign="top">shipping_fee&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">配送费用 </td>
+</tr>
+<tr>
+<td width="102" valign="top">insure_fee&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">保价费用 </td>
+</tr>
+<tr>
+<td width="102" valign="top">pay_fee&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">支付费用,跟支付方式的配置相关,取值表payment </td>
+</tr>
+<tr>
+<td width="102" valign="top">pack_fee&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">包装费用,取值表pack </td>
+</tr>
+<tr>
+<td width="102" valign="top">card_fee&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">贺卡费用,取值card </td>
+</tr>
+<tr>
+<td width="102" valign="top">money_paid&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">已付款金额 </td>
+</tr>
+<tr>
+<td width="102" valign="top">surplus&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">该订单使用金额的数量,取用户设定余额,用户可用余额,订单金额中最小者 </td>
+</tr>
+<tr>
+<td width="102" valign="top">integral&nbsp; </td>
+<td width="92" valign="top">int(10)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">使用的积分的数量,取用户使用积分,商品可用积分,用户拥有积分中最小者 </td>
+</tr>
+<tr>
+<td width="102" valign="top">integral_money&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">使用积分金额 </td>
+</tr>
+<tr>
+<td width="102" valign="top">bonus&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">使用红包金额 </td>
+</tr>
+<tr>
+<td width="102" valign="top">order_amount&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">应付款金额 </td>
+</tr>
+<tr>
+<td width="102" valign="top">from_ad&nbsp; </td>
+<td width="92" valign="top">smallint(5) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">订单由某广告带来的广告id,应该取值于ad </td>
+</tr>
+<tr>
+<td width="102" valign="top">referer&nbsp; </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">订单的来源页面 </td>
+</tr>
+<tr>
+<td width="102" valign="top">add_time&nbsp; </td>
+<td width="92" valign="top">int(10)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">订单生成时间 </td>
+</tr>
+<tr>
+<td width="102" valign="top">confirm_time&nbsp; </td>
+<td width="92" valign="top">int(10)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">订单确认时间 </td>
+</tr>
+<tr>
+<td width="102" valign="top">pay_time&nbsp; </td>
+<td width="92" valign="top">int(10)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">订单支付时间 </td>
+</tr>
+<tr>
+<td width="102" valign="top">shipping_time&nbsp; </td>
+<td width="92" valign="top">int(10)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">订单配送时间 </td>
+</tr>
+<tr>
+<td width="102" valign="top">pack_id&nbsp; </td>
+<td width="92" valign="top">tinyint(3)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">包装id,取值表pck </td>
+</tr>
+<tr>
+<td width="102" valign="top">card_id&nbsp; </td>
+<td width="92" valign="top">tinyint(3)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">贺卡id,用户在页面选择,取值 </td>
+</tr>
+<tr>
+<td width="102" valign="top">bonus_id&nbsp; </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">红包id,&nbsp;user_bonus的bonus_id </td>
+</tr>
+<tr>
+<td width="102" valign="top">invoice_no&nbsp; </td>
+<td width="92" valign="top">varchar(50) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">发货时填写,&nbsp;可在订单查询查看 </td>
+</tr>
+<tr>
+<td width="102" valign="top">extension_code&nbsp; </td>
+<td width="92" valign="top">varchar(30) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">通过活动购买的商品的代号,group_buy是团购;&nbsp;auction是拍卖;snatch夺宝奇兵;正常普通产品该处理为空 </td>
+</tr>
+<tr>
+<td width="102" valign="top">extension_id&nbsp; </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">通过活动购买的物品id,取值ecs_good_activity;如果是正常普通商品,该处为0 </td>
+</tr>
+<tr>
+<td width="102" valign="top">to_buyer&nbsp; </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">商家给客户的留言,当该字段值时可以在订单查询看到 </td>
+</tr>
+<tr>
+<td width="102" valign="top">pay_note&nbsp; </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">付款备注,&nbsp;在订单管理编辑修改 </td>
+</tr>
+<tr>
+<td width="102" valign="top">agency_id&nbsp; </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">该笔订单被指派给的办事处的id,&nbsp;根据订单内容和办事处负责范围自动决定,也可以有管理员修改,取值于表agency </td>
+</tr>
+<tr>
+<td width="102" valign="top">inv_type&nbsp; </td>
+<td width="92" valign="top">varchar(60) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">发票类型,用户页面选择,取值shop_config的code字段的值invoice_type的value </td>
+</tr>
+<tr>
+<td width="102" valign="top">tax&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">发票税额 </td>
+</tr>
+<tr>
+<td width="102" valign="top">is_separate&nbsp; </td>
+<td width="92" valign="top">tinyint(1) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">0未分成或等待分成;1已分成;2取消分成 </td>
+</tr>
+<tr>
+<td width="102" valign="top">parent_id&nbsp; </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">自增ID </td>
+</tr>
+<tr>
+<td width="102" valign="top">discount&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="65" valign="top">否 </td>
+<td width="347" valign="top">&nbsp;订单号,唯一 </td>
+</tr>
+</table>
+<h4>55.pack&nbsp;&nbsp;商品包装信息配置表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">pack_id&nbsp; </td>
+<td width="86" valign="top">tinyint(3)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">包装配置的自增id </td>
+</tr>
+<tr>
+<td width="91" valign="top">pack_name&nbsp; </td>
+<td width="86" valign="top">varchar(120) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">包装的名称 </td>
+</tr>
+<tr>
+<td width="91" valign="top">pack_img&nbsp; </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">包装图纸 </td>
+</tr>
+<tr>
+<td width="91" valign="top">pack_fee&nbsp; </td>
+<td width="86" valign="top">smallint(5)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">包装的费用 </td>
+</tr>
+<tr>
+<td width="91" valign="top">free_money&nbsp; </td>
+<td width="86" valign="top">smallint(5)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">订单达到此金额可以免除该包装费用 </td>
+</tr>
+<tr>
+<td width="91" valign="top">pack_desc&nbsp; </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">包装描述 </td>
+</tr>
+</table>
+<h4>56.package_goods&nbsp;</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">Package_id </td>
+<td width="84" valign="top">mediumint(8) </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Goods_id </td>
+<td width="84" valign="top">mediumint(8) </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Product_id </td>
+<td width="84" valign="top">mediumint(8) </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Goods_number </td>
+<td width="84" valign="top">Smallint(5) </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Admin_id </td>
+<td width="84" valign="top">Tinyint(3) </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>57.payment&nbsp;&nbsp;安装的支付方式配置信息</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">pay_id&nbsp; </td>
+<td width="86" valign="top">tinyint(3)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">已安装的支付方式自增id </td>
+</tr>
+<tr>
+<td width="91" valign="top">pay_code&nbsp; </td>
+<td width="86" valign="top">varchar(20) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">支付方式&nbsp;的英文缩写,其实是该支付方式处理插件的不带后缀的文件名部分 </td>
+</tr>
+<tr>
+<td width="91" valign="top">pay_name&nbsp; </td>
+<td width="86" valign="top">varchar(120) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">支付方式名称 </td>
+</tr>
+<tr>
+<td width="91" valign="top">pay_fee&nbsp; </td>
+<td width="86" valign="top">varchar(10) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">支付费用 </td>
+</tr>
+<tr>
+<td width="91" valign="top">pay_desc&nbsp; </td>
+<td width="86" valign="top">text </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">支付方式描述 </td>
+</tr>
+<tr>
+<td width="91" valign="top">pay_order&nbsp; </td>
+<td width="86" valign="top">tinyint(3)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">支付方式在页面的显示顺序 </td>
+</tr>
+<tr>
+<td width="91" valign="top">pay_config&nbsp; </td>
+<td width="86" valign="top">text </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">支付方式的配置信息,包括商户号和密钥什么的 </td>
+</tr>
+<tr>
+<td width="91" valign="top">enabled&nbsp; </td>
+<td width="86" valign="top">tinyint(1)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">是否可用;0否;1是 </td>
+</tr>
+<tr>
+<td width="91" valign="top">is_cod&nbsp; </td>
+<td width="86" valign="top">tinyint(1)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">是否货到付款,&nbsp;0否;1是 </td>
+</tr>
+<tr>
+<td width="91" valign="top">is_online&nbsp; </td>
+<td width="86" valign="top">tinyint(1)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">是否在线支付;0否;1是 </td>
+</tr>
+</table>
+<h4>58.pay_log&nbsp;&nbsp;系统支付记录</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="93" valign="top">log_id&nbsp; </td>
+<td width="92" valign="top">int(10)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">支付记录自增id </td>
+</tr>
+<tr>
+<td width="93" valign="top">order_id&nbsp; </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">对应的交交易记录的id,取值表order_info </td>
+</tr>
+<tr>
+<td width="93" valign="top">order_amount&nbsp; </td>
+<td width="92" valign="top">decimal(10,2)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">支付金额 </td>
+</tr>
+<tr>
+<td width="93" valign="top">order_type&nbsp; </td>
+<td width="92" valign="top">tinyint(1)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">支付类型,0订单支付,1会员预付款支付 </td>
+</tr>
+<tr>
+<td width="93" valign="top">is_paid&nbsp; </td>
+<td width="92" valign="top">tinyint(1)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">是否已支付,0否;1是 </td>
+</tr>
+</table>
+<h4>59.plugins&nbsp;&nbsp;</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">code&nbsp; </td>
+<td width="86" valign="top">varchar(30) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">version&nbsp; </td>
+<td width="86" valign="top">varchar(10) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">library&nbsp; </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">assign&nbsp; </td>
+<td width="86" valign="top">tinyint(1)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">install_date&nbsp; </td>
+<td width="86" valign="top">int(10) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>60.products&nbsp;&nbsp;</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="94" valign="top">Product_id </td>
+<td width="91" valign="top">mediumint(8) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="94" valign="top">Goods_id </td>
+<td width="91" valign="top">mediumint(8) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="94" valign="top">Goods_attr </td>
+<td width="91" valign="top">varchar(50) </td>
+<td width="66" valign="top">是 </td>
+<td width="355" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="94" valign="top">Product_sn </td>
+<td width="91" valign="top">varchar(50) </td>
+<td width="66" valign="top">是 </td>
+<td width="355" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="94" valign="top">Product_number </td>
+<td width="91" valign="top">smallint(5) </td>
+<td width="66" valign="top">是 </td>
+<td width="355" valign="top"> </td>
+</tr>
+</table>
+<h4>61.region&nbsp;&nbsp;地区列表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">region_id&nbsp; </td>
+<td width="86" valign="top">smallint(5)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">表示该地区的id </td>
+</tr>
+<tr>
+<td width="91" valign="top">parent_id&nbsp; </td>
+<td width="86" valign="top">smallint(5)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">该地区的上一个节点的地区id </td>
+</tr>
+<tr>
+<td width="91" valign="top">region_name&nbsp; </td>
+<td width="86" valign="top">varchar(120) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">地区的名字 </td>
+</tr>
+<tr>
+<td width="91" valign="top">region_type&nbsp; </td>
+<td width="86" valign="top">tinyint(1) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">该地区的下一个节点的地区id </td>
+</tr>
+<tr>
+<td width="91" valign="top">agency_id&nbsp; </td>
+<td width="86" valign="top">smallint(5)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">办事处的id,这里有一个bug,同一个省不能有多个办事处,该字段只记录最新的那个办事处的id' </td>
+</tr>
+</table>
+<h4>62.reg_extend_info&nbsp;&nbsp;</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">Id </td>
+<td width="84" valign="top">Int(10) </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">User_id </td>
+<td width="84" valign="top">Mediumint(8) </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Reg_field_id </td>
+<td width="84" valign="top">Int(10) </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Content </td>
+<td width="84" valign="top">text </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>63.reg_fields&nbsp;&nbsp;</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="93" valign="top">Id </td>
+<td width="84" valign="top">tinyint(3) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="93" valign="top">Reg_field_name </td>
+<td width="84" valign="top">varchar(60) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="93" valign="top">Dis_order </td>
+<td width="84" valign="top">tinyint(3) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="93" valign="top">Display </td>
+<td width="84" valign="top">tinyint(1) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="93" valign="top">Type </td>
+<td width="84" valign="top">tinyint(1) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="93" valign="top">Is_need </td>
+<td width="84" valign="top">tinyint(1) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>64.role&nbsp;&nbsp;</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">Role_id </td>
+<td width="84" valign="top">Smallint(5) </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Role_name </td>
+<td width="84" valign="top">Varchar(60) </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Action_list </td>
+<td width="84" valign="top">Text </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">Role_describe </td>
+<td width="84" valign="top">text </td>
+<td width="67" valign="top">是 </td>
+<td width="364" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>65.searchengine&nbsp;&nbsp;搜索引擎访问记录</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">date&nbsp; </td>
+<td width="91" valign="top">date </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">搜索引擎访问日期 </td>
+</tr>
+<tr>
+<td width="91" valign="top">searchengine&nbsp; </td>
+<td width="91" valign="top">varchar(20) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">搜索引擎名称 </td>
+</tr>
+<tr>
+<td width="91" valign="top">count&nbsp; </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">访问次数 </td>
+</tr>
+</table>
+<h4>66.sessions&nbsp;&nbsp;session记录表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="90" valign="top">sesskey&nbsp; </td>
+<td width="91" valign="top">char(32) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">sessionid </td>
+</tr>
+<tr>
+<td width="90" valign="top">expiry&nbsp; </td>
+<td width="91" valign="top">int(10)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">Session创建时间 </td>
+</tr>
+<tr>
+<td width="90" valign="top">userid&nbsp; </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">如果不是管理员，记录用户id </td>
+</tr>
+<tr>
+<td width="90" valign="top">adminid&nbsp; </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">如果是管理员记录管理员id </td>
+</tr>
+<tr>
+<td width="90" valign="top">ip&nbsp; </td>
+<td width="91" valign="top">char(15) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">客户端ip </td>
+</tr>
+<tr>
+<td width="90" valign="top">user_name </td>
+<td width="91" valign="top">varchar(60) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="90" valign="top">user_rank </td>
+<td width="91" valign="top">tinyint(3) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="90" valign="top">discount </td>
+<td width="91" valign="top">decimal(3,2) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="90" valign="top">email </td>
+<td width="91" valign="top">varchar(60) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="90" valign="top">data&nbsp; </td>
+<td width="91" valign="top">char(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">序列化后的session数据，如果session数据大于255则将数据存到表sessions_data，此处为空 </td>
+</tr>
+</table>
+<h4>67.sessions_data&nbsp;&nbsp;session数据库</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">sesskey&nbsp; </td>
+<td width="84" valign="top">varchar(32) </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">sessionid </td>
+</tr>
+<tr>
+<td width="91" valign="top">expiry&nbsp; </td>
+<td width="84" valign="top">int(10)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">Session创建时间 </td>
+</tr>
+<tr>
+<td width="91" valign="top">data&nbsp; </td>
+<td width="84" valign="top">longtext </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">Session序列化后的数据 </td>
+</tr>
+</table>
+<h4>68.shipping&nbsp;&nbsp;配送方式配置信息表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="100" valign="top">shipping_id&nbsp; </td>
+<td width="86" valign="top">tinyint(3)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="354" valign="top">自增id号 </td>
+</tr>
+<tr>
+<td width="100" valign="top">shipping_code&nbsp; </td>
+<td width="86" valign="top">varchar(20) </td>
+<td width="66" valign="top">否 </td>
+<td width="354" valign="top">配送方式的字符串代号 </td>
+</tr>
+<tr>
+<td width="100" valign="top">shipping_name&nbsp; </td>
+<td width="86" valign="top">varchar(120) </td>
+<td width="66" valign="top">否 </td>
+<td width="354" valign="top">配送方式名称 </td>
+</tr>
+<tr>
+<td width="100" valign="top">shipping_desc&nbsp; </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="354" valign="top">配送方式描述 </td>
+</tr>
+<tr>
+<td width="100" valign="top">insure&nbsp; </td>
+<td width="86" valign="top">varchar(10) </td>
+<td width="66" valign="top">否 </td>
+<td width="354" valign="top">保价费用，单位元，或者是百分数，该值直接输出为报价费用 </td>
+</tr>
+<tr>
+<td width="100" valign="top">support_cod&nbsp; </td>
+<td width="86" valign="top">tinyint(1)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="354" valign="top">是否支持货到付款，1，支持；0，不支持 </td>
+</tr>
+<tr>
+<td width="100" valign="top">enabled&nbsp; </td>
+<td width="86" valign="top">tinyint(1)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="354" valign="top">该配送方式是否被禁用，1，可用；0，禁用 </td>
+</tr>
+<tr>
+<td width="100" valign="top">shipping_print </td>
+<td width="86" valign="top">&nbsp;</td>
+<td width="66" valign="top">否 </td>
+<td width="354" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">print_bg </td>
+<td width="86" valign="top">&nbsp;</td>
+<td width="66" valign="top">是 </td>
+<td width="354" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">config_lable </td>
+<td width="86" valign="top">&nbsp;</td>
+<td width="66" valign="top">是 </td>
+<td width="354" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="100" valign="top">print_model </td>
+<td width="86" valign="top">&nbsp;</td>
+<td width="66" valign="top">是 </td>
+<td width="354" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>69.shipping_area&nbsp;&nbsp;配送方式所属的配送区域和配送费用信息</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="130" valign="top">shipping_area_id&nbsp; </td>
+<td width="86" valign="top">smallint(5)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="326" valign="top">自增id号 </td>
+</tr>
+<tr>
+<td width="130" valign="top">shipping_area_name&nbsp; </td>
+<td width="86" valign="top">varchar(150) </td>
+<td width="64" valign="top">否 </td>
+<td width="326" valign="top">配送方式中的配送区域的名字 </td>
+</tr>
+<tr>
+<td width="130" valign="top">shipping_id&nbsp; </td>
+<td width="86" valign="top">tinyint(3)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="326" valign="top">该配送区域所属的配送方式，同shipping的shipping_id </td>
+</tr>
+<tr>
+<td width="130" valign="top">configure&nbsp; </td>
+<td width="86" valign="top">text </td>
+<td width="64" valign="top">否 </td>
+<td width="326" valign="top">序列化的该配送区域的费用配置信息 </td>
+</tr>
+</table>
+<h4>70.shop_config&nbsp;&nbsp;全站配置信息表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">id&nbsp; </td>
+<td width="86" valign="top">smallint(5)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">全站配置信息自增id </td>
+</tr>
+<tr>
+<td width="91" valign="top">parent_id&nbsp; </td>
+<td width="86" valign="top">smallint(5)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">父节点id，取值于该表id字段的值 </td>
+</tr>
+<tr>
+<td width="91" valign="top">code&nbsp; </td>
+<td width="86" valign="top">varchar(30) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">跟变量名的作用差不多，其实就是语言包中的字符串索引，如$_LANG[''cfg_range''][''cart_confirm''] </td>
+</tr>
+<tr>
+<td width="91" valign="top">type&nbsp; </td>
+<td width="86" valign="top">varchar(10) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">该配置的类型，text，文本输入框 </td>
+</tr>
+<tr>
+<td width="91" valign="top">store_range&nbsp; </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">当语言包中的code字段对应的是一个数组时，那该处就是该数组的索引，如$_LANG[''cfg_range''][''cart_confirm''][1]；只有type字段为select,options时才有值' </td>
+</tr>
+<tr>
+<td width="91" valign="top">store_dir&nbsp; </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">当type为file时才有值，文件上传后的保存目录 </td>
+</tr>
+<tr>
+<td width="91" valign="top">value&nbsp; </td>
+<td width="86" valign="top">text </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">该项配置的值 </td>
+</tr>
+<tr>
+<td width="91" valign="top">sort_order&nbsp; </td>
+<td width="86" valign="top">tinyint(3)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">显示顺序，数字越大越靠后 </td>
+</tr>
+</table>
+<h4>71.snatch_log&nbsp;&nbsp;夺宝奇兵出价记录表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="90" valign="top">log_id&nbsp; </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">自增id号 </td>
+</tr>
+<tr>
+<td width="90" valign="top">snatch_id&nbsp; </td>
+<td width="92" valign="top">tinyint(3)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">夺宝奇兵活动号，取值于goods_activity的act_id字段 </td>
+</tr>
+<tr>
+<td width="90" valign="top">user_id&nbsp; </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">出价的用户id，取值于users的user_id </td>
+</tr>
+<tr>
+<td width="90" valign="top">bid_price&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">出价的价格 </td>
+</tr>
+<tr>
+<td width="90" valign="top">bid_time&nbsp; </td>
+<td width="92" valign="top">int(10)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">出价的时间 </td>
+</tr>
+</table>
+<h4>72.stats&nbsp;&nbsp;访问信息记录表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="100" valign="top">access_time&nbsp; </td>
+<td width="86" valign="top">int(10)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="353" valign="top">访问时间 </td>
+</tr>
+<tr>
+<td width="100" valign="top">ip_address&nbsp; </td>
+<td width="86" valign="top">varchar(15) </td>
+<td width="66" valign="top">否 </td>
+<td width="353" valign="top">访问者ip </td>
+</tr>
+<tr>
+<td width="100" valign="top">visit_times&nbsp; </td>
+<td width="86" valign="top">smallint(5)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="353" valign="top">访问次数，如果之前有过访问次数，在以前的基础上＋1 </td>
+</tr>
+<tr>
+<td width="100" valign="top">browser&nbsp; </td>
+<td width="86" valign="top">varchar(60) </td>
+<td width="66" valign="top">否 </td>
+<td width="353" valign="top">浏览器及版本 </td>
+</tr>
+<tr>
+<td width="100" valign="top">system&nbsp; </td>
+<td width="86" valign="top">varchar(20) </td>
+<td width="66" valign="top">否 </td>
+<td width="353" valign="top">操作系统 </td>
+</tr>
+<tr>
+<td width="100" valign="top">language&nbsp; </td>
+<td width="86" valign="top">varchar(20) </td>
+<td width="66" valign="top">否 </td>
+<td width="353" valign="top">语言 </td>
+</tr>
+<tr>
+<td width="100" valign="top">area&nbsp; </td>
+<td width="86" valign="top">varchar(30) </td>
+<td width="66" valign="top">否 </td>
+<td width="353" valign="top">Ip所在地区 </td>
+</tr>
+<tr>
+<td width="100" valign="top">referer_domain&nbsp; </td>
+<td width="86" valign="top">varchar(100) </td>
+<td width="66" valign="top">否 </td>
+<td width="353" valign="top">页面访问来源域名 </td>
+</tr>
+<tr>
+<td width="100" valign="top">referer_path&nbsp; </td>
+<td width="86" valign="top">varchar(200) </td>
+<td width="66" valign="top">否 </td>
+<td width="353" valign="top">页面访问来源除域名外的路径部分 </td>
+</tr>
+<tr>
+<td width="100" valign="top">access_url&nbsp; </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="353" valign="top">访问页面文件名 </td>
+</tr>
+</table>
+<h4>73.suppliers&nbsp;&nbsp;</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="102" valign="top">suppliers_id </td>
+<td width="86" valign="top">smallint(5) </td>
+<td width="66" valign="top">否 </td>
+<td width="352" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="102" valign="top">suppliers_name </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="66" valign="top">是 </td>
+<td width="352" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="102" valign="top">suppliers_desc </td>
+<td width="86" valign="top">mediumtext </td>
+<td width="66" valign="top">是 </td>
+<td width="352" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="102" valign="top">is_check </td>
+<td width="86" valign="top">tinyint(1) </td>
+<td width="66" valign="top">否 </td>
+<td width="352" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>74.tag&nbsp;&nbsp;商品的标记</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="90" valign="top">tag_id&nbsp; </td>
+<td width="91" valign="top">mediumint(8) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">商品标签自增id </td>
+</tr>
+<tr>
+<td width="90" valign="top">user_id&nbsp; </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">用户的id </td>
+</tr>
+<tr>
+<td width="90" valign="top">goods_id&nbsp; </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">商品的id </td>
+</tr>
+<tr>
+<td width="90" valign="top">tag_words&nbsp; </td>
+<td width="91" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">标签内容 </td>
+</tr>
+</table>
+<h4>75.template&nbsp;&nbsp;模板设置数据表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">filename&nbsp; </td>
+<td width="84" valign="top">varchar(30) </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">该条模板配置属于哪个模板页面 </td>
+</tr>
+<tr>
+<td width="91" valign="top">region&nbsp; </td>
+<td width="84" valign="top">varchar(40) </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">该条模板配置在它所属的模板文件中的位置 </td>
+</tr>
+<tr>
+<td width="91" valign="top">library&nbsp; </td>
+<td width="84" valign="top">varchar(40) </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">该条模板配置在它所属的模板文件中的位置处应该引入的lib的相对目录地址 </td>
+</tr>
+<tr>
+<td width="91" valign="top">sort_order&nbsp; </td>
+<td width="84" valign="top">tinyint(1)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">模板文件中这个位置的引入lib项的值的显示顺序 </td>
+</tr>
+<tr>
+<td width="91" valign="top">id&nbsp; </td>
+<td width="84" valign="top">smallint(5)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">字段意义待查 </td>
+</tr>
+<tr>
+<td width="91" valign="top">number&nbsp; </td>
+<td width="84" valign="top">tinyint(1)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">每次显示多少个值 </td>
+</tr>
+<tr>
+<td width="91" valign="top">type&nbsp; </td>
+<td width="84" valign="top">tinyint(1)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">属于哪个动态项，0，固定项；1，分类下的商品；2，品牌下的商品；3，文章列表；4，广告位 </td>
+</tr>
+<tr>
+<td width="91" valign="top">theme&nbsp; </td>
+<td width="84" valign="top">varchar(60) </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">该模板配置项属于哪套模板的模板名 </td>
+</tr>
+<tr>
+<td width="91" valign="top">remarks&nbsp; </td>
+<td width="84" valign="top">varchar(30) </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">备注，可能是预留字段，没有值所以没确定用途 </td>
+</tr>
+</table>
+<h4>76.topic&nbsp;&nbsp;专题活动配置表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">topic_id&nbsp; </td>
+<td width="86" valign="top">int(10)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">专题自增id </td>
+</tr>
+<tr>
+<td width="91" valign="top">title&nbsp; </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">专题名称 </td>
+</tr>
+<tr>
+<td width="91" valign="top">intro&nbsp; </td>
+<td width="86" valign="top">text </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">专题介绍 </td>
+</tr>
+<tr>
+<td width="91" valign="top">start_time&nbsp; </td>
+<td width="86" valign="top">int(11) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">专题开始时间 </td>
+</tr>
+<tr>
+<td width="91" valign="top">end_time&nbsp; </td>
+<td width="86" valign="top">int(10) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">结束时间 </td>
+</tr>
+<tr>
+<td width="91" valign="top">data&nbsp; </td>
+<td width="86" valign="top">text </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">专题数据内容，包括分类，商品等 </td>
+</tr>
+<tr>
+<td width="91" valign="top">template&nbsp; </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">专题模板文件 </td>
+</tr>
+<tr>
+<td width="91" valign="top">css&nbsp; </td>
+<td width="86" valign="top">text </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">专题样式代码 </td>
+</tr>
+<tr>
+<td width="91" valign="top">topic_img </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="67" valign="top">是 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">title_pic </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="67" valign="top">是 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">base_style </td>
+<td width="86" valign="top">char(6) </td>
+<td width="67" valign="top">是 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">htmls </td>
+<td width="86" valign="top">mediumtext </td>
+<td width="67" valign="top">是 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">keywords </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="67" valign="top">是 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="91" valign="top">description </td>
+<td width="86" valign="top">varchar(255) </td>
+<td width="67" valign="top">是 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>77.users&nbsp;&nbsp;</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="110" valign="top">user_id&nbsp; </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">会员资料自增id </td>
+</tr>
+<tr>
+<td width="110" valign="top">email&nbsp; </td>
+<td width="92" valign="top">varchar(60) </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">会员Email </td>
+</tr>
+<tr>
+<td width="110" valign="top">user_name&nbsp; </td>
+<td width="92" valign="top">varchar(60) </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">用户名 </td>
+</tr>
+<tr>
+<td width="110" valign="top">password&nbsp; </td>
+<td width="92" valign="top">varchar(32) </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">用户密码 </td>
+</tr>
+<tr>
+<td width="110" valign="top">question&nbsp; </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">密码提问 </td>
+</tr>
+<tr>
+<td width="110" valign="top">answer&nbsp; </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">密码回答 </td>
+</tr>
+<tr>
+<td width="110" valign="top">sex&nbsp; </td>
+<td width="92" valign="top">tinyint(1)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">性别&nbsp;;&nbsp;&nbsp;0保密;&nbsp;&nbsp;1男;&nbsp;2女 </td>
+</tr>
+<tr>
+<td width="110" valign="top">birthday&nbsp; </td>
+<td width="92" valign="top">date </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">出生日期 </td>
+</tr>
+<tr>
+<td width="110" valign="top">user_money&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">用户现有资金 </td>
+</tr>
+<tr>
+<td width="110" valign="top">frozen_money&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">用户冻结资金 </td>
+</tr>
+<tr>
+<td width="110" valign="top">pay_points&nbsp; </td>
+<td width="92" valign="top">int(10)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">消费积分 </td>
+</tr>
+<tr>
+<td width="110" valign="top">rank_points&nbsp; </td>
+<td width="92" valign="top">int(10)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">会员等级积分 </td>
+</tr>
+<tr>
+<td width="110" valign="top">address_id&nbsp; </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">收货信息id,表值表user_address </td>
+</tr>
+<tr>
+<td width="110" valign="top">reg_time&nbsp; </td>
+<td width="92" valign="top">int(10)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">注册时间&nbsp; </td>
+</tr>
+<tr>
+<td width="110" valign="top">last_login&nbsp; </td>
+<td width="92" valign="top">int(11)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">最后一次登录时间 </td>
+</tr>
+<tr>
+<td width="110" valign="top">last_time&nbsp; </td>
+<td width="92" valign="top">datetime </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">应该是最后一次修改信息时间，该表信息从其他表同步过来考虑 </td>
+</tr>
+<tr>
+<td width="110" valign="top">last_ip&nbsp; </td>
+<td width="92" valign="top">varchar(15) </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">最后一次登录IP </td>
+</tr>
+<tr>
+<td width="110" valign="top">visit_count&nbsp; </td>
+<td width="92" valign="top">smallint(5)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">员登记id，取值user_rank </td>
+</tr>
+<tr>
+<td width="110" valign="top">user_rank&nbsp; </td>
+<td width="92" valign="top">tinyint(3)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">会员登记id，取值user_rank </td>
+</tr>
+<tr>
+<td width="110" valign="top">is_special&nbsp; </td>
+<td width="92" valign="top">tinyint(3)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">是否特殊 </td>
+</tr>
+<tr>
+<td width="110" valign="top">salt&nbsp; </td>
+<td width="92" valign="top">varchar(10) </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="110" valign="top">parent_id&nbsp; </td>
+<td width="92" valign="top">mediumint(9) </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">推荐人会员id </td>
+</tr>
+<tr>
+<td width="110" valign="top">flag&nbsp; </td>
+<td width="92" valign="top">tinyint(3)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">标识 </td>
+</tr>
+<tr>
+<td width="110" valign="top">alias&nbsp; </td>
+<td width="92" valign="top">varchar(60) </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">昵称 </td>
+</tr>
+<tr>
+<td width="110" valign="top">msn&nbsp; </td>
+<td width="92" valign="top">varchar(60) </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">msn账号 </td>
+</tr>
+<tr>
+<td width="110" valign="top">qq&nbsp; </td>
+<td width="92" valign="top">varchar(20) </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">Qq账号 </td>
+</tr>
+<tr>
+<td width="110" valign="top">office_phone&nbsp; </td>
+<td width="92" valign="top">varchar(20) </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">办公电话 </td>
+</tr>
+<tr>
+<td width="110" valign="top">home_phone&nbsp; </td>
+<td width="92" valign="top">varchar(20) </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">家用电话 </td>
+</tr>
+<tr>
+<td width="110" valign="top">mobile_phone&nbsp; </td>
+<td width="92" valign="top">varchar(20) </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">移动电话 </td>
+</tr>
+<tr>
+<td width="110" valign="top">is_validated&nbsp; </td>
+<td width="92" valign="top">tinyint(3)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">是否生效 </td>
+</tr>
+<tr>
+<td width="110" valign="top">credit_line&nbsp; </td>
+<td width="92" valign="top">decimal(10,2)&nbsp; </td>
+<td width="64" valign="top">否 </td>
+<td width="340" valign="top">最大消费 </td>
+</tr>
+<tr>
+<td width="110" valign="top">passwd_question </td>
+<td width="92" valign="top">varchar(50) </td>
+<td width="64" valign="top">是 </td>
+<td width="340" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="110" valign="top">passwd_answer </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="64" valign="top">是 </td>
+<td width="340" valign="top"> </td>
+</tr>
+</table>
+<h4>78.user_account&nbsp;&nbsp;用户资金流动表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">id&nbsp; </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">自增id号 </td>
+</tr>
+<tr>
+<td width="91" valign="top">user_id&nbsp; </td>
+<td width="92" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">用户登录后保存在session中的id号，跟users表中的user_id对应 </td>
+</tr>
+<tr>
+<td width="91" valign="top">admin_user&nbsp; </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">操作该笔交易的管理员的用户名 </td>
+</tr>
+<tr>
+<td width="91" valign="top">amount&nbsp; </td>
+<td width="92" valign="top">decimal(10,2) </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">资金的数目，正数为增加，负数为减少 </td>
+</tr>
+<tr>
+<td width="91" valign="top">add_time&nbsp; </td>
+<td width="92" valign="top">int(10) </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">记录插入时间 </td>
+</tr>
+<tr>
+<td width="91" valign="top">paid_time&nbsp; </td>
+<td width="92" valign="top">int(10) </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">记录更新时间 </td>
+</tr>
+<tr>
+<td width="91" valign="top">admin_note&nbsp; </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">管理员的被准 </td>
+</tr>
+<tr>
+<td width="91" valign="top">user_note&nbsp; </td>
+<td width="92" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">用户备注 </td>
+</tr>
+<tr>
+<td width="91" valign="top">process_type&nbsp; </td>
+<td width="92" valign="top">tinyint(1) </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">操作类型，1，退款；0，预付费，其实就是充值 </td>
+</tr>
+<tr>
+<td width="91" valign="top">payment&nbsp; </td>
+<td width="92" valign="top">varchar(90) </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">支付渠道的名称，取自payment的pay_name字段 </td>
+</tr>
+<tr>
+<td width="91" valign="top">is_paid&nbsp; </td>
+<td width="92" valign="top">tinyint(1) </td>
+<td width="66" valign="top">否 </td>
+<td width="357" valign="top">是否已经付款，０，未付；１，已付 </td>
+</tr>
+</table>
+<h4>79.user_address&nbsp;&nbsp;收货人的信息列表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="93" valign="top">address_id&nbsp; </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="93" valign="top">address_name&nbsp; </td>
+<td width="91" valign="top">varchar(50) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">名称 </td>
+</tr>
+<tr>
+<td width="93" valign="top">user_id&nbsp; </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">用户表中的流水号 </td>
+</tr>
+<tr>
+<td width="93" valign="top">consignee&nbsp; </td>
+<td width="91" valign="top">varchar(60) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">收货人的名字 </td>
+</tr>
+<tr>
+<td width="93" valign="top">email&nbsp; </td>
+<td width="91" valign="top">varchar(60) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">收货人的email </td>
+</tr>
+<tr>
+<td width="93" valign="top">country&nbsp; </td>
+<td width="91" valign="top">smallint(5) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">收货人的国家 </td>
+</tr>
+<tr>
+<td width="93" valign="top">province&nbsp; </td>
+<td width="91" valign="top">smallint(5) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">收货人的省份 </td>
+</tr>
+<tr>
+<td width="93" valign="top">city&nbsp; </td>
+<td width="91" valign="top">smallint(5) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">收货人城市 </td>
+</tr>
+<tr>
+<td width="93" valign="top">district&nbsp; </td>
+<td width="91" valign="top">smallint(5) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">收货人的地区 </td>
+</tr>
+<tr>
+<td width="93" valign="top">address&nbsp; </td>
+<td width="91" valign="top">varchar(120) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">收货人的详细地址 </td>
+</tr>
+<tr>
+<td width="93" valign="top">zipcode&nbsp; </td>
+<td width="91" valign="top">varchar(60) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">收货人的邮编 </td>
+</tr>
+<tr>
+<td width="93" valign="top">tel&nbsp; </td>
+<td width="91" valign="top">varchar(60) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">收货人的电话 </td>
+</tr>
+<tr>
+<td width="93" valign="top">mobile&nbsp; </td>
+<td width="91" valign="top">varchar(60) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">收货人的手机号 </td>
+</tr>
+<tr>
+<td width="93" valign="top">sign_building&nbsp; </td>
+<td width="91" valign="top">varchar(120) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">收货地址的标志性建筑名 </td>
+</tr>
+<tr>
+<td width="93" valign="top">best_time&nbsp; </td>
+<td width="91" valign="top">varchar(120) </td>
+<td width="66" valign="top">否 </td>
+<td width="355" valign="top">收货人的最佳收货时间 </td>
+</tr>
+</table>
+<h4>80.user_bonus&nbsp;&nbsp;已经发送的红包信息列表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="96" valign="top">bonus_id&nbsp; </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="353" valign="top">红包的流水号 </td>
+</tr>
+<tr>
+<td width="96" valign="top">bonus_type_id&nbsp; </td>
+<td width="91" valign="top">tinyint(3)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="353" valign="top">红包发送类型.0,按用户如会员等级,会员名称发放;1,按商品类别发送;2,按订单金额所达到的额度发送;3,线下发送 </td>
+</tr>
+<tr>
+<td width="96" valign="top">bonus_sn&nbsp; </td>
+<td width="91" valign="top">bigint(20)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="353" valign="top">红包号,如果为0就是没有红包号.如果大于0,就需要输入该红包号才能使用红包 </td>
+</tr>
+<tr>
+<td width="96" valign="top">user_id&nbsp; </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="353" valign="top">该红包属于某会员的id.如果为0,就是该红包不属于某会员 </td>
+</tr>
+<tr>
+<td width="96" valign="top">used_time&nbsp; </td>
+<td width="91" valign="top">int(10)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="353" valign="top">红包使用的时间 </td>
+</tr>
+<tr>
+<td width="96" valign="top">order_id&nbsp; </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="353" valign="top">使用了该红包的交易号 </td>
+</tr>
+<tr>
+<td width="96" valign="top">emailed&nbsp; </td>
+<td width="91" valign="top">tinyint(3)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="353" valign="top">否已经将红包发送到用户的邮箱；1，是；0，否 </td>
+</tr>
+</table>
+<h4>81.user_feed&nbsp;&nbsp;</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="90" valign="top">Feed_id </td>
+<td width="91" valign="top">mediumint(8) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="90" valign="top">User_id </td>
+<td width="91" valign="top">mediumint(8) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="90" valign="top">Value_id </td>
+<td width="91" valign="top">mediumint(8) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="90" valign="top">Goods_id </td>
+<td width="91" valign="top">mediumint(8) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="90" valign="top">Feed_type </td>
+<td width="91" valign="top">tinyint(1) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="90" valign="top">Is_feed </td>
+<td width="91" valign="top">tinyint(1) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>82.user_rank&nbsp;&nbsp;会员等级配置信息</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">rank_id&nbsp; </td>
+<td width="84" valign="top">tinyint(3)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">会员等级编号，其中0是非会员 </td>
+</tr>
+<tr>
+<td width="91" valign="top">rank_name&nbsp; </td>
+<td width="84" valign="top">varchar(30) </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">会员等级名称 </td>
+</tr>
+<tr>
+<td width="91" valign="top">min_points&nbsp; </td>
+<td width="84" valign="top">int(10)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">该等级的最低积分 </td>
+</tr>
+<tr>
+<td width="91" valign="top">max_points&nbsp; </td>
+<td width="84" valign="top">int(10)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">该等级的最高积分 </td>
+</tr>
+<tr>
+<td width="91" valign="top">discount&nbsp; </td>
+<td width="84" valign="top">tinyint(3)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">该会员等级的商品折扣 </td>
+</tr>
+<tr>
+<td width="91" valign="top">show_price&nbsp; </td>
+<td width="84" valign="top">tinyint(1)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">是否在不是该等级会员购买页面显示该会员等级的折扣价格.1,显示;0,不显示 </td>
+</tr>
+<tr>
+<td width="91" valign="top">special_rank&nbsp; </td>
+<td width="84" valign="top">tinyint(1)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="364" valign="top">是否事特殊会员等级组.0,不是;1,是 </td>
+</tr>
+</table>
+<h4>83.virtual_card&nbsp;&nbsp;虚拟卡卡号库</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="98" valign="top">card_id&nbsp; </td>
+<td width="91" valign="top">mediumint(8) </td>
+<td width="66" valign="top">否 </td>
+<td width="351" valign="top">虚拟卡卡号自增id </td>
+</tr>
+<tr>
+<td width="98" valign="top">goods_id&nbsp; </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="351" valign="top">该虚拟卡对应的商品id，取值于表goods </td>
+</tr>
+<tr>
+<td width="98" valign="top">card_sn&nbsp; </td>
+<td width="91" valign="top">varchar(60) </td>
+<td width="66" valign="top">否 </td>
+<td width="351" valign="top">加密后的卡号 </td>
+</tr>
+<tr>
+<td width="98" valign="top">card_password&nbsp; </td>
+<td width="91" valign="top">varchar(60) </td>
+<td width="66" valign="top">否 </td>
+<td width="351" valign="top">加密后的密码 </td>
+</tr>
+<tr>
+<td width="98" valign="top">add_date&nbsp; </td>
+<td width="91" valign="top">int(11) </td>
+<td width="66" valign="top">否 </td>
+<td width="351" valign="top">卡号添加日期 </td>
+</tr>
+<tr>
+<td width="98" valign="top">end_date&nbsp; </td>
+<td width="91" valign="top">int(11) </td>
+<td width="66" valign="top">否 </td>
+<td width="351" valign="top">卡号截至使用日期 </td>
+</tr>
+<tr>
+<td width="98" valign="top">is_saled&nbsp; </td>
+<td width="91" valign="top">tinyint(1) </td>
+<td width="66" valign="top">否 </td>
+<td width="351" valign="top">是否卖出，0，否；1，是 </td>
+</tr>
+<tr>
+<td width="98" valign="top">order_sn&nbsp; </td>
+<td width="91" valign="top">varchar(20) </td>
+<td width="66" valign="top">否 </td>
+<td width="351" valign="top">卖出该卡号的交易号，取值表order_info </td>
+</tr>
+<tr>
+<td width="98" valign="top">crc32&nbsp; </td>
+<td width="91" valign="top">int(11) </td>
+<td width="66" valign="top">否 </td>
+<td width="351" valign="top">crc32后的key </td>
+</tr>
+</table>
+<h4>84.volume_price&nbsp;&nbsp;</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="94" valign="top">Price_type </td>
+<td width="84" valign="top">Tinyint(1) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="94" valign="top">Goods_id </td>
+<td width="84" valign="top">Mediumint(8) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="94" valign="top">Volume_number </td>
+<td width="84" valign="top">Smallint(5) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td width="94" valign="top">Volume_price </td>
+<td width="84" valign="top">Decimal(10,2) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>85.vote&nbsp;&nbsp;网站调查信息记录表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">vote_id&nbsp; </td>
+<td width="86" valign="top">smallint(5)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">在线调查自增id </td>
+</tr>
+<tr>
+<td width="91" valign="top">vote_name&nbsp; </td>
+<td width="86" valign="top">varchar(250) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">在线调查主题 </td>
+</tr>
+<tr>
+<td width="91" valign="top">start_time&nbsp; </td>
+<td width="86" valign="top">int(11)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">在线调查开始时间 </td>
+</tr>
+<tr>
+<td width="91" valign="top">end_time&nbsp; </td>
+<td width="86" valign="top">int(11)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">在线调查结束时间 </td>
+</tr>
+<tr>
+<td width="91" valign="top">can_multi&nbsp; </td>
+<td width="86" valign="top">tinyint(1)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">能否多选，0，可以；1，不可以 </td>
+</tr>
+<tr>
+<td width="91" valign="top">vote_count&nbsp; </td>
+<td width="86" valign="top">int(10)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">投票人数也可以说投票次数 </td>
+</tr>
+</table>
+<h4>86.vote_log&nbsp;&nbsp;投票记录表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="90" valign="top">log_id&nbsp; </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">投票记录自增id </td>
+</tr>
+<tr>
+<td width="90" valign="top">vote_id&nbsp; </td>
+<td width="91" valign="top">smallint(5)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">关联的投票主题id，取值表vote </td>
+</tr>
+<tr>
+<td width="90" valign="top">ip_address&nbsp; </td>
+<td width="91" valign="top">varchar(15) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">投票的ip地址 </td>
+</tr>
+<tr>
+<td width="90" valign="top">vote_time&nbsp; </td>
+<td width="91" valign="top">int(10) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">投票的时间 </td>
+</tr>
+</table>
+<h4>87.vote_option&nbsp;&nbsp;投票的选项内容表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">option_id&nbsp; </td>
+<td width="86" valign="top">smallint(5)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">投票选项自增id </td>
+</tr>
+<tr>
+<td width="91" valign="top">vote_id&nbsp; </td>
+<td width="86" valign="top">smallint(5)&nbsp; </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">关联的投票主题id，取值表vote </td>
+</tr>
+<tr>
+<td width="91" valign="top">option_name&nbsp; </td>
+<td width="86" valign="top">varchar(250) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">投票选项的值 </td>
+</tr>
+<tr>
+<td width="91" valign="top">option_count&nbsp; </td>
+<td width="86" valign="top">int(8) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">该选项的票数 </td>
+</tr>
+<tr>
+<td width="91" valign="top">option_order </td>
+<td width="86" valign="top">tinyint(3) </td>
+<td width="67" valign="top">否 </td>
+<td width="362" valign="top">&nbsp;</td>
+</tr>
+</table>
+<h4>88.wholesale&nbsp;&nbsp;批发方案表</h4>
+<table width="100%" border="1" cellpadding="0" cellspacing="0">
+<tr style="background:#F1F1F1;">
+<th style="width:10%">字段</th>
+<th style="width:10%">类型</th>
+<th style="width:10%">Null/默认</th>
+<th>注释</th>
+</tr>
+<tr>
+<td width="91" valign="top">act_id&nbsp; </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">批发方案自增id </td>
+</tr>
+<tr>
+<td width="91" valign="top">goods_id&nbsp; </td>
+<td width="91" valign="top">mediumint(8)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">商品ID </td>
+</tr>
+<tr>
+<td width="91" valign="top">goods_name&nbsp; </td>
+<td width="91" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">商品名称 </td>
+</tr>
+<tr>
+<td width="91" valign="top">rank_ids&nbsp; </td>
+<td width="91" valign="top">varchar(255) </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">适用会员登记,多个值之间用逗号分隔取值于user_rank </td>
+</tr>
+<tr>
+<td width="91" valign="top">prices&nbsp; </td>
+<td width="91" valign="top">text </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">序列化后的商品属性,数量,价格 </td>
+</tr>
+<tr>
+<td width="91" valign="top">enabled&nbsp; </td>
+<td width="91" valign="top">tinyint(3)&nbsp; </td>
+<td width="66" valign="top">否 </td>
+<td width="358" valign="top">批发方案是否可用 </td>
+</tr>
+</table>
+</div>
+<div class="menu"></div>
+</body>
+</html>
