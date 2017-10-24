@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0033)JavaScript 插件 · Bootstrap 中文文档.htm -->
+<!-- saved from url=(0033) -->
 <html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -12,7 +12,7 @@
 
 <title>
   
-    JavaScript 插件 · Bootstrap 中文文档
+    global_javascript_plugin
   
 </title>
 
@@ -27,7 +27,7 @@
 <!-- Documentation extras -->
 <link href="./css/docs.min.css" rel="stylesheet">
 <!--[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-<script src="./JavaScript 插件 · Bootstrap 中文文档_files/ie-emulation-modes-warning.js"></script>
+<script src="./global_javascript_plugin_files/ie-emulation-modes-warning.js"></script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -36,14 +36,25 @@
 <![endif]-->
 
 <!-- Favicons -->
-<link rel="apple-touch-icon" href="http://v3.bootcss.com/apple-touch-icon.png">
-<link rel="icon" href="http://v3.bootcss.com/favicon.ico">
-<script>
+<link rel="apple-touch-icon" href="http://docs.5izan.com/bootstrap3/apple-touch-icon.png">
+<link rel="icon" href="http://docs.5izan.com/bootstrap3/favicon.ico">
+  <!--baidu 统计代码 -->
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c71e48c99bfcd4db07a04a44a3f175b0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+  <script>
   var _hmt = _hmt || [];
 </script>
   </head>
   <body>
-    <a id="skippy" class="sr-only sr-only-focusable" href="JavaScript 插件 · Bootstrap 中文文档.htm#content"><div class="container"><span class="skiplink-text">Skip to main content</span></div></a>
+    <a id="skippy" class="sr-only sr-only-focusable" href="#content"><div class="container"><span class="skiplink-text">Skip to main content</span></div></a>
 
     <!-- Docs master nav -->
     <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
@@ -55,29 +66,25 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="http://v3.bootcss.com/" class="navbar-brand">Bootstrap</a>
+      <a href="#" class="navbar-brand">Bootstrap</a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse">
       <ul class="nav navbar-nav">
         <li>
-          <a href="起步 · Bootstrap 中文文档.htm">起步</a>
+          <a href="index.htm">起步</a>
         </li>
         <li class="active">
-          <a href="全局 CSS 样式 · Bootstrap 中文文档.htm">全局 CSS 样式</a>
+          <a href="global_css.htm">全局 CSS 样式</a>
         </li>
         <li>
-          <a href="组件 · Bootstrap 中文文档.htm">组件</a>
+          <a href="global_component.htm">组件</a>
         </li>
         <li>
-          <a href="JavaScript 插件 · Bootstrap 中文文档.htm">JavaScript 插件</a>
+          <a href="global_javascript_plugin.htm">JavaScript 插件</a>
         </li>
         <li>
-          <a href="定制并下载 Bootstrap · Bootstrap 中文文档.htm">定制</a>
+          <a href="download_bootsratp.htm">定制</a>
         </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="http://job.bootcss.com/" onclick="_hmt.push([&#39;_trackEvent&#39;, &#39;docv3-navbar&#39;, &#39;click&#39;, &#39;doc-home-navbar-job&#39;])" target="_blank">高薪工作</a></li>
-        <li><a href="http://expo.bootcss.com/" onclick="_hmt.push([&#39;_trackEvent&#39;, &#39;docv3-navbar&#39;, &#39;click&#39;, &#39;doc-home-navbar-expo&#39;])" target="_blank">优站精选</a></li>
       </ul>
     </nav>
   </div>
@@ -190,7 +197,7 @@
   </div>
   <div class="bs-callout bs-callout-warning" id="callout-modal-mobile-caveats">
     <h4>对于移动设备的附加说明</h4>
-    <p>这里提供了在移动设备上使用模态框有一些附加说明。请参考<a href="http://v3.bootcss.com/getting-started/#support-fixed-position-keyboards">浏览器支持</a>章节。</p>
+    <p>这里提供了在移动设备上使用模态框有一些附加说明。请参考<a href="http://docs.5izan.com/bootstrap3/getting-started/#support-fixed-position-keyboards">浏览器支持</a>章节。</p>
   </div>
 
   <p><strong class="text-danger">Due to how HTML5 defines its semantics, the <code>autofocus</code> HTML attribute has no effect in Bootstrap modals.</strong> To achieve the same effect, use some custom JavaScript:</p>
@@ -255,10 +262,10 @@
           <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
 
           <h4>Popover in a modal</h4>
-          <p>This <a href="JavaScript 插件 · Bootstrap 中文文档.htm#" role="button" class="btn btn-default popover-test" title="" data-content="And here&#39;s some amazing content. It&#39;s very engaging. right?" data-original-title="A Title">button</a> should trigger a popover on click.</p>
+          <p>This <a href="#" role="button" class="btn btn-default popover-test" title="" data-content="And here&#39;s some amazing content. It&#39;s very engaging. right?" data-original-title="A Title">button</a> should trigger a popover on click.</p>
 
           <h4>Tooltips in a modal</h4>
-          <p><a href="JavaScript 插件 · Bootstrap 中文文档.htm#" class="tooltip-test" title="" data-original-title="Tooltip">This link</a> and <a href="JavaScript 插件 · Bootstrap 中文文档.htm#" class="tooltip-test" title="" data-original-title="Tooltip">that link</a> should have tooltips on hover.</p>
+          <p><a href="#" class="tooltip-test" title="" data-original-title="Tooltip">This link</a> and <a href="#" class="tooltip-test" title="" data-original-title="Tooltip">that link</a> should have tooltips on hover.</p>
 
           <hr>
 
@@ -594,12 +601,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="JavaScript 插件 · Bootstrap 中文文档.htm#">Project Name</a>
+          <a class="navbar-brand" href="#">Project Name</a>
         </div>
         <div class="collapse navbar-collapse bs-example-js-navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="dropdown">
-              <a id="drop1" href="JavaScript 插件 · Bootstrap 中文文档.htm#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+              <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
                 Dropdown
                 <span class="caret"></span>
               </a>
@@ -612,7 +619,7 @@
               </ul>
             </li>
             <li class="dropdown">
-              <a id="drop2" href="JavaScript 插件 · Bootstrap 中文文档.htm#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+              <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
                 Dropdown
                 <span class="caret"></span>
               </a>
@@ -627,7 +634,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li id="fat-menu" class="dropdown">
-              <a id="drop3" href="JavaScript 插件 · Bootstrap 中文文档.htm#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+              <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
                 Dropdown
                 <span class="caret"></span>
               </a>
@@ -648,9 +655,9 @@
   <h3>Within pills</h3>
   <div class="bs-example">
     <ul class="nav nav-pills" role="tablist">
-      <li role="presentation" class="active"><a href="JavaScript 插件 · Bootstrap 中文文档.htm#">Regular link</a></li>
+      <li role="presentation" class="active"><a href="#">Regular link</a></li>
       <li role="presentation" class="dropdown">
-        <a id="drop4" href="JavaScript 插件 · Bootstrap 中文文档.htm#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+        <a id="drop4" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
           Dropdown
           <span class="caret"></span>
         </a>
@@ -663,7 +670,7 @@
         </ul>
       </li>
       <li role="presentation" class="dropdown">
-        <a id="drop5" href="JavaScript 插件 · Bootstrap 中文文档.htm#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+        <a id="drop5" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
           Dropdown
           <span class="caret"></span>
         </a>
@@ -676,7 +683,7 @@
         </ul>
       </li>
       <li role="presentation" class="dropdown">
-        <a id="drop6" href="JavaScript 插件 · Bootstrap 中文文档.htm#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+        <a id="drop6" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
           Dropdown
           <span class="caret"></span>
         </a>
@@ -786,19 +793,19 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="JavaScript 插件 · Bootstrap 中文文档.htm#">Project Name</a>
+          <a class="navbar-brand" href="#">Project Name</a>
         </div>
         <div class="collapse navbar-collapse bs-example-js-navbar-scrollspy">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="JavaScript 插件 · Bootstrap 中文文档.htm#fat">@fat</a></li>
-            <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#mdo">@mdo</a></li>
+            <li class="active"><a href="#fat">@fat</a></li>
+            <li><a href="#mdo">@mdo</a></li>
             <li class="dropdown">
-              <a href="JavaScript 插件 · Bootstrap 中文文档.htm#" id="navbarDrop1" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <a href="#" id="navbarDrop1" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="navbarDrop1">
-                <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#one" tabindex="-1">one</a></li>
-                <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#two" tabindex="-1">two</a></li>
+                <li><a href="#one" tabindex="-1">one</a></li>
+                <li><a href="#two" tabindex="-1">two</a></li>
                 <li class="divider"></li>
-                <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#three" tabindex="-1">three</a></li>
+                <li><a href="#three" tabindex="-1">three</a></li>
               </ul>
             </li>
           </ul>
@@ -826,7 +833,7 @@
 
   <div class="bs-callout bs-callout-warning" id="callout-scrollspy-needs-nav">
     <h4>依赖 Bootstrap 的导航组件</h4>
-    <p>滚动监听插件依赖 <a href="http://v3.bootcss.com/components/#nav">Bootstrap 的导航组件</a> 用于高亮显示当前激活的链接。</p>
+    <p>滚动监听插件依赖 <a href="http://docs.5izan.com/bootstrap3/components/#nav">Bootstrap 的导航组件</a> 用于高亮显示当前激活的链接。</p>
   </div>
   <div class="bs-callout bs-callout-danger" id="callout-scrollspy-target-ids">
     <h4>Resolvable ID targets required</h4>
@@ -920,13 +927,13 @@
   <p>Add quick, dynamic tab functionality to transition through panes of local content, even via dropdown menus.</p>
   <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
     <ul id="myTab" class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="JavaScript 插件 · Bootstrap 中文文档.htm#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Home</a></li>
-      <li role="presentation"><a href="JavaScript 插件 · Bootstrap 中文文档.htm#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Profile</a></li>
+      <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Home</a></li>
+      <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Profile</a></li>
       <li role="presentation" class="dropdown">
-        <a href="JavaScript 插件 · Bootstrap 中文文档.htm#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">Dropdown <span class="caret"></span></a>
+        <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">Dropdown <span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
-          <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#dropdown1" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">@fat</a></li>
-          <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">@mdo</a></li>
+          <li><a href="#dropdown1" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">@fat</a></li>
+          <li><a href="#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">@mdo</a></li>
         </ul>
       </li>
     </ul>
@@ -948,7 +955,7 @@
 
   <div class="bs-callout bs-callout-info" id="callout-tabs-extends-component">
     <h4>Extends tabbed navigation</h4>
-    <p>This plugin extends the <a href="http://v3.bootcss.com/components/#nav-tabs">tabbed navigation component</a> to add tabbable areas.</p>
+    <p>This plugin extends the <a href="http://docs.5izan.com/bootstrap3/components/#nav-tabs">tabbed navigation component</a> to add tabbable areas.</p>
   </div>
 
 
@@ -968,7 +975,7 @@
 <span class="nx">$</span><span class="p">(</span><span class="s1">'#myTab li:eq(2) a'</span><span class="p">).</span><span class="nx">tab</span><span class="p">(</span><span class="s1">'show'</span><span class="p">)</span> <span class="c1">// Select third tab (0-indexed)</span></code></pre></div>
 
   <h3>Markup</h3>
-  <p>You can activate a tab or pill navigation without writing any JavaScript by simply specifying <code>data-toggle="tab"</code> or <code>data-toggle="pill"</code> on an element. Adding the <code>nav</code> and <code>nav-tabs</code> classes to the tab <code>ul</code> will apply the Bootstrap <a href="http://v3.bootcss.com/components/#nav-tabs">tab styling</a>, while adding the <code>nav</code> and <code>nav-pills</code> classes will apply <a href="http://v3.bootcss.com/components/#nav-pills">pill styling</a>.</p>
+  <p>You can activate a tab or pill navigation without writing any JavaScript by simply specifying <code>data-toggle="tab"</code> or <code>data-toggle="pill"</code> on an element. Adding the <code>nav</code> and <code>nav-tabs</code> classes to the tab <code>ul</code> will apply the Bootstrap <a href="http://docs.5izan.com/bootstrap3/components/#nav-tabs">tab styling</a>, while adding the <code>nav</code> and <code>nav-pills</code> classes will apply <a href="http://docs.5izan.com/bootstrap3/components/#nav-pills">pill styling</a>.</p>
 <div class="zero-clipboard"><span class="btn-clipboard">复制</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">role=</span><span class="s">"tabpanel"</span><span class="nt">&gt;</span>
 
   <span class="c">&lt;!-- Nav tabs --&gt;</span>
@@ -1074,7 +1081,7 @@
   <h2 id="tooltips-examples">Examples</h2>
   <p>Hover over the links below to see tooltips:</p>
   <div class="bs-example tooltip-demo">
-    <p>Tight pants next level keffiyeh <a href="JavaScript 插件 · Bootstrap 中文文档.htm#" data-toggle="tooltip" title="Default tooltip">you probably</a> haven't heard of them. Photo booth beard raw denim letterpress vegan messenger bag stumptown. Farm-to-table seitan, mcsweeney's fixie sustainable quinoa 8-bit american apparel <a href="JavaScript 插件 · Bootstrap 中文文档.htm#" data-toggle="tooltip" title="Another tooltip">have a</a> terry richardson vinyl chambray. Beard stumptown, cardigans banh mi lomo thundercats. Tofu biodiesel williamsburg marfa, four loko mcsweeney's cleanse vegan chambray. A really ironic artisan <a href="JavaScript 插件 · Bootstrap 中文文档.htm#" data-toggle="tooltip" title="Another one here too">whatever keytar</a>, scenester farm-to-table banksy Austin <a href="JavaScript 插件 · Bootstrap 中文文档.htm#" data-toggle="tooltip" title="The last tip!">twitter handle</a> freegan cred raw denim single-origin coffee viral.</p>
+    <p>Tight pants next level keffiyeh <a href="#" data-toggle="tooltip" title="Default tooltip">you probably</a> haven't heard of them. Photo booth beard raw denim letterpress vegan messenger bag stumptown. Farm-to-table seitan, mcsweeney's fixie sustainable quinoa 8-bit american apparel <a href="#" data-toggle="tooltip" title="Another tooltip">have a</a> terry richardson vinyl chambray. Beard stumptown, cardigans banh mi lomo thundercats. Tofu biodiesel williamsburg marfa, four loko mcsweeney's cleanse vegan chambray. A really ironic artisan <a href="#" data-toggle="tooltip" title="Another one here too">whatever keytar</a>, scenester farm-to-table banksy Austin <a href="#" data-toggle="tooltip" title="The last tip!">twitter handle</a> freegan cred raw denim single-origin coffee viral.</p>
   </div><!-- /example -->
 
   <h3>Static tooltip</h3>
@@ -1330,7 +1337,7 @@
 
   <div class="bs-callout bs-callout-danger" id="callout-popover-needs-tooltip">
     <h4>插件依赖</h4>
-    <p>弹出框依赖 <a href="JavaScript 插件 · Bootstrap 中文文档.htm#tooltips">工具提示插件</a> ，因此，如果你定制了 Bootstrap，一定要注意将依赖的插件编译进去。</p>
+    <p>弹出框依赖 <a href="#tooltips">工具提示插件</a> ，因此，如果你定制了 Bootstrap，一定要注意将依赖的插件编译进去。</p>
   </div>
   <div class="bs-callout bs-callout-danger" id="callout-popover-opt-in">
     <h4>初始化</h4>
@@ -1701,7 +1708,7 @@ sagittis lacus vel augue laoreet rutrum faucibus."</span><span class="nt">&gt;</
   <p>通过添加 <code>data-loading-text="Loading..."</code> 可以为按钮设置正在加载的状态。</p>
   <div class="bs-callout bs-callout-info" id="callout-buttons-state-names">
     <h4>Use whichever state you like!</h4>
-    <p>For the sake of this demonstration, we are using <code>data-loading-text</code> and <code>$().button('loading')</code>, but that's not the only state you can use. <a href="JavaScript 插件 · Bootstrap 中文文档.htm#buttons-methods">See more on this below in the <code>$().button(string)</code> documentation</a>.</p>
+    <p>For the sake of this demonstration, we are using <code>data-loading-text</code> and <code>$().button('loading')</code>, but that's not the only state you can use. <a href="#buttons-methods">See more on this below in the <code>$().button(string)</code> documentation</a>.</p>
   </div>
   <div class="bs-example">
     <button type="button" id="loading-example-btn" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
@@ -1823,7 +1830,7 @@ sagittis lacus vel augue laoreet rutrum faucibus."</span><span class="nt">&gt;</
 
   <div class="bs-callout bs-callout-danger" id="callout-collapse-dependency">
     <h4>Plugin dependency</h4>
-    <p>Collapse requires the <a href="JavaScript 插件 · Bootstrap 中文文档.htm#transitions">transitions plugin</a> to be included in your version of Bootstrap.</p>
+    <p>Collapse requires the <a href="#transitions">transitions plugin</a> to be included in your version of Bootstrap.</p>
   </div>
 
   <h2 id="collapse-example">Example</h2>
@@ -1837,7 +1844,7 @@ sagittis lacus vel augue laoreet rutrum faucibus."</span><span class="nt">&gt;</
 
   <div class="bs-example">
     <p>
-      <a class="btn btn-primary" data-toggle="collapse" href="JavaScript 插件 · Bootstrap 中文文档.htm#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
         Link with href
       </a>
       <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -1870,7 +1877,7 @@ sagittis lacus vel augue laoreet rutrum faucibus."</span><span class="nt">&gt;</
       <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingOne">
           <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="JavaScript 插件 · Bootstrap 中文文档.htm#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
               Collapsible Group Item #1
             </a>
           </h4>
@@ -1884,7 +1891,7 @@ sagittis lacus vel augue laoreet rutrum faucibus."</span><span class="nt">&gt;</
       <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingTwo">
           <h4 class="panel-title">
-            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="JavaScript 插件 · Bootstrap 中文文档.htm#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
               Collapsible Group Item #2
             </a>
           </h4>
@@ -1898,7 +1905,7 @@ sagittis lacus vel augue laoreet rutrum faucibus."</span><span class="nt">&gt;</
       <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingThree">
           <h4 class="panel-title">
-            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="JavaScript 插件 · Bootstrap 中文文档.htm#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
               Collapsible Group Item #3
             </a>
           </h4>
@@ -1962,7 +1969,7 @@ sagittis lacus vel augue laoreet rutrum faucibus."</span><span class="nt">&gt;</
     <div class="panel panel-default">
       <div class="panel-heading" role="tab" id="collapseListGroupHeading1">
         <h4 class="panel-title">
-          <a class="collapsed" data-toggle="collapse" href="JavaScript 插件 · Bootstrap 中文文档.htm#collapseListGroup1" aria-expanded="false" aria-controls="collapseListGroup1">
+          <a class="collapsed" data-toggle="collapse" href="#collapseListGroup1" aria-expanded="false" aria-controls="collapseListGroup1">
             Collapsible list group
           </a>
         </h4>
@@ -2108,11 +2115,11 @@ sagittis lacus vel augue laoreet rutrum faucibus."</span><span class="nt">&gt;</
           <img data-src="holder.js/900x500/auto/#555:#333/text:Third slide" alt="Third slide [900x500]" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDkwMCA1MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzPjwvZGVmcz48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzU1NSI+PC9yZWN0PjxnPjx0ZXh0IHg9IjMwNy41IiB5PSIyNTAiIHN0eWxlPSJmaWxsOiMzMzM7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6NDJwdDtkb21pbmFudC1iYXNlbGluZTpjZW50cmFsIj5UaGlyZCBzbGlkZTwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true">
         </div>
       </div>
-      <a class="left carousel-control" href="JavaScript 插件 · Bootstrap 中文文档.htm#carousel-example-generic" role="button" data-slide="prev">
+      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-      <a class="right carousel-control" href="JavaScript 插件 · Bootstrap 中文文档.htm#carousel-example-generic" role="button" data-slide="next">
+      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
@@ -2201,11 +2208,11 @@ sagittis lacus vel augue laoreet rutrum faucibus."</span><span class="nt">&gt;</
           </div>
         </div>
       </div>
-      <a class="left carousel-control" href="JavaScript 插件 · Bootstrap 中文文档.htm#carousel-example-captions" role="button" data-slide="prev">
+      <a class="left carousel-control" href="#carousel-example-captions" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-      <a class="right carousel-control" href="JavaScript 插件 · Bootstrap 中文文档.htm#carousel-example-captions" role="button" data-slide="next">
+      <a class="right carousel-control" href="#carousel-example-captions" role="button" data-slide="next">
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
@@ -2449,135 +2456,135 @@ sagittis lacus vel augue laoreet rutrum faucibus."</span><span class="nt">&gt;</
             <ul class="nav bs-docs-sidenav">
               
                 <li>
-  <a href="JavaScript 插件 · Bootstrap 中文文档.htm#js-overview">概览</a>
+  <a href="#js-overview">概览</a>
   <ul class="nav">
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#js-individual-compiled">单个还是全部引入</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#js-data-attrs">data 属性</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#js-programmatic-api">编程方式的 API</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#js-noconflict">避免命名空间冲突</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#js-events">事件</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#js-version-nums">Version numbers</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#js-disabled">浏览器的 JavaScript 被禁用的情况</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#callout-third-party-libs">第三方工具库</a></li>
+    <li><a href="#js-individual-compiled">单个还是全部引入</a></li>
+    <li><a href="#js-data-attrs">data 属性</a></li>
+    <li><a href="#js-programmatic-api">编程方式的 API</a></li>
+    <li><a href="#js-noconflict">避免命名空间冲突</a></li>
+    <li><a href="#js-events">事件</a></li>
+    <li><a href="#js-version-nums">Version numbers</a></li>
+    <li><a href="#js-disabled">浏览器的 JavaScript 被禁用的情况</a></li>
+    <li><a href="#callout-third-party-libs">第三方工具库</a></li>
   </ul>
 </li>
-<li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#transitions">过渡效果</a></li>
+<li><a href="#transitions">过渡效果</a></li>
 <li>
-  <a href="JavaScript 插件 · Bootstrap 中文文档.htm#modals">模态框</a>
+  <a href="#modals">模态框</a>
   <ul class="nav">
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#modals-examples">实例</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#modals-sizes">Sizes</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#modals-remove-animation">Remove animation</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#modals-related-target">Varying content based on trigger button</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#modals-usage">用法</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#modals-options">参数</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#modals-methods">方法</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#modals-events">事件</a></li>
-  </ul>
-</li>
-<li>
-  <a href="JavaScript 插件 · Bootstrap 中文文档.htm#dropdowns">下拉菜单</a>
-  <ul class="nav">
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#dropdowns-examples">实例</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#dropdowns-usage">用法</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#dropdowns-methods">方法</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#dropdowns-events">事件</a></li>
+    <li><a href="#modals-examples">实例</a></li>
+    <li><a href="#modals-sizes">Sizes</a></li>
+    <li><a href="#modals-remove-animation">Remove animation</a></li>
+    <li><a href="#modals-related-target">Varying content based on trigger button</a></li>
+    <li><a href="#modals-usage">用法</a></li>
+    <li><a href="#modals-options">参数</a></li>
+    <li><a href="#modals-methods">方法</a></li>
+    <li><a href="#modals-events">事件</a></li>
   </ul>
 </li>
 <li>
-  <a href="JavaScript 插件 · Bootstrap 中文文档.htm#scrollspy">滚动监听</a>
+  <a href="#dropdowns">下拉菜单</a>
   <ul class="nav">
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#scrollspy-examples">实例</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#scrollspy-usage">用法</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#scrollspy-methods">方法</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#scrollspy-options">参数</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#scrollspy-events">事件</a></li>
+    <li><a href="#dropdowns-examples">实例</a></li>
+    <li><a href="#dropdowns-usage">用法</a></li>
+    <li><a href="#dropdowns-methods">方法</a></li>
+    <li><a href="#dropdowns-events">事件</a></li>
   </ul>
 </li>
 <li>
-  <a href="JavaScript 插件 · Bootstrap 中文文档.htm#tabs">标签页</a>
+  <a href="#scrollspy">滚动监听</a>
   <ul class="nav">
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#tabs-examples">实例</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#tabs-usage">用法</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#tabs-methods">方法</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#tabs-events">事件</a></li>
+    <li><a href="#scrollspy-examples">实例</a></li>
+    <li><a href="#scrollspy-usage">用法</a></li>
+    <li><a href="#scrollspy-methods">方法</a></li>
+    <li><a href="#scrollspy-options">参数</a></li>
+    <li><a href="#scrollspy-events">事件</a></li>
   </ul>
 </li>
 <li>
-  <a href="JavaScript 插件 · Bootstrap 中文文档.htm#tooltips">工具提示</a>
+  <a href="#tabs">标签页</a>
   <ul class="nav">
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#tooltips-examples">实例</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#tooltips-usage">用法</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#tooltips-options">参数</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#tooltips-methods">方法</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#tooltips-events">事件</a></li>
+    <li><a href="#tabs-examples">实例</a></li>
+    <li><a href="#tabs-usage">用法</a></li>
+    <li><a href="#tabs-methods">方法</a></li>
+    <li><a href="#tabs-events">事件</a></li>
   </ul>
 </li>
 <li>
-  <a href="JavaScript 插件 · Bootstrap 中文文档.htm#popovers">弹出框</a>
+  <a href="#tooltips">工具提示</a>
   <ul class="nav">
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#popovers-examples">实例</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#popovers-usage">用法</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#popovers-options">参数</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#popovers-events">事件</a></li>
+    <li><a href="#tooltips-examples">实例</a></li>
+    <li><a href="#tooltips-usage">用法</a></li>
+    <li><a href="#tooltips-options">参数</a></li>
+    <li><a href="#tooltips-methods">方法</a></li>
+    <li><a href="#tooltips-events">事件</a></li>
   </ul>
 </li>
 <li>
-  <a href="JavaScript 插件 · Bootstrap 中文文档.htm#alerts">警告框</a>
+  <a href="#popovers">弹出框</a>
   <ul class="nav">
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#alerts-examples">警告框实例</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#alerts-usage">用法</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#alerts-methods">方法</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#alerts-events">事件</a></li>
+    <li><a href="#popovers-examples">实例</a></li>
+    <li><a href="#popovers-usage">用法</a></li>
+    <li><a href="#popovers-options">参数</a></li>
+    <li><a href="#popovers-events">事件</a></li>
   </ul>
 </li>
 <li>
-  <a href="JavaScript 插件 · Bootstrap 中文文档.htm#buttons">按钮</a>
+  <a href="#alerts">警告框</a>
   <ul class="nav">
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#buttons-stateful">Stateful</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#buttons-single-toggle">Single toggle</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#buttons-checkbox-radio">Checkbox / Radio</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#buttons-methods">方法</a></li>
+    <li><a href="#alerts-examples">警告框实例</a></li>
+    <li><a href="#alerts-usage">用法</a></li>
+    <li><a href="#alerts-methods">方法</a></li>
+    <li><a href="#alerts-events">事件</a></li>
   </ul>
 </li>
 <li>
-  <a href="JavaScript 插件 · Bootstrap 中文文档.htm#collapse">Collapse</a>
+  <a href="#buttons">按钮</a>
   <ul class="nav">
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#collapse-example">实例</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#collapse-example-accordion">Accordion example</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#collapse-usage">用法</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#collapse-options">参数</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#collapse-methods">方法</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#collapse-events">事件</a></li>
+    <li><a href="#buttons-stateful">Stateful</a></li>
+    <li><a href="#buttons-single-toggle">Single toggle</a></li>
+    <li><a href="#buttons-checkbox-radio">Checkbox / Radio</a></li>
+    <li><a href="#buttons-methods">方法</a></li>
   </ul>
 </li>
 <li>
-  <a href="JavaScript 插件 · Bootstrap 中文文档.htm#carousel">Carousel</a>
+  <a href="#collapse">Collapse</a>
   <ul class="nav">
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#carousel-examples">实例</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#carousel-usage">用法</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#carousel-options">参数</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#carousel-methods">方法</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#carousel-events">事件</a></li>
+    <li><a href="#collapse-example">实例</a></li>
+    <li><a href="#collapse-example-accordion">Accordion example</a></li>
+    <li><a href="#collapse-usage">用法</a></li>
+    <li><a href="#collapse-options">参数</a></li>
+    <li><a href="#collapse-methods">方法</a></li>
+    <li><a href="#collapse-events">事件</a></li>
   </ul>
 </li>
 <li>
-  <a href="JavaScript 插件 · Bootstrap 中文文档.htm#affix">Affix</a>
+  <a href="#carousel">Carousel</a>
   <ul class="nav">
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#affix-examples">实例</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#affix-usage">用法</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#affix-options">参数</a></li>
-    <li><a href="JavaScript 插件 · Bootstrap 中文文档.htm#affix-events">事件</a></li>
+    <li><a href="#carousel-examples">实例</a></li>
+    <li><a href="#carousel-usage">用法</a></li>
+    <li><a href="#carousel-options">参数</a></li>
+    <li><a href="#carousel-methods">方法</a></li>
+    <li><a href="#carousel-events">事件</a></li>
+  </ul>
+</li>
+<li>
+  <a href="#affix">Affix</a>
+  <ul class="nav">
+    <li><a href="#affix-examples">实例</a></li>
+    <li><a href="#affix-usage">用法</a></li>
+    <li><a href="#affix-options">参数</a></li>
+    <li><a href="#affix-events">事件</a></li>
   </ul>
 </li>
 
               
             </ul>
-            <a class="back-to-top" href="JavaScript 插件 · Bootstrap 中文文档.htm#top">
+            <a class="back-to-top" href="#top">
               返回顶部
             </a>
             
-            <a href="JavaScript 插件 · Bootstrap 中文文档.htm#" class="bs-docs-theme-toggle" role="button">Disable theme preview</a>
+            <a href="#" class="bs-docs-theme-toggle" role="button">Disable theme preview</a>
             
           </nav>
         </div>
@@ -2588,50 +2595,26 @@ sagittis lacus vel augue laoreet rutrum faucibus."</span><span class="nt">&gt;</
     <!-- Footer
 ================================================== -->
 <footer class="bs-docs-footer" role="contentinfo">
-  <div class="container">
 
-    <p>Designed and built with all the love in the world by <a href="https://twitter.com/mdo" target="_blank">@mdo</a> and <a href="https://twitter.com/fat" target="_blank">@fat</a>.</p>
-    <p>Maintained by the <a href="https://github.com/orgs/twbs/people">core team</a> with the help of <a href="https://github.com/twbs/bootstrap/graphs/contributors">our contributors</a>.</p>
-    <p>本项目源码受 <a href="https://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT</a> 开源协议保护，文档受 <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> 开源协议保护。</p>
-    <ul class="bs-docs-footer-links text-muted">
-      <li>当前版本： v3.3.2</li>
-      <li>·</li>
-      <li><a href="https://github.com/twbs/bootstrap">GitHub 仓库</a></li>
-      <li>·</li>
-      <li><a href="http://v3.bootcss.com/getting-started/#examples">实例精选</a></li>
-      <li>·</li>
-      <li><a href="http://v2.bootcss.com/">v2.3.2 中文文档</a></li>
-      <li>·</li>
-      <li><a href="http://v3.bootcss.com/about/">关于</a></li>
-      <li>·</li>
-      <li><a href="http://expo.bootcss.com/">优站精选</a></li>
-      <li>·</li>
-      <li><a href="http://blog.getbootstrap.com/">官方博客</a></li>
-      <li>·</li>
-      <li><a href="https://github.com/twbs/bootstrap/issues">Issues</a></li>
-      <li>·</li>
-      <li><a href="https://github.com/twbs/bootstrap/releases">历史版本</a></li>
-    </ul>
-  </div>
 </footer>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="./JavaScript 插件 · Bootstrap 中文文档_files/jquery.min.js"></script>
+<script src="./global_javascript_plugin_files/jquery.min.js"></script>
 
 
-  <script src="./JavaScript 插件 · Bootstrap 中文文档_files/bootstrap.min.js"></script>
+  <script src="./global_javascript_plugin_files/bootstrap.min.js"></script>
 
 
 
-  <script src="./JavaScript 插件 · Bootstrap 中文文档_files/docs.min.js"></script>
+  <script src="./global_javascript_plugin_files/docs.min.js"></script>
 
 
 
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="./JavaScript 插件 · Bootstrap 中文文档_files/ie10-viewport-bug-workaround.js"></script>
+<script src="./global_javascript_plugin_files/ie10-viewport-bug-workaround.js"></script>
 
 
 
@@ -2639,14 +2622,14 @@ sagittis lacus vel augue laoreet rutrum faucibus."</span><span class="nt">&gt;</
 ================================================== -->
 <script type="text/javascript">
 var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fbdb993b828cbe079a7fbc1a951f44726' type='text/javascript'%3E%3C/script%3E"));
-</script><script src="./JavaScript 插件 · Bootstrap 中文文档_files/h.js" type="text/javascript"></script>
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "docs.5izan.com/h.js%3Fbdb993b828cbe079a7fbc1a951f44726' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./global_javascript_plugin_files/h.js" type="text/javascript"></script>
 
 <!-- 全局统计代码 -->
 <script type="text/javascript">
 var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F079fac161efc4b2a6f31e80064f14e82' type='text/javascript'%3E%3C/script%3E"));
-</script><script src="./JavaScript 插件 · Bootstrap 中文文档_files/h(1).js" type="text/javascript"></script>
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "docs.5izan.com/h.js%3F079fac161efc4b2a6f31e80064f14e82' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./global_javascript_plugin_files/h(1).js" type="text/javascript"></script>
   
 
 <div id="global-zeroclipboard-html-bridge" class="global-zeroclipboard-container" style="position: absolute; left: 0px; top: -9999px; width: 15px; height: 15px; z-index: 999999999;" title="" data-original-title="复制到剪贴板">      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="global-zeroclipboard-flash-bridge" width="100%" height="100%">         <param name="movie" value="/assets/flash/ZeroClipboard.swf?noCache=1426855937488">         <param name="allowScriptAccess" value="sameDomain">         <param name="scale" value="exactfit">         <param name="loop" value="false">         <param name="menu" value="false">         <param name="quality" value="best">         <param name="bgcolor" value="#ffffff">         <param name="wmode" value="transparent">         <param name="flashvars" value="trustedOrigins=v3.bootcss.com%2C%2F%2Fv3.bootcss.com%2Chttp%3A%2F%2Fv3.bootcss.com">         <embed src="/assets/flash/ZeroClipboard.swf?noCache=1426855937488" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="100%" height="100%" name="global-zeroclipboard-flash-bridge" allowscriptaccess="sameDomain" allowfullscreen="false" type="application/x-shockwave-flash" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="trustedOrigins=v3.bootcss.com%2C%2F%2Fv3.bootcss.com%2Chttp%3A%2F%2Fv3.bootcss.com" scale="exactfit">                </object></div><svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500" preserveAspectRatio="none" style="visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs></defs><text x="0" y="42" style="font-weight:bold;font-size:42pt;font-family:Arial, Helvetica, Open Sans, sans-serif;dominant-baseline:middle">900x500</text></svg></body></html>
