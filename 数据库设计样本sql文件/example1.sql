@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2018-01-12 09:28:04
+Date: 2018-01-22 09:27:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -205,9 +205,9 @@ CREATE TABLE `finance_phase_relation` (
 -- ----------------------------
 -- Records of finance_phase_relation
 -- ----------------------------
-INSERT INTO `finance_phase_relation` VALUES ('asdfasdfff', 'ccc', '2', '2018-01-04 15:57:47', null, '1', null, null, null);
-INSERT INTO `finance_phase_relation` VALUES ('asdfddd', 'ccc', '1', '2018-01-04 15:57:32', null, '1', null, null, null);
-INSERT INTO `finance_phase_relation` VALUES ('dsdddd', 'ccc', '3', '2018-01-04 15:58:04', null, '1', null, null, null);
+INSERT INTO `finance_phase_relation` VALUES ('asdfasdfff', 'ddd', '2', '2018-01-04 15:57:47', null, '1', null, null, null);
+INSERT INTO `finance_phase_relation` VALUES ('asdfddd', 'ddd', '1', '2018-01-04 15:57:32', null, '1', null, null, null);
+INSERT INTO `finance_phase_relation` VALUES ('dsdddd', 'ddd', '3', '2018-01-04 15:58:04', null, '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for `friends`
@@ -354,6 +354,7 @@ DROP TABLE IF EXISTS `news`;
 CREATE TABLE `news` (
   `id` varchar(255) NOT NULL COMMENT '表ID',
   `title` varchar(255) NOT NULL COMMENT '正标题',
+  `author` varchar(255) DEFAULT NULL COMMENT '作者',
   `desc` varchar(255) NOT NULL COMMENT '副标题',
   `test_content` text COMMENT '试读内容',
   `content` text NOT NULL COMMENT '新闻内容',
@@ -365,20 +366,23 @@ CREATE TABLE `news` (
   `type` tinyint(4) DEFAULT NULL COMMENT '类型1:普通新闻;2:行研',
   `user_id` varchar(255) DEFAULT NULL COMMENT '投资人user_id,关联user',
   `collect_way` tinyint(255) DEFAULT NULL COMMENT '收集方式：1\\爬虫  2\\后台自己添加',
-  `status` tinyint(255) DEFAULT NULL COMMENT '状态:0\\待审核 \\1一审同意 ;\\2.发布 ;3.\\拒绝',
+  `status` tinyint(255) DEFAULT NULL COMMENT '状态:0\\待审核 \\1一审同意(进入二审) ;\\2.发布 ;3.\\拒绝;4\\未发布（二审中保存或后台人工添加中保存）',
   `is_top` tinyint(4) DEFAULT NULL COMMENT '1置顶  2未置顶',
   `create_time` datetime NOT NULL COMMENT '记录创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '记录更新时间',
   `is_delete` tinyint(1) DEFAULT NULL COMMENT '1:存在;2:不存在(逻辑中的软删除)',
   `remark` varchar(255) DEFAULT NULL COMMENT '记录备注',
-  `create_user` varchar(255) DEFAULT NULL COMMENT '记录创建者',
-  `update_user` varchar(255) DEFAULT NULL COMMENT '记录更新者',
+  `create_user` varchar(255) DEFAULT NULL COMMENT '记录创建者ID',
+  `create_user_name` varchar(255) DEFAULT NULL COMMENT '创建者姓名',
+  `update_user` varchar(255) DEFAULT NULL COMMENT '记录更新者ID',
+  `update_user_name` varchar(255) DEFAULT NULL COMMENT '更新者姓名',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='新闻表';
 
 -- ----------------------------
 -- Records of news
 -- ----------------------------
+INSERT INTO `news` VALUES ('sadf', 'dd', null, 'fcccc', 'sdaf', 'adsfasdfddddd', 'http://www.bai.com', 'china', '1', null, '1', '1', 'ccc', null, '1', null, '0000-00-00 00:00:00', null, '1', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `project`
@@ -418,9 +422,9 @@ CREATE TABLE `project` (
 -- ----------------------------
 -- Records of project
 -- ----------------------------
-INSERT INTO `project` VALUES ('1', 'asdf', 'asdf', 'sadf', 'asdf', null, null, null, null, null, null, null, null, null, null, null, '1', null, null, null, null, '0000-00-00 00:00:00', null, '1', null, null, null);
-INSERT INTO `project` VALUES ('2', 'dddd', 'ddd', 'ddd', 'ddd', null, null, null, null, null, null, null, null, null, null, null, '2', null, null, null, null, '0000-00-00 00:00:00', null, '1', null, null, null);
-INSERT INTO `project` VALUES ('3', 'ccc', 'ccc', 'ccc', 'cc', null, null, null, null, null, null, null, null, null, null, null, '2', null, null, null, null, '0000-00-00 00:00:00', null, '1', null, null, null);
+INSERT INTO `project` VALUES ('1', 'ddd', 'ccc', 'sadf', 'asdf', null, null, null, null, null, null, null, null, null, null, null, '1', null, null, null, null, '0000-00-00 00:00:00', null, '1', null, null, null);
+INSERT INTO `project` VALUES ('2', 'ddd', 'ccc', 'dddc', 'ddd', null, null, null, 'http://www.a.com/a.jpg', null, null, null, null, null, null, null, '2', null, null, null, null, '0000-00-00 00:00:00', null, '1', null, null, null);
+INSERT INTO `project` VALUES ('3', 'ddd', 'ccc', 'ccc', 'cc', null, null, null, null, null, null, null, null, null, null, null, '2', null, null, null, null, '0000-00-00 00:00:00', null, '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for `project_record`
@@ -537,6 +541,9 @@ CREATE TABLE `system_data` (
 -- ----------------------------
 -- Records of system_data
 -- ----------------------------
+INSERT INTO `system_data` VALUES ('1', '0', null, '2', '天使论', '0000-00-00 00:00:00', null, '1', null, null, null);
+INSERT INTO `system_data` VALUES ('2', '0', null, '2', '风险投资', '0000-00-00 00:00:00', null, '1', null, null, null);
+INSERT INTO `system_data` VALUES ('3', '0', null, '2', 'B论', '0000-00-00 00:00:00', null, '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for `template`
@@ -573,6 +580,7 @@ CREATE TABLE `user` (
   `wechcat_open_id` varchar(255) NOT NULL COMMENT '微信open_id',
   `wechat_nick_name` varchar(255) DEFAULT NULL COMMENT '微信昵称',
   `wechat_head_url` varchar(255) DEFAULT NULL COMMENT '微信图像',
+  `wechat_account` varchar(255) DEFAULT NULL COMMENT '微信号(完善信息)',
   `name` varchar(255) DEFAULT NULL COMMENT '姓名(完善信息)',
   `city` varchar(255) DEFAULT NULL COMMENT '城市(完善信息)',
   `mailbox` varchar(255) DEFAULT NULL COMMENT '邮箱(完善信息)',
@@ -581,8 +589,12 @@ CREATE TABLE `user` (
   `phone` char(11) DEFAULT NULL COMMENT '电话(完善信息)',
   `company` varchar(255) DEFAULT NULL COMMENT '公司(完善信息)',
   `position` varchar(255) DEFAULT NULL COMMENT '职位(完善信息)',
+  `cocupation_period` varchar(255) DEFAULT NULL COMMENT '职业从业年限(完善信息)',
   `address` varchar(255) DEFAULT NULL COMMENT '详细地址(完善信息)',
+  `resident_address` varchar(255) DEFAULT NULL COMMENT '常驻地址详情(完善信息)',
   `last_login_time` datetime DEFAULT NULL COMMENT '最近登录时间',
+  `is_apply_vip` tinyint(4) NOT NULL DEFAULT '1' COMMENT '投资者是否申请VIP: 1\\未申请; 2\\申请中 ;3\\已同意；4\\已拒绝 ',
+  `apply_vip_date` datetime DEFAULT NULL COMMENT '会员申请时间',
   `create_time` datetime NOT NULL COMMENT '记录创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '记录更新时间',
   `is_delete` tinyint(1) DEFAULT NULL COMMENT '1:存在; 2:不存在(逻辑中的软删除)',
@@ -595,8 +607,8 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('ccc', '1', 'dddddasdfasdf', 'nnnnnn', null, null, null, null, '1', '1', null, null, null, null, null, '0000-00-00 00:00:00', null, '1', null, null, null);
-INSERT INTO `user` VALUES ('ddd', '1', 'dddddasdfasdfdddd', 'vvvssdd', null, null, null, null, '1', '1', null, null, null, null, null, '0000-00-00 00:00:00', null, '1', null, null, null);
+INSERT INTO `user` VALUES ('ccc', '2', 'dddddasdfasdf', 'nnnnnn', null, null, null, null, null, '1', '2', null, null, null, null, null, null, null, '1', null, '0000-00-00 00:00:00', null, '1', null, null, null);
+INSERT INTO `user` VALUES ('ddd', '1', 'dddddasdfasdfdddd', 'vvvssdd', null, null, null, null, null, '1', '1', null, null, null, null, null, null, null, '1', null, '0000-00-00 00:00:00', null, '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for `user_card`
@@ -623,6 +635,7 @@ CREATE TABLE `user_card` (
 -- ----------------------------
 -- Records of user_card
 -- ----------------------------
+INSERT INTO `user_card` VALUES ('asdf', '', null, null, '', null, 'ccc', null, '0000-00-00 00:00:00', null, '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for `user_vip`
@@ -631,23 +644,27 @@ DROP TABLE IF EXISTS `user_vip`;
 CREATE TABLE `user_vip` (
   `id` varchar(255) NOT NULL,
   `user_id` varchar(255) DEFAULT NULL COMMENT '关联user表的id',
-  `experience` text COMMENT '履历(工作经历)',
-  `education_back` text COMMENT '教育背景',
+  `experience` text COMMENT '履历(工作经历) JSON格式',
+  `education_back` text COMMENT '教育背景,JSON格式',
+  `fund_scale` varchar(255) DEFAULT NULL COMMENT '管理基金规模',
+  `has_resource` varchar(255) DEFAULT NULL COMMENT '已有资源背景(如产业资源，政府资源)',
   `image_url` varchar(255) DEFAULT NULL COMMENT '正装照',
   `create_time` datetime NOT NULL COMMENT '记录创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '记录更新时间',
   `is_delete` tinyint(1) DEFAULT NULL COMMENT '1:存在; 2:不存在(逻辑中的软删除)',
   `remark` varchar(255) DEFAULT NULL COMMENT '人物简介',
-  `create_user` varchar(255) DEFAULT NULL COMMENT '记录创建者',
-  `update_user` varchar(255) DEFAULT NULL COMMENT '记录更新者',
+  `create_user` varchar(255) DEFAULT NULL COMMENT '记录创建者(审核投资者为会员的后台管理人员ID)',
+  `create_user_name` varchar(255) DEFAULT NULL COMMENT '当时审核投资者为会员的后台管理人员姓名',
+  `update_user` varchar(255) DEFAULT NULL COMMENT '记录更新者(更新会员资料的后台管理人员ID)',
+  `update_user_name` varchar(255) DEFAULT NULL COMMENT '当时更新会员资料的后台管理人员的姓名',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='会员表';
 
 -- ----------------------------
 -- Records of user_vip
 -- ----------------------------
-INSERT INTO `user_vip` VALUES ('dddss', 'ccc', '经历1', '教育背景', '图像', '2017-12-27 15:01:28', null, null, null, null, null);
-INSERT INTO `user_vip` VALUES ('wewrsdf', 'ddd', '经历2', '教育背景2', '图像搜索', '2017-12-28 15:03:25', null, null, null, null, null);
+INSERT INTO `user_vip` VALUES ('dddss', 'ccc', '经历1', '教育背景', null, null, '图像', '2017-12-27 15:01:28', null, '1', null, null, null, null, null);
+INSERT INTO `user_vip` VALUES ('wewrsdf', 'ddd', '经历2', '教育背景2', null, null, '图像搜索', '2017-12-28 15:03:25', null, '1', null, '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for `yiji_account`
@@ -675,7 +692,7 @@ CREATE TABLE `yiji_account` (
 -- ----------------------------
 -- Records of yiji_account
 -- ----------------------------
-INSERT INTO `yiji_account` VALUES ('39', 'wangjian', '$2y$10$ciW.H5flv0c908lxWxVG8uMwVcZVyvv0K.4W.uSzjYFv5htWK50j6', '9', '22', '9', '1515666660', '127.0.0.1', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3d3LnlpamkudHBsL2FwaS9BZG1pbi9sb2dpbiIsImlhdCI6MTUxNTY2NjY2MCwiZXhwIjoxNTE1ODgyNjYwLCJuYmYiOjE1MTU2NjY2NjAsImp0aSI6IjIzYzc0NTA2MmU4MjU4OTRmOThmYmNhMTFlN2M0NzRhIiwic3ViIjozOX0.7rt4jeenwfk3zT7LYj_SN7alAsYomSjSCp0B9xXZEs8', '1515656402', '0', '1515666660', '0', null, '1');
+INSERT INTO `yiji_account` VALUES ('39', 'wangjian', '$2y$10$ciW.H5flv0c908lxWxVG8uMwVcZVyvv0K.4W.uSzjYFv5htWK50j6', '9', '22', '13', '1516583716', '127.0.0.1', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3d3LnlpamkudHBsL2FwaS9BZG1pbi9sb2dpbiIsImlhdCI6MTUxNjU4MzcxNiwiZXhwIjoxNTE2Nzk5NzE2LCJuYmYiOjE1MTY1ODM3MTYsImp0aSI6ImM0NzQxZjZkZTUwYjhlZDE1MjZhMzNhNTRmYTc3NTgxIiwic3ViIjozOX0.HJbd6ZRiiW1IR5ZEbzGtanQU74XRLWYbYjKhn6_R0PU', '1515656402', '0', '1516583716', '0', null, '1');
 
 -- ----------------------------
 -- Table structure for `yiji_auth_permissions`
