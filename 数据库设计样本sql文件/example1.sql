@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50540
-Source Host           : localhost:3306
-Source Database       : ejivc1
+Source Server         : 邦实测试环境ejivc
+Source Server Version : 50631
+Source Host           : 120.26.120.234:3306
+Source Database       : ejivc
 
 Target Server Type    : MYSQL
-Target Server Version : 50540
+Target Server Version : 50631
 File Encoding         : 65001
 
-Date: 2018-01-22 09:27:05
+Date: 2018-02-11 11:27:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -57,13 +57,16 @@ CREATE TABLE `activity` (
   `is_delete` tinyint(1) DEFAULT NULL COMMENT '1:存在 ;2:不存在   (逻辑中的软删除)',
   `remark` varchar(255) DEFAULT NULL COMMENT '记录备注',
   `create_user` varchar(255) DEFAULT NULL COMMENT '记录创建者',
+  `create_user_name` varchar(255) DEFAULT NULL COMMENT '创建者姓名',
   `update_user` varchar(255) DEFAULT NULL COMMENT '记录更新者',
+  `update_user_name` varchar(255) DEFAULT NULL COMMENT '更新者姓名',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='活动表';
 
 -- ----------------------------
 -- Records of activity
 -- ----------------------------
+INSERT INTO `activity` VALUES ('dssdf', '表演1', 'http://www.abc.com/a.jpg', '广场', '', '1', '1', '2018-01-16 16:11:48', '2018-01-26 16:11:54', 'asdfasdf', '2018-01-24 16:12:02', null, '1', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `activity_customer`
@@ -99,9 +102,13 @@ CREATE TABLE `activity_user` (
   `user_id` varchar(255) NOT NULL COMMENT '关联user表id',
   `activity_id` varchar(255) NOT NULL COMMENT '活动ID ，关联acitvitys表id',
   `user_wechat_image_url` varchar(255) DEFAULT NULL COMMENT '冗余 ：用户微信图像',
+  `user_wechat_nick_name` varchar(255) DEFAULT NULL COMMENT '冗余 ：用户微信昵称',
+  `user_wechat_openid` varchar(255) DEFAULT NULL COMMENT '冗余 ：用户微信openid',
+  `user_identity_text` varchar(255) DEFAULT NULL COMMENT '冗余 ：用户当时报名的身份',
   `user_position` varchar(255) DEFAULT NULL COMMENT '冗余：职位',
   `user_company` varchar(255) DEFAULT NULL COMMENT '冗余:机构',
   `is_sign` tinyint(1) DEFAULT NULL COMMENT '是否签到：1\\签到 ；2\\未签到 (报名用户是否到现场扫码签到)',
+  `sign_date` datetime DEFAULT NULL COMMENT '签到日期',
   `create_time` datetime NOT NULL COMMENT '记录创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '记录更新时间',
   `is_delete` tinyint(1) DEFAULT NULL COMMENT '1:存在;2:不存在(逻辑中的软删除)',
@@ -114,8 +121,8 @@ CREATE TABLE `activity_user` (
 -- ----------------------------
 -- Records of activity_user
 -- ----------------------------
-INSERT INTO `activity_user` VALUES ('ddd', 'fff', 'dssdf', 'asdfsdaf', 'asdfsadf', 'asdfsadf', '2', '0000-00-00 00:00:00', null, '1', null, null, null);
-INSERT INTO `activity_user` VALUES ('dsaf', 'ddd', 'ccccf', 'AAAA', 'cccc', 'fff', '1', '0000-00-00 00:00:00', '2018-01-05 14:11:07', '1', null, null, null);
+INSERT INTO `activity_user` VALUES ('ddd', 'fff', 'dssdf', 'asdfsdaf', '0x776a', 'asdfsadfsadf415d5sasdf5', '投资者', 'asdfsadf', 'asdfsadf', '2', null, '0000-00-00 00:00:00', null, '1', null, null, null);
+INSERT INTO `activity_user` VALUES ('dsaf', 'ddd', 'ccccf', 'AAAA', null, null, null, 'cccc', 'fff', '1', null, '0000-00-00 00:00:00', '2018-01-05 14:11:07', '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for `advertisement`
@@ -125,8 +132,6 @@ CREATE TABLE `advertisement` (
   `id` varchar(255) NOT NULL COMMENT '表ID',
   `title` varchar(255) NOT NULL COMMENT '标题',
   `desc` varchar(500) DEFAULT NULL COMMENT '描述',
-  `start_time` datetime NOT NULL COMMENT '开始时间',
-  `end_time` datetime DEFAULT NULL COMMENT '结束时间',
   `image_url` varchar(255) DEFAULT NULL COMMENT '广告图片',
   `enabled` tinyint(4) NOT NULL COMMENT '1.启用  2.不启用',
   `create_time` datetime NOT NULL COMMENT '创建时间',
@@ -134,7 +139,9 @@ CREATE TABLE `advertisement` (
   `is_delete` tinyint(4) NOT NULL COMMENT '1:存在;2:不存在(逻辑中的软删除)',
   `remark` varchar(255) DEFAULT NULL COMMENT '记录备注',
   `create_user` varchar(255) DEFAULT NULL COMMENT '记录创建者',
+  `create_user_name` varchar(255) DEFAULT NULL COMMENT '添加人姓名',
   `update_user` varchar(255) DEFAULT NULL COMMENT '记录更新者',
+  `update_user_name` varchar(255) DEFAULT NULL COMMENT '更新人姓名',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -184,6 +191,9 @@ CREATE TABLE `favorite` (
 -- ----------------------------
 -- Records of favorite
 -- ----------------------------
+INSERT INTO `favorite` VALUES ('favorite676dd2263878b34b1333d3139c0e88845904', 'userd02ed867907c69b2339f0e695aebe713a089', '1', 'userd02ed867907c69b2339f0e695aebe713a089', '2018-02-11 11:06:04', null, '1', null, null, null);
+INSERT INTO `favorite` VALUES ('favoriteba7854d7600ef6b0a16c3dc612e0318a8a01', '1', '1', 'user4100aa27814a880f9b8292087ea1c2278e9e', '2018-02-07 14:46:27', null, '1', null, null, null);
+INSERT INTO `favorite` VALUES ('favoriteefa70249308a535a703a19831640d2eb060c', '1', '1', 'userd02ed867907c69b2339f0e695aebe713a089', '2018-02-11 11:14:23', null, '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for `finance_phase_relation`
@@ -317,12 +327,36 @@ CREATE TABLE `message` (
   `is_delete` tinyint(1) DEFAULT NULL COMMENT '1:存在;2:不存在(逻辑中的软删除)',
   `remark` varchar(255) DEFAULT NULL COMMENT '记录备注',
   `create_user` varchar(255) DEFAULT NULL COMMENT '记录创建者',
+  `create_user_name` varchar(255) DEFAULT NULL COMMENT '创建者姓名',
   `update_user` varchar(255) DEFAULT NULL COMMENT '记录更新者',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='消息表';
 
 -- ----------------------------
 -- Records of message
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `message_crontab`
+-- ----------------------------
+DROP TABLE IF EXISTS `message_crontab`;
+CREATE TABLE `message_crontab` (
+  `id` varchar(255) NOT NULL COMMENT '表ID',
+  `content` longtext NOT NULL COMMENT '要发送对象的相关信息JSON格式',
+  `send_datetime` datetime NOT NULL COMMENT '发送时间',
+  `way` tinyint(4) DEFAULT NULL COMMENT '发送方式：1\\\\ 站内消息; 2\\\\短信',
+  `create_time` datetime NOT NULL COMMENT '记录创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '记录更新时间',
+  `is_delete` tinyint(1) DEFAULT NULL COMMENT '1:存在;2:不存在(逻辑中的软删除)',
+  `remark` varchar(255) DEFAULT NULL COMMENT '记录备注',
+  `create_user` varchar(255) DEFAULT NULL COMMENT '记录创建者',
+  `create_user_name` varchar(255) DEFAULT NULL COMMENT '创建者姓名',
+  `update_user` varchar(255) DEFAULT NULL COMMENT '记录更新者',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定时消息表(该表有个定时任务在轮循执行，时间粒度是每分钟一次)';
+
+-- ----------------------------
+-- Records of message_crontab
 -- ----------------------------
 
 -- ----------------------------
@@ -340,7 +374,8 @@ CREATE TABLE `message_template` (
   `remark` varchar(255) DEFAULT NULL COMMENT '记录备注',
   `create_user` varchar(255) DEFAULT NULL COMMENT '记录创建者',
   `update_user` varchar(255) DEFAULT NULL COMMENT '记录更新者',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_key_name` (`name`) USING HASH
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统消息模板,仅针对系统消息';
 
 -- ----------------------------
@@ -382,7 +417,7 @@ CREATE TABLE `news` (
 -- ----------------------------
 -- Records of news
 -- ----------------------------
-INSERT INTO `news` VALUES ('sadf', 'dd', null, 'fcccc', 'sdaf', 'adsfasdfddddd', 'http://www.bai.com', 'china', '1', null, '1', '1', 'ccc', null, '1', null, '0000-00-00 00:00:00', null, '1', null, null, null, null, null);
+INSERT INTO `news` VALUES ('1', 'dd', null, 'fcccc', 'sdaf', 'adsfasdfddddd', 'http://www.bai.com', 'china', '1', null, '1', '1', 'ccc', null, '2', null, '0000-00-00 00:00:00', null, '1', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `project`
@@ -422,7 +457,7 @@ CREATE TABLE `project` (
 -- ----------------------------
 -- Records of project
 -- ----------------------------
-INSERT INTO `project` VALUES ('1', 'ddd', 'ccc', 'sadf', 'asdf', null, null, null, null, null, null, null, null, null, null, null, '1', null, null, null, null, '0000-00-00 00:00:00', null, '1', null, null, null);
+INSERT INTO `project` VALUES ('1', 'userd02ed867907c69b2339f0e695aebe713a089', 'ccc', 'sadf', 'asdf', null, null, null, null, null, null, null, null, null, null, null, '3', null, null, null, null, '0000-00-00 00:00:00', null, '1', 'sd', null, null);
 INSERT INTO `project` VALUES ('2', 'ddd', 'ccc', 'dddc', 'ddd', null, null, null, 'http://www.a.com/a.jpg', null, null, null, null, null, null, null, '2', null, null, null, null, '0000-00-00 00:00:00', null, '1', null, null, null);
 INSERT INTO `project` VALUES ('3', 'ddd', 'ccc', 'ccc', 'cc', null, null, null, null, null, null, null, null, null, null, null, '2', null, null, null, null, '0000-00-00 00:00:00', null, '1', null, null, null);
 
@@ -447,6 +482,7 @@ CREATE TABLE `project_record` (
 -- ----------------------------
 -- Records of project_record
 -- ----------------------------
+INSERT INTO `project_record` VALUES ('projectrecordd5bb71fa1863f1cc6d108c01911282646dc8', 'asdf', 'userd02ed867907c69b2339f0e695aebe713a089', '1', '2018-02-11 11:14:20', null, '1', null, 'userd02ed867907c69b2339f0e695aebe713a089', null);
 
 -- ----------------------------
 -- Table structure for `project_verity`
@@ -560,7 +596,9 @@ CREATE TABLE `template` (
   `is_delete` tinyint(1) DEFAULT NULL COMMENT '1:存在; 2:不存在(逻辑中的软删除)',
   `remark` varchar(255) DEFAULT NULL COMMENT '记录备注',
   `create_user` varchar(255) DEFAULT NULL COMMENT '记录创建者',
+  `create_user_name` varchar(255) DEFAULT NULL COMMENT '创建人名字',
   `update_user` varchar(255) DEFAULT NULL COMMENT '记录更新者',
+  `update_user_name` varchar(255) DEFAULT NULL COMMENT '更新人姓名',
   `type` tinyint(1) DEFAULT NULL COMMENT '1:系统默认;2:项目活动模板',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='某位投资者创建的收集表模板';
@@ -568,7 +606,7 @@ CREATE TABLE `template` (
 -- ----------------------------
 -- Records of template
 -- ----------------------------
-INSERT INTO `template` VALUES ('template35355cde26d9d261c8258292459d7d0231e5', '0', '1', '[\r\n    {\r\n        \"title\": \"项目名称\",\r\n        \"field_key\": \"project_name\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 1,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 1\r\n    },\r\n    {\r\n        \"title\": \"所属行业领域\",\r\n        \"field_key\": \"project_domain\",\r\n        \"field_type\": \"select\",\r\n        \"field_is_must\": 1,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 2\r\n    },\r\n    {\r\n        \"title\": \"项目LOGO\",\r\n        \"field_key\": \"project_logo_url\",\r\n        \"field_type\": \"file\",\r\n        \"field_is_must\": 1,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 3\r\n    },\r\n    {\r\n        \"title\": \"项目BP\",\r\n        \"field_key\": \"project_bp_url\",\r\n        \"field_type\": \"file\",\r\n        \"field_is_must\": 1,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 4\r\n    },\r\n	 {\r\n        \"title\": \"项目描述\",\r\n        \"field_key\": \"project_desc\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 1,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 5\r\n    },\r\n    {\r\n        \"title\": \"项目定位\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 6\r\n    },\r\n    {\r\n        \"title\": \"项目所在地\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 7\r\n    },\r\n    {\r\n        \"title\": \"注册公司情况\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 8\r\n    },\r\n    {\r\n        \"title\": \"项目概况\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 9\r\n    },\r\n    {\r\n        \"title\": \"市场背景\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 10\r\n    },\r\n    {\r\n        \"title\": \"核心竞争力\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 11\r\n    },\r\n    {\r\n        \"title\": \"关键业务指标\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 12\r\n    },\r\n    {\r\n        \"title\": \"竞品分析\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 13\r\n    },\r\n    {\r\n        \"title\": \"当前融资阶段\",\r\n        \"field_key\": \"financing_phase\",\r\n        \"field_type\": \"select\",\r\n        \"field_is_must\": 1,\r\n        \"field_group\": 2,\r\n        \"field_group_location\": 1\r\n    },\r\n    {\r\n        \"title\": \"计划融资额\",\r\n        \"field_key\": \"financing_money\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 1,\r\n        \"field_group\": 2,\r\n        \"field_group_location\": 2\r\n    },\r\n    {\r\n        \"title\": \"融资史\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 2,\r\n        \"field_group_location\": 3\r\n    },\r\n    {\r\n        \"title\": \"当前股权结构\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 2,\r\n        \"field_group_location\": 4\r\n    },\r\n    {\r\n        \"title\": \"已有意向机构\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 2,\r\n        \"field_group_location\": 5\r\n    },\r\n    {\r\n        \"title\": \"现有资金情况\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 2,\r\n        \"field_group_location\": 6\r\n    },\r\n    {\r\n        \"title\": \"资金使用计划\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 2,\r\n        \"field_group_location\": 7\r\n    },\r\n    {\r\n        \"title\": \"姓名\",\r\n        \"field_key\": \"create_name\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 1,\r\n        \"field_group\": 3,\r\n        \"field_group_location\": 1\r\n    },\r\n    {\r\n        \"title\": \"联系方式\",\r\n        \"field_key\": \"create_phone\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 1,\r\n        \"field_group\": 3,\r\n        \"field_group_location\": 2\r\n    },\r\n    {\r\n        \"title\": \"职业经历\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 3,\r\n        \"field_group_location\": 3\r\n    },\r\n    {\r\n        \"title\": \"教育背景\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 3,\r\n        \"field_group_location\": 4\r\n    },\r\n    {\r\n        \"title\": \"当前团队人数\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 4,\r\n        \"field_group_location\": 1\r\n    }\r\n]', '系统模板标题', '2017-12-21 11:40:13', null, '1', null, null, null, '1');
+INSERT INTO `template` VALUES ('template35355cde26d9d261c8258292459d7d0231e5', '0', '1', '[\r\n    {\r\n        \"title\": \"项目名称\",\r\n        \"field_key\": \"project_name\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 1,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 1\r\n    },\r\n    {\r\n        \"title\": \"所属行业领域\",\r\n        \"field_key\": \"project_domain\",\r\n        \"field_type\": \"select\",\r\n        \"field_is_must\": 1,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 2\r\n    },\r\n    {\r\n        \"title\": \"项目LOGO\",\r\n        \"field_key\": \"project_logo_url\",\r\n        \"field_type\": \"file\",\r\n        \"field_is_must\": 1,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 3\r\n    },\r\n    {\r\n        \"title\": \"项目BP\",\r\n        \"field_key\": \"project_bp_url\",\r\n        \"field_type\": \"file\",\r\n        \"field_is_must\": 1,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 4\r\n    },\r\n	 {\r\n        \"title\": \"项目描述\",\r\n        \"field_key\": \"project_desc\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 1,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 5\r\n    },\r\n    {\r\n        \"title\": \"项目定位\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 6\r\n    },\r\n    {\r\n        \"title\": \"项目所在地\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 7\r\n    },\r\n    {\r\n        \"title\": \"注册公司情况\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 8\r\n    },\r\n    {\r\n        \"title\": \"项目概况\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 9\r\n    },\r\n    {\r\n        \"title\": \"市场背景\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 10\r\n    },\r\n    {\r\n        \"title\": \"核心竞争力\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 11\r\n    },\r\n    {\r\n        \"title\": \"关键业务指标\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 12\r\n    },\r\n    {\r\n        \"title\": \"竞品分析\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 1,\r\n        \"field_group_location\": 13\r\n    },\r\n    {\r\n        \"title\": \"当前融资阶段\",\r\n        \"field_key\": \"financing_phase\",\r\n        \"field_type\": \"select\",\r\n        \"field_is_must\": 1,\r\n        \"field_group\": 2,\r\n        \"field_group_location\": 1\r\n    },\r\n    {\r\n        \"title\": \"计划融资额\",\r\n        \"field_key\": \"financing_money\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 1,\r\n        \"field_group\": 2,\r\n        \"field_group_location\": 2\r\n    },\r\n    {\r\n        \"title\": \"融资史\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 2,\r\n        \"field_group_location\": 3\r\n    },\r\n    {\r\n        \"title\": \"当前股权结构\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 2,\r\n        \"field_group_location\": 4\r\n    },\r\n    {\r\n        \"title\": \"已有意向机构\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 2,\r\n        \"field_group_location\": 5\r\n    },\r\n    {\r\n        \"title\": \"现有资金情况\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 2,\r\n        \"field_group_location\": 6\r\n    },\r\n    {\r\n        \"title\": \"资金使用计划\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 2,\r\n        \"field_group_location\": 7\r\n    },\r\n    {\r\n        \"title\": \"姓名\",\r\n        \"field_key\": \"create_name\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 1,\r\n        \"field_group\": 3,\r\n        \"field_group_location\": 1\r\n    },\r\n    {\r\n        \"title\": \"联系方式\",\r\n        \"field_key\": \"create_phone\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 1,\r\n        \"field_group\": 3,\r\n        \"field_group_location\": 2\r\n    },\r\n    {\r\n        \"title\": \"职业经历\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 3,\r\n        \"field_group_location\": 3\r\n    },\r\n    {\r\n        \"title\": \"教育背景\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 3,\r\n        \"field_group_location\": 4\r\n    },\r\n    {\r\n        \"title\": \"当前团队人数\",\r\n        \"field_key\": \"\",\r\n        \"field_type\": \"text\",\r\n        \"field_is_must\": 0,\r\n        \"field_group\": 4,\r\n        \"field_group_location\": 1\r\n    }\r\n]', '系统模板标题', '2017-12-21 11:40:13', null, '1', null, null, null, null, null, '1');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -581,6 +619,7 @@ CREATE TABLE `user` (
   `wechat_nick_name` varchar(255) DEFAULT NULL COMMENT '微信昵称',
   `wechat_head_url` varchar(255) DEFAULT NULL COMMENT '微信图像',
   `wechat_account` varchar(255) DEFAULT NULL COMMENT '微信号(完善信息)',
+  `token` varchar(500) DEFAULT NULL COMMENT 'token',
   `name` varchar(255) DEFAULT NULL COMMENT '姓名(完善信息)',
   `city` varchar(255) DEFAULT NULL COMMENT '城市(完善信息)',
   `mailbox` varchar(255) DEFAULT NULL COMMENT '邮箱(完善信息)',
@@ -601,14 +640,18 @@ CREATE TABLE `user` (
   `remark` varchar(255) DEFAULT NULL COMMENT '记录备注',
   `create_user` varchar(255) DEFAULT NULL COMMENT '记录创建者',
   `update_user` varchar(255) DEFAULT NULL COMMENT '记录更新者',
+  `remember_token` varchar(500) DEFAULT NULL,
+  `password` varchar(500) DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='投资者和创业者表';
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('ccc', '2', 'dddddasdfasdf', 'nnnnnn', null, null, null, null, null, '1', '2', null, null, null, null, null, null, null, '1', null, '0000-00-00 00:00:00', null, '1', null, null, null);
-INSERT INTO `user` VALUES ('ddd', '1', 'dddddasdfasdfdddd', 'vvvssdd', null, null, null, null, null, '1', '1', null, null, null, null, null, null, null, '1', null, '0000-00-00 00:00:00', null, '1', null, null, null);
+INSERT INTO `user` VALUES ('user0e48ee6280bbe8cdb08ca4789040ce4983c9', '1', 'owZO84p1zICH8BhAm-4DorLeXFsg', '音阙司听', 'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqDeE2iaa9vRGxsOYbcj3OJTHZJ2YeOUnF9SV8ibhnIc4qYG38fqDDICDHDm0YkEhHgN1VJjpicFABiag/0', null, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdC5hcGkuZWppdmMueWNoY2FwaXRhbC5jb20vYXBpL3BlcnNvbi9sb2dpbiIsImlhdCI6MTUxODMxODg3NSwiZXhwIjoxNTE4NTM0ODc1LCJuYmYiOjE1MTgzMTg4NzUsImp0aSI6ImFiZDc5OWJkY2E0NTEwMjgxZWRkYjUwNzU4NWQzY2QyIiwic3ViIjoidXNlcjBlNDhlZTYyODBiYmU4Y2RiMDhjYTQ3ODkwNDBjZTQ5ODNjOSJ9.8CyrfgBOXUpqyRci2KUO-gWpGtwORiR_HD4GjGEjCQA', null, null, null, '1', '2', null, null, null, null, null, null, '2018-02-11 11:14:35', '1', null, '2018-02-11 09:05:54', '2018-02-11 11:14:35', '1', null, null, null, null, '$2y$10$toog2qWIdEAot2p4ypLjhuetG1A3QnTfOZbW2Cxb9LNyRXysseh3S');
+INSERT INTO `user` VALUES ('user2239b7ff70759780c2755b876ff2f68f21a0', '2', 'owZO84p1zICH8BhAm-4DorLeXFsg', '音阙司听', 'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqDeE2iaa9vRGxsOYbcj3OJTHZJ2YeOUnF9SV8ibhnIc4qYG38fqDDICDHDm0YkEhHgN1VJjpicFABiag/0', null, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdC5hcGkuZWppdmMueWNoY2FwaXRhbC5jb20vYXBpL3BlcnNvbi9sb2dpbiIsImlhdCI6MTUxODMxODg5MCwiZXhwIjoxNTE4NTM0ODkwLCJuYmYiOjE1MTgzMTg4OTAsImp0aSI6IjZmM2E2Y2FiMThiNWQ1Yzc5OTNmZWRjNGI0MWI5OWNhIiwic3ViIjoidXNlcjIyMzliN2ZmNzA3NTk3ODBjMjc1NWI4NzZmZjJmNjhmMjFhMCJ9.QKY-n-tbAuLcMGcyc9KEX-751B7omOF_U5I7iYukmoQ', null, null, null, '1', '2', null, null, null, null, null, null, '2018-02-11 11:14:50', '1', null, '2018-02-11 09:05:46', '2018-02-11 11:14:50', '1', null, null, null, null, '$2y$10$lSXSejLCvFtMzC8HxsfU9elmt8NLBvIfUBMt.gFjTZ1ALnN5R1oZy');
+INSERT INTO `user` VALUES ('userd02ed867907c69b2339f0e695aebe713a089', '1', 'owZO84qh1j2CWfelbnOyX3IcZzzs', '其', 'https://wx.qlogo.cn/mmopen/vi_32/9vskr12GhfdODa906RkahDKFHFN1oibJCYnfbqfzyTkaaD6kTic8wJcZwmgpzbqBpREk6xC82MoUzaPAY6o3bRDg/0', null, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdC5hcGkuZWppdmMueWNoY2FwaXRhbC5jb20vYXBpL3BlcnNvbi9sb2dpbiIsImlhdCI6MTUxODMxOTYyNiwiZXhwIjoxNTE4NTM1NjI2LCJuYmYiOjE1MTgzMTk2MjYsImp0aSI6ImI3MmM2M2NmMjA4ZDExNmU5ZDkwODhiODkwZTZhMWY5Iiwic3ViIjoidXNlcmQwMmVkODY3OTA3YzY5YjIzMzlmMGU2OTVhZWJlNzEzYTA4OSJ9.Ow26Knsx_KuyokksoKc6XKjkU0Gdu7_svjCnV25qLMI', null, null, null, '1', '2', null, null, null, null, null, null, '2018-02-11 11:27:06', '1', null, '2018-02-09 14:56:07', '2018-02-11 11:27:06', '1', null, null, null, null, '$2y$10$PX7nAgfyf.IGaHHyI.lZ7.QtXySukDjsFPrKhtFDwpi/nbBxmtKIa');
+INSERT INTO `user` VALUES ('userd44cab0c7b890706687a79a79cf95e1415ec', '2', 'owZO84qh1j2CWfelbnOyX3IcZzzs', '其', 'https://wx.qlogo.cn/mmopen/vi_32/9vskr12GhfdODa906RkahDKFHFN1oibJCYnfbqfzyTkaaD6kTic8wJcZwmgpzbqBpREk6xC82MoUzaPAY6o3bRDg/0', null, 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdC5hcGkuZWppdmMueWNoY2FwaXRhbC5jb20vYXBpL3BlcnNvbi9sb2dpbiIsImlhdCI6MTUxODMxNTE5NCwiZXhwIjoxNTE4NTMxMTk0LCJuYmYiOjE1MTgzMTUxOTQsImp0aSI6IjJmYmQ3ZWUzNjQzMzRjMmIwMDg4MmZjZWM1NDRiM2NiIiwic3ViIjoidXNlcmQ0NGNhYjBjN2I4OTA3MDY2ODdhNzlhNzljZjk1ZTE0MTVlYyJ9.r8HicYZ72rS--YGCRgZs2B6Jq7l6dZsGMn4ignrZz_0', null, null, null, '1', '2', null, null, null, null, null, null, '2018-02-11 10:13:14', '1', null, '2018-02-09 14:55:56', '2018-02-11 10:13:14', '1', null, null, null, null, '$2y$10$EZD5yQoyvuvedTPlFqzdUOJqEyAk.B9OfGVbUf/IBsP9eyzKmNBAy');
 
 -- ----------------------------
 -- Table structure for `user_card`
@@ -687,12 +730,14 @@ CREATE TABLE `yiji_account` (
   `remark` varchar(200) DEFAULT NULL COMMENT '备注',
   `state` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：0/删除，1/正常',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='登录账号';
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='登录账号';
 
 -- ----------------------------
 -- Records of yiji_account
 -- ----------------------------
-INSERT INTO `yiji_account` VALUES ('39', 'wangjian', '$2y$10$ciW.H5flv0c908lxWxVG8uMwVcZVyvv0K.4W.uSzjYFv5htWK50j6', '9', '22', '13', '1516583716', '127.0.0.1', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3d3LnlpamkudHBsL2FwaS9BZG1pbi9sb2dpbiIsImlhdCI6MTUxNjU4MzcxNiwiZXhwIjoxNTE2Nzk5NzE2LCJuYmYiOjE1MTY1ODM3MTYsImp0aSI6ImM0NzQxZjZkZTUwYjhlZDE1MjZhMzNhNTRmYTc3NTgxIiwic3ViIjozOX0.HJbd6ZRiiW1IR5ZEbzGtanQU74XRLWYbYjKhn6_R0PU', '1515656402', '0', '1516583716', '0', null, '1');
+INSERT INTO `yiji_account` VALUES ('39', 'wangjian', '$2y$10$ciW.H5flv0c908lxWxVG8uMwVcZVyvv0K.4W.uSzjYFv5htWK50j6', '9', '22', '21', '1518148034', '127.0.0.1', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vd3d3LnlpamkudHBsL2FwaS9BZG1pbi9sb2dpbiIsImlhdCI6MTUxODE0ODAzNCwiZXhwIjoxNTE4MzY0MDM0LCJuYmYiOjE1MTgxNDgwMzQsImp0aSI6ImZhNWZlYzYyYWY0Y2MzYjRhN2VmYmE5MzRjNmNlYTk4Iiwic3ViIjozOX0.inFLSGlocccwtIEYP3o7P7XsAQL2dUt5NZIDKVGAL_E', '1515656402', '0', '1518148034', '0', null, '1');
+INSERT INTO `yiji_account` VALUES ('40', '18611112222', '$2y$10$HwyQicT7LEI792fc3Z7Ip.g.KwniVCvImpppXMnCUoqmlCZBKXUY6', '9', '32', '0', null, null, null, '1517540786', '39', '1517540786', '39', null, '1');
+INSERT INTO `yiji_account` VALUES ('41', '18611112224', '$2y$10$TtT9hKaY7DFLg1qnd296aeneUbp5I2rJMsQrO4ecjQPwkHjzOrb2e', '9', '33', '0', null, null, null, '1517540920', '39', '1517540920', '39', null, '1');
 
 -- ----------------------------
 -- Table structure for `yiji_auth_permissions`
@@ -774,8 +819,8 @@ DROP TABLE IF EXISTS `yiji_business_file`;
 CREATE TABLE `yiji_business_file` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `file_id` int(11) unsigned NOT NULL COMMENT '附件id',
-  `model` int(5) unsigned DEFAULT NULL COMMENT '模块：1/项目收集 ; 2/活动 ; 3/自定义名片',
-  `model_id` int(5) unsigned DEFAULT NULL COMMENT '模块id',
+  `model` int(5) unsigned DEFAULT NULL COMMENT '模块：1/项目收集 ; 2/活动(活动展示) ; 3/自定义名片 4/广告',
+  `model_id` varchar(255) DEFAULT NULL COMMENT '模块id',
   `model_type` tinyint(5) DEFAULT NULL COMMENT '业务附件的类别，备用',
   `url` varchar(2550) DEFAULT NULL COMMENT '附件url',
   `create_time` int(5) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
@@ -818,6 +863,52 @@ CREATE TABLE `yiji_file` (
 INSERT INTO `yiji_file` VALUES ('1', 'wechat.jpg', null, 'zmall.oss-cn-hangzhou.aliyuncs.com', 'http://zmall.oss-cn-hangzhou.aliyuncs.com/ejivc_file%2F2017%2F12%2F22%2F112208wechat.jpg', '24963', 'jpeg', '1513912929', '0', '1513912929', '0', null, '1');
 
 -- ----------------------------
+-- Table structure for `yiji_menu`
+-- ----------------------------
+DROP TABLE IF EXISTS `yiji_menu`;
+CREATE TABLE `yiji_menu` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `parent_id` int(11) unsigned DEFAULT NULL COMMENT '父菜单id',
+  `club_uid` varchar(50) NOT NULL DEFAULT '' COMMENT '俱乐部uid',
+  `name` varchar(30) DEFAULT NULL COMMENT '菜单名',
+  `key` varchar(50) DEFAULT NULL COMMENT 'key',
+  `link` varchar(255) DEFAULT NULL COMMENT '链接',
+  `icon` varchar(255) DEFAULT NULL COMMENT '图标',
+  `create_time` int(13) DEFAULT NULL COMMENT '创建时间',
+  `create_name` int(11) NOT NULL DEFAULT '0' COMMENT '创建人',
+  `update_time` int(13) DEFAULT NULL COMMENT '修改时间',
+  `update_name` int(11) NOT NULL DEFAULT '0' COMMENT '修改人',
+  `remark` varchar(200) DEFAULT NULL COMMENT '备注',
+  `state` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：0/删除，1/正常',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COMMENT='菜单';
+
+-- ----------------------------
+-- Records of yiji_menu
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `yiji_menu_permission`
+-- ----------------------------
+DROP TABLE IF EXISTS `yiji_menu_permission`;
+CREATE TABLE `yiji_menu_permission` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `menu_id` int(11) unsigned DEFAULT NULL COMMENT '菜单id',
+  `permission_id` int(11) unsigned DEFAULT NULL COMMENT '权限id',
+  `create_time` int(13) DEFAULT NULL COMMENT '创建时间',
+  `create_name` int(11) NOT NULL DEFAULT '0' COMMENT '创建人',
+  `update_time` int(13) DEFAULT NULL COMMENT '修改时间',
+  `update_name` int(11) NOT NULL DEFAULT '0' COMMENT '修改人',
+  `remark` varchar(200) DEFAULT NULL COMMENT '备注',
+  `state` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：0/删除，1/正常',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COMMENT='菜单权限关联';
+
+-- ----------------------------
+-- Records of yiji_menu_permission
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `yiji_users`
 -- ----------------------------
 DROP TABLE IF EXISTS `yiji_users`;
@@ -836,9 +927,11 @@ CREATE TABLE `yiji_users` (
   `remark` varchar(200) DEFAULT NULL COMMENT '备注',
   `state` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态：0/删除，1/正常',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='用户';
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='用户';
 
 -- ----------------------------
 -- Records of yiji_users
 -- ----------------------------
 INSERT INTO `yiji_users` VALUES ('22', '9', '汪见', 'CEO', '18657940454', null, 'jij@163.com', '1515656402', '0', null, '0', null, '1');
+INSERT INTO `yiji_users` VALUES ('32', '9', '李四', 'PHP开发', '18611112222', '', '', '1517540785', '39', '1517540785', '39', '', '1');
+INSERT INTO `yiji_users` VALUES ('33', '9', '李四1', 'PHP开发', '18611112224', '', '', '1517540920', '39', '1517540920', '39', '', '1');
