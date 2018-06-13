@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>横竖自由转换的菜单</title>
+    <style>
+        body{
+            background-color:#dee0ff;
+        }
+
+        ul{
+            font-family:宋体;
+            font-size:14px;
+            text-align:right;
+            list-style-type:none;
+            margin:0px;
+            padding:0px;
+        }
+        li{
+            float:left;
+            border-bottom:1px solid #9f9fed;
+        }
+        li a{
+            display:block;
+            width:150px;
+            height:1em;
+            padding:5px 5px 5px 0.5em;
+            text-decoration: none;
+            text-align: center;
+            border-left:12px solid #151571;
+            border-right:1px solid #151571;
+        }
+
+        li a:link ,li a:visited{
+            background-color:#1136c1;
+            color:#ffffff;
+        }
+        li a:hover{
+            background-color:#002099;
+            color:#ffff00;
+            border-left:12px solid yellow;
+            font-weight:bold;
+        }
+
+    </style>
+</head>
+<body>
+<!--
+1.改变ul的宽度，要足够容纳下菜单中所有li水平显示时的宽或ul宽度自适应
+2.改变li的浮动方式为左浮动
+3.设置a标签的宽度
+-->
+
+<ul>
+    <li><a href="#">首页</a></li>
+    <li><a href="#">企业简介</a></li>
+    <li><a href="#">企业新闻</a></li>
+    <li><a href="#">产品展示</a></li>
+    <li><a href="#">联系我们</a></li>
+</ul>
+
+</body>
+</html>
