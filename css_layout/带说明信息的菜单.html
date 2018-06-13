@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>带说明信息的菜单</title>
+    <style>
+
+        ul {
+            width: 120px;
+            font-family: 宋体;
+            font-size: 14px;
+            text-align: right;
+            list-style-type: none;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        li {
+            border-bottom: 1px solid #9f9fed;
+            text-align:center;
+
+        }
+        li a{
+            position:relative;
+
+        }
+
+        #menu a span.desc ,#menu a:visited span.desc{
+            display:none;
+        }
+        #menu a:hover span.desc{
+            display:block;
+            position:absolute;
+            color:#000;
+            border:1px dashed #000;
+            width:80px;
+            height:auto;
+            top:0px;
+            left:120px;
+            background-color:#eee;
+
+        }
+    </style>
+</head>
+<body>
+<!--使用float脱离文档流时，其他盒子会无视这个元素，但其他盒子内的文本依然会为这个元素让出位置，环绕在周围。
+而对于使用absolute :position脱离文档流的元素，其他盒子与其他盒子内的文本都会无视它。-->
+<ul id="menu">
+    <li><a href="#"><span class="left"></span>首页<span class="desc">这是首页</span></a></li>
+    <li><a href="#"><span class="left"></span>企业简介<span class="desc">这是企业简介</span></a></li>
+    <li><a href="#"><span class="left"></span>企业新闻<span class="desc">这是企业新闻</span></a></li>
+    <li><a href="#"><span class="left"></span>产品展示<span class="desc">这是产品展示</span></a></li>
+    <li><a href="#"><span class="left"></span>联系我们<span class="desc">这是联系我们</span></a></li>
+</ul>
+</body>
+</html>
